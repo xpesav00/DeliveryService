@@ -1,0 +1,487 @@
+<Project>
+  <Name>Delivery</Name>
+  <ProjectItem type="NClass.DiagramEditor.ClassDiagram.Diagram" assembly="NClass.DiagramEditor, Version=2.4.1823.0, Culture=neutral, PublicKeyToken=null">
+    <Name>Untitled</Name>
+    <Language>Java</Language>
+    <Entities>
+      <Entity type="Class">
+        <Name>Delivery</Name>
+        <Access>Public</Access>
+        <Location left="369" top="112" />
+        <Size width="197" height="366" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private long Id</Member>
+        <Member type="Field">private String name</Member>
+        <Member type="Field">private Postman postman</Member>
+        <Member type="Field">private List&lt;Goods&gt; packages</Member>
+        <Member type="Field">private Customer customer</Member>
+        <Member type="Field">private DeliveryStatus status</Member>
+        <Member type="Constructor">public Delivery()</Member>
+        <Member type="Method">public void setId()</Member>
+        <Member type="Method">public long getId()</Member>
+        <Member type="Method">public void setName()</Member>
+        <Member type="Method">public String getName()</Member>
+        <Member type="Method">public Postman getPostman()</Member>
+        <Member type="Method">public void addPostman()</Member>
+        <Member type="Method">public Customer getCustomer()</Member>
+        <Member type="Method">public void addCustomer()</Member>
+        <Member type="Method">public List&lt;Goods&gt; getAllPackages()</Member>
+        <Member type="Method">public void addPackage()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Customer</Name>
+        <Access>Public</Access>
+        <Location left="690" top="517" />
+        <Size width="195" height="349" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private long Id</Member>
+        <Member type="Field">private String firstName</Member>
+        <Member type="Field">private String lastName</Member>
+        <Member type="Field">private Address address</Member>
+        <Member type="Field">private List&lt;Delivery&gt; deliveries</Member>
+        <Member type="Constructor">public Customer()</Member>
+        <Member type="Method">public long getId()</Member>
+        <Member type="Method">public void setId()</Member>
+        <Member type="Method">public String getFistName()</Member>
+        <Member type="Method">public void setFirstName()</Member>
+        <Member type="Method">public String getLastName()</Member>
+        <Member type="Method">public void setLastName()</Member>
+        <Member type="Method">public Address getAddress()</Member>
+        <Member type="Method">public void setAddress()</Member>
+        <Member type="Method">public List&lt;Delivery&gt; geAllDeliveries()</Member>
+        <Member type="Method">public void addNewDelivery()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Goods</Name>
+        <Access>Public</Access>
+        <Location left="369" top="565" />
+        <Size width="162" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private long Id</Member>
+        <Member type="Field">private long price</Member>
+        <Member type="Field">private String seller</Member>
+        <Member type="Constructor">public Goods()</Member>
+        <Member type="Method">public long getId()</Member>
+        <Member type="Method">public long getPrice()</Member>
+        <Member type="Method">public String getSeller()</Member>
+        <Member type="Method">public void setId()</Member>
+        <Member type="Method">public void setPrice()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Postman</Name>
+        <Access>Public</Access>
+        <Location left="48" top="502" />
+        <Size width="182" height="315" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private long Id</Member>
+        <Member type="Field">private String firstName</Member>
+        <Member type="Field">private String lastName</Member>
+        <Member type="Field">private List&lt;Delivery&gt; deliveries</Member>
+        <Member type="Constructor">public Postman()</Member>
+        <Member type="Method">public long getId()</Member>
+        <Member type="Method">public void setId()</Member>
+        <Member type="Method">public String getFistName()</Member>
+        <Member type="Method">public void setFirstName()</Member>
+        <Member type="Method">public String getLastName()</Member>
+        <Member type="Method">public void setLastName()</Member>
+        <Member type="Method">public List&lt;Delivery&gt; geAllDeliveries()</Member>
+        <Member type="Method">public void addNewDelivery()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Address</Name>
+        <Access>Public</Access>
+        <Location left="723" top="96" />
+        <Size width="162" height="298" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private long Id</Member>
+        <Member type="Field">private String city</Member>
+        <Member type="Field">private String street</Member>
+        <Member type="Field">private int postcode</Member>
+        <Member type="Constructor">public Address()</Member>
+        <Member type="Method">public long getId()</Member>
+        <Member type="Method">public void setId()</Member>
+        <Member type="Method">public void setCity()</Member>
+        <Member type="Method">public String getCity()</Member>
+        <Member type="Method">public void setStreet()</Member>
+        <Member type="Method">public String getStreet()</Member>
+        <Member type="Method">public void setPostcode()</Member>
+        <Member type="Method">public String getPostcode()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Postman</Name>
+        <Access>Public</Access>
+        <Location left="100" top="870" />
+        <Size width="162" height="315" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private long Id</Member>
+        <Member type="Field">private String firstName</Member>
+        <Member type="Field">private String lastName</Member>
+        <Member type="Field">private List&lt;Delivery&gt; deliveries</Member>
+        <Member type="Constructor">public Postman()</Member>
+        <Member type="Method">public long getId()</Member>
+        <Member type="Method">public void setId()</Member>
+        <Member type="Method">public String getFistName()</Member>
+        <Member type="Method">public void setFirstName()</Member>
+        <Member type="Method">public String getLastName()</Member>
+        <Member type="Method">public void setLastName()</Member>
+        <Member type="Method">public List&lt;Delivery&gt; geAllDeliveries()</Member>
+        <Member type="Method">public void addNewDelivery()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>PostmanDao</Name>
+        <Access>Public</Access>
+        <Location left="342" top="927" />
+        <Size width="162" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">List getAllPostman()</Member>
+        <Member type="Method">void updatePostman()</Member>
+        <Member type="Method">void deletePostman()</Member>
+        <Member type="Method">void addPostman()</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>DaoPatternDemo</Name>
+        <Access>Public</Access>
+        <Location left="554" top="941" />
+        <Size width="162" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void main()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>PostmanDaoImpl</Name>
+        <Access>Public</Access>
+        <Location left="342" top="1123" />
+        <Size width="162" height="179" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private List&lt;Postman&gt; postmen</Member>
+        <Member type="Constructor">public PostmanDaoImpl()</Member>
+        <Member type="Method">public List getAllPostman()</Member>
+        <Member type="Method">public void updatePostman()</Member>
+        <Member type="Method">public void deletePostman()</Member>
+        <Member type="Method">public void addPostman()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Goods</Name>
+        <Access>Public</Access>
+        <Location left="73" top="1336" />
+        <Size width="162" height="247" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private long Id</Member>
+        <Member type="Field">private long price</Member>
+        <Member type="Field">private String seller</Member>
+        <Member type="Constructor">public Goods()</Member>
+        <Member type="Method">public long getId()</Member>
+        <Member type="Method">public long getPrice()</Member>
+        <Member type="Method">public String getSeller()</Member>
+        <Member type="Method">public void setId()</Member>
+        <Member type="Method">public void setPrice()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>GoodsDao</Name>
+        <Access>Public</Access>
+        <Location left="331" top="1381" />
+        <Size width="162" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">List getAllGoods()</Member>
+        <Member type="Method">void updateGoods()</Member>
+        <Member type="Method">void deleteGoods()</Member>
+        <Member type="Method">void addGoods()</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>DaoPatternDemo</Name>
+        <Access>Public</Access>
+        <Location left="581" top="1403" />
+        <Size width="162" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void main()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>GoodsDaoImpl</Name>
+        <Access>Public</Access>
+        <Location left="331" top="1582" />
+        <Size width="162" height="216" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public GoodsDaoImpl()</Member>
+        <Member type="Method">public List getAllGoods()</Member>
+        <Member type="Method">public void updateGoods()</Member>
+        <Member type="Method">public void deleteGoods()</Member>
+        <Member type="Method">public void addGoods()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>CustomerDaoImpl</Name>
+        <Access>Public</Access>
+        <Location left="319" top="2061" />
+        <Size width="162" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public CustomerDaoImpl()</Member>
+        <Member type="Method">public List getAllCustomer()</Member>
+        <Member type="Method">public void updateCustomer()</Member>
+        <Member type="Method">public void deleteCustomer()</Member>
+        <Member type="Method">public void addCustomer()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>CustomerDao</Name>
+        <Access>Public</Access>
+        <Location left="319" top="1862" />
+        <Size width="162" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">List getAllCustomer()</Member>
+        <Member type="Method">void updateCustomer()</Member>
+        <Member type="Method">void deleteCustomer()</Member>
+        <Member type="Method">void addCustomer()</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>DaoPatternDemo</Name>
+        <Access>Public</Access>
+        <Location left="569" top="1881" />
+        <Size width="162" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void main()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Customer</Name>
+        <Access>Public</Access>
+        <Location left="62" top="1831" />
+        <Size width="183" height="349" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private long Id</Member>
+        <Member type="Field">private String firstName</Member>
+        <Member type="Field">private String lastName</Member>
+        <Member type="Field">private Address address</Member>
+        <Member type="Field">private List&lt;Delivery&gt; deliveries</Member>
+        <Member type="Constructor">public Customer()</Member>
+        <Member type="Method">public long getId()</Member>
+        <Member type="Method">public void setId()</Member>
+        <Member type="Method">public String getFistName()</Member>
+        <Member type="Method">public void setFirstName()</Member>
+        <Member type="Method">public String getLastName()</Member>
+        <Member type="Method">public void setLastName()</Member>
+        <Member type="Method">public Address getAddress()</Member>
+        <Member type="Method">public void setAddress()</Member>
+        <Member type="Method">public List&lt;Delivery&gt; geAllDeliveries()</Member>
+        <Member type="Method">public void addNewDelivery()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Interface">
+        <Name>DeliveryDao</Name>
+        <Access>Public</Access>
+        <Location left="346" top="2357" />
+        <Size width="162" height="145" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">List getAllDelivery()</Member>
+        <Member type="Method">void updateDelivery()</Member>
+        <Member type="Method">void deleteDelivery()</Member>
+        <Member type="Method">void addDelivery()</Member>
+      </Entity>
+      <Entity type="Class">
+        <Name>DaoPatternDemo</Name>
+        <Access>Public</Access>
+        <Location left="569" top="2383" />
+        <Size width="162" height="94" />
+        <Collapsed>False</Collapsed>
+        <Member type="Method">public void main()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>DeliveryDaoImpl</Name>
+        <Access>Public</Access>
+        <Location left="333" top="2556" />
+        <Size width="162" height="162" />
+        <Collapsed>False</Collapsed>
+        <Member type="Constructor">public DeliveryDaoImpl()</Member>
+        <Member type="Method">public List getAllDelivery()</Member>
+        <Member type="Method">public void updateDelivery()</Member>
+        <Member type="Method">publicvoid deleteDelivery()</Member>
+        <Member type="Method">public void addDelivery()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+      <Entity type="Class">
+        <Name>Delivery</Name>
+        <Access>Public</Access>
+        <Location left="62" top="2334" />
+        <Size width="197" height="366" />
+        <Collapsed>False</Collapsed>
+        <Member type="Field">private long Id</Member>
+        <Member type="Field">private String name</Member>
+        <Member type="Field">private Postman postman</Member>
+        <Member type="Field">private List&lt;Goods&gt; packages</Member>
+        <Member type="Field">private Customer customer</Member>
+        <Member type="Field">private DeliveryStatus status</Member>
+        <Member type="Constructor">public Delivery()</Member>
+        <Member type="Method">public void setId()</Member>
+        <Member type="Method">public long getId()</Member>
+        <Member type="Method">public void setName()</Member>
+        <Member type="Method">public String getName()</Member>
+        <Member type="Method">public Postman getPostman()</Member>
+        <Member type="Method">public void addPostman()</Member>
+        <Member type="Method">public Customer getCustomer()</Member>
+        <Member type="Method">public void addCustomer()</Member>
+        <Member type="Method">public List&lt;Goods&gt; getAllPackages()</Member>
+        <Member type="Method">public void addPackage()</Member>
+        <Modifier>None</Modifier>
+      </Entity>
+    </Entities>
+    <Relationships>
+      <Relationship type="Association" first="3" second="0">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>381</X>
+          <Y>504</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartMultiplicity>1</StartMultiplicity>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="1" second="0">
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <BendPoint relativeToStartShape="True">
+          <X>778</X>
+          <Y>492</Y>
+        </BendPoint>
+        <BendPoint relativeToStartShape="False">
+          <X>511</X>
+          <Y>503</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartMultiplicity>1</StartMultiplicity>
+        <EndMultiplicity>0..*</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="2" second="1">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartMultiplicity>1..*</StartMultiplicity>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="2" second="0">
+        <Label>
+        </Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartMultiplicity>0..*</StartMultiplicity>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="4" second="1">
+        <Label>
+        </Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+        <StartMultiplicity>1</StartMultiplicity>
+        <EndMultiplicity>1</EndMultiplicity>
+      </Relationship>
+      <Relationship type="Association" first="6" second="5">
+        <Label>Uses</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <BendPoint relativeToStartShape="False">
+          <X>287</X>
+          <Y>994</Y>
+        </BendPoint>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="7" second="6">
+        <Label>Uses</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="8" second="6">
+        <Label>Implements</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="11" second="10">
+        <Label>Uses</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="10" second="9">
+        <Label>Uses</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="12" second="10">
+        <Label>Implements</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="13" second="14">
+        <Label>Implements</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="15" second="14">
+        <Label>Uses</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="14" second="16">
+        <Label>Uses</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="18" second="17">
+        <Label>Uses</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="19" second="17">
+        <Label>Implements</Label>
+        <StartOrientation>Vertical</StartOrientation>
+        <EndOrientation>Vertical</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+      <Relationship type="Association" first="17" second="20">
+        <Label>Uses</Label>
+        <StartOrientation>Horizontal</StartOrientation>
+        <EndOrientation>Horizontal</EndOrientation>
+        <Direction>Unidirectional</Direction>
+        <AssociationType>Association</AssociationType>
+      </Relationship>
+    </Relationships>
+  </ProjectItem>
+</Project>
