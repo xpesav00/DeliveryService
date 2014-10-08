@@ -7,9 +7,9 @@ public interface DeliveryDao {
 
     List<Delivery> getAllDelivery();
 
-    void updateDelivery();
+    void updateDelivery(Delivery delivery);
 
-    void deleteDelivery();
+    void deleteDelivery(Delivery delivery);
 
     void addDelivery();
 

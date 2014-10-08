@@ -14,15 +14,15 @@ public class DeliveryDaoImpl implements DeliveryDao{
         throw new UnsupportedOperationException("The method is not implemented yet.");
     }
 
-    public void updateDelivery() {
+    public void updateDelivery(Delivery delivery) {
         throw new UnsupportedOperationException("The method is not implemented yet.");
     }
 
-    public void deleteDelivery() {
+    public void deleteDelivery(Delivery delivery) {
         throw new UnsupportedOperationException("The method is not implemented yet.");
     }
 
-    public void addDelivery() {
+    public void addDelivery(Delivery delivery) {
         throw new UnsupportedOperationException("The method is not implemented yet.");
     }
 
