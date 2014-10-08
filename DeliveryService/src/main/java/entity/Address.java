@@ -1,10 +1,17 @@
 package entity;
 
-public class Address {
+import javax.persistence.*;
 
+@Entity
+public class Address {
+    @Id
+    @GeneratedValue
     private long Id;
+    @Column
     private String city;
+    @Column
     private String street;
+    @Column
     private int postcode;
 
     public Address() {
@@ -40,5 +47,10 @@ public class Address {
 
     public void setPostcode(int postcode) {
         this.postcode = postcode;
+    }
+    
+    @Override
+    public String toString(){
+        return "Address: city: "+getCity()+", street: "+getStreet()+", postcode: "+getPostcode();
     }
 }

@@ -7,10 +7,10 @@ public interface GoodsDao {
 
     List<Goods> getAllGoods();
 
-    void updateGoods();
+    void updateGoods(Goods goods);
 
-    void deleteGoods();
+    void deleteGoods(Goods goods);
 
-    void addGoods();
+    void addGoods(Goods goods);
 
 }

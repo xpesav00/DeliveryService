@@ -1,9 +1,17 @@
 package entity;
 
-public class Goods {
+import javax.persistence.*;
 
+@Entity
+public class Goods {
+    @Id
+    @GeneratedValue
     private long Id;
+    
+    @Column
     private long price;
+    
+    @Column
     private String seller;
 
     public Goods() {
@@ -33,4 +41,8 @@ public class Goods {
         this.seller = seller;
     }
 
+    @Override
+    public String toString(){
+        return "Goods: id: "+getId()+", price: "+getPrice()+", seller: "+getSeller();
+    }
 }
