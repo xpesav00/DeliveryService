@@ -1,7 +1,7 @@
-package daoImplementation;
+package pa165.deliveryservice.daoImplementation;
 
-import daoInterface.CustomerDao;
-import entity.Customer;
+import pa165.deliveryservice.daoInterface.CustomerDao;
+import pa165.deliveryservice.entity.Customer;
 import java.util.List;
 
 public class CustomerDaoImpl implements CustomerDao{

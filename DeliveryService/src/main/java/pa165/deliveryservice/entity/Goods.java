@@ -1,4 +1,4 @@
-package entity;
+package pa165.deliveryservice.entity;
 
 public class Goods {
 

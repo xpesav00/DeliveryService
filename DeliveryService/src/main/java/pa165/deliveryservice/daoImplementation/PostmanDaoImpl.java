@@ -1,7 +1,7 @@
-package daoImplementation;
+package pa165.deliveryservice.daoImplementation;
 
-import daoInterface.PostmanDao;
-import entity.Postman;
+import pa165.deliveryservice.daoInterface.PostmanDao;
+import pa165.deliveryservice.entity.Postman;
 import java.util.List;
 
 public class PostmanDaoImpl implements PostmanDao{
