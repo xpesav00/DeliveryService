@@ -1,9 +1,9 @@
-package demo;
+package pa165.deliveryservice.demo;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import pa165.deliveryservice.DaoContext;
 
-public class DeliveryDaoPatternDemo {
+public class PostmanDaoPatternDemo {
 
     public void main() {
         new AnnotationConfigApplicationContext(DaoContext.class);

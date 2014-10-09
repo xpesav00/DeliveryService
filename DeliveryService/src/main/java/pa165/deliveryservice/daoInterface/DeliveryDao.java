@@ -1,6 +1,6 @@
-package daoInterface;
+package pa165.deliveryservice.daoInterface;
 
-import entity.Delivery;
+import pa165.deliveryservice.entity.Delivery;
 import java.util.List;
 
 public interface DeliveryDao {

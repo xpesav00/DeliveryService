@@ -1,17 +1,15 @@
-package entity;
+package pa165.deliveryservice.entity;
 
 import java.util.List;
 
-public class Customer {
+public class Postman {
 
     private long Id;
     private String firstName;
     private String lastName;
-    private Address address;
     private List<Delivery> deliveries;
 
-    public Customer() {
-    }
+    public Postman() {}
 
     public long getId() {
         return Id;
@@ -37,14 +35,6 @@ public class Customer {
         this.lastName = lastName;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
     public List<Delivery> getDeliveries() {
         return deliveries;
     }
@@ -53,4 +43,5 @@ public class Customer {
         this.deliveries = deliveries;
     }
 
+        
 }

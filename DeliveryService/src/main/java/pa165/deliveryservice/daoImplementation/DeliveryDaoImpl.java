@@ -1,7 +1,7 @@
-package daoImplementation;
+package pa165.deliveryservice.daoImplementation;
 
-import daoInterface.DeliveryDao;
-import entity.Delivery;
+import pa165.deliveryservice.daoInterface.DeliveryDao;
+import pa165.deliveryservice.entity.Delivery;
 import java.util.List;
 
 public class DeliveryDaoImpl implements DeliveryDao{
