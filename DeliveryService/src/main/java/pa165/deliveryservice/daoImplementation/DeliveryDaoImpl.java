@@ -26,4 +26,9 @@ public class DeliveryDaoImpl implements DeliveryDao{
         throw new UnsupportedOperationException("The method is not implemented yet.");
     }
 
+    @Override
+    public void addDelivery() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }

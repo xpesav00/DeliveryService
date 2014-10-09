@@ -3,27 +3,48 @@ package pa165.deliveryservice.daoImplementation;
 import pa165.deliveryservice.daoInterface.PostmanDao;
 import pa165.deliveryservice.entity.Postman;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
-public class PostmanDaoImpl implements PostmanDao{
+public class PostmanDaoImpl implements PostmanDao {
 
-    public PostmanDaoImpl() {
-        throw new UnsupportedOperationException("The method is not implemented yet.");
+    private EntityManagerFactory emf;
+
+    public PostmanDaoImpl(EntityManagerFactory emf) {
+        this.emf = emf;
     }
 
+    @Override
     public List<Postman> getAllPostmen() {
-        throw new UnsupportedOperationException("The method is not implemented yet.");
+        EntityManager em = emf.createEntityManager();
+        List<Postman> postmen = em.createQuery("SELECT p from Postman p", Postman.class).getResultList();
+        em.close();
+        return postmen;
     }
 
+    @Override
     public void updatePostman(Postman postman) {
-        throw new UnsupportedOperationException("The method is not implemented yet.");
+        EntityManager em = emf.createEntityManager();
+        Postman postmandb = em.find(Postman.class, postman.getId());
+        postmandb.setFirstName(postman.getFirstName());
+        postmandb.setLastName(postman.getLastName());
+        postmandb.setDeliveries(postman.getDeliveries());
+        em.close();
     }
 
+    @Override
     public void deletePostman(Postman postman) {
-        throw new UnsupportedOperationException("The method is not implemented yet.");
+        EntityManager em = emf.createEntityManager();
+        Postman postmandb = em.find(Postman.class, postman.getId());
+        em.remove(postmandb);
+        em.close();
     }
 
+    @Override
     public void addPostman(Postman postman) {
-        throw new UnsupportedOperationException("The method is not implemented yet.");
+        EntityManager em = emf.createEntityManager();
+        em.persist(postman);
+        em.close();
     }
 
 }
