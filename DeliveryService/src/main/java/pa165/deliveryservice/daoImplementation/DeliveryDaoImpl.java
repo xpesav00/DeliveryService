@@ -80,4 +80,9 @@ public class DeliveryDaoImpl implements DeliveryDao{
         }
     }
 
+    @Override
+    public void addDelivery() {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
 }
