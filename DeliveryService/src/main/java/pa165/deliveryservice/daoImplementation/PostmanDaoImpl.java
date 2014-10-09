@@ -10,19 +10,19 @@ public class PostmanDaoImpl implements PostmanDao{
         throw new UnsupportedOperationException("The method is not implemented yet.");
     }
 
-    public List<Postman> getAllPostman() {
+    public List<Postman> getAllPostmen() {
         throw new UnsupportedOperationException("The method is not implemented yet.");
     }
 
-    public void updatePostman() {
+    public void updatePostman(Postman postman) {
         throw new UnsupportedOperationException("The method is not implemented yet.");
     }
 
-    public void deletePostman() {
+    public void deletePostman(Postman postman) {
         throw new UnsupportedOperationException("The method is not implemented yet.");
     }
 
-    public void addPostman() {
+    public void addPostman(Postman postman) {
         throw new UnsupportedOperationException("The method is not implemented yet.");
     }
 
