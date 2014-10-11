@@ -1,21 +1,14 @@
 package pa165.deliveryservice.entity;
 
-public class Address {
+import javax.persistence.Embeddable;
 
-    private long Id;
+@Embeddable
+public class Address {
     private String city;
     private String street;
     private int postcode;
 
     public Address() {
-    }
-
-    public long getId() {
-        return Id;
-    }
-
-    public void setId(long Id) {
-        this.Id = Id;
     }
 
     public String getCity() {
