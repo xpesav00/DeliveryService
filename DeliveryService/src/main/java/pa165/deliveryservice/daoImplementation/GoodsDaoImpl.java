@@ -54,7 +54,6 @@ public class GoodsDaoImpl implements GoodsDao {
         em.remove(goodsDb);
         em.getTransaction().commit();
         em.close();
-        //emf.close();
     }
 
     public void addGoods(Goods goods) {
@@ -66,7 +65,14 @@ public class GoodsDaoImpl implements GoodsDao {
         em.persist(goods);
         em.getTransaction().commit();
         em.close();
-        //emf.close();
+    }
+    
+    public Goods getGoods(long id){
+        EntityManager em = emf.createEntityManager();
+        Goods goodsDb = em.find(Goods.class, id);
+        em.close();
+        
+        return goodsDb;
     }
     
     public void closeConnection(){

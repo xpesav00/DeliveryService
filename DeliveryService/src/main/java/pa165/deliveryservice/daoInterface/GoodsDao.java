@@ -35,6 +35,12 @@ public interface GoodsDao {
     void addGoods(Goods goods);
     
     /**
+     * Get specific goods to Delivery Service database
+     * @param goods goods to add into database
+     */
+    Goods getGoods(long id);
+
+    /**
      * Close opened connection
      */
     void closeConnection();
