@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 /**
@@ -15,13 +17,20 @@ import javax.persistence.PersistenceContext;
  */
 public class DeliveryDaoImpl implements DeliveryDao{
     
-    @PersistenceContext
     private EntityManager entityManager;
     
-//    public DeliveryDaoImpl() {
+    @PersistenceContext
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
+    public DeliveryDaoImpl() {
 //        EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
 //        entityManager = emf.createEntityManager();
-//    }
+    }
+    
+    public DeliveryDaoImpl(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
     
     @Override
     public void addDelivery(Delivery delivery) {

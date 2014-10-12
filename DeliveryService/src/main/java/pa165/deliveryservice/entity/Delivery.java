@@ -20,7 +20,7 @@ public class Delivery {
     @ManyToOne
     private Postman postman;
     @OneToMany(mappedBy="deliveryId")
-    private List<Goods> packages;    
+    private List<Goods> goods;
     @ManyToOne
     private Customer customer;
     @Enumerated(EnumType.STRING)
@@ -55,11 +55,11 @@ public class Delivery {
     }
 
     public List<Goods> getPackages() {
-        return packages;
+        return goods;
     }
 
     public void setPackages(List<Goods> packages) {
-        this.packages = packages;
+        this.goods = packages;
     }
 
     public Customer getCustomer() {
@@ -96,7 +96,7 @@ public class Delivery {
         if (!Objects.equals(this.postman, other.postman)) {
             return false;
         }
-        if (!Objects.equals(this.packages, other.packages)) {
+        if (!Objects.equals(this.goods, other.goods)) {
             return false;
         }
         if (!Objects.equals(this.customer, other.customer)) {
@@ -114,19 +114,14 @@ public class Delivery {
         hash = 71 * hash + Objects.hashCode(this.Id);
         hash = 71 * hash + Objects.hashCode(this.name);
         hash = 71 * hash + Objects.hashCode(this.postman);
-        hash = 71 * hash + Objects.hashCode(this.packages);
+        hash = 71 * hash + Objects.hashCode(this.goods);
         hash = 71 * hash + Objects.hashCode(this.customer);
         hash = 71 * hash + (this.status != null ? this.status.hashCode() : 0);
         return hash;
-    }
-
-    
+    }   
 
     @Override
     public String toString() {
-        return "Delivery["+ Id.toString() + "] " + name + ", P:" + postman + ", G:{" + packages + "}, C:" + customer + ", S:" + status;
+        return "Delivery["+ Id.toString() + "] " + name + ", P:" + postman.getId() + ", G:{" + goods + "}, C:" + customer.getFirstName()+" "+customer.getLastName()+ ", S:" + status;
     }
-    
-    
-
 }
