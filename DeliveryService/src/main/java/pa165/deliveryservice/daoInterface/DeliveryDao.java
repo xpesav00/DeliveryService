@@ -5,12 +5,14 @@ import java.util.List;
 
 public interface DeliveryDao {
 
-    List<Delivery> getAllDelivery();
+    List<Delivery> getAllDeliveries();
 
-    void updateDelivery();
+    void updateDelivery(Delivery delivery);
 
-    void deleteDelivery();
+    void deleteDelivery(Delivery delivery);
 
-    void addDelivery();
+    void addDelivery(Delivery delivery);
+    
+    Delivery getDelivery(Delivery delivery);
 
 }

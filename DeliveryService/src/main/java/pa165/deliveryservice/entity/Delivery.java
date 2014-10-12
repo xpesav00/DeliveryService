@@ -1,65 +1,138 @@
-package pa165.deliveryservice.entity;
+package pa165.deliveryservice.entity; 
 
-import java.util.List;
+import java.util.List; 
+import java.util.Objects; 
+import javax.persistence.*; 
 
-public class Delivery {
+/** 
+ * Delivery entity 
+ * @author Jan Šastný 
+ */ 
 
-    private long Id;
-    private String name;
-    private Postman postman;
-    private List<Goods> packages;
-    private Customer customer;
-    private DeliveryStatus status;
+@Entity
 
-    public Delivery() {
-    }
+public class Delivery { 
+    public static final int NAME_LENGTH = 13; 
 
-    public long getId() {
-        return Id;
-    }
+    @Id 
+    @GeneratedValue 
+    private Long Id;     
 
-    public void setId(long Id) {
-        this.Id = Id;
-    }
+    @Column(nullable=false,length=NAME_LENGTH) 
+    private String name; 
 
-    public String getName() {
-        return name;
-    }
+    @ManyToOne 
+    private Postman postman; 
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    @OneToMany(mappedBy="deliveryId") 
+    private List<Goods> packages;     
+    @ManyToOne 
+    private Customer customer; 
 
-    public Postman getPostman() {
-        return postman;
-    }
+    @Enumerated(EnumType.STRING) 
+    private DeliveryStatus status; 
 
-    public void setPostman(Postman postman) {
-        this.postman = postman;
-    }
+    public Delivery() { 
+    } 
 
-    public List<Goods> getPackages() {
-        return packages;
-    }
+    public Long getId() { 
+        return Id; 
+    } 
 
-    public void setPackages(List<Goods> packages) {
-        this.packages = packages;
-    }
+    public void setId(Long Id) { 
+        this.Id = Id; 
+    } 
 
-    public Customer getCustomer() {
-        return customer;
-    }
+    public String getName() { 
+        return name; 
+    } 
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+    public void setName(String name) { 
+        this.name = name; 
+    } 
 
-    public DeliveryStatus getStatus() {
-        return status;
-    }
+    public Postman getPostman() { 
+        return postman; 
+    } 
 
-    public void setStatus(DeliveryStatus status) {
-        this.status = status;
-    }
+    public void setPostman(Postman postman) { 
+        this.postman = postman; 
+    } 
 
-}
+    public List<Goods> getPackages() { 
+        return packages; 
+    } 
+
+    public void setPackages(List<Goods> packages) { 
+        this.packages = packages; 
+    } 
+
+    public Customer getCustomer() { 
+        return customer; 
+    } 
+
+    public void setCustomer(Customer customer) { 
+        this.customer = customer; 
+    } 
+
+    public DeliveryStatus getStatus() { 
+        return status; 
+    } 
+
+    public void setStatus(DeliveryStatus status) { 
+        this.status = status; 
+    } 
+
+    @Override 
+    public boolean equals(Object obj) { 
+        if (obj == null) { 
+            return false; 
+        } 
+        if (getClass() != obj.getClass()) { 
+
+            return false; 
+
+        } 
+
+        final Delivery other = (Delivery) obj; 
+        if (!Objects.equals(this.Id, other.Id)) { 
+            return false; 
+        } 
+        if (!Objects.equals(this.name, other.name)) { 
+            return false; 
+        } 
+        if (!Objects.equals(this.postman, other.postman)) { 
+            return false; 
+        } 
+
+        if (!Objects.equals(this.packages, other.packages)) { 
+            return false; 
+        } 
+        if (!Objects.equals(this.customer, other.customer)) { 
+            return false; 
+        } 
+
+        if (this.status != other.status) { 
+            return false; 
+        } 
+
+        return true; 
+    } 
+
+    @Override 
+    public int hashCode() { 
+        int hash = 7; 
+        hash = 71 * hash + Objects.hashCode(this.Id); 
+        hash = 71 * hash + Objects.hashCode(this.name); 
+        hash = 71 * hash + Objects.hashCode(this.postman); 
+        hash = 71 * hash + Objects.hashCode(this.packages); 
+        hash = 71 * hash + Objects.hashCode(this.customer); 
+        hash = 71 * hash + (this.status != null ? this.status.hashCode() : 0); 
+        return hash; 
+    } 
+
+    @Override 
+    public String toString() { 
+        return "Delivery["+ Id.toString() + "] " + name + ", P:" + postman + ", G:{" + packages + "}, C:" + customer + ", S:" + status; 
+    } 
+} 

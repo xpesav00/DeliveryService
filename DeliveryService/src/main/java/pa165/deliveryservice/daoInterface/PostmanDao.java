@@ -5,12 +5,12 @@ import java.util.List;
 
 public interface PostmanDao {
 
-    List<Postman> getAllPostman();
+    List<Postman> getAllPostmen();
 
-    void updatePostman();
+    void updatePostman(Postman postman);
 
-    void deletePostman();
+    void deletePostman(Postman postman);
 
-    void addPostman();
+    void addPostman(Postman postman);
 
 }

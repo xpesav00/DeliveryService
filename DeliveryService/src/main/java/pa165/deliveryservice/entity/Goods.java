@@ -42,6 +42,25 @@ public class Goods {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + (int) (this.Id ^ (this.Id >>> 32));
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Goods other = (Goods) obj;
+        return true;
+    }
+
+    @Override
     public String toString(){
         return "Goods: [id: "+getId()+", price: "+getPrice()+", seller: "+getSeller()+"]";
     }

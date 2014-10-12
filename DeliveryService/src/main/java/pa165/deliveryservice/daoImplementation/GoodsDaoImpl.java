@@ -17,7 +17,6 @@ public class GoodsDaoImpl implements GoodsDao {
         emf = Persistence.createEntityManagerFactory("myUnit");
     }
     
-    @Deprecated
     public GoodsDaoImpl(EntityManagerFactory emf){
         if(emf == null){
             throw new NullPointerException();

@@ -2,15 +2,18 @@ package pa165.deliveryservice.entity;
 
 import javax.persistence.*;
 
-@Entity
+@Embeddable
 public class Address {
     @Id
     @GeneratedValue
     private long Id;
+    
     @Column
     private String city;
+    
     @Column
     private String street;
+    
     @Column
     private int postcode;
 

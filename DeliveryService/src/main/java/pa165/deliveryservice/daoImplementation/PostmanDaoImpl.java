@@ -1,29 +1,58 @@
-package pa165.deliveryservice.daoImplementation;
+package pa165.deliveryservice.daoImplementation; 
 
-import pa165.deliveryservice.daoInterface.PostmanDao;
-import pa165.deliveryservice.entity.Postman;
-import java.util.List;
+import pa165.deliveryservice.daoInterface.PostmanDao; 
+import pa165.deliveryservice.entity.Postman; 
+import java.util.List; 
+import javax.persistence.EntityManager; 
+import javax.persistence.EntityManagerFactory; 
 
-public class PostmanDaoImpl implements PostmanDao{
 
-    public PostmanDaoImpl() {
-        throw new UnsupportedOperationException("The method is not implemented yet.");
-    }
+public class PostmanDaoImpl implements PostmanDao { 
+    private EntityManagerFactory emf; 
 
-    public List<Postman> getAllPostman() {
-        throw new UnsupportedOperationException("The method is not implemented yet.");
-    }
+    public PostmanDaoImpl(EntityManagerFactory emf) { 
+        this.emf = emf; 
+    } 
 
-    public void updatePostman() {
-        throw new UnsupportedOperationException("The method is not implemented yet.");
-    }
+    @Override 
+    public List<Postman> getAllPostmen() { 
+        EntityManager em = emf.createEntityManager(); 
+        em.getTransaction().begin(); 
+        List<Postman> postmen = em.createQuery("SELECT p from Postman p", Postman.class).getResultList(); 
+        em.getTransaction().commit(); 
+        em.close(); 
+        return postmen; 
+    } 
 
-    public void deletePostman() {
-        throw new UnsupportedOperationException("The method is not implemented yet.");
-    }
+    @Override 
+    public void updatePostman(Postman postman) { 
+        EntityManager em = emf.createEntityManager(); 
+        em.getTransaction().begin(); 
+        Postman postmandb = em.find(Postman.class, postman.getId()); 
+        postmandb.setFirstName(postman.getFirstName()); 
+        postmandb.setLastName(postman.getLastName()); 
+        postmandb.setDeliveries(postman.getDeliveries()); 
+        em.getTransaction().commit(); 
+        em.close(); 
+    } 
 
-    public void addPostman() {
-        throw new UnsupportedOperationException("The method is not implemented yet.");
-    }
+    @Override 
+    public void deletePostman(Postman postman) { 
+        EntityManager em = emf.createEntityManager(); 
+        em.getTransaction().begin(); 
+        Postman postmandb = em.find(Postman.class, postman.getId()); 
+        em.remove(postmandb); 
+        em.getTransaction().commit(); 
+        em.close(); 
+    } 
 
-}
+
+    @Override 
+    public void addPostman(Postman postman) { 
+        EntityManager em = emf.createEntityManager(); 
+        em.getTransaction().begin(); 
+        em.persist(postman); 
+        em.getTransaction().commit(); 
+        em.close(); 
+    } 
+} 
