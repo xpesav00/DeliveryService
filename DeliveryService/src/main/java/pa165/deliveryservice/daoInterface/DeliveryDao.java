@@ -31,9 +31,9 @@ public interface DeliveryDao {
     
     /**
      * Deletes delivery founded by given id.
-     * @param id 
+     * @param delivery 
      */
-    void deleteDelivery(Long id);
+    void deleteDelivery(Delivery delivery);
     
     /**
      * Returns all deliveries in database

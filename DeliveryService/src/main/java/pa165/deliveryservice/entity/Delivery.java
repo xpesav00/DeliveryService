@@ -54,12 +54,12 @@ public class Delivery {
         this.postman = postman;
     }
 
-    public List<Goods> getPackages() {
+    public List<Goods> getGoods() {
         return goods;
     }
 
-    public void setPackages(List<Goods> packages) {
-        this.goods = packages;
+    public void setGoods(List<Goods> goods) {
+        this.goods = goods;
     }
 
     public Customer getCustomer() {

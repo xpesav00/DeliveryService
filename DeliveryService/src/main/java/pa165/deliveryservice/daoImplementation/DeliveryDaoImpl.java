@@ -17,44 +17,53 @@ import javax.persistence.PersistenceContext;
  */
 public class DeliveryDaoImpl implements DeliveryDao{
     
-    private EntityManager entityManager;
+    private EntityManagerFactory entityManagerFactory;
     
-    @PersistenceContext
-    public void setEntityManager(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
+//    @PersistenceContext
+//    public void setEntityManager(EntityManager entityManager) {
+//        this.entityManager = entityManager;
+//    }
     public DeliveryDaoImpl() {
-//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
-//        entityManager = emf.createEntityManager();
+        entityManagerFactory = Persistence.createEntityManagerFactory("myUnit");
     }
     
-    public DeliveryDaoImpl(EntityManager entityManager) {
-        this.entityManager = entityManager;
+    public DeliveryDaoImpl(EntityManagerFactory entityManagerFactory) {
+        if(entityManagerFactory == null) throw new NullPointerException("Entity manager factory can not be null.");
+        this.entityManagerFactory = entityManagerFactory;
     }
     
     @Override
     public void addDelivery(Delivery delivery) {
         evaluateDelivery(delivery);
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
         entityManager.persist(delivery);
         entityManager.flush();
-        entityManager.detach(delivery);
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
     
     @Override
     public void updateDelivery(Delivery delivery) {
         evaluateDelivery(delivery);
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
         entityManager.merge(delivery);
-        entityManager.flush();        
-        entityManager.detach(delivery);
+        entityManager.flush();               
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
     
     @Override
-    public void deleteDelivery(Long id) {
-        if(id == null && id < 0) {
-            throw new IllegalArgumentException("Invalid id.");
-        }
-        Delivery delivery = entityManager.find(Delivery.class, id);
-        entityManager.remove(delivery);
+    public void deleteDelivery(Delivery delivery) {
+        evaluateDelivery(delivery);
+        
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
+        Delivery deletedDelivery = entityManager.find(Delivery.class, delivery.getId());
+        entityManager.remove(deletedDelivery);              
+        entityManager.getTransaction().commit();
+        entityManager.close();
     }
     
     @Override
@@ -62,14 +71,21 @@ public class DeliveryDaoImpl implements DeliveryDao{
         if(id == null && id < 0) {
             throw new IllegalArgumentException("Invalid id (id null or < 0).");
         }
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        entityManager.getTransaction().begin();
         Delivery delivery = entityManager.find(Delivery.class, id);
         entityManager.detach(delivery);
+        entityManager.getTransaction().commit();
+        entityManager.close();
         return delivery;
     }
     
     @Override
     public List<Delivery> getAllDeliveries() {
-        return entityManager.createQuery("SELECT d from Delivery d",Delivery.class).getResultList();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        List<Delivery> resultList = entityManager.createQuery("SELECT d from Delivery d",Delivery.class).getResultList();
+        entityManager.close();
+        return resultList;
     }
     
     /**
