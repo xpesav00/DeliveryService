@@ -65,9 +65,9 @@ public class DeliveryDaoImpl implements DeliveryDao{
     }
     
     @Override
-    public Delivery getDelivery(Long id) {
-        if(id == null && id < 0) {
-            throw new IllegalArgumentException("Invalid id (id null or < 0).");
+    public Delivery getDelivery(long id) {
+        if(id <= 0) {
+            throw new IllegalArgumentException("Invalid id (id <= 0).");
         }
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
@@ -95,7 +95,7 @@ public class DeliveryDaoImpl implements DeliveryDao{
         if(delivery == null) {
             throw new IllegalArgumentException("Delivery can not be null!");
         }
-        if(delivery.getId() != null && delivery.getId() < 0) {
+        if(delivery.getId() <= 0) {
             throw new IllegalArgumentException("Invalid id, value < 0.");
         }
         if(delivery.getName().length() == 0 || delivery.getName() == null || delivery.getName().length() > Delivery.NAME_LENGTH) {
