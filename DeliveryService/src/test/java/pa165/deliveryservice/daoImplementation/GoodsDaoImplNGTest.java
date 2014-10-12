@@ -8,10 +8,14 @@ import javax.persistence.Persistence;
 import org.apache.commons.lang3.Validate;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import static org.testng.Assert.*;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pa165.deliveryservice.DaoContext;
 import pa165.deliveryservice.entity.*;
 
 /**
@@ -20,7 +24,9 @@ import pa165.deliveryservice.entity.*;
  * @author Jan Šťastný
  */
 
-public class GoodsDaoImplNGTest {
+@ContextConfiguration(classes = DaoContext.class)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+public class GoodsDaoImplNGTest extends AbstractTestNGSpringContextTests {
     private EntityManagerFactory emf;
 
     @BeforeMethod
@@ -59,7 +65,8 @@ public class GoodsDaoImplNGTest {
         System.out.println("updateGoodsTest");
         GoodsDaoImpl instance = new GoodsDaoImpl(emf);
         Goods goods = new Goods();
-        goods.setId(Long.getLong("1"));
+        instance.addGoods(goods);
+//        goods.setId(Long.getLong("1"));
         Goods goodsFromDB = getSpecificGoods(goods);
         goodsFromDB.setPrice(150000);
         goodsFromDB.setSeller("ABC");
