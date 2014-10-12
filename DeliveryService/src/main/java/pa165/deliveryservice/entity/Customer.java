@@ -1,28 +1,30 @@
 package pa165.deliveryservice.entity;
 
 import java.util.List;
+import javax.persistence.Embedded;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * Represents a customer of delivery service
- * 
- * @author Martin Nekula
+ *
+ * @author Jan Pešava
  */
 public class Customer {
 
     @Id
     @GeneratedValue
     private long Id;
-    
+
     private String firstName;
-    
+
     private String lastName;
-    
+
+    @Embedded
     private Address address;
-    
-    @ManyToOne(mappedBy = "customer")
+
+    @OneToMany(mappedBy = "customer")
     private List<Delivery> deliveries;
 
     public Customer() {
@@ -66,6 +68,15 @@ public class Customer {
 
     public void setDeliveries(List<Delivery> deliveries) {
         this.deliveries = deliveries;
+    }
+
+    /**
+     * Adds one delivery to customer.
+     *
+     * @param delivery Delivery to be added.
+     */
+    public void addDelivery(Delivery delivery) {
+        deliveries.add(delivery);
     }
 
     @Override
