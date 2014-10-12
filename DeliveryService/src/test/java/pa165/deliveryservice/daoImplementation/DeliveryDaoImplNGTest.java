@@ -16,9 +16,11 @@ import pa165.deliveryservice.entity.Delivery;
 import pa165.deliveryservice.entity.DeliveryStatus;
 
 /**
- *
- * @author Drimal
+ *  Test of DeliveryImpl
+ * 
+ * @author Martin Drimal
  */
+@Test(enabled = false)
 public class DeliveryDaoImplNGTest {
     EntityManagerFactory emf;
 
