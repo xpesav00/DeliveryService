@@ -3,7 +3,7 @@ package pa165.deliveryservice.entity;
 import javax.persistence.*;
 
 /**
- * Entity reprezents goods
+ * Entity represents goods
  * 
  * @author Martin Drimal
  */

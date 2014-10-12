@@ -38,7 +38,6 @@ public class DeliveryDaoImpl implements DeliveryDao{
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
         entityManager.persist(delivery);
-        entityManager.flush();
         entityManager.getTransaction().commit();
         entityManager.close();
     }
@@ -48,8 +47,7 @@ public class DeliveryDaoImpl implements DeliveryDao{
         evaluateDelivery(delivery);
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
-        entityManager.merge(delivery);
-        entityManager.flush();               
+        entityManager.merge(delivery);              
         entityManager.getTransaction().commit();
         entityManager.close();
     }
