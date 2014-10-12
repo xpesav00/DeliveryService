@@ -1,31 +1,14 @@
 package pa165.deliveryservice.entity;
 
-import javax.persistence.*;
+import javax.persistence.Embeddable;
 
 @Embeddable
 public class Address {
-    @Id
-    @GeneratedValue
-    private long Id;
-    
-    @Column
     private String city;
-    
-    @Column
     private String street;
-    
-    @Column
     private int postcode;
 
     public Address() {
-    }
-
-    public long getId() {
-        return Id;
-    }
-
-    public void setId(long Id) {
-        this.Id = Id;
     }
 
     public String getCity() {
@@ -50,31 +33,5 @@ public class Address {
 
     public void setPostcode(int postcode) {
         this.postcode = postcode;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Address other = (Address) obj;
-        if (this.Id != other.Id) {
-            return false;
-        }
-        return true;
-    }
-        
-    @Override
-    public String toString(){
-        return "Address: city: "+getCity()+", street: "+getStreet()+", postcode: "+getPostcode();
     }
 }

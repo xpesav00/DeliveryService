@@ -1,41 +1,16 @@
 package pa165.deliveryservice.daoInterface;
 
-
-import java.util.List;
 import pa165.deliveryservice.entity.Goods;
+import java.util.List;
 
-/**
- * Performs necessary operations with goods entities
- * 
- * @author Martin Drimal
- */
 public interface GoodsDao {
-    /**
-     * Retrieve all goods from Delivery Service database
-     * @return list of goods
-     */
+
     List<Goods> getAllGoods();
 
-    /**
-     * Update goods in Delivery Service database
-     * @param goods goods to update in database
-     */
-    void updateGoods(Goods goods);
+    void updateGoods();
 
-    /**
-     * Delete goods from Delivery Service database
-     * @param goods goods to delete from database
-     */
-    void deleteGoods(Goods goods);
+    void deleteGoods();
 
-    /**
-     * Add goods to Delivery Service database
-     * @param goods goods to add into database
-     */
-    void addGoods(Goods goods);
-    
-    /**
-     * Close opened connection
-     */
-    void closeConnection();
+    void addGoods();
+
 }
