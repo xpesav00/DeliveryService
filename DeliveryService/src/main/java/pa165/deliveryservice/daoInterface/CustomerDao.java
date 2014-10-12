@@ -7,10 +7,10 @@ public interface CustomerDao {
 
     List<Customer> getAllCustomer();
 
-    void updateCustomer();
+    void updateCustomer(Customer customer);
 
-    void deleteCustomer();
+    void deleteCustomer(Long id);
 
-    void addCustomer();
+    void addCustomer(Customer customer);
 
 }
