@@ -53,11 +53,11 @@ public class Postman {
     public List<Delivery> getDeliveries() {
         return deliveries;
     }
-
+    
     /**
      * Adds one delivery to postman.
-     *     
-* @param delivery Delivery to be added.
+     * 
+     * @param delivery Delivery to be added.
      */
     public void addDelivery(Delivery delivery) {
         deliveries.add(delivery);

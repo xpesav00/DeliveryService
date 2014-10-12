@@ -5,19 +5,16 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceUnit;
 
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
-import static org.testng.Assert.*;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import pa165.deliveryservice.DaoContext;
-import pa165.deliveryservice.daoInterface.CustomerDao;
 import pa165.deliveryservice.entity.Address;
 import pa165.deliveryservice.entity.Customer;
 import pa165.deliveryservice.entity.Delivery;
@@ -26,13 +23,13 @@ import pa165.deliveryservice.entity.Goods;
 import pa165.deliveryservice.entity.Postman;
 
 /**
- * Set of tests for Customer DAO Implementation.
- *
- * @author Martin Nekula
+ * Class is test for postman functions
+ * @author Pesava
+ * @version 1.0
  */
 @ContextConfiguration(classes = DaoContext.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
-public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
+public class PostmanDaoImplNGTest extends AbstractTestNGSpringContextTests {
 
     public EntityManagerFactory emf;
     private long cus1Id;
@@ -59,11 +56,11 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
         g1.setPrice(1337);
         g2.setSeller("Toilets Inc.");
         g2.setPrice(1338);
-
+        
         Postman pman1 = new Postman();
         pman1.setFirstName("Jiri");
         pman1.setLastName("Zbrozek");
-
+        
         Customer cus1 = new Customer();
         Customer cus2 = new Customer();
         cus1.setFirstName("Milan");
@@ -85,6 +82,12 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
         //TODO add goods to del2
         del2.setCustomer(cus2);
         del2.setStatus(DeliveryStatus.SENT);
+        
+        //set deliveries
+        List<Delivery> deliveries = new ArrayList<>();
+        deliveries.add(del1);
+        deliveries.add(del2);
+        pman1.setDeliveries(deliveries);
 
         //TODO add delivery to customers
         //TODO add deliveries to postman
@@ -126,7 +129,7 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
     public void testUpdateCustomer() {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
-        Customer cusDetached = em.find(Customer.class, cus1Id);
+        Postman cusDetached = em.find(Postman.class, cus1Id);
         em.detach(cusDetached);
         em.getTransaction().commit();
         
@@ -137,7 +140,6 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
 
         cusDetached.setFirstName("Jozka");
         cusDetached.setLastName("Cerny");
-        cusDetached.setAddress(newAddr);
         //TODO test deliveries update
         
 //        CustomerDao custDao = new CustomerDaoImpl(emf);
@@ -146,25 +148,24 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
         Customer cusMerged = em.find(Customer.class, cus1Id);      
         Assert.assertEquals(cusMerged.getFirstName(), "Jozka");
         Assert.assertEquals(cusMerged.getLastName(), "Cerny");
-        Assert.assertEquals(cusMerged.getAddress(), newAddr);
         
         em.close();
     }
 
     /**
-     * Test of deleteCustomer method, of class CustomerDaoImpl.
+     * Test of deletePostman method, of class PostmanDaoImpl.
      */
     @Test
-    public void testDeleteCustomer() {
+    public void testDeletePostman() {
         EntityManager em = emf.createEntityManager();
-        Customer cus1 = em.find(Customer.class, cus1Id);  
+        Postman postman = em.find(Postman.class, cus1Id);  
 
 //        CustomerDao custDao = new CustomerDaoImpl(emf);
 //        custDao.deleteCustomer(cus1);
         
-        List<Customer> customers = em.createQuery("SELECT c FROM Customer c", Customer.class).getResultList();
-        Assert.assertEquals(customers.size(), 1, "Nothing deleted!");
-        Assert.assertEquals(customers.get(0).getFirstName(), "Josef", "Deleted wrong customer!"); 
+        List<Postman> postmans = em.createQuery("SELECT c FROM Postman c", Postman.class).getResultList();
+        Assert.assertEquals(postmans.size(), 1, "Nothing deleted!");
+        Assert.assertEquals(postmans.get(0).getFirstName(), "Josef", "Deleted wrong customer!"); 
         em.close();
     }
 
@@ -173,13 +174,11 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
      */
     @Test
     public void testAddCustomer() {
-        Customer newCust = new Customer();
-//        CustomerDao custDao = new CustomerDaoImpl(emf);
-//        custDao.addCustomer(newCust);
+        Postman postman = new Postman();
         
         EntityManager em = emf.createEntityManager();
-        List<Customer> customers = em.createQuery("SELECT c FROM Customer c", Customer.class).getResultList();
-        Assert.assertEquals(customers.size(), 3, "Customer not added!");
+        List<Postman> postmans = em.createQuery("SELECT c FROM Postman c", Postman.class).getResultList();
+        Assert.assertEquals(postmans.size(), 3, "Postman not added!");
         em.close();
     }
 

@@ -20,7 +20,7 @@ public class Delivery {
     @ManyToOne
     private Postman postman;
     @OneToMany(mappedBy="deliveryId")
-    private List<Goods> packages;    
+    private List<Goods> goods;
     @ManyToOne
     private Customer customer;
     @Enumerated(EnumType.STRING)
@@ -54,12 +54,12 @@ public class Delivery {
         this.postman = postman;
     }
 
-    public List<Goods> getPackages() {
-        return packages;
+    public List<Goods> getGoods() {
+        return goods;
     }
 
-    public void setPackages(List<Goods> packages) {
-        this.packages = packages;
+    public void setGoods(List<Goods> goods) {
+        this.goods = goods;
     }
 
     public Customer getCustomer() {
@@ -79,6 +79,13 @@ public class Delivery {
     }
 
     @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.Id);
+        return hash;
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
@@ -90,43 +97,11 @@ public class Delivery {
         if (!Objects.equals(this.Id, other.Id)) {
             return false;
         }
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.postman, other.postman)) {
-            return false;
-        }
-        if (!Objects.equals(this.packages, other.packages)) {
-            return false;
-        }
-        if (!Objects.equals(this.customer, other.customer)) {
-            return false;
-        }
-        if (this.status != other.status) {
-            return false;
-        }
         return true;
     }
 
     @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 71 * hash + Objects.hashCode(this.Id);
-        hash = 71 * hash + Objects.hashCode(this.name);
-        hash = 71 * hash + Objects.hashCode(this.postman);
-        hash = 71 * hash + Objects.hashCode(this.packages);
-        hash = 71 * hash + Objects.hashCode(this.customer);
-        hash = 71 * hash + (this.status != null ? this.status.hashCode() : 0);
-        return hash;
-    }
-
-    
-
-    @Override
     public String toString() {
-        return "Delivery["+ Id.toString() + "] " + name + ", P:" + postman + ", G:{" + packages + "}, C:" + customer + ", S:" + status;
+        return "Delivery["+ Id.toString() + "] " + name + ", P:" + postman.getId() + ", G:{" + goods + "}, C:" + customer.getFirstName()+" "+customer.getLastName()+ ", S:" + status;
     }
-    
-    
-
 }
