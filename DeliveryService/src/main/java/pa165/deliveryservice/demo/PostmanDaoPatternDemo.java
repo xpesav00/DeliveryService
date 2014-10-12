@@ -33,6 +33,5 @@ public class PostmanDaoPatternDemo {
         System.out.println(postmandb.getFirstName());
         System.out.println(postmandb.getLastName());
         System.out.println(postmandb.getId());
-        em.close();
     }
 }

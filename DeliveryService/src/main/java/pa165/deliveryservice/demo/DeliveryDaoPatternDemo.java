@@ -9,8 +9,10 @@ import pa165.deliveryservice.entity.Delivery;
 import java.util.UUID;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import pa165.deliveryservice.daoInterface.DeliveryDao;
 import pa165.deliveryservice.entity.Customer;
 import pa165.deliveryservice.entity.DeliveryStatus;
+import pa165.deliveryservice.entity.Postman;
 
 public class DeliveryDaoPatternDemo {
 
@@ -18,26 +20,27 @@ public class DeliveryDaoPatternDemo {
         new AnnotationConfigApplicationContext(DaoContext.class);
        
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
-        EntityManager entityManager = emf.createEntityManager();
+        DeliveryDao deliveryDAO = new DeliveryDaoImpl(emf);
+        
         Delivery delivery0 = new Delivery();
             delivery0.setName(generateCode());
             delivery0.setCustomer(new Customer());
-            delivery0.setPackages(null);
-            delivery0.setPostman(null);
+            delivery0.setGoods(null);
+            delivery0.setPostman(new Postman());
             delivery0.setStatus(DeliveryStatus.INIT);
-        entityManager.getTransaction().begin();
-        entityManager.persist(delivery0);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+//        entityManager.getTransaction().begin();
+//        entityManager.persist(delivery0);
+//        entityManager.getTransaction().commit();
+//        entityManager.close();
+          deliveryDAO.addDelivery(delivery0);
         dbFetch(emf);
         
         
-        DeliveryDaoImpl deliveryDAO = new DeliveryDaoImpl();
         Delivery delivery1 = new Delivery();
             delivery1.setName(generateCode());
             delivery1.setCustomer(new Customer());
-            delivery1.setPackages(null);
-            delivery1.setPostman(null);
+            delivery1.setGoods(null);
+            delivery1.setPostman(new Postman());
             delivery1.setStatus(DeliveryStatus.INIT);
         
         deliveryDAO.addDelivery(delivery1);
@@ -45,7 +48,7 @@ public class DeliveryDaoPatternDemo {
         List<Delivery> allDeliveries = deliveryDAO.getAllDeliveries();
         System.out.println("All deliveries:"+allDeliveries);
         deliveryDAO.getDelivery(Long.valueOf(0));
-        deliveryDAO.deleteDelivery(Long.valueOf(0));
+        deliveryDAO.deleteDelivery(delivery0);
         delivery1.setName(generateCode());
         deliveryDAO.updateDelivery(delivery1);
         allDeliveries = deliveryDAO.getAllDeliveries();

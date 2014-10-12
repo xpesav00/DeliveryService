@@ -18,9 +18,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 /**
- * You probably don't understand this code. It will be in later lectures.
+ * Class create embeddded data source
  * 
- * @author Filip Nguyen
+ * @author Martin Drimal
  *
  */
 @Configuration
