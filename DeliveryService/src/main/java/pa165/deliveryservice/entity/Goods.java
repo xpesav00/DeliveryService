@@ -18,6 +18,9 @@ public class Goods {
     
     @Column(length = 20)
     private String seller;
+    
+    @ManyToOne
+    private Delivery delivery;
 
     public Goods() {
     }
@@ -44,6 +47,14 @@ public class Goods {
 
     public void setSeller(String seller) {
         this.seller = seller;
+    }
+
+    public Delivery getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(Delivery delivery) {
+        this.delivery = delivery;
     }
 
     @Override

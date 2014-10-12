@@ -1,6 +1,5 @@
 package pa165.deliveryservice.daoImplementation;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,13 +19,15 @@ import pa165.deliveryservice.entity.DeliveryStatus;
  * 
  * @author Martin Drimal
  */
-@Test(enabled = false)
+@Test
 public class DeliveryDaoImplNGTest {
     EntityManagerFactory emf;
+    private long deliverId;
 
     @BeforeMethod
     public void setUpMethod() throws Exception {
         emf = Persistence.createEntityManagerFactory("myUnit");
+        prepareDatabase();
     }
 
     @AfterMethod
@@ -42,9 +43,7 @@ public class DeliveryDaoImplNGTest {
     @Test
     public void testGetAllDeliveries() {
         System.out.println("getAllDeliveryTest");
-        prepareDatabase();
-        
-        DeliveryDaoImpl instance = new DeliveryDaoImpl();
+        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
         List expResult = retrieveDatabase();
         List result = instance.getAllDeliveries();
         assertEquals(result.size(), expResult.size(), "Number of row should be same.");
@@ -57,9 +56,9 @@ public class DeliveryDaoImplNGTest {
     @Test
     public void testUpdateDelivery() {
         System.out.println("updateDeliveryTest");
-        DeliveryDaoImpl instance = new DeliveryDaoImpl();
+        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
         Delivery del1 = new Delivery();
-        del1.setId(Long.getLong("1"));
+        del1.setId(Long.getLong(String.format("", deliverId)));
         Delivery delDb = getSpecificDelivery(del1);
         delDb.setName("Ondra");
         instance.updateDelivery(delDb);
@@ -74,9 +73,14 @@ public class DeliveryDaoImplNGTest {
     @Test
     public void testDeleteDelivery() {
         System.out.println("deleteDelivery");
-        DeliveryDaoImpl instance = new DeliveryDaoImpl();
-        instance.deleteDelivery(null);
-        // TODO review the generated test code and remove the default call to fail.
+        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
+        Delivery delivery = new Delivery();
+        int sizeBeforeDelete = getDatabaseSize();
+        delivery.setId(deliverId);
+        List<Delivery> deliveryList = retrieveDatabase();
+        instance.deleteDelivery(delivery);
+        assertEquals(retrieveDatabase().size(), sizeBeforeDelete-1, "Database should be smaller.");
+        assertFalse(deliveryList.contains(delivery));
     }
 
     /**
@@ -86,15 +90,20 @@ public class DeliveryDaoImplNGTest {
     public void testAddDelivery() {
         System.out.println("addDelivery");
         DeliveryDaoImpl instance = new DeliveryDaoImpl();
-        
+        int sizeBeforeAdd = getDatabaseSize();
         Delivery delivery = createTestDelivery();
         instance.addDelivery(delivery);
         List<Delivery> deliveries = retrieveDatabase();
-        Delivery actual = deliveries.get(0);
-        
+        Delivery actual = deliveries.get(getDatabaseSize()-1);
+        assertEquals(sizeBeforeAdd, deliveries.size(), "Database size should be larger");
         assertEquals(actual, delivery, "Deliveries should be equal.");        
     }
-    
+  
+    private int getDatabaseSize(){
+        List<Delivery> deliveryList = retrieveDatabase();
+        return deliveryList.size();
+    }
+
     private void prepareDatabase(){
         EntityManager em = emf.createEntityManager();
         
@@ -103,6 +112,7 @@ public class DeliveryDaoImplNGTest {
         deliveryOne.setCustomer(cust);
         deliveryOne.setName("Test1");
         deliveryOne.setStatus(DeliveryStatus.INIT);
+        deliverId = deliveryOne.getId();
         
         Delivery deliveryTwo = new Delivery();
         deliveryTwo.setCustomer(createTestCustomer("Hozna", "Lamal"));
