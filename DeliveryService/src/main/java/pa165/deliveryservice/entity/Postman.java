@@ -53,13 +53,19 @@ public class Postman {
     public List<Delivery> getDeliveries() {
         return deliveries;
     }
-    
+
     /**
      * Adds one delivery to postman.
-     * 
+     *
      * @param delivery Delivery to be added.
      */
     public void addDelivery(Delivery delivery) {
+        if (delivery == null) {
+            throw new NullPointerException("Delivery to add cannot be null!");
+        }
+        if (delivery.getId() != 0) {
+            throw new IllegalArgumentException("Cannot add: delivery ID already set!");
+        }
         deliveries.add(delivery);
     }
 

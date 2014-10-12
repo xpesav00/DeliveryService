@@ -86,8 +86,10 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
         del2.setCustomer(cus2);
         del2.setStatus(DeliveryStatus.SENT);
 
-        //TODO add delivery to customers
-        //TODO add deliveries to postman
+        cus1.addDelivery(del1);
+        cus2.addDelivery(del2);
+        pman1.addDelivery(del1);
+        pman1.addDelivery(del2);
         em.persist(g1);
         em.persist(g2);
         em.persist(pman1);
@@ -113,10 +115,10 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
      */
     @Test
     public void testGetAllCustomer() {
-//        CustomerDao custDao = new CustomerDaoImpl(emf);      
-//        List<Customer> customers = custDao.getAllCustomer();
+        CustomerDao custDao = new CustomerDaoImpl();      
+        List<Customer> customers = custDao.getAllCustomers();
 
-//        Assert.assertEquals(customers.size(), 2, "Not all customers in the list!");
+        Assert.assertEquals(customers.size(), 2, "Not all customers in the list!");
     }
 
     /**
@@ -140,8 +142,8 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
         cusDetached.setAddress(newAddr);
         //TODO test deliveries update
         
-//        CustomerDao custDao = new CustomerDaoImpl(emf);
-//        custDao.updateCustomer(cusDetached);
+        CustomerDao custDao = new CustomerDaoImpl(emf);
+        custDao.updateCustomer(cusDetached);
         
         Customer cusMerged = em.find(Customer.class, cus1Id);      
         Assert.assertEquals(cusMerged.getFirstName(), "Jozka");
@@ -159,8 +161,8 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
         EntityManager em = emf.createEntityManager();
         Customer cus1 = em.find(Customer.class, cus1Id);  
 
-//        CustomerDao custDao = new CustomerDaoImpl(emf);
-//        custDao.deleteCustomer(cus1);
+        CustomerDao custDao = new CustomerDaoImpl(emf);
+        custDao.deleteCustomer(cus1);
         
         List<Customer> customers = em.createQuery("SELECT c FROM Customer c", Customer.class).getResultList();
         Assert.assertEquals(customers.size(), 1, "Nothing deleted!");
@@ -174,8 +176,8 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testAddCustomer() {
         Customer newCust = new Customer();
-//        CustomerDao custDao = new CustomerDaoImpl(emf);
-//        custDao.addCustomer(newCust);
+        CustomerDao custDao = new CustomerDaoImpl(emf);
+        custDao.addCustomer(newCust);
         
         EntityManager em = emf.createEntityManager();
         List<Customer> customers = em.createQuery("SELECT c FROM Customer c", Customer.class).getResultList();
