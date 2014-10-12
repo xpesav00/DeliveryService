@@ -19,7 +19,7 @@ public class Delivery {
     private String name;
     @ManyToOne
     private Postman postman;
-    @OneToMany(mappedBy="deliveryId")
+    @OneToMany(mappedBy="delivery")
     private List<Goods> goods;
     @ManyToOne
     private Customer customer;
