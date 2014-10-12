@@ -39,13 +39,13 @@ public class CustomerDaoPatternDemo {
          CustomerDao customerDao = new CustomerDaoImpl();
          
          //get empty customer list
-         printAllCustomers(customerDao.getAllCustomer());
+         printAllCustomers(customerDao.getAllCustomers());
          
          //add deliveries
          customerDao.addCustomer(customer);
          
          //get all customers in database
-         printAllCustomers(customerDao.getAllCustomer());
+         printAllCustomers(customerDao.getAllCustomers());
     }
      
      

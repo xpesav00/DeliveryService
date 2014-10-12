@@ -7,6 +7,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+/**
+ * Implementation of PostmanDao.
+ *
+ * @author Martin Nekula
+ */
 public class PostmanDaoImpl implements PostmanDao {
 
     private EntityManagerFactory emf;
@@ -20,6 +25,22 @@ public class PostmanDaoImpl implements PostmanDao {
             throw new NullPointerException();
         }
         this.emf = emf;
+    }
+
+    /**
+     * Finds a single postman in the DB.
+     *
+     * @param id Postman's ID.
+     * @return Found postman.
+     */
+    public Postman getPostman(Long id) {
+        if (id == null && id < 0) {
+            throw new IllegalArgumentException("Invalid id (id null or < 0).");
+        }
+        EntityManager em = emf.createEntityManager();
+        Postman postmanDb = em.find(Postman.class, id);
+        em.close();
+        return postmanDb;
     }
 
     @Override
@@ -67,4 +88,9 @@ public class PostmanDaoImpl implements PostmanDao {
         em.close();
     }
 
+    public void closeConnection() {
+        if (emf != null) {
+            emf.close();
+        }
+    }
 }
