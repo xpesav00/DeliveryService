@@ -40,7 +40,7 @@ public class DeliveryDaoImplNGTest {
      * Test of getAllDelivery method, of class DeliveryDaoImpl.
      */
     @Test
-    public void testGetAllDelivery() {
+    public void testGetAllDeliveries() {
         System.out.println("getAllDeliveryTest");
         prepareDatabase();
         

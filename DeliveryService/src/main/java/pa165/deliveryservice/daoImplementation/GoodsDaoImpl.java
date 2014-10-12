@@ -4,7 +4,6 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceUnit;
 import pa165.deliveryservice.daoInterface.GoodsDao;
 import pa165.deliveryservice.entity.Goods;
 
@@ -38,8 +37,8 @@ public class GoodsDaoImpl implements GoodsDao {
         if(goods == null){
             throw new NullPointerException("Goods is null.");
         }
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
+        EntityManager em = emf.createEntityManager(); 
+       em.getTransaction().begin();
         em.merge(goods);
         em.getTransaction().commit();
         em.close();
