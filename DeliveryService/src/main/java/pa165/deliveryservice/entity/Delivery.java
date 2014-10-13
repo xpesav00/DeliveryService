@@ -14,7 +14,7 @@ public class Delivery {
     public static final int NAME_LENGTH = 13;
     @Id
     @GeneratedValue
-    private Long Id;    
+    private long Id;    
     @Column(nullable=false,length=NAME_LENGTH)
     private String name;
     @ManyToOne
@@ -30,11 +30,11 @@ public class Delivery {
     public Delivery() {
     }
 
-    public Long getId() {
+    public long getId() {
         return Id;
     }
 
-    public void setId(Long Id) {
+    public void setId(long Id) {
         this.Id = Id;
     }
 
@@ -102,6 +102,7 @@ public class Delivery {
 
     @Override
     public String toString() {
-        return "Delivery["+ Id.toString() + "] " + name + ", P:" + postman.getId() + ", G:{" + goods + "}, C:" + customer.getFirstName()+" "+customer.getLastName()+ ", S:" + status;
+        return "Delivery{" + "Id=" + Id + ", name=" + name + ", postman=" + postman + ", goods=" + goods + ", customer=" + customer + ", status=" + status + '}';
     }
+
 }

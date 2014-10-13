@@ -20,7 +20,7 @@ public interface DeliveryDao {
      * @return Appropriate delivery
      * @throws IllegalArgumentException if delivery's id is null or less or equal to 0
      */
-    Delivery getDelivery(Long id);
+    Delivery getDelivery(long id);
     
     /**
      * Updates delivery

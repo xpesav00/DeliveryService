@@ -154,12 +154,12 @@ public class PostmanDaoImplNGTest extends AbstractTestNGSpringContextTests {
         EntityManager em = emf.createEntityManager();
         Postman postman = em.find(Postman.class, postman1Id);
 
-        PostmanDao postmanDao = new PostmanDaoImpl(emf); 
+        PostmanDao postmanDao = new PostmanDaoImpl(); 
         postmanDao.deletePostman(postman);
         
         List<Postman> postmans = em.createQuery("SELECT c FROM Postman c", Postman.class).getResultList();
         Assert.assertEquals(postmans.size(), 0, "Nothing deleted!");
-        Assert.assertEquals(postmans.get(0).getFirstName(), "Karel", "Deleted wrong customer!"); 
+//        Assert.assertEquals(postmans.get(0).getFirstName(), "Karel", "Deleted wrong customer!"); 
         em.close();
     }
 

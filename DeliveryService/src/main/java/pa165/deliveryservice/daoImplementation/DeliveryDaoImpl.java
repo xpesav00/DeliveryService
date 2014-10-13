@@ -96,7 +96,7 @@ public class DeliveryDaoImpl implements DeliveryDao{
             throw new IllegalArgumentException("Delivery can not be null!");
         }
         if(delivery.getId() <= 0) {
-            throw new IllegalArgumentException("Invalid id, value < 0.");
+            throw new IllegalArgumentException("Invalid id, value <= 0.");
         }
         if(delivery.getName().length() == 0 || delivery.getName() == null || delivery.getName().length() > Delivery.NAME_LENGTH) {
             throw new IllegalArgumentException("Invalid name of delivery.");

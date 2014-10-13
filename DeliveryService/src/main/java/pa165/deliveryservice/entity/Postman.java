@@ -1,6 +1,7 @@
 package pa165.deliveryservice.entity;
 
 import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ public class Postman {
     private long Id;
     private String firstName;
     private String lastName;
-    @OneToMany(mappedBy = "postman")
+    @OneToMany(mappedBy = "postman", cascade = CascadeType.REMOVE)
     private List<Delivery> deliveries;
 
     public Postman() {

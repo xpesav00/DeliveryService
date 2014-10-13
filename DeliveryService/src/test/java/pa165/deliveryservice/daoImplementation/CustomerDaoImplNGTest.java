@@ -5,13 +5,11 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceUnit;
 
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.Assert;
-import static org.testng.Assert.*;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -63,15 +61,18 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
         Postman pman1 = new Postman();
         pman1.setFirstName("Jiri");
         pman1.setLastName("Zbrozek");
+        pman1.setDeliveries(new ArrayList<Delivery>());
 
         Customer cus1 = new Customer();
         Customer cus2 = new Customer();
         cus1.setFirstName("Milan");
         cus1.setLastName("Bochal");
         cus1.setAddress(addr1);
+        cus1.setDeliveries(new  ArrayList<Delivery>());
         cus2.setFirstName("Josef");
         cus2.setLastName("Majda");
         cus2.setAddress(addr2);
+        cus2.setDeliveries(new ArrayList<Delivery>());
 
         Delivery del1 = new Delivery();
         Delivery del2 = new Delivery();
@@ -142,13 +143,15 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
         cusDetached.setAddress(newAddr);
         //TODO test deliveries update
         
-        CustomerDao custDao = new CustomerDaoImpl(emf);
+        CustomerDao custDao = new CustomerDaoImpl();
         custDao.updateCustomer(cusDetached);
         
         Customer cusMerged = em.find(Customer.class, cus1Id);      
         Assert.assertEquals(cusMerged.getFirstName(), "Jozka");
         Assert.assertEquals(cusMerged.getLastName(), "Cerny");
-        Assert.assertEquals(cusMerged.getAddress(), newAddr);
+        Assert.assertEquals(cusMerged.getAddress().getCity(), "Novy Jicin");
+        Assert.assertEquals(cusMerged.getAddress().getStreet(), "Bozetechova 90");
+        Assert.assertEquals(cusMerged.getAddress().getPostcode(), 54345);
         
         em.close();
     }
@@ -161,7 +164,7 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
         EntityManager em = emf.createEntityManager();
         Customer cus1 = em.find(Customer.class, cus1Id);  
 
-        CustomerDao custDao = new CustomerDaoImpl(emf);
+        CustomerDao custDao = new CustomerDaoImpl();
         custDao.deleteCustomer(cus1);
         
         List<Customer> customers = em.createQuery("SELECT c FROM Customer c", Customer.class).getResultList();
@@ -176,7 +179,11 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testAddCustomer() {
         Customer newCust = new Customer();
-        CustomerDao custDao = new CustomerDaoImpl(emf);
+        newCust.setAddress(new Address());
+        newCust.setFirstName("Jano");
+        newCust.setLastName("Zoslovenska");
+        newCust.setDeliveries(new ArrayList<Delivery>());
+        CustomerDao custDao = new CustomerDaoImpl();
         custDao.addCustomer(newCust);
         
         EntityManager em = emf.createEntityManager();
