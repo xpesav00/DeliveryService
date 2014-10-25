@@ -1,10 +1,10 @@
 package pa165.deliveryservice.daoImplementation;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import javax.persistence.PersistenceUnit;
 import org.apache.commons.lang3.Validate;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
@@ -18,6 +18,7 @@ import pa165.deliveryservice.entity.Address;
 import pa165.deliveryservice.entity.Customer;
 import pa165.deliveryservice.entity.Delivery;
 import pa165.deliveryservice.entity.DeliveryStatus;
+import pa165.deliveryservice.entity.Goods;
 
 /**
  * Test of DeliveryImpl
@@ -39,6 +40,7 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
 
     @AfterMethod
     public void tearDownMethod() throws Exception {
+        
         if (emf != null) {
             emf.close();
         }
@@ -99,15 +101,14 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testAddDelivery() {
         System.out.println("addDelivery");
-        DeliveryDaoImpl instance = new DeliveryDaoImpl();
-        int sizeBeforeAdd = getDatabaseSize();
-        Delivery delivery = createTestDelivery();
-        delivery.setName("Delivery");
+        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
+        
+        Delivery delivery = new Delivery();
+        delivery.setName("Pokus");
         instance.addDelivery(delivery);
-        List<Delivery> deliveries = retrieveDatabase();
-        Delivery actual = deliveries.get(getDatabaseSize() - 1);
-        assertEquals(sizeBeforeAdd, deliveries.size(), "Database size should be larger");
-        assertEquals(actual, delivery, "Deliveries should be equal.");
+        Delivery  deliverzFromDB = instance.getDelivery(delivery.getId());
+        assertTrue(deliverzFromDB.equals(delivery));
+
     }
 
     private int getDatabaseSize() {
@@ -154,6 +155,9 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
         Customer cust = createTestCustomer("Pepa", "Pospisil");
         deliveryOne.setCustomer(cust);
         deliveryOne.setName("Test1");
+        List<Goods> goods = new ArrayList();
+        goods.add(new Goods());
+        deliveryOne.setGoods(goods);
         deliveryOne.setStatus(DeliveryStatus.INIT);
         return deliveryOne;
     }
@@ -196,5 +200,9 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
 
         EntityManager em = emf.createEntityManager();
         return em.find(Delivery.class, delivery.getId());
+    }
+    
+    private void deleteDatabase(){
+        
     }
 }
