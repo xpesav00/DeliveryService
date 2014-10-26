@@ -27,12 +27,7 @@ public class PostmanDaoImpl implements PostmanDao {
         this.emf = emf;
     }
 
-    /**
-     * Finds a single postman in the DB.
-     *
-     * @param id Postman's ID.
-     * @return Found postman.
-     */
+    @Override
     public Postman getPostman(Long id) {
         if (id == null && id < 0) {
             throw new IllegalArgumentException("Invalid id (id null or < 0).");

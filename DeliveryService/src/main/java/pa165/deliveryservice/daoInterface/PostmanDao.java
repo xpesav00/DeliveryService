@@ -38,4 +38,11 @@ public interface PostmanDao {
      */
     void addPostman(Postman postman);
 
+    /**
+     * Finds a single postman in the DB.
+     *
+     * @param id Postman's ID.
+     * @return Found postman.
+     */
+    public Postman getPostman(Long id);
 }

@@ -30,6 +30,7 @@ public class GoodsDaoImpl implements GoodsDao {
         this.emf = emf;
     }
 
+    @Override
     public List<Goods> getAllGoods() {
         log.info("Retrieve all goods from database.");
         EntityManager em = emf.createEntityManager();
@@ -38,6 +39,7 @@ public class GoodsDaoImpl implements GoodsDao {
         return goods;
     }
 
+    @Override
     public void updateGoods(Goods goods) throws IllegalArgumentException, NullPointerException{
         log.info("Update goods "+goods+" to database.");
         if(goods == null){
@@ -50,6 +52,7 @@ public class GoodsDaoImpl implements GoodsDao {
         em.close();
     }
 
+    @Override
     public void deleteGoods(Goods goods) throws IllegalArgumentException{
         log.info("Delete goods "+goods+" from database.");
         if(goods == null){
@@ -63,6 +66,7 @@ public class GoodsDaoImpl implements GoodsDao {
         em.close();
     }
 
+    @Override
     public void addGoods(Goods goods) {
         log.info("Add goods "+goods+" to database.");
         if (goods == null) {
@@ -75,15 +79,25 @@ public class GoodsDaoImpl implements GoodsDao {
         em.close();
     }
     
+    @Override
     public Goods getGoods(long id){
         log.info("Get specific goods from database.");
+        if (id <= 0){
+            throw new IllegalArgumentException("Id is zero or negative.");
+        }
         EntityManager em = emf.createEntityManager();
-        Goods goodsDb = em.find(Goods.class, id);
+        Goods goodsDb = null;
+        try{
+            goodsDb = em.find(Goods.class, id);
+        }catch(NullPointerException ex){
+            throw new IllegalArgumentException("Unknow delivery object.");
+        }
         em.close();
         
         return goodsDb;
     }
     
+    @Override
     public void closeConnection(){
         if(emf != null){
             emf.close();
