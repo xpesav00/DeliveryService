@@ -1,1 +1,3 @@
 /DeliveryService/target/
+/DeliveryService/derby.log
+/MultimoduleDeliveryService/ServiceLayer/target/

@@ -68,7 +68,7 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
         cus1.setFirstName("Milan");
         cus1.setLastName("Bochal");
         cus1.setAddress(addr1);
-        cus1.setDeliveries(new  ArrayList<Delivery>());
+        cus1.setDeliveries(new ArrayList<Delivery>());
         cus2.setFirstName("Josef");
         cus2.setLastName("Majda");
         cus2.setAddress(addr2);
@@ -107,7 +107,9 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
     //after each test
     @AfterMethod
     public void tearDownMethod() throws Exception {
-        emf.close();
+        if (emf != null) {
+            emf.close();
+        }
         cus1Id = Long.MIN_VALUE;
     }
 
@@ -116,7 +118,7 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
      */
     @Test
     public void testGetAllCustomer() {
-        CustomerDao custDao = new CustomerDaoImpl();      
+        CustomerDao custDao = new CustomerDaoImpl();
         List<Customer> customers = custDao.getAllCustomers();
 
         Assert.assertEquals(customers.size(), 2, "Not all customers in the list!");
@@ -132,7 +134,7 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
         Customer cusDetached = em.find(Customer.class, cus1Id);
         em.detach(cusDetached);
         em.getTransaction().commit();
-        
+
         Address newAddr = new Address();
         newAddr.setCity("Novy Jicin");
         newAddr.setStreet("Bozetechova 90");
@@ -142,17 +144,17 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
         cusDetached.setLastName("Cerny");
         cusDetached.setAddress(newAddr);
         //TODO test deliveries update
-        
+
         CustomerDao custDao = new CustomerDaoImpl();
         custDao.updateCustomer(cusDetached);
-        
-        Customer cusMerged = em.find(Customer.class, cus1Id);      
+
+        Customer cusMerged = em.find(Customer.class, cus1Id);
         Assert.assertEquals(cusMerged.getFirstName(), "Jozka");
         Assert.assertEquals(cusMerged.getLastName(), "Cerny");
         Assert.assertEquals(cusMerged.getAddress().getCity(), "Novy Jicin");
         Assert.assertEquals(cusMerged.getAddress().getStreet(), "Bozetechova 90");
         Assert.assertEquals(cusMerged.getAddress().getPostcode(), 54345);
-        
+
         em.close();
     }
 
@@ -162,14 +164,14 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
     @Test
     public void testDeleteCustomer() {
         EntityManager em = emf.createEntityManager();
-        Customer cus1 = em.find(Customer.class, cus1Id);  
+        Customer cus1 = em.find(Customer.class, cus1Id);
 
         CustomerDao custDao = new CustomerDaoImpl();
         custDao.deleteCustomer(cus1);
-        
+
         List<Customer> customers = em.createQuery("SELECT c FROM Customer c", Customer.class).getResultList();
         Assert.assertEquals(customers.size(), 1, "Nothing deleted!");
-        Assert.assertEquals(customers.get(0).getFirstName(), "Josef", "Deleted wrong customer!"); 
+        Assert.assertEquals(customers.get(0).getFirstName(), "Josef", "Deleted wrong customer!");
         em.close();
     }
 
@@ -185,7 +187,7 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
         newCust.setDeliveries(new ArrayList<Delivery>());
         CustomerDao custDao = new CustomerDaoImpl();
         custDao.addCustomer(newCust);
-        
+
         EntityManager em = emf.createEntityManager();
         List<Customer> customers = em.createQuery("SELECT c FROM Customer c", Customer.class).getResultList();
         Assert.assertEquals(customers.size(), 3, "Customer not added!");

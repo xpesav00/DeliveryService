@@ -1,13 +1,10 @@
 package pa165.deliveryservice.daoImplementation;
 
-import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import org.apache.commons.lang3.Validate;
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
