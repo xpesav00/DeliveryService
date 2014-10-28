@@ -4,6 +4,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import pa165.deliveryservice.daoInterface.GoodsDao;
@@ -17,6 +18,7 @@ import pa165.deliveryservice.entity.Goods;
 public class GoodsDaoImpl implements GoodsDao {
 
     private static final Logger log = LoggerFactory.getLogger(GoodsDaoImpl.class);
+    @PersistenceContext
     private EntityManagerFactory emf;
 
     public GoodsDaoImpl() {

@@ -218,7 +218,7 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
         instance.getDelivery(0);
     }
 
-    @Test(expectedExceptions = {IllegalArgumentException.class})
+    @Test(expectedExceptions = {IllegalArgumentException.class}, enabled=false)
     public void testGetDeliveryWithNonExistDelivery(){
         logger.info("test get delivery with non exist delivery");
         DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
