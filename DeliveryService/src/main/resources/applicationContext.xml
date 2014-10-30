@@ -11,7 +11,7 @@
             http://www.springframework.org/schema/tx
             http://www.springframework.org/schema/tx/spring-tx.xsd">
     <import resource="springDBConfig.xml"/>
-    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+
     <bean id="goodsDaoImpl" class="pa165.deliveryservice.daoImplementation.GoodsDaoImpl" />
     <bean id="goodsService" class="pa165.servicelayer.serviceImplementation.GoodsServiceImpl">
         <property name="goodsDao" ref="goodsDaoImpl" />
