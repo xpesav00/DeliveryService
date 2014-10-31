@@ -18,9 +18,9 @@ public class PostmanDaoPatternDemo {
 
     public static void main(String[] args) {
         new AnnotationConfigApplicationContext(DaoContext.class);
-//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
-//        EntityManager em = emf.createEntityManager();
-//        em.getTransaction().begin();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("dsInMem");
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
 
         Delivery del1 = new Delivery();
         del1.setCustomer(new Customer());
@@ -37,13 +37,13 @@ public class PostmanDaoPatternDemo {
 
         PostmanDao postmanDao = new PostmanDaoImpl();
         postmanDao.addPostman(postman1);
-        printAllCustomers(postmanDao.getAllPostmen());
+        printAllPostmen(postmanDao.getAllPostmen());
 
-//        em.persist(postman1);
-//        em.getTransaction().commit();
-//        em.close();
-//        dbFetch(emf);
-//        emf.close();
+        em.persist(postman1);
+        em.getTransaction().commit();
+        em.close();
+        dbFetch(emf);
+        emf.close();
     }
 
     private static void dbFetch(EntityManagerFactory emf) {
@@ -54,9 +54,9 @@ public class PostmanDaoPatternDemo {
         System.out.println(postmandb.getId());
     }
 
-    public static void printAllCustomers(List<Postman> postmen) {
+    public static void printAllPostmen(List<Postman> postmen) {
         System.out.println("******************************");
-        System.out.println("        LIST CUSTOMERS        ");
+        System.out.println("        LIST POSTMEN        ");
         for (Postman postman : postmen) {
             System.out.println(postman);
         }

@@ -98,6 +98,6 @@ public class Postman {
 
     @Override
     public String toString() {
-        return "Postman{" + "Id=" + Id + ", firstName=" + firstName + ", lastName=" + lastName + ", deliveries=" + deliveries + '}';
+        return "Postman{" + "Id=" + Id + ", firstName=" + firstName + ", lastName=" + lastName /**+ ", deliveries=" + deliveries**/ + '}';
     }
 }

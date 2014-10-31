@@ -44,5 +44,5 @@ public interface PostmanDao {
      * @param id Postman's ID.
      * @return Found postman.
      */
-    public Postman getPostman(Long id);
+    public Postman getPostman(long id);
 }

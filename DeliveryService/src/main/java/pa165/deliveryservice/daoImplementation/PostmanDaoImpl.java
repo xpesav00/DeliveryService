@@ -4,88 +4,94 @@ import pa165.deliveryservice.daoInterface.PostmanDao;
 import pa165.deliveryservice.entity.Postman;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 /**
  * Implementation of PostmanDao.
  *
  * @author Martin Nekula
  */
+@Repository
 public class PostmanDaoImpl implements PostmanDao {
 
-    private EntityManagerFactory emf;
+    private static final Logger log = LoggerFactory.getLogger(PostmanDaoImpl.class);
+    @PersistenceContext
+    private EntityManager em;
 
     public PostmanDaoImpl() {
-        emf = Persistence.createEntityManagerFactory("myUnit");
+        log.info("Create database connection.");
     }
 
-    public PostmanDaoImpl(EntityManagerFactory emf) {
-        if (emf == null) {
+    public PostmanDaoImpl(EntityManager em) {
+        log.info("Create database connection with param.");
+        if (em == null) {
             throw new NullPointerException();
         }
-        this.emf = emf;
+        this.em = em;
     }
 
     @Override
-    public Postman getPostman(Long id) {
-        if (id == null && id < 0) {
-            throw new IllegalArgumentException("Invalid id (id null or < 0).");
+    public Postman getPostman(long id) {
+        log.info("Get specific postman from database.");
+        if (id <= 0) {
+            throw new IllegalArgumentException("Invalid id (zero or negative).");
         }
-        EntityManager em = emf.createEntityManager();
-        Postman postmanDb = em.find(Postman.class, id);
-        em.close();
+        Postman postmanDb = null;
+        try {
+            postmanDb = em.find(Postman.class, id);
+        } catch (NullPointerException ex) {
+            throw new IllegalArgumentException("Unknow postman object.");
+        }
         return postmanDb;
     }
 
     @Override
     public List<Postman> getAllPostmen() {
-        EntityManager em = emf.createEntityManager();
+        log.info("Retrieve all postmen from database.");
         List<Postman> postmen = em.createQuery("SELECT p from Postman p", Postman.class).getResultList();
-        em.close();
         return postmen;
     }
 
     @Override
     public void updatePostman(Postman postman) {
+        log.info("Update postman " + postman + " to database.");
         if (postman == null) {
             throw new NullPointerException("Postman is null.");
         }
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
         em.merge(postman);
-        em.getTransaction().commit();
-        em.close();
     }
 
     @Override
     public void deletePostman(Postman postman) {
+        log.info("Delete postman " + postman + " from database.");
         if (postman == null) {
             throw new NullPointerException("Postman is null.");
         }
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
+        if (postman.getId() <= 0) {
+            throw new IllegalArgumentException("Trying to delete postman with no id assigned.");
+        }
         Postman postmandb = em.find(Postman.class, postman.getId());
         em.remove(postmandb);
-        em.getTransaction().commit();
-        em.close();
     }
 
     @Override
     public void addPostman(Postman postman) {
+        log.info("Add postman " + postman + " to database.");
         if (postman == null) {
             throw new NullPointerException("Postman is null.");
         }
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
+        if (postman.getId() > 0) {
+            throw new IllegalStateException("Trying to add postman with id assigned.");
+        }
         em.persist(postman);
-        em.getTransaction().commit();
-        em.close();
     }
 
     public void closeConnection() {
-        if (emf != null) {
-            emf.close();
+        if (em != null) {
+            em.close();
         }
     }
 }

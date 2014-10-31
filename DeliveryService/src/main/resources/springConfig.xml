@@ -9,7 +9,19 @@
             http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
             http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
             http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    
     <tx:annotation-driven transaction-manager="transactionManager" />
     
-    <!-- beany pro vytvoreni entitymanagerfacotry pro vsechny daoImpl-->
+    <!-- beany pro vytvoreni entitymanager pro vsechny daoImpl-->
+    
+    <!-- zpracovava @PersistenceContext anotace u EntityManagerů v DAO -->
+    <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor"/>
+    
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="emf"/>
+    </bean>
+    
+    <bean id="emf" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="myUnit"/>
+    </bean>
 </beans>
