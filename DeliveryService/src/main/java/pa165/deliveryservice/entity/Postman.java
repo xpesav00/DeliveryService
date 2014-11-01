@@ -21,7 +21,7 @@ public class Postman {
     private long Id;
     private String firstName;
     private String lastName;
-    @OneToMany(mappedBy = "postman", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "postman")
     private List<Delivery> deliveries;
 
     public Postman() {

@@ -61,18 +61,21 @@ public class PostmanDaoImplNGTest extends AbstractTestNGSpringContextTests {
         g2.setSeller("Toilets Inc.");
         g2.setPrice(1338);
 
-        //TODO add deliveries
         Postman pman1 = new Postman();
         pman1.setFirstName("Jiri");
         pman1.setLastName("Zbrozek");
+        pman1.setDeliveries(new ArrayList<Delivery>());
+        
         Customer cus1 = new Customer();
         Customer cus2 = new Customer();
         cus1.setFirstName("Milan");
         cus1.setLastName("Bochal");
         cus1.setAddress(addr1);
+        cus1.setDeliveries(new ArrayList<Delivery>());
         cus2.setFirstName("Josef");
         cus2.setLastName("Majda");
         cus2.setAddress(addr2);
+        cus2.setDeliveries(new ArrayList<Delivery>());
 
         Delivery del1 = new Delivery();
         Delivery del2 = new Delivery();
@@ -88,13 +91,12 @@ public class PostmanDaoImplNGTest extends AbstractTestNGSpringContextTests {
         del2.setStatus(DeliveryStatus.SENT);
 
         //set deliveries
-        List<Delivery> deliveries = new ArrayList<>();
-        deliveries.add(del1);
-        deliveries.add(del2);
-        pman1.setDeliveries(deliveries);
-
-        //TODO add delivery to customers
-        //TODO add deliveries to postman
+        g1.setDelivery(del1);
+        g2.setDelivery(del2);
+        pman1.addDelivery(del1);
+        pman1.addDelivery(del2);
+        cus1.addDelivery(del1);
+        cus2.addDelivery(del2);
         em.persist(g1);
         em.persist(g2);
         em.persist(pman1);
