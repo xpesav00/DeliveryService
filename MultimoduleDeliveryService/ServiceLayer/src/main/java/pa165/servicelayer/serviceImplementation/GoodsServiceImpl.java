@@ -40,30 +40,55 @@ public class GoodsServiceImpl implements GoodsService{
         goods.setDelivery(delivery);
         try{
             goodsDao.addGoods(goods);
-        }catch(NullPointerException ex){
-            throw new DataAccessException("Error in persistance layer."){};
+        }catch(Exception ex){
+            throw new DataAccessException("Error in persistance layer.", ex){};
         }
         return goods;
     }
 
     @Override
     public boolean deleteGoods(Goods goods) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        boolean result = false;
+        if(goods == null){
+            throw new NullPointerException("Goods can't be null.");
+        }
+        try{
+            goodsDao.deleteGoods(goods);
+            return true;
+        }catch(Exception ex){
+            throw new DataAccessException("Error in persistance layer.", ex){};
+        }
     }
 
     @Override
     public void updateGoods(Goods goods) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(goods == null){
+            throw new NullPointerException("Goods can't be null.");
+        }
+        try{
+            goodsDao.updateGoods(goods);
+        }catch(Exception ex){
+            throw new DataAccessException("Error in persistance layer.", ex){};
+        }
     }
 
     @Override
     public List<Goods> getAllGoods() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return goodsDao.getAllGoods();
     }
 
     @Override
     public Goods findGood(long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if(id < 0){
+            throw new IllegalArgumentException("Id can't be negative.");
+        }
+        Goods goods = null;
+        try{
+            goods = goodsDao.getGoods(id);
+        }catch(Exception ex){
+            throw new DataAccessException("Error in persistance layer.", ex){};
+        }
+        return goods;
     }
     
 }
