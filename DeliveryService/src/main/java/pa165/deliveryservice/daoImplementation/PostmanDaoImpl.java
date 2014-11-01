@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import pa165.deliveryservice.entity.Delivery;
 
 /**
  * Implementation of PostmanDao.
@@ -43,7 +44,7 @@ public class PostmanDaoImpl implements PostmanDao {
         try {
             postmanDb = em.find(Postman.class, id);
         } catch (NullPointerException ex) {
-            throw new IllegalArgumentException("Unknow postman object.");
+            throw new IllegalArgumentException("Unknown postman object.");
         }
         return postmanDb;
     }
@@ -73,8 +74,17 @@ public class PostmanDaoImpl implements PostmanDao {
         if (postman.getId() <= 0) {
             throw new IllegalArgumentException("Trying to delete postman with no id assigned.");
         }
-        Postman postmandb = em.find(Postman.class, postman.getId());
-        em.remove(postmandb);
+        Postman postmanDb = null;
+        try {
+            postmanDb = em.find(Postman.class, postman.getId());
+        } catch (NullPointerException ex) {
+            throw new IllegalArgumentException("Unknown postman object.");
+        }
+        //set 'no postman' to deleted postman's deliveries
+        for (Delivery del : postmanDb.getDeliveries()) {
+            del.setPostman(null);
+        }
+        em.remove(postmanDb);
     }
 
     @Override
