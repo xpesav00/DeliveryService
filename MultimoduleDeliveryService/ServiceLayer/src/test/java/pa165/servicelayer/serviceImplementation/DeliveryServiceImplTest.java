@@ -239,7 +239,7 @@ public class DeliveryServiceImplTest {
         deliveryDao.addDelivery(deliveryOne);
         deliveryDao.addDelivery(deliveryTwo);
 
-        Delivery deliveryDb = service.getDelivery(deliveryTwo.getId());
+        Delivery deliveryDb = service.findDelivery(deliveryTwo.getId());
         assertEquals(deliveryDb.getName(), "Zasilka pro Prahu");
         assertEquals(deliveryDb.getStatus(), DeliveryStatus.SENT);
     }
@@ -247,7 +247,7 @@ public class DeliveryServiceImplTest {
     @Test
     public void testFindDeliveryWithNegativeId() {
         exception.expect(IllegalArgumentException.class);
-        service.getDelivery(-8L);
+        service.findDelivery(-8L);
     }
     
     @Test
@@ -255,7 +255,7 @@ public class DeliveryServiceImplTest {
         deliveryDao.addDelivery(deliveryOne);
         deliveryDao.addDelivery(deliveryTwo);
         exception.expect(DataAccessException.class);
-        Delivery deliveryDb = service.getDelivery(3L);
+        Delivery deliveryDb = service.findDelivery(3L);
 
     }
     

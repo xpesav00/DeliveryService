@@ -40,5 +40,8 @@ public interface DeliveryDao {
      * @return List<Delivery> all deliveries in database
      */
     List<Delivery> getAllDeliveries();
-    
+    /**
+     * Close opened connection
+     */
+    void closeConnection();
 }

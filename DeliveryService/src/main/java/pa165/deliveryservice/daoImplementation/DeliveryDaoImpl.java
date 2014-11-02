@@ -1,5 +1,7 @@
 package pa165.deliveryservice.daoImplementation;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import pa165.deliveryservice.daoInterface.DeliveryDao;
 import pa165.deliveryservice.entity.Delivery;
@@ -10,75 +12,74 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
+import org.slf4j.LoggerFactory;
 
 /**
  * An implementation of DeliveryDao interface
  * @author Jan Šťastný
+ * @version 02.11.2014
  */
 public class DeliveryDaoImpl implements DeliveryDao{
-    
-    private EntityManagerFactory entityManagerFactory;
+    private static final org.slf4j.Logger log = LoggerFactory.getLogger(DeliveryDaoImpl.class);
+    @PersistenceContext
+    private EntityManager em;
     
     public DeliveryDaoImpl() {
-        entityManagerFactory = Persistence.createEntityManagerFactory("myUnit");
+        log.info("Creating database connection.");
     }
     
-    public DeliveryDaoImpl(EntityManagerFactory entityManagerFactory) {
-        if(entityManagerFactory == null) throw new NullPointerException("Entity manager factory can not be null.");
-        this.entityManagerFactory = entityManagerFactory;
+    public DeliveryDaoImpl(EntityManager em) {
+        log.info("Creating database connection.");
+        if(em == null) throw new NullPointerException("Entity manager can not be null.");
+        this.em = em;
     }
     
     @Override
     public void addDelivery(Delivery delivery) {
+        log.info("Adding new delivery("+delivery+") into DB.");
         evaluateDelivery(delivery);
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.persist(delivery);
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        em.persist(delivery);
     }
     
     @Override
     public void updateDelivery(Delivery delivery) {
+        log.info("Updating delivery("+delivery+")");
         evaluateDelivery(delivery);
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        entityManager.merge(delivery);              
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        em.merge(delivery);       
     }
     
     @Override
     public void deleteDelivery(Delivery delivery) {
+        log.info("Deleting delivery("+delivery+")");
         evaluateDelivery(delivery);
-        
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        Delivery deletedDelivery = entityManager.find(Delivery.class, delivery.getId());
-        entityManager.remove(deletedDelivery);              
-        entityManager.getTransaction().commit();
-        entityManager.close();
+        Delivery foundedDelivery = null;
+        try{
+            foundedDelivery = em.find(Delivery.class, delivery.getId());
+        }catch(NullPointerException e) {
+            throw new IllegalArgumentException("Deleting delivery isn't in DB.");
+        }
+        em.remove(foundedDelivery);
     }
     
     @Override
     public Delivery getDelivery(long id) {
+        log.info("Getting delivery with id "+id);
         if(id <= 0) {
             throw new IllegalArgumentException("Invalid id (id <= 0).");
         }
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        entityManager.getTransaction().begin();
-        Delivery delivery = entityManager.find(Delivery.class, id);
-        entityManager.detach(delivery);
-        entityManager.getTransaction().commit();
-        entityManager.close();
-        return delivery;
+        Delivery foundedDelivery = null;
+        try{
+            foundedDelivery = em.find(Delivery.class, id);
+        }catch(NullPointerException e) {
+            throw new IllegalArgumentException("Delivery with id:"+id+" isn't in DB.");
+        }
+        return foundedDelivery;
     }
     
     @Override
     public List<Delivery> getAllDeliveries() {
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        List<Delivery> resultList = entityManager.createQuery("SELECT d from Delivery d",Delivery.class).getResultList();
-        entityManager.close();
+        log.info("Getting all deliveries from DB.");
+        List<Delivery> resultList = em.createQuery("SELECT d from Delivery d",Delivery.class).getResultList();
         return resultList;
     }
     
@@ -89,7 +90,7 @@ public class DeliveryDaoImpl implements DeliveryDao{
      */
     private void evaluateDelivery(Delivery delivery) throws IllegalArgumentException {
         if(delivery == null) {
-            throw new IllegalArgumentException("Delivery can not be null!");
+            throw new NullPointerException("Delivery can not be null!");
         }
         if(delivery.getId() < 0) {
             throw new IllegalArgumentException("Invalid id, value < 0.");
@@ -97,6 +98,11 @@ public class DeliveryDaoImpl implements DeliveryDao{
         if(delivery.getName().length() == 0 || delivery.getName() == null || delivery.getName().length() > Delivery.NAME_LENGTH) {
             throw new IllegalArgumentException("Invalid name of delivery.");
         }
+    }
+    
+    @Override
+    public void closeConnection() {
+        if(em != null) em.close();
     }
 
 }

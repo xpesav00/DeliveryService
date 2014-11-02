@@ -23,4 +23,10 @@
     <bean id="goodsService" class="pa165.servicelayer.serviceImplementation.GoodsServiceImpl">
         <property name="goodsDao" ref="goodsDaoImpl" />
     </bean>
+    
+    <!--Jan Stastny-->
+    <bean id="deliveryDaoImpl" class="pa165.deliveryservice.daoImplementation.DeliveryDaoImpl" />
+    <bean id="deliveryService" class="pa165.servicelayer.serviceImplementation.DeliveryServiceImpl">
+        <property name="deliveryDao" ref="deliveryDaoImpl" />
+    </bean>
 </beans>
