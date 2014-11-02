@@ -38,4 +38,13 @@ public interface CustomerDao {
      */
     void addCustomer(Customer customer);
 
+    /**
+     * Finds a single customer in the DB.
+     *
+     * @param id Customers's ID.
+     * @return Found customer.
+     */
+    Customer getCustomer(long id);
+
+    void closeConnection();
 }

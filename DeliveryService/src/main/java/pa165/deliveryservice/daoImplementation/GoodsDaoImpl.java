@@ -84,10 +84,8 @@ public class GoodsDaoImpl implements GoodsDao {
         try {
             goodsDb = em.find(Goods.class, id);
         } catch (NullPointerException ex) {
-            throw new IllegalArgumentException("Unknow delivery object.");
+            throw new IllegalArgumentException("Unknow goods object.");
         }
-        em.close();
-
         return goodsDb;
     }
     

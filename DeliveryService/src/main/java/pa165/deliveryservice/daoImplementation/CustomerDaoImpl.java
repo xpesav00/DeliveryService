@@ -19,19 +19,21 @@ import org.slf4j.LoggerFactory;
  */
 public class CustomerDaoImpl implements CustomerDao {
 
-    private EntityManagerFactory emf;
     private final static Logger log = LoggerFactory.getLogger(CustomerDaoImpl.class);
 
+    @PersistenceContext
+    private EntityManager em;
+
     public CustomerDaoImpl() {
-        emf = Persistence.createEntityManagerFactory("myUnit");
+        log.info("Create database connection.");
     }
 
-    public CustomerDaoImpl(EntityManagerFactory emf) {
-        if (emf == null) {
-            log.error("Internal Error: Param entityManger is null.");
+    public CustomerDaoImpl(EntityManager em) {
+        log.info("Create database connection.");
+        if (em == null) {
             throw new NullPointerException("Internal Error: Param entityManger is null.");
         }
-        this.emf = emf;
+        this.em = em;
     }
 
     /**
@@ -40,27 +42,32 @@ public class CustomerDaoImpl implements CustomerDao {
      * @param id Customers's ID.
      * @return Found customer.
      */
-    public Customer getCustomer(Long id) {
-        if (id == null && id < 0) {
-            throw new IllegalArgumentException("Invalid id (id null or < 0).");
+    @Override
+    public Customer getCustomer(long id) {
+        log.info("Get specific customer from database.");
+        if (id <= 0) {
+            throw new IllegalArgumentException("Invalid id (zero or negative).");
         }
-        EntityManager em = emf.createEntityManager();
-        Customer customer = em.find(Customer.class, id);
-        em.close();
+        Customer customer = null;
+        try {
+            customer = em.find(Customer.class, id);
+        } catch (NullPointerException ex) {
+            throw new IllegalArgumentException("Unknow customer object.");
+        }
         return customer;
     }
 
     @Override
     public List<Customer> getAllCustomers() {
-        EntityManager em = emf.createEntityManager();
+        log.info("Retrieve all customers from database.");
         List<Customer> customers = em.createQuery("SELECT d from Customer d", Customer.class).getResultList();
-        em.close();
         return customers;
 
     }
 
     @Override
     public void updateCustomer(Customer customer) {
+        log.info("Update goods " + customer + " to database.");
         if (customer == null) {
             log.error("Internal Error: Param customer is null.");
             throw new NullPointerException("Internal Error: Param customer is null.");
@@ -70,16 +77,12 @@ public class CustomerDaoImpl implements CustomerDao {
             log.error("Internal Error: Param customer id is null.");
             throw new NullPointerException("Internal Error: Param customer id is null.");
         }
-
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
         em.merge(customer);
-        em.getTransaction().commit();
-        em.close();
     }
 
     @Override
     public void deleteCustomer(Customer customer) {
+        log.info("Delete goods " + customer + " from database.");
         if (customer == null) {
             log.error("Internal Error: Param customer is null.");
             throw new NullPointerException("Internal Error: Param customer is null.");
@@ -88,16 +91,18 @@ public class CustomerDaoImpl implements CustomerDao {
             log.error("Internal Error: Param customer id is null.");
             throw new NullPointerException("Internal Error: Param customer id is null.");
         }
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        Customer customerdb = em.find(Customer.class, customer.getId());
-        em.remove(customerdb);
-        em.getTransaction().commit();
-        em.close();
+        Customer customerDb = null;
+        try {
+            customerDb = em.find(Customer.class, customer.getId());
+        } catch (NullPointerException ex) {
+            throw new IllegalArgumentException("Unknown object to delete.");
+        }
+        em.remove(customerDb);
     }
 
     @Override
     public void addCustomer(Customer customer) {
+        log.info("Add customer" + customer + " to database.");
         if (customer == null) {
             log.error("Internal Error: Param customer is null.");
             throw new NullPointerException("Internal Error: Param customer is null.");
@@ -107,11 +112,13 @@ public class CustomerDaoImpl implements CustomerDao {
             log.error("Internal Error: Param customer id is set.");
             throw new NullPointerException("Internal Error: Param customer id is set.");
         }
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
         em.persist(customer);
-        em.getTransaction().commit();
-        em.close();
     }
 
+    @Override
+    public void closeConnection() {
+        if (em != null) {
+            em.close();
+        }
+    }
 }
