@@ -3,6 +3,7 @@ package pa165.servicelayer.serviceInterface;
 import java.util.List;
 import pa165.deliveryservice.entity.Delivery;
 import pa165.deliveryservice.entity.Goods;
+import pa165.servicelayer.dto.GoodsDto;
 
 /**
  *
@@ -22,7 +23,7 @@ public interface GoodsService {
     
     void updateGoods(Goods goods);
     
-    List<Goods> getAllGoods();
+    List<GoodsDto> getAllGoods();
     
-    Goods findGood(long id);
+    GoodsDto findGood(long id);
 }

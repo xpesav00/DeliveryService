@@ -28,7 +28,7 @@ import pa165.servicelayer.serviceInterface.DeliveryService;
  */
 @RunWith(MockitoJUnitRunner.class)
 public class DeliveryServiceImplTest {
-
+    //TODO update test for DTO objects
     @Mock
     private Postman postman;
 

@@ -18,7 +18,9 @@
     <!-- propojuje @Autowired atributy -->
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 
-    
+    <!-- nastaveni mapper pro prevod na DTO objekty -->
+    <bean id="mapper" class="org.dozer.DozerBeanMapper"></bean>
+
     <bean id="goodsDaoImpl" class="pa165.deliveryservice.daoImplementation.GoodsDaoImpl" />
     <bean id="goodsService" class="pa165.servicelayer.serviceImplementation.GoodsServiceImpl">
         <property name="goodsDao" ref="goodsDaoImpl" />
