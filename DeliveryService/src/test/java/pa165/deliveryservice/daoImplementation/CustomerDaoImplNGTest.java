@@ -32,14 +32,14 @@ import pa165.deliveryservice.entity.Postman;
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
 
-    public EntityManagerFactory emf;
+    private EntityManagerFactory emf;
+    private EntityManager em;
     private long cus1Id;
 
-    //before each test
     @BeforeMethod
     public void setUpMethod() throws Exception {
         emf = Persistence.createEntityManagerFactory("myUnit");
-        EntityManager em = emf.createEntityManager();
+        em = emf.createEntityManager();
         em.getTransaction().begin();
 
         Address addr1 = new Address();
@@ -98,15 +98,14 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
         em.persist(cus2);
         em.persist(del1);
         em.persist(del2);
-
-        cus1Id = cus1.getId();
         em.getTransaction().commit();
-        em.close();
+        cus1Id = cus1.getId();
     }
 
     //after each test
     @AfterMethod
     public void tearDownMethod() throws Exception {
+        em.close();
         if (emf != null) {
             emf.close();
         }
@@ -118,7 +117,7 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
      */
     @Test
     public void testGetAllCustomer() {
-        CustomerDao custDao = new CustomerDaoImpl();
+        CustomerDao custDao = new CustomerDaoImpl(em);
         List<Customer> customers = custDao.getAllCustomers();
 
         Assert.assertEquals(customers.size(), 2, "Not all customers in the list!");
@@ -129,33 +128,41 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
      */
     @Test
     public void testUpdateCustomer() {
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        Customer cusDetached = em.find(Customer.class, cus1Id);
-        em.detach(cusDetached);
-        em.getTransaction().commit();
 
+        em.getTransaction().begin();
+        Customer customer = new Customer();
+        customer.setFirstName("FirstName");
+        customer.setFirstName("LastName");
         Address newAddr = new Address();
         newAddr.setCity("Novy Jicin");
         newAddr.setStreet("Bozetechova 90");
         newAddr.setPostcode(54345);
+        customer.setAddress(newAddr);
+        em.persist(customer);
 
-        cusDetached.setFirstName("Jozka");
-        cusDetached.setLastName("Cerny");
-        cusDetached.setAddress(newAddr);
-        //TODO test deliveries update
+        Customer updated = em.find(Customer.class, customer.getId());
+        em.detach(updated);
+        newAddr.setCity("Olomouc");
+        newAddr.setStreet("Bozetechova 90");
+        newAddr.setPostcode(54345);
 
-        CustomerDao custDao = new CustomerDaoImpl();
-        custDao.updateCustomer(cusDetached);
+        em.getTransaction().commit();
 
-        Customer cusMerged = em.find(Customer.class, cus1Id);
+        updated.setFirstName("Jozka");
+        updated.setLastName("Cerny");
+        updated.setAddress(newAddr);
+
+        CustomerDao custDao = new CustomerDaoImpl(em);
+        em.getTransaction().begin();
+        custDao.updateCustomer(updated);
+        em.getTransaction().commit();
+
+        Customer cusMerged = em.find(Customer.class, updated.getId());
         Assert.assertEquals(cusMerged.getFirstName(), "Jozka");
         Assert.assertEquals(cusMerged.getLastName(), "Cerny");
-        Assert.assertEquals(cusMerged.getAddress().getCity(), "Novy Jicin");
+        Assert.assertEquals(cusMerged.getAddress().getCity(), "Olomouc");
         Assert.assertEquals(cusMerged.getAddress().getStreet(), "Bozetechova 90");
         Assert.assertEquals(cusMerged.getAddress().getPostcode(), 54345);
-
-        em.close();
     }
 
     /**
@@ -163,16 +170,24 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
      */
     @Test
     public void testDeleteCustomer() {
-        EntityManager em = emf.createEntityManager();
-        Customer cus1 = em.find(Customer.class, cus1Id);
+        em.getTransaction().begin();
+        Customer customer = new Customer();
+        customer.setFirstName("Petr");
+        customer.setLastName("Chuchvalec");
+        customer.setAddress(new Address());
+        customer.setDeliveries(new ArrayList<Delivery>());
+        em.persist(customer);
+        em.getTransaction().commit();
 
-        CustomerDao custDao = new CustomerDaoImpl();
-        custDao.deleteCustomer(cus1);
+        CustomerDao custDao = new CustomerDaoImpl(em);
+        em.getTransaction().begin();
+        custDao.deleteCustomer(customer);
+        em.getTransaction().commit();
 
         List<Customer> customers = em.createQuery("SELECT c FROM Customer c", Customer.class).getResultList();
-        Assert.assertEquals(customers.size(), 1, "Nothing deleted!");
-        Assert.assertEquals(customers.get(0).getFirstName(), "Josef", "Deleted wrong customer!");
-        em.close();
+        Assert.assertEquals(customers.size(), 2, "Nothing deleted!");
+        Assert.assertEquals(customers.get(0).getFirstName(), "Milan", "Deleted wrong customer!");
+        Assert.assertEquals(customers.get(1).getFirstName(), "Josef", "Deleted wrong customer!");
     }
 
     /**
@@ -185,13 +200,15 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
         newCust.setFirstName("Jano");
         newCust.setLastName("Zoslovenska");
         newCust.setDeliveries(new ArrayList<Delivery>());
-        CustomerDao custDao = new CustomerDaoImpl();
+        CustomerDao custDao = new CustomerDaoImpl(em);
+        em.getTransaction().begin();
         custDao.addCustomer(newCust);
+        em.getTransaction().commit();
 
-        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
         List<Customer> customers = em.createQuery("SELECT c FROM Customer c", Customer.class).getResultList();
+        em.getTransaction().commit();
         Assert.assertEquals(customers.size(), 3, "Customer not added!");
-        em.close();
     }
 
 }
