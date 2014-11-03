@@ -21,6 +21,7 @@ import pa165.deliveryservice.entity.DeliveryStatus;
 import pa165.deliveryservice.entity.Goods;
 import pa165.servicelayer.serviceInterface.GoodsService;
 import static org.testng.Assert.*;
+import pa165.servicelayer.dto.GoodsDto;
 
 /**
  *
@@ -135,20 +136,20 @@ public class GoodsServiceImplTest {
         assertEquals(allGoods.size(), 1, "Database should contains one goods.");
         testingGoods.setSeller("McDonald");
         service.updateGoods(testingGoods);
-        allGoods = service.getAllGoods();
-        assertEquals(allGoods.get(0).getSeller(), "McDonald", "Goods new Seller should be McDonald");
+        List<GoodsDto> allGoodsDto = service.getAllGoods();
+        assertEquals(allGoodsDto.get(0).getSeller(), "McDonald", "Goods new Seller should be McDonald");
     }
     
     public void testGetAllGoods() {
         dao.addGoods(testingGoods);
-        List<Goods> allGoods = service.getAllGoods();
+        List<GoodsDto> allGoods = service.getAllGoods();
         assertEquals(allGoods.size(), 1);
         assertEquals(allGoods.get(0), testingGoods);
     }
     
     public void testFind() {
         dao.addGoods(testingGoods);
-        Goods findedGoods = service.findGood(testingGoods.getId());
+        GoodsDto findedGoods = service.findGood(testingGoods.getId());
         assertEquals(testingGoods, findedGoods);
     }
     
