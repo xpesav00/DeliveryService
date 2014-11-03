@@ -7,8 +7,8 @@ package pa165.servicelayer.serviceInterface;
 
 import java.util.List;
 import pa165.deliveryservice.entity.Address;
-import pa165.deliveryservice.entity.Customer;
 import pa165.deliveryservice.entity.Delivery;
+import pa165.servicelayer.dto.CustomerDto;
 
 /**
  *
@@ -16,13 +16,13 @@ import pa165.deliveryservice.entity.Delivery;
  */
 public interface CustomerService {
 
-    List<Customer> getAllCustomers();
+    List<CustomerDto> getAllCustomers();
 
-    void updateCustomer(Customer customer);
+    void updateCustomer(CustomerDto customer);
 
-    void deleteCustomer(Customer customer);
+    void deleteCustomer(CustomerDto customer);
 
     void createCustomer(String firstName, String lastname, Address address, List<Delivery> deliveries);
 
-    Customer findCustomer(long id);
+    CustomerDto findCustomer(long id);
 }

@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package pa165.servicelayer.serviceImplementation;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import pa165.deliveryservice.daoImplementation.DeliveryDaoImpl;
 import pa165.deliveryservice.entity.*;
 import pa165.servicelayer.serviceInterface.DeliveryService;
@@ -17,6 +13,8 @@ import pa165.servicelayer.serviceInterface.DeliveryService;
  *
  * @author Drimal
  */
+@Service
+@Transactional
 public class DeliveryServiceImpl implements DeliveryService{
     @Autowired
     private DeliveryDaoImpl deliveryDao;
