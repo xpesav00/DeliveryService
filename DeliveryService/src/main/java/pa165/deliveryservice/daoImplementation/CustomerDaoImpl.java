@@ -9,6 +9,7 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 /**
  * Class is implementation of interface CustomerDao and describes real customer
@@ -17,6 +18,7 @@ import org.slf4j.LoggerFactory;
  * @author Jan Pesava
  * @version 1.0
  */
+@Repository
 public class CustomerDaoImpl implements CustomerDao {
 
     private final static Logger log = LoggerFactory.getLogger(CustomerDaoImpl.class);

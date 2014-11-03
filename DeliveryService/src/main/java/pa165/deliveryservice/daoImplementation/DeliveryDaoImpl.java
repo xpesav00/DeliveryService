@@ -13,12 +13,14 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Repository;
 
 /**
  * An implementation of DeliveryDao interface
  * @author Jan Šťastný
  * @version 02.11.2014
  */
+@Repository
 public class DeliveryDaoImpl implements DeliveryDao{
     private static final org.slf4j.Logger log = LoggerFactory.getLogger(DeliveryDaoImpl.class);
     @PersistenceContext
