@@ -31,4 +31,7 @@
     <bean id="deliveryService" class="pa165.servicelayer.serviceImplementation.DeliveryServiceImpl">
         <property name="deliveryDao" ref="deliveryDaoImpl" />
     </bean>
+    
+    <bean id="postmanDao" class="pa165.deliveryservice.daoImplementation.PostmanDaoImpl" />
+    <bean id="postmanService" class="pa165.servicelayer.serviceImplementation.PostmanServiceImpl" />
 </beans>
