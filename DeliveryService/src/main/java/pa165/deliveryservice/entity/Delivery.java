@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Entity
 public class Delivery {
     
-    public static final int NAME_LENGTH = 13;
+    public static final int NAME_LENGTH = 20;
     @Id
     @GeneratedValue
     private long Id;    

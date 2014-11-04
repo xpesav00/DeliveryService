@@ -9,9 +9,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.testng.Assert;
 import pa165.deliveryservice.daoImplementation.DeliveryDaoImpl;
@@ -55,7 +55,7 @@ public class DeliveryServiceImplTest extends TestCase{
 
     private Delivery deliveryTwo;
 
-    @Autowired
+    @InjectMocks
     DeliveryService service;
 
     private DeliveryDao deliveryDao;
