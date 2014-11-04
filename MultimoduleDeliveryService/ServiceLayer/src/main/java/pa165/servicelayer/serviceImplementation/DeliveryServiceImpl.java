@@ -1,12 +1,15 @@
 package pa165.servicelayer.serviceImplementation;
 
+import java.util.ArrayList;
 import java.util.List;
+import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pa165.deliveryservice.daoImplementation.DeliveryDaoImpl;
 import pa165.deliveryservice.entity.*;
+import pa165.servicelayer.dto.DeliveryDto;
 import pa165.servicelayer.serviceInterface.DeliveryService;
 
 /**
@@ -18,6 +21,8 @@ import pa165.servicelayer.serviceInterface.DeliveryService;
 public class DeliveryServiceImpl implements DeliveryService{
     @Autowired
     private DeliveryDaoImpl deliveryDao;
+    @Autowired
+    private Mapper mapper;
     
     @Override
     public void createDelivery(String name, Postman postman, List<Goods> goods, Customer customer, DeliveryStatus status) {
@@ -45,17 +50,13 @@ public class DeliveryServiceImpl implements DeliveryService{
     }
 
     @Override
-    public Delivery findDelivery(long id) {
+    public DeliveryDto findDelivery(long id) {
         if(id < 0) {
             throw new IllegalArgumentException("Id can not be less than 0.");
         }
         Delivery delivery = null;
-        try{
-            delivery = deliveryDao.getDelivery(id);
-        }catch(Exception e) {
-            throw new DataAccessException("Error in persistance layer.", e) {};
-        }
-        return delivery;
+        delivery = deliveryDao.getDelivery(id);
+        return mapper.map(delivery, DeliveryDto.class);
     }
 
     @Override
@@ -82,8 +83,13 @@ public class DeliveryServiceImpl implements DeliveryService{
     }
 
     @Override
-    public List<Delivery> getAllDeliveries() {
-        return deliveryDao.getAllDeliveries();
+    public List<DeliveryDto> getAllDeliveries() {
+        List<DeliveryDto> allDeliveries = new ArrayList<>();
+        List<Delivery> allDeliveryDaos = deliveryDao.getAllDeliveries();
+        for(Delivery delivery : allDeliveryDaos) {
+            allDeliveries.add(mapper.map(delivery, DeliveryDto.class));
+        }
+        return allDeliveries;
     }
     
 }
