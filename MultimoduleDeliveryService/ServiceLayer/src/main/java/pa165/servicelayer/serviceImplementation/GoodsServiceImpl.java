@@ -3,8 +3,8 @@ package pa165.servicelayer.serviceImplementation;
 import java.util.ArrayList;
 import java.util.List;
 import org.dozer.Mapper;
+import org.dozer.MappingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pa165.deliveryservice.daoImplementation.GoodsDaoImpl;
@@ -50,29 +50,24 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public boolean deleteGoods(GoodsDto goods) {
-        boolean result = false;
-        if (goods == null) {
+    public boolean deleteGoods(GoodsDto goodsDto) {
+        if (goodsDto == null) {
             throw new NullPointerException("Goods can't be null.");
         }
-        try {
-            Goods deletedGoods = mapper.map(goods, Goods.class);
-            goodsDao.deleteGoods(deletedGoods);
-            return true;
-        } catch (Exception ex) {
-            throw new DataAccessException("Error in persistance layer.", ex) {
-            };
-        }
+
+        Goods goods = convertGoodsDtoToGoods(goodsDto, true);
+        goodsDao.deleteGoods(goods);
+        return true;
     }
 
     @Override
-    public void updateGoods(GoodsDto goods) {
-        if (goods == null) {
+    public void updateGoods(GoodsDto goodsDto) {
+        if (goodsDto == null) {
             throw new NullPointerException("Goods can't be null.");
         }
-        Goods updatedGoods = mapper.map(goods, Goods.class);
-        goodsDao.updateGoods(updatedGoods);
+        Goods goods = convertGoodsDtoToGoods(goodsDto, true);
 
+        goodsDao.updateGoods(goods);
     }
 
     @Override
@@ -95,4 +90,14 @@ public class GoodsServiceImpl implements GoodsService {
         return mapper.map(goods, GoodsDto.class);
     }
 
+    private Goods convertGoodsDtoToGoods(GoodsDto goodsDto, boolean setId) throws MappingException {
+        Goods goods = new Goods();
+        if (setId) {
+            goods.setId(goodsDto.getId());
+        }
+        goods.setPrice(goodsDto.getPrice());
+        goods.setSeller(goodsDto.getSeller());
+        goods.setDelivery(mapper.map(goodsDto.getDelivery(), Delivery.class));
+        return goods;
+    }
 }

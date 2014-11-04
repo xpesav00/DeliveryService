@@ -55,6 +55,7 @@ public class PostmanServiceImpl implements PostmanService {
         }
 
         postman.setDeliveries(deliveries);
+        postmanDao.updatePostman(postman);
     }
 
     @Override
@@ -78,7 +79,7 @@ public class PostmanServiceImpl implements PostmanService {
     }
 
     @Override
-    public PostmanDto getPostman(long id) {
+    public PostmanDto findPostman(long id) {
         Postman postman = postmanDao.getPostman(id);
         if (postman == null) {
             return null;

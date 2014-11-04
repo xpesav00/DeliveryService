@@ -21,6 +21,7 @@ import pa165.deliveryservice.entity.Delivery;
 import pa165.deliveryservice.entity.DeliveryStatus;
 import pa165.deliveryservice.entity.Goods;
 import pa165.deliveryservice.entity.Postman;
+import pa165.servicelayer.dto.DeliveryDto;
 import pa165.servicelayer.serviceInterface.DeliveryService;
 
 /**
@@ -226,14 +227,14 @@ public class DeliveryServiceImplTest extends TestCase{
     public void testGetAllDeliveries() {
         deliveryDao.addDelivery(deliveryOne);
         deliveryDao.addDelivery(deliveryTwo);
-        List<Delivery> deliveries = service.getAllDeliveries();
+        List<DeliveryDto> deliveries = service.getAllDeliveries();
         assertEquals(deliveries.size(), 1);
         assertEquals(deliveries.get(0), deliveryOne);
     }
 
     @Test
     public void testGetAllDeliveriesFromEmptyDatabase() {
-        List<Delivery> deliveries = service.getAllDeliveries();
+        List<DeliveryDto> deliveries = service.getAllDeliveries();
         assertTrue(deliveries.isEmpty());
 
     }
@@ -243,7 +244,7 @@ public class DeliveryServiceImplTest extends TestCase{
         deliveryDao.addDelivery(deliveryOne);
         deliveryDao.addDelivery(deliveryTwo);
 
-        Delivery deliveryDb = service.findDelivery(deliveryTwo.getId());
+        DeliveryDto deliveryDb = service.findDelivery(deliveryTwo.getId());
         assertEquals(deliveryDb.getName(), "Zasilka pro Prahu");
         assertEquals(deliveryDb.getStatus(), DeliveryStatus.SENT);
     }
@@ -259,7 +260,7 @@ public class DeliveryServiceImplTest extends TestCase{
         deliveryDao.addDelivery(deliveryOne);
         deliveryDao.addDelivery(deliveryTwo);
         exception.expect(DataAccessException.class);
-        Delivery deliveryDb = service.findDelivery(3L);
+        DeliveryDto deliveryDb = service.findDelivery(3L);
     }
 
 }

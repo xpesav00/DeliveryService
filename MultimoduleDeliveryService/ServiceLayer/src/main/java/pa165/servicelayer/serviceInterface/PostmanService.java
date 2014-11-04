@@ -18,5 +18,5 @@ public interface PostmanService {
 
     void addPostman(PostmanDto postman);
 
-    public PostmanDto getPostman(long id);
+    public PostmanDto findPostman(long id);
 }
