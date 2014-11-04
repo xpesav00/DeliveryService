@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pa165.deliveryservice.daoImplementation.GoodsDaoImpl;
 import pa165.deliveryservice.entity.Delivery;
 import pa165.deliveryservice.entity.Goods;
+import pa165.servicelayer.dto.DeliveryDto;
 import pa165.servicelayer.dto.GoodsDto;
 import pa165.servicelayer.serviceInterface.GoodsService;
 
@@ -28,7 +29,7 @@ public class GoodsServiceImpl implements GoodsService {
     private Mapper mapper;
 
     @Override
-    public GoodsDto createGoods(long price, String seller, Delivery delivery) {
+    public GoodsDto createGoods(long price, String seller, DeliveryDto delivery) {
         if (price < 0) {
             throw new IllegalArgumentException("Price can't be negative.");
         }
@@ -41,7 +42,7 @@ public class GoodsServiceImpl implements GoodsService {
         Goods goods = new Goods();
         goods.setPrice(price);
         goods.setSeller(seller);
-        goods.setDelivery(delivery);
+        goods.setDelivery(mapper.map(delivery, Delivery.class));
 
         goodsDao.addGoods(goods);
 
@@ -49,13 +50,14 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public boolean deleteGoods(Goods goods) {
+    public boolean deleteGoods(GoodsDto goods) {
         boolean result = false;
         if (goods == null) {
             throw new NullPointerException("Goods can't be null.");
         }
         try {
-            goodsDao.deleteGoods(goods);
+            Goods deletedGoods = mapper.map(goods, Goods.class);
+            goodsDao.deleteGoods(deletedGoods);
             return true;
         } catch (Exception ex) {
             throw new DataAccessException("Error in persistance layer.", ex) {
@@ -64,11 +66,12 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public void updateGoods(Goods goods) {
+    public void updateGoods(GoodsDto goods) {
         if (goods == null) {
             throw new NullPointerException("Goods can't be null.");
         }
-        goodsDao.updateGoods(goods);
+        Goods updatedGoods = mapper.map(goods, Goods.class);
+        goodsDao.updateGoods(updatedGoods);
 
     }
 
