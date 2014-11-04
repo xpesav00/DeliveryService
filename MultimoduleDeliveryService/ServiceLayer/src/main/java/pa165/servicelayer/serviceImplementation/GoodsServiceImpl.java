@@ -28,7 +28,7 @@ public class GoodsServiceImpl implements GoodsService {
     private Mapper mapper;
 
     @Override
-    public Goods createGoods(long price, String seller, Delivery delivery) {
+    public GoodsDto createGoods(long price, String seller, Delivery delivery) {
         if (price < 0) {
             throw new IllegalArgumentException("Price can't be negative.");
         }
@@ -42,13 +42,10 @@ public class GoodsServiceImpl implements GoodsService {
         goods.setPrice(price);
         goods.setSeller(seller);
         goods.setDelivery(delivery);
-        try {
-            goodsDao.addGoods(goods);
-        } catch (Exception ex) {
-            throw new DataAccessException("Error in persistance layer.", ex) {
-            };
-        }
-        return goods;
+
+        goodsDao.addGoods(goods);
+
+        return mapper.map(goods, GoodsDto.class);
     }
 
     @Override
@@ -71,12 +68,8 @@ public class GoodsServiceImpl implements GoodsService {
         if (goods == null) {
             throw new NullPointerException("Goods can't be null.");
         }
-        try {
-            goodsDao.updateGoods(goods);
-        } catch (Exception ex) {
-            throw new DataAccessException("Error in persistance layer.", ex) {
-            };
-        }
+        goodsDao.updateGoods(goods);
+
     }
 
     @Override
@@ -94,12 +87,8 @@ public class GoodsServiceImpl implements GoodsService {
             throw new IllegalArgumentException("Id can't be negative.");
         }
         Goods goods = null;
-        try {
-            goods = goodsDao.getGoods(id);
-        } catch (Exception ex) {
-            throw new DataAccessException("Error in persistance layer.", ex) {
-            };
-        }
+        goods = goodsDao.getGoods(id);
+
         return mapper.map(goods, GoodsDto.class);
     }
 

@@ -1,11 +1,14 @@
 package pa165.deliveryservice.daoImplementation;
 
+import static com.oracle.nio.BufferSecrets.instance;
+import static java.lang.StrictMath.exp;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import org.apache.commons.lang3.Validate;
+import org.junit.Rule;
+import org.junit.rules.ExpectedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.test.annotation.DirtiesContext;
@@ -33,18 +36,21 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
 
     private static final Logger logger = LoggerFactory.getLogger(DeliveryDaoImplNGTest.class);
     private EntityManagerFactory emf;
+    private EntityManager em;
     private long deliverId;
+    private DeliveryDaoImpl instance;
 
     @BeforeMethod
     public void setUpMethod() throws Exception {
         emf = Persistence.createEntityManagerFactory("myUnit");
+        em = emf.createEntityManager();
+        instance = new DeliveryDaoImpl(em);
     }
 
     @AfterMethod
     public void tearDownMethod() throws Exception {
-        if (emf != null) {
-            emf.close();
-        }
+        em.close();
+        emf.close();
     }
 
     /**
@@ -54,20 +60,20 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
     public void testAddDelivery() {
         logger.info("test add delivery");
 
-        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
         Delivery delivery = new Delivery();
         delivery.setName("Pokus");
+        em.getTransaction().begin();
         instance.addDelivery(delivery);
+        em.getTransaction().commit();
         Delivery deliveryFromDB = getSpecificDelivery(delivery);
-        assertTrue(deliveryFromDB.equals(delivery));
+        assertEquals(deliveryFromDB.getName(), "Pokus");
     }
 
-    @Test(expectedExceptions = {IllegalArgumentException.class})
+    @Test(expectedExceptions = {NullPointerException.class})
     public void testAddDeliveryWithNullArgument() {
-        logger.info("test add delivery with null argument");
-
-        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
+        em.getTransaction().begin();
         instance.addDelivery(null);
+        em.getTransaction().commit();
     }
 
     /**
@@ -78,17 +84,15 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
         logger.info("test get all deliveries");
 
         prepareDatabase();
-        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
         List expResult = retrieveDatabase();
         List<Delivery> result = instance.getAllDeliveries();
         assertEquals(result.size(), expResult.size(), "Number of row should be same.");
     }
 
     @Test
-    public void testGetAllDeliveriesEmptyDatabase(){
+    public void testGetAllDeliveriesEmptyDatabase() {
         logger.info("test get all deliveries from empty database");
 
-        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
         List<Delivery> result = instance.getAllDeliveries();
         assertTrue(result.isEmpty(), "List should be empty.");
     }
@@ -100,7 +104,6 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
     public void testUpdateDelivery() {
         logger.info("test update delivery");
 
-        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
         Delivery del1 = new Delivery();
         del1.setName("Updating");
         addDeliveryToDatabase(del1);
@@ -113,19 +116,18 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
         assertEquals(updated.getName(), "Ondra", "Name should be changed");
     }
 
-    @Test(expectedExceptions = {IllegalArgumentException.class})
+    @Test(expectedExceptions = {NullPointerException.class})
     public void testUpdateDeliveryWithNullArgument() {
         logger.info("test update delivery with null argument");
-
-        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
+        em.getTransaction().begin();
         instance.updateDelivery(null);
+        em.getTransaction().commit();
     }
 
     @Test(expectedExceptions = {IllegalArgumentException.class})
     public void testUpdateDeliveryWithNegativeId() {
         logger.info("test update delivery with null argument");
 
-        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
         Delivery delivery = new Delivery();
         delivery.setId(-1);
         instance.updateDelivery(delivery);
@@ -135,7 +137,6 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
     public void testUpdateDeliveryWithWrongName() {
         logger.info("test update delivery with empty name");
 
-        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
         Delivery delivery = new Delivery();
         delivery.setName("");
         instance.updateDelivery(delivery);
@@ -148,23 +149,22 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
     public void testDeleteDelivery() {
         logger.info("test delete delivery");
 
-        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
         Delivery delivery = new Delivery();
         delivery.setName("name");
         addDeliveryToDatabase(delivery);
         int sizeBeforeDelete = getDatabaseSize();
 
+        em.getTransaction().begin();
         instance.deleteDelivery(delivery);
+        em.getTransaction().commit();
         List<Delivery> deliveryList = retrieveDatabase();
         assertEquals(retrieveDatabase().size(), sizeBeforeDelete - 1, "Database should be smaller.");
         assertFalse(deliveryList.contains(delivery));
     }
 
-    @Test(expectedExceptions = {IllegalArgumentException.class})
+    @Test(expectedExceptions = {NullPointerException.class})
     public void testDeleteDeliveryTestWithNullArgument() {
         logger.info("test delete delivery with null argument");
-
-        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
         instance.deleteDelivery(null);
     }
 
@@ -172,7 +172,6 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
     public void testDeleteDeliveryTestWithNegativeId() {
         logger.info("test delete delivery with null argument");
 
-        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
         Delivery delivery = new Delivery();
         delivery.setId(-1);
         instance.deleteDelivery(delivery);
@@ -182,7 +181,6 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
     public void testDeleteDeliveryTestWithEmptyName() {
         logger.info("test delete delivery with empty name");
 
-        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
         Delivery delivery = new Delivery();
         delivery.setName("");
         instance.deleteDelivery(delivery);
@@ -195,7 +193,6 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
     public void testGetDelivery() {
         logger.info("test get delivery");
 
-        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
         Delivery delivery = new Delivery();
         delivery.setName("Delivery");
         addDeliveryToDatabase(delivery);
@@ -207,22 +204,21 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
     @Test(expectedExceptions = {IllegalArgumentException.class})
     public void testGetDeliveryWithNegativeArgument() {
         logger.info("test get delivery with negative argument");
-        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
+
         instance.getDelivery(-1);
     }
 
     @Test(expectedExceptions = {IllegalArgumentException.class})
     public void testGetDeliveryWithZeroArgument() {
         logger.info("test get delivery with zero argument");
-        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
+
         instance.getDelivery(0);
     }
 
-    @Test(expectedExceptions = {IllegalArgumentException.class}, enabled=false)
-    public void testGetDeliveryWithNonExistDelivery(){
+    @Test(expectedExceptions = {IllegalArgumentException.class}, enabled = false)
+    public void testGetDeliveryWithNonExistDelivery() {
         logger.info("test get delivery with non exist delivery");
-        DeliveryDaoImpl instance = new DeliveryDaoImpl(emf);
-        instance.getDelivery(3);        
+        instance.getDelivery(3);
     }
 
     /**
@@ -231,11 +227,9 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
      * @param delivery
      */
     private void addDeliveryToDatabase(Delivery delivery) {
-        EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         em.persist(delivery);
         em.getTransaction().commit();
-        em.close();
     }
 
     /**
@@ -252,8 +246,6 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
      * Prepare database for testing
      */
     private void prepareDatabase() {
-        EntityManager em = emf.createEntityManager();
-
         Delivery deliveryOne = new Delivery();
         Customer cust = createTestCustomer("Pepa", "Pospisil");
         deliveryOne.setCustomer(cust);
@@ -281,8 +273,6 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
         em.persist(deliveryThird);
         em.getTransaction().commit();
         deliverId = deliveryOne.getId();
-
-        em.close();
     }
 
     /**
@@ -308,7 +298,6 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
      * @return retrieved deliveries from database
      */
     private List<Delivery> retrieveDatabase() {
-        EntityManager em = emf.createEntityManager();
         return em.createQuery("Select d FROM Delivery d").getResultList();
     }
 
@@ -346,9 +335,7 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
      * @return delivery from database
      */
     private Delivery getSpecificDelivery(Delivery delivery) {
-        Validate.notNull(emf, "Emf should be opened.");
 
-        EntityManager em = emf.createEntityManager();
         return em.find(Delivery.class, delivery.getId());
     }
 }

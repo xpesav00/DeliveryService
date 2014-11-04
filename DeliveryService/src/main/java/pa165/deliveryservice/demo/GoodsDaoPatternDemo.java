@@ -3,8 +3,9 @@ package pa165.deliveryservice.demo;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.List;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import pa165.deliveryservice.DaoContext;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import pa165.deliveryservice.daoImplementation.GoodsDaoImpl;
 import pa165.deliveryservice.daoInterface.GoodsDao;
 import pa165.deliveryservice.entity.Goods;
@@ -15,10 +16,9 @@ import pa165.deliveryservice.entity.Goods;
  * @author Martin Drimal
  */
 public class GoodsDaoPatternDemo {
-
+    
     public static final void main(String[] args) throws SQLException{
-        new AnnotationConfigApplicationContext(DaoContext.class);
-        
+ 
         GoodsDao goodsDaoInterface = new GoodsDaoImpl();
         
         Goods goods1 = new Goods();

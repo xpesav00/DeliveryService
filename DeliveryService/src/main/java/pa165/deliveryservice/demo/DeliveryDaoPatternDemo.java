@@ -20,7 +20,8 @@ public class DeliveryDaoPatternDemo {
         new AnnotationConfigApplicationContext(DaoContext.class);
        
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("myUnit");
-        DeliveryDao deliveryDAO = new DeliveryDaoImpl(emf);
+        EntityManager em = emf.createEntityManager();
+        DeliveryDao deliveryDAO = new DeliveryDaoImpl(em);
         
         Delivery delivery0 = new Delivery();
             delivery0.setName(generateCode());
@@ -33,7 +34,7 @@ public class DeliveryDaoPatternDemo {
 //        entityManager.getTransaction().commit();
 //        entityManager.close();
           deliveryDAO.addDelivery(delivery0);
-        dbFetch(emf);
+        dbFetch(em);
         
         
         Delivery delivery1 = new Delivery();
@@ -61,8 +62,7 @@ public class DeliveryDaoPatternDemo {
         return code;
     }
     
-    private static void dbFetch(EntityManagerFactory emf) {
-        EntityManager em = emf.createEntityManager();
+    private static void dbFetch(EntityManager em) {
         Delivery d = em.createQuery("SELECT d from Delivery d", Delivery.class).getSingleResult();
         System.out.println(d);
         em.close();

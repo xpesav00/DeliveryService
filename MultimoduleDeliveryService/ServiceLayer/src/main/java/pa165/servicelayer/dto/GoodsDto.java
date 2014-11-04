@@ -9,6 +9,7 @@ package pa165.servicelayer.dto;
 
 
 /**
+ * DTO for goods entity
  *
  * @author Drimal
  */
@@ -76,8 +77,11 @@ public class GoodsDto {
             return false;
         }
         final GoodsDto other = (GoodsDto) obj;
-        return true;
+
+        return this.id != other.id;
     }
+
+   
 
     @Override
     public String toString(){

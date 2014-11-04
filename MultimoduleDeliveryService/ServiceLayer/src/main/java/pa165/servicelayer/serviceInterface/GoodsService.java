@@ -17,7 +17,7 @@ public interface GoodsService {
      * @param delivery 
      * @return created goods
      */
-    Goods createGoods(long price, String seller, Delivery delivery);
+    GoodsDto createGoods(long price, String seller, Delivery delivery);
     
     boolean deleteGoods(Goods goods);
     

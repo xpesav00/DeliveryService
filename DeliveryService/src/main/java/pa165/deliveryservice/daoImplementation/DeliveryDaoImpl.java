@@ -90,7 +90,7 @@ public class DeliveryDaoImpl implements DeliveryDao{
      * @param delivery
      * @throws IllegalArgumentException 
      */
-    private void evaluateDelivery(Delivery delivery) throws IllegalArgumentException {
+     private void evaluateDelivery(Delivery delivery) throws IllegalArgumentException {
         if(delivery == null) {
             throw new NullPointerException("Delivery can not be null!");
         }
