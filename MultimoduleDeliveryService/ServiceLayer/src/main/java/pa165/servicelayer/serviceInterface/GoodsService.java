@@ -1,8 +1,7 @@
 package pa165.servicelayer.serviceInterface;
 
 import java.util.List;
-import pa165.deliveryservice.entity.Delivery;
-import pa165.deliveryservice.entity.Goods;
+import pa165.servicelayer.dto.DeliveryDto;
 import pa165.servicelayer.dto.GoodsDto;
 
 /**
@@ -17,11 +16,11 @@ public interface GoodsService {
      * @param delivery 
      * @return created goods
      */
-    GoodsDto createGoods(long price, String seller, Delivery delivery);
+    GoodsDto createGoods(long price, String seller, DeliveryDto delivery);
     
-    boolean deleteGoods(Goods goods);
+    boolean deleteGoods(GoodsDto goods);
     
-    void updateGoods(Goods goods);
+    void updateGoods(GoodsDto goods);
     
     List<GoodsDto> getAllGoods();
     

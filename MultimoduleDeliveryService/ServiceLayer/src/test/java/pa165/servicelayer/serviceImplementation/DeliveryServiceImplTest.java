@@ -2,28 +2,18 @@ package pa165.servicelayer.serviceImplementation;
 
 import java.util.Collections;
 import java.util.List;
+import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
-import static org.mockito.Mockito.*;
-import org.mockito.MockitoAnnotations;
+import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.assertTrue;
-import static org.testng.Assert.assertTrue;
+import org.testng.Assert;
 import pa165.deliveryservice.daoImplementation.DeliveryDaoImpl;
 import pa165.deliveryservice.daoInterface.DeliveryDao;
 import pa165.deliveryservice.entity.Customer;
@@ -37,9 +27,8 @@ import pa165.servicelayer.serviceInterface.DeliveryService;
  *
  * @author Drimal
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration
-public class DeliveryServiceImplTest {
+@RunWith(MockitoJUnitRunner.class)
+public class DeliveryServiceImplTest extends TestCase{
 
     @Mock
     private Postman postman;
@@ -100,7 +89,7 @@ public class DeliveryServiceImplTest {
         service.createDelivery("Obchodni zasilka", postman, goods, customer, DeliveryStatus.INIT);
         List<Delivery> deliveries = deliveryDao.getAllDeliveries();
 
-        assertEquals(deliveries.size(), 1, "Database should contain one delivery.");
+        Assert.assertEquals(deliveries.size(), 1, "Database should contain one delivery.");
         Delivery delivery = deliveries.get(0);
         assertEquals(delivery.getName(), "Obchodni zasilka");
         assertEquals(delivery.getPostman(), postman);
@@ -149,10 +138,10 @@ public class DeliveryServiceImplTest {
     public void testDeleteDelivery() {
         deliveryDao.addDelivery(deliveryOne);
         List<Delivery> deliveries = deliveryDao.getAllDeliveries();
-        assertEquals(deliveries.size(), 1, "Database should contains one delivery.");
+        Assert.assertEquals(deliveries.size(), 1, "Database should contains one delivery.");
         service.deleteDelivery(deliveryOne);
         deliveries = deliveryDao.getAllDeliveries();
-        assertEquals(deliveries.size(), 0, "Database should be empty.");
+        Assert.assertEquals(deliveries.size(), 0, "Database should be empty.");
     }
 
     @Test
@@ -177,11 +166,11 @@ public class DeliveryServiceImplTest {
     public void testUpdateDeliveryName() {
         deliveryDao.addDelivery(deliveryOne);
         List<Delivery> deliveries = deliveryDao.getAllDeliveries();
-        assertEquals(deliveries.size(), 1, "Database should contains one delivery.");
+        Assert.assertEquals(deliveries.size(), 1, "Database should contains one delivery.");
         deliveryOne.setName("UpdatedName");
         service.updateDelivery(deliveryOne);
         deliveries = deliveryDao.getAllDeliveries();
-        assertEquals(deliveries.size(), 1, "Database should be empty.");
+        Assert.assertEquals(deliveries.size(), 1, "Database should be empty.");
         assertEquals(deliveries.get(0).getName(), "UpdatedName", "Delivery name should be updated.");
     }
 
@@ -189,48 +178,48 @@ public class DeliveryServiceImplTest {
     public void testUpdateDeliveryPostman() {
         deliveryDao.addDelivery(deliveryOne);
         List<Delivery> deliveries = deliveryDao.getAllDeliveries();
-        assertEquals(deliveries.size(), 1, "Database should contains one delivery.");
+        Assert.assertEquals(deliveries.size(), 1, "Database should contains one delivery.");
         deliveryOne.setPostman(updatedPostman);
         service.updateDelivery(deliveryOne);
         deliveries = deliveryDao.getAllDeliveries();
-        assertEquals(deliveries.size(), 1, "Database should be empty.");
-        assertEquals(deliveries.get(0).getPostman(), updatedPostman, "Delivery postman should be updated.");
+        Assert.assertEquals(deliveries.size(), 1, "Database should be empty.");
+        Assert.assertEquals(deliveries.get(0).getPostman(), updatedPostman, "Delivery postman should be updated.");
     }
 
     @Test
     public void testUpdateDeliveryGoods() {
         deliveryDao.addDelivery(deliveryOne);
         List<Delivery> deliveries = deliveryDao.getAllDeliveries();
-        assertEquals(deliveries.size(), 1, "Database should contains one delivery.");
+        Assert.assertEquals(deliveries.size(), 1, "Database should contains one delivery.");
         deliveryOne.setGoods(updatedGoods);
         service.updateDelivery(deliveryOne);
         deliveries = deliveryDao.getAllDeliveries();
-        assertEquals(deliveries.size(), 1, "Database should be empty.");
-        assertEquals(deliveries.get(0).getGoods(), updatedGoods, "Delivery goods should be updated.");
+        Assert.assertEquals(deliveries.size(), 1, "Database should be empty.");
+        Assert.assertEquals(deliveries.get(0).getGoods(), updatedGoods, "Delivery goods should be updated.");
     }
 
     @Test
     public void testUpdateDeliveryCustomer() {
         deliveryDao.addDelivery(deliveryOne);
         List<Delivery> deliveries = deliveryDao.getAllDeliveries();
-        assertEquals(deliveries.size(), 1, "Database should contains one delivery.");
+        Assert.assertEquals(deliveries.size(), 1, "Database should contains one delivery.");
         deliveryOne.setCustomer(updatedCustomer);
         service.updateDelivery(deliveryOne);
         deliveries = deliveryDao.getAllDeliveries();
-        assertEquals(deliveries.size(), 1, "Database should be empty.");
-        assertEquals(deliveries.get(0).getCustomer(), updatedCustomer, "Delivery customer should be updated.");
+        Assert.assertEquals(deliveries.size(), 1, "Database should be empty.");
+        Assert.assertEquals(deliveries.get(0).getCustomer(), updatedCustomer, "Delivery customer should be updated.");
     }
 
     @Test
     public void testUpdateDeliveryStatus() {
         deliveryDao.addDelivery(deliveryOne);
         List<Delivery> deliveries = deliveryDao.getAllDeliveries();
-        assertEquals(deliveries.size(), 1, "Database should contains one delivery.");
+        Assert.assertEquals(deliveries.size(), 1, "Database should contains one delivery.");
         deliveryOne.setStatus(DeliveryStatus.SENT);
         service.updateDelivery(deliveryOne);
         deliveries = deliveryDao.getAllDeliveries();
-        assertEquals(deliveries.size(), 1, "Database should be empty.");
-        assertEquals(deliveries.get(0).getStatus(), DeliveryStatus.SENT, "Delivery customer should be updated.");
+        Assert.assertEquals(deliveries.size(), 1, "Database should be empty.");
+        Assert.assertEquals(deliveries.get(0).getStatus(), DeliveryStatus.SENT, "Delivery customer should be updated.");
     }
 
     @Test

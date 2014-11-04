@@ -2,6 +2,10 @@ package pa165.servicelayer.dto;
 
 import java.util.Objects;
 
+/**
+ * 
+ * @author Drimal
+ */
 public class AddressDto {
     private String city;
     private String street;
