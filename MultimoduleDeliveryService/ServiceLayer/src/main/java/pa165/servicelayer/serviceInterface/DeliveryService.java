@@ -12,6 +12,7 @@ import pa165.deliveryservice.entity.Delivery;
 import pa165.deliveryservice.entity.DeliveryStatus;
 import pa165.deliveryservice.entity.Goods;
 import pa165.deliveryservice.entity.Postman;
+import pa165.servicelayer.dto.DeliveryDto;
 
 /**
  *
@@ -32,10 +33,10 @@ public interface DeliveryService {
     /**
      * Find delivery by given id.
      * @param id id of deliverz
-     * @return delivery with given id or null if there doesnt exists.
+     * @return DeliveryDto with given id or null if there doesnt exists.
      * @throws IllegalArgumentException
      */
-    Delivery findDelivery(long id);
+    DeliveryDto findDelivery(long id);
     
     /**
      * Updates delivery
@@ -53,5 +54,5 @@ public interface DeliveryService {
      * Returns list of all deliveries in DB.
      * @return List of deliveries
      */
-    List<Delivery> getAllDeliveries();
+    List<DeliveryDto> getAllDeliveries();
 }
