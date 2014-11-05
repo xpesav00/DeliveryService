@@ -46,6 +46,7 @@ public class GoodsServiceImpl implements GoodsService {
 
         goodsDao.addGoods(goods);
 
+        //TODO fix mapping (delivery mapping)
         return mapper.map(goods, GoodsDto.class);
     }
 
@@ -55,7 +56,7 @@ public class GoodsServiceImpl implements GoodsService {
             throw new NullPointerException("Goods can't be null.");
         }
 
-        Goods goods = convertGoodsDtoToGoods(goodsDto, true);
+        Goods goods = convertGoodsDtoToGoods(goodsDto);
         goodsDao.deleteGoods(goods);
         return true;
     }
@@ -65,7 +66,7 @@ public class GoodsServiceImpl implements GoodsService {
         if (goodsDto == null) {
             throw new NullPointerException("Goods can't be null.");
         }
-        Goods goods = convertGoodsDtoToGoods(goodsDto, true);
+        Goods goods = convertGoodsDtoToGoods(goodsDto);
 
         goodsDao.updateGoods(goods);
     }
@@ -84,17 +85,14 @@ public class GoodsServiceImpl implements GoodsService {
         if (id < 0) {
             throw new IllegalArgumentException("Id can't be negative.");
         }
-        Goods goods = null;
-        goods = goodsDao.getGoods(id);
+        Goods goods = goodsDao.getGoods(id);
 
         return mapper.map(goods, GoodsDto.class);
     }
 
-    private Goods convertGoodsDtoToGoods(GoodsDto goodsDto, boolean setId) throws MappingException {
+    private Goods convertGoodsDtoToGoods(GoodsDto goodsDto) throws MappingException {
         Goods goods = new Goods();
-        if (setId) {
-            goods.setId(goodsDto.getId());
-        }
+        goods.setId(goodsDto.getId());
         goods.setPrice(goodsDto.getPrice());
         goods.setSeller(goodsDto.getSeller());
         goods.setDelivery(mapper.map(goodsDto.getDelivery(), Delivery.class));

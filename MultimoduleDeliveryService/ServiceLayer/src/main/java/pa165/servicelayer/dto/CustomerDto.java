@@ -13,7 +13,7 @@ public class CustomerDto {
     private long Id;
     private String firstName;
     private String lastName;
-    private Address address;
+    private AddressDto address;
     private List<DeliveryDto> deliveries;
 
     
@@ -44,11 +44,11 @@ public class CustomerDto {
         this.lastName = lastName;
     }
 
-    public Address getAddress() {
+    public AddressDto getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(AddressDto address) {
         this.address = address;
     }
 

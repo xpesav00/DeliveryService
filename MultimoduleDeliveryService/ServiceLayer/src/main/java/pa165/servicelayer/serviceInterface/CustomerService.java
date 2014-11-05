@@ -10,6 +10,7 @@ import pa165.deliveryservice.entity.Address;
 import pa165.deliveryservice.entity.Delivery;
 import pa165.servicelayer.dto.AddressDto;
 import pa165.servicelayer.dto.CustomerDto;
+import pa165.servicelayer.dto.DeliveryDto;
 
 /**
  *
@@ -23,7 +24,7 @@ public interface CustomerService {
 
     void deleteCustomer(CustomerDto customer);
 
-    void createCustomer(String firstName, String lastname, Address address, List<Delivery> deliveries);
+    void createCustomer(String firstName, String lastname, AddressDto address, List<DeliveryDto> deliveries);
 
     CustomerDto findCustomer(long id);
     
