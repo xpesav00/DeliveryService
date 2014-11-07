@@ -1,0 +1,7 @@
+#surefire
+#Fri Nov 07 23:02:09 CET 2014
+maven.ext.class.path=C\:\\devel\\ide\\NetBeans 8.0\\java\\maven-nblib\\netbeans-eventspy.jar
+user.dir=C\:\\Users\\Drimal\\Skola\\PA165\\projekt\\verze3\\DeliveryService\\DeliveryServiceParent\\DeliveryService-Web
+file.encoding=UTF-8
+localRepository=C\:\\Users\\Drimal\\.m2\\repository
+basedir=C\:\\Users\\Drimal\\Skola\\PA165\\projekt\\verze3\\DeliveryService\\DeliveryServiceParent\\DeliveryService-Web

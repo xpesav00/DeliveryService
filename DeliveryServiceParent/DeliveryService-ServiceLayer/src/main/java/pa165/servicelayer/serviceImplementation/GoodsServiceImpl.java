@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pa165.deliveryservice.daoImplementation.GoodsDaoImpl;
+import pa165.deliveryservice.daoInterface.GoodsDao;
 import pa165.deliveryservice.entity.Delivery;
 import pa165.deliveryservice.entity.Goods;
 import pa165.servicelayer.dto.DeliveryDto;
@@ -23,7 +24,7 @@ import pa165.servicelayer.serviceInterface.GoodsService;
 public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
-    private GoodsDaoImpl goodsDao;
+    private GoodsDao goodsDao;
 
     @Autowired
     private Mapper mapper;

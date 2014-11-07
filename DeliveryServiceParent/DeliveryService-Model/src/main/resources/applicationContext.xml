@@ -21,16 +21,12 @@
     <!-- nastaveni mapper pro prevod na DTO objekty -->
     <bean id="mapper" class="org.dozer.DozerBeanMapper"></bean>
 
-    <bean id="goodsDaoImpl" class="pa165.deliveryservice.daoImplementation.GoodsDaoImpl" />
-    <bean id="goodsService" class="pa165.servicelayer.serviceImplementation.GoodsServiceImpl">
-        <property name="goodsDao" ref="goodsDaoImpl" />
-    </bean>
+    <bean id="goodsDao" class="pa165.deliveryservice.daoImplementation.GoodsDaoImpl" />
+    <bean id="goodsService" class="pa165.servicelayer.serviceImplementation.GoodsServiceImpl"/>
     
     <!--Jan Stastny-->
-    <bean id="deliveryDaoImpl" class="pa165.deliveryservice.daoImplementation.DeliveryDaoImpl" />
-    <bean id="deliveryService" class="pa165.servicelayer.serviceImplementation.DeliveryServiceImpl">
-        <property name="deliveryDao" ref="deliveryDaoImpl" />
-    </bean>
+    <bean id="deliveryDao" class="pa165.deliveryservice.daoImplementation.DeliveryDaoImpl" />
+    <bean id="deliveryService" class="pa165.servicelayer.serviceImplementation.DeliveryServiceImpl"/>
     
     <bean id="postmanDao" class="pa165.deliveryservice.daoImplementation.PostmanDaoImpl" />
     <bean id="postmanService" class="pa165.servicelayer.serviceImplementation.PostmanServiceImpl" />
