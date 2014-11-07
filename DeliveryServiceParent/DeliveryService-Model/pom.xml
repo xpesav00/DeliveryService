@@ -13,13 +13,14 @@
     <name>DeliveryService-Object Model</name>
     
     <dependencies>
-        <!-- Uz je v rodicovi
+ 
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>6.8.8</version>
+            <scope>test</scope>
         </dependency>
-
+       <!-- Uz je v rodicovi
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
