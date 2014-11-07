@@ -7,7 +7,7 @@ import org.dozer.MappingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pa165.deliveryservice.daoImplementation.CustomerDaoImpl;
+import pa165.deliveryservice.daoInterface.CustomerDao;
 import pa165.deliveryservice.entity.Address;
 import pa165.deliveryservice.entity.Customer;
 import pa165.deliveryservice.entity.Delivery;
@@ -19,14 +19,14 @@ import pa165.servicelayer.serviceInterface.CustomerService;
 /**
  * Service layer for Customer entity.
  *
- * @author Jan Pešava
+ * @author Martin Dřímal
  */
 @Service
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
-    private CustomerDaoImpl customerDao;
+    private CustomerDao customerDao;
 
     @Autowired
     private Mapper mapper;
