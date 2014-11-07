@@ -44,16 +44,6 @@ public class GoodsServiceImplTest extends AbstractIntegrationTest {
         ReflectionTestUtils.setField(goodsService, "goodsDao", goodsDAO);
         ReflectionTestUtils.setField(goodsService, "mapper", mapper);
        
-//        Customer customer = new Customer();
-//        customer.setFirstName("Pepa");
-//        customer.setLastName("Novak");
-//        customer.setAddress(new Address());
-//        Delivery delivery = new Delivery();
-//        delivery.setCustomer(customer);
-//        delivery.setPostman(null);
-//        delivery.setName("aaaaaaaaaaaaaaaaaaaa");
-//        delivery.setStatus(DeliveryStatus.INIT);
-       
         goods = new Goods();
         goods.setPrice(1000);
         goods.setSeller("Tescoma");
@@ -87,7 +77,7 @@ public class GoodsServiceImplTest extends AbstractIntegrationTest {
     public void testFindGoods() {
         when(goodsDAO.getGoods(goodsDTO.getId())).thenReturn(goods);
         GoodsDto gDTO = goodsService.findGood(goodsDTO.getId());
-        assertEquals(gDTO, goodsDTO);
+        assertEquals(gDTO.getSeller(), goodsDTO.getSeller());
     }
    
     @Test
