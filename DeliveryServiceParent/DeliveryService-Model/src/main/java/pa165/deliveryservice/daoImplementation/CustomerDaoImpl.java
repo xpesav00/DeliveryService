@@ -4,12 +4,11 @@ import pa165.deliveryservice.daoInterface.CustomerDao;
 import pa165.deliveryservice.entity.Customer;
 import java.util.List;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import pa165.deliveryservice.entity.Delivery;
 
 /**
  * Class is implementation of interface CustomerDao and describes real customer
@@ -98,6 +97,10 @@ public class CustomerDaoImpl implements CustomerDao {
             customerDb = em.find(Customer.class, customer.getId());
         } catch (NullPointerException ex) {
             throw new IllegalArgumentException("Unknown object to delete.");
+        }
+        //set 'no customer' to deleted customer's deliveries
+        for (Delivery del : customerDb.getDeliveries()) {
+            del.setCustomer(null);
         }
         em.remove(customerDb);
     }

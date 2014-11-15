@@ -1,5 +1,6 @@
 package pa165.servicelayer.serviceImplementation;
 
+import java.util.ArrayList;
 import java.util.List;
 import junit.framework.TestCase;
 import org.dozer.DozerBeanMapper;
@@ -59,7 +60,8 @@ public class DeliveryServiceImplTest extends TestCase {
     public void setUp() {
         deliveryService = new DeliveryServiceImpl();
         mapper = new DozerBeanMapper();
-        //sets Mock PostmanDao to postmanService field
+        goods = new ArrayList<>();
+        //sets Mock DeliveryDao to deliveryService field
         ReflectionTestUtils.setField(deliveryService, "deliveryDao", dao);
         ReflectionTestUtils.setField(deliveryService, "mapper", mapper);
         
@@ -120,7 +122,6 @@ public class DeliveryServiceImplTest extends TestCase {
     @Test
     public void testGetAllDeliveries() {
         deliveryService.getAllDeliveries();
-        List<Delivery> deliveries = verify(dao).getAllDeliveries();
-        assertEquals(1, deliveries.size());
+        verify(dao).getAllDeliveries();
     }
 }

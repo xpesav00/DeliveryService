@@ -1,5 +1,6 @@
 package pa165.deliveryservice.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Embedded;
@@ -27,8 +28,8 @@ public class Customer {
     @Embedded
     private Address address;
 
-    @OneToMany(mappedBy = "customer", cascade = CascadeType.REMOVE)
-    private List<Delivery> deliveries;
+    @OneToMany(mappedBy = "customer")
+    private List<Delivery> deliveries = new ArrayList<>();
 
     public Customer() {
     }

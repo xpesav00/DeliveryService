@@ -112,7 +112,6 @@ public class PostmanDaoImplNGTest extends AbstractTestNGSpringContextTests {
     //after each test
     @AfterMethod
     public void tearDownMethod() throws Exception {
-        em.close();
         emf.close();
         dao = null;
         postman1Id = Long.MIN_VALUE;

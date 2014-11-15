@@ -105,7 +105,6 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
     //after each test
     @AfterMethod
     public void tearDownMethod() throws Exception {
-        em.close();
         if (emf != null) {
             emf.close();
         }

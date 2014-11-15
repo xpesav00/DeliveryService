@@ -7,7 +7,6 @@ import org.dozer.MappingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pa165.deliveryservice.daoImplementation.GoodsDaoImpl;
 import pa165.deliveryservice.daoInterface.GoodsDao;
 import pa165.deliveryservice.entity.Delivery;
 import pa165.deliveryservice.entity.Goods;

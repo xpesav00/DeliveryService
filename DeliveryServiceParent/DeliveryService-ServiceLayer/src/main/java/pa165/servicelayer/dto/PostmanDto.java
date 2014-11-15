@@ -1,5 +1,6 @@
 package pa165.servicelayer.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,7 +13,7 @@ public class PostmanDto {
     private long Id;
     private String firstName;
     private String lastName;
-    private List<DeliveryDto> deliveries;
+    private List<DeliveryDto> deliveries = new ArrayList<>();
 
     
     public PostmanDto() {

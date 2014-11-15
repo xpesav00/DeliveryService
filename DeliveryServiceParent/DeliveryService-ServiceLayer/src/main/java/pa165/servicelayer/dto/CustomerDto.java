@@ -1,5 +1,6 @@
 package pa165.servicelayer.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 import pa165.deliveryservice.entity.Address;
 
@@ -14,7 +15,7 @@ public class CustomerDto {
     private String firstName;
     private String lastName;
     private AddressDto address;
-    private List<DeliveryDto> deliveries;
+    private List<DeliveryDto> deliveries = new ArrayList<>();
 
     
     public CustomerDto() {

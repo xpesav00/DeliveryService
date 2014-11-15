@@ -6,6 +6,7 @@
 
 package pa165.servicelayer.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import pa165.deliveryservice.entity.DeliveryStatus;
@@ -18,7 +19,7 @@ public class DeliveryDto {
     private long id;
     private String name;
     private PostmanDto postman;
-    private List<GoodsDto> goods;
+    private List<GoodsDto> goods = new ArrayList<>();
     private CustomerDto customer;
     private DeliveryStatus status;
 

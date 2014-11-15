@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pa165.deliveryservice.daoImplementation.DeliveryDaoImpl;
+import pa165.deliveryservice.daoInterface.DeliveryDao;
 import pa165.deliveryservice.entity.*;
 import pa165.servicelayer.dto.DeliveryDto;
 import pa165.servicelayer.serviceInterface.DeliveryService;
@@ -20,7 +20,7 @@ import pa165.servicelayer.serviceInterface.DeliveryService;
 @Transactional
 public class DeliveryServiceImpl implements DeliveryService{
     @Autowired
-    private DeliveryDaoImpl deliveryDao;
+    private DeliveryDao deliveryDao;
     @Autowired
     private Mapper mapper;
     

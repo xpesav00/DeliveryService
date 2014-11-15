@@ -1,5 +1,6 @@
 package pa165.deliveryservice.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.*;
@@ -19,8 +20,9 @@ public class Delivery {
     private String name;
     @ManyToOne
     private Postman postman;
-    @OneToMany(mappedBy="delivery")
-    private List<Goods> goods;
+    //when removing delivery, remove also the goods in it
+    @OneToMany(mappedBy="delivery", cascade = CascadeType.REMOVE)
+    private List<Goods> goods = new ArrayList<>();
     @ManyToOne
     private Customer customer;
     @Enumerated(EnumType.STRING)

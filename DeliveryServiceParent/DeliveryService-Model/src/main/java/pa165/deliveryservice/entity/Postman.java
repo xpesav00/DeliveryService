@@ -1,5 +1,6 @@
 package pa165.deliveryservice.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -22,7 +23,7 @@ public class Postman {
     private String firstName;
     private String lastName;
     @OneToMany(mappedBy = "postman")
-    private List<Delivery> deliveries;
+    private List<Delivery> deliveries = new ArrayList<>();
 
     public Postman() {
     }

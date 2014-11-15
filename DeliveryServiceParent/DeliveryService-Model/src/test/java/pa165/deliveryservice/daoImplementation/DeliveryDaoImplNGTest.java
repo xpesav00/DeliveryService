@@ -49,7 +49,6 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
 
     @AfterMethod
     public void tearDownMethod() throws Exception {
-        em.close();
         emf.close();
     }
 
