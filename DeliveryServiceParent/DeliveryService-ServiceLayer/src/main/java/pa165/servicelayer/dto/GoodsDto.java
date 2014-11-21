@@ -1,10 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package pa165.servicelayer.dto;
+
+import java.util.Objects;
+import javax.validation.constraints.*;
+import pa165.servicelayer.validation.GoodsConstraint;
 
 
 
@@ -13,11 +11,21 @@ package pa165.servicelayer.dto;
  *
  * @author Drimal
  */
-public class GoodsDto {
+@GoodsConstraint
+public class GoodsDto  implements Cloneable{
     private long id;
-    private long price;
-    private String seller;
-    private DeliveryDto delivery;
+    @NotNull
+    @Min(1)
+    private long price; //Cena musi byt vzdy nastavena a navic nesmi byt rovna 0
+    
+    //TODO smazat komentar
+    //Musi zacinat velkym pismenet
+    @NotNull
+    @Pattern(regexp = "\\p{javaUpperCase}.*")
+    private String seller; //Prodejce musi zacinat velkym pismenem a nemsi byt null
+
+    @NotNull
+    private DeliveryDto delivery; //Nevim, jake by mela mit dalsi omezeni
 
     public GoodsDto(){}
     
@@ -62,27 +70,30 @@ public class GoodsDto {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + (int) (this.id ^ (this.id >>> 32));
-        return hash;
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass())  return false;
+
+        GoodsDto goods = (GoodsDto) obj;
+        
+        if (this.id != goods.id)  return false;
+        if (this.price != goods.price) return false;
+        if (this.seller != null ? !seller.equals(goods.seller) : goods.seller != null) return false;
+        if (this.delivery != null ? !delivery.equals(goods.delivery) :goods.delivery != null) return false;
+
+        return true;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final GoodsDto other = (GoodsDto) obj;
-
-        return this.id != other.id;
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + (int) (this.id ^ (this.id >>> 32));
+        hash = 97 * hash + (int) (this.price ^ (this.price >>> 32));
+        hash = 97 * hash + Objects.hashCode(this.seller);
+        hash = 97 * hash + Objects.hashCode(this.delivery);
+        return hash;
     }
-
-   
-
+    
     @Override
     public String toString(){
         return "Goods: [id: "+getId()+", price: "+getPrice()+", seller: "+getSeller()+"]";

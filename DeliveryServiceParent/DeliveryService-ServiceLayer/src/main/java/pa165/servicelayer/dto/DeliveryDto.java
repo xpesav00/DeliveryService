@@ -1,25 +1,29 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package pa165.servicelayer.dto;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.validation.constraints.*;
 import pa165.deliveryservice.entity.DeliveryStatus;
+import pa165.servicelayer.validation.DeliveryConstraint;
 
 /**
- *
+ * 
  * @author Drimal
  */
-public class DeliveryDto {
+@DeliveryConstraint
+public class DeliveryDto implements Cloneable{
     private long id;
+    @NotNull
+    @Pattern(regexp = "\\p{javaUpperCase}.*")
+    @Size(min =3, max = 30)
     private String name;
+    @NotNull
     private PostmanDto postman;
+    @NotNull
+    @Size(min =1)
     private List<GoodsDto> goods = new ArrayList<>();
+    @NotNull
     private CustomerDto customer;
     private DeliveryStatus status;
 
