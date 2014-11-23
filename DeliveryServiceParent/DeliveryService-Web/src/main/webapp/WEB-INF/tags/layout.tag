@@ -18,10 +18,10 @@
 
 <div id="navigation">
     <ul>
-<!--        <li><a href="${pageContext.request.contextPath}/"><f:message key="navigation.index"/></a></li>
-        <li><a href="${pageContext.request.contextPath}/praha.jsp"><f:message key="navigation.praha"/></a></li>
-        <li><a href="${pageContext.request.contextPath}/podoli.jsp"><f:message key="navigation.podoli"/></a></li>
-        <li><a href="${pageContext.request.contextPath}/pharmacy.jsp"><f:message key="navigation.pharmacy"/></a></li>-->
+        <li><a href="${pageContext.request.contextPath}/"><f:message key="navigation.index"/></a></li>
+        <li><a href="${pageContext.request.contextPath}/postman.jsp"><f:message key="navigation.postman"/></a></li>
+        <li><a href="${pageContext.request.contextPath}/customer.jsp"><f:message key="navigation.customer"/></a></li>
+        <li><a href="${pageContext.request.contextPath}/delivery.jsp"><f:message key="navigation.delivery"/></a></li>
     </ul>
 </div>
 <div id="content">
