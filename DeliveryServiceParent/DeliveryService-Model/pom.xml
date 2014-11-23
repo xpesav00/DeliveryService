@@ -20,41 +20,6 @@
             <version>6.8.8</version>
             <scope>test</scope>
         </dependency>
-       <!-- Uz je v rodicovi
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
-            <version>4.3.6.Final</version>
-            <type>jar</type>
-        </dependency>       
-        
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.10</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.7</version>
-            <type>jar</type>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.1</version>
-            <scope>test</scope>
-            <type>jar</type>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.derby</groupId>
-            <artifactId>derby</artifactId>
-            <version>10.10.2.0</version>
-        </dependency>
-        -->
         <!--spring framework-->
         <dependency>
             <groupId>org.springframework</groupId>

@@ -1,0 +1,18 @@
+<configuration>
+    <appender name="APP" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="APP"/>
+    </root>
+
+    <logger name="org" level="info"/>
+    <logger name="org.springframework" level="warn"/>
+    <logger name="org.springframework.web.context.ContextLoader" level="info"/>
+    <logger name="cz" level="debug"/>
+    <logger name="org.springframework.web.servlet.DispatcherServlet" level="info"/>
+
+</configuration>
