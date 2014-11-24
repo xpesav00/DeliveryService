@@ -1,7 +1,9 @@
 package pa165.servicelayer.serviceImplementation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -23,6 +25,21 @@ public class DeliveryServiceImpl implements DeliveryService{
     private DeliveryDao deliveryDao;
     @Autowired
     private Mapper mapper;
+    
+    @PostConstruct
+    public void preloadDB(){
+        System.out.println("Preload DB");
+
+        Customer customer = new Customer();
+        customer.setAddress(new Address());
+        customer.setFirstName("Honza");
+        customer.setLastName("Pelda");
+        
+        Postman postman = new Postman();
+        postman.setFirstName("Karel");
+        postman.setLastName("Pepik");
+        createDelivery("CZC.cz", postman, Collections.EMPTY_LIST, customer, DeliveryStatus.INIT);
+    }
     
     @Override
     public void createDelivery(String name, Postman postman, List<Goods> goods, Customer customer, DeliveryStatus status) {
