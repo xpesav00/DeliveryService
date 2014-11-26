@@ -1,4 +1,4 @@
-package pa165.deliveryweb.web;
+package pa165.deliveryservice.web;
 
 
 import java.util.List;

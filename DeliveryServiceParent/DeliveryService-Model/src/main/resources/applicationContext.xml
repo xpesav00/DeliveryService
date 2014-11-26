@@ -19,7 +19,7 @@
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 
     <!-- nastaveni mapper pro prevod na DTO objekty -->
-    <bean id="mapper" class="org.dozer.DozerBeanMapper"></bean>
+    <bean id="mapper" class="org.dozer.spring.DozerBeanMapperFactoryBean"></bean>
 
     <bean id="goodsDao" class="pa165.deliveryservice.daoImplementation.GoodsDaoImpl" />
     <bean id="goodsService" class="pa165.servicelayer.serviceImplementation.GoodsServiceImpl"/>

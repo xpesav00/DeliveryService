@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import pa165.deliveryservice.entity.Delivery;
 
 /**
@@ -16,6 +17,7 @@ import pa165.deliveryservice.entity.Delivery;
  * @author Martin Nekula
  */
 @Repository
+@Transactional
 public class PostmanDaoImpl implements PostmanDao {
 
     private static final Logger log = LoggerFactory.getLogger(PostmanDaoImpl.class);

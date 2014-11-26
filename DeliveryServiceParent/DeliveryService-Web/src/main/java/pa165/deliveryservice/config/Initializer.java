@@ -1,4 +1,4 @@
-package pa165.deliveryweb.config;
+package pa165.deliveryservice.config;
 
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;

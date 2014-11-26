@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import pa165.deliveryservice.daoInterface.GoodsDao;
 import pa165.deliveryservice.entity.Goods;
 
@@ -16,6 +17,7 @@ import pa165.deliveryservice.entity.Goods;
  * @author Martin Drimal
  */
 @Repository
+@Transactional
 public class GoodsDaoImpl implements GoodsDao {
 
     private static final Logger log = LoggerFactory.getLogger(GoodsDaoImpl.class);

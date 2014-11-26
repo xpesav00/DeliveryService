@@ -21,7 +21,7 @@ import pa165.servicelayer.serviceInterface.CustomerService;
  *
  * @author Martin Dřímal
  */
-@Service
+@Service("customerService")
 @Transactional
 public class CustomerServiceImpl implements CustomerService {
 

@@ -1,4 +1,4 @@
-package pa165.deliveryweb.config;
+package pa165.deliveryservice.config;
 
 import pa165.servicelayer.serviceInterface.*;
 import pa165.servicelayer.serviceImplementation.*;
@@ -30,8 +30,8 @@ import javax.validation.Validator;
  */
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = "pa165.deliveryservice")
-@ImportResource({"classpath:springConfig.xml"})
+@ComponentScan(basePackages = "pa165")
+@ImportResource({"classpath:applicationContext.xml"})
 public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
 
     final static Logger log = LoggerFactory.getLogger(MySpringMvcConfig.class);

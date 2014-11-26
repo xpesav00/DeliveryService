@@ -14,6 +14,7 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * An implementation of DeliveryDao interface
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Repository;
  * @version 02.11.2014
  */
 @Repository
+@Transactional
 public class DeliveryDaoImpl implements DeliveryDao{
     private static final org.slf4j.Logger log = LoggerFactory.getLogger(DeliveryDaoImpl.class);
     @PersistenceContext

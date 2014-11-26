@@ -18,7 +18,7 @@ import pa165.servicelayer.serviceInterface.GoodsService;
  *
  * @author Drimal
  */
-@Service
+@Service("goodsService")
 @Transactional
 public class GoodsServiceImpl implements GoodsService {
 

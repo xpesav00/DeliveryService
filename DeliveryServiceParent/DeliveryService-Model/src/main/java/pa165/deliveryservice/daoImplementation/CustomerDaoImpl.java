@@ -1,13 +1,14 @@
 package pa165.deliveryservice.daoImplementation;
 
-import pa165.deliveryservice.daoInterface.CustomerDao;
-import pa165.deliveryservice.entity.Customer;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
+import pa165.deliveryservice.daoInterface.CustomerDao;
+import pa165.deliveryservice.entity.Customer;
 import pa165.deliveryservice.entity.Delivery;
 
 /**
@@ -18,6 +19,7 @@ import pa165.deliveryservice.entity.Delivery;
  * @version 1.0
  */
 @Repository
+@Transactional
 public class CustomerDaoImpl implements CustomerDao {
 
     private final static Logger log = LoggerFactory.getLogger(CustomerDaoImpl.class);

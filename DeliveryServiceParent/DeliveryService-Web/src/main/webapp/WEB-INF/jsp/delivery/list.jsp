@@ -26,8 +26,8 @@
                     <td>${delivery.id}</td>
                     <td><c:out value="${delivery.name}"/></td>
                     <td><c:out value="${delivery.postman}"/></td>
-                    <td><c:out value="${delivery.Customer}"/></td>
-<!--                <!--Goods a tlacitka update a delete --!>    
+                    <td><c:out value="${delivery.customer}"/></td>
+                <%--Goods a tlacitka update a delete --%>
                     <td>
                         <form method="get" action="${pageContext.request.contextPath}/delivery/list/${delivery.id}">
                             <input type="submit" value="<fmt:message key='delivery.list.goods'/>">
@@ -43,7 +43,7 @@
                         <form method="post" action="${pageContext.request.contextPath}/delivery/delete/${delivery.id}">
                             <input type="submit" value="<fmt:message key='delivery.list.delete'/>">
                         </form>
-                    </td>-->
+                    </td>
 
                 </tr>
             </c:forEach>
