@@ -1,93 +1,128 @@
-.message {
-    background-color: lightgreen;
-    border: 1px solid darkgreen;
-    padding: 1em;
+* {margin: 0;padding: 0;}
+body{background-color: #d1d1d1; font-family: sans-serif; font-size: 14px; color: white; text-align: center;}
+
+div#container{
+    margin:0 auto;
+    padding:10px;
+    text-align: left;
+    width:1366px;
+    height:90%;
 }
 
-span.error {
-    background-color: yellow;
-    color: red;
-    font-weight: bold;
+div#banner{
+    width:100%;
+    height: 160px;
+    background-image: url("resources/bannerBG.jpg");
+    background-repeat: repeat-x;
+    text-align: left;
 }
 
-input.error {
-    background-color: yellow;
+div#banner a{text-decoration: none;}
+div#banner img {padding:10px;}
+
+div#navigation{
+    width:1366px;
+    height: 34px;
+    margin-top: 5px;
 }
 
-body {
-    font-family: Helvetica, sans-serif;
-    background-color: azure;
-}
-
-h1 {
-    text-align: center;
-    text-decoration: underline;
-    text-shadow: aquamarine;
-    text-transform: capitalize;
-}
-
-table.basic {
-    border-collapse: collapse;
-    margin: 10px;
-}
-
-table.basic th, table.basic td {
-    border: solid 1px black;
-    padding: 4px;
-}
-
-/*  http://www.alistapart.com/articles/taminglists/ */
-#navigation {
-    width: 120px;
-    border-right: 1px solid #000;
-    padding: 0 0 1em 0;
-    margin-bottom: 1em;
-    background-color: #90bade;
-    color: #333;
-}
-
-#navigation ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    border: none;
-}
-
-#navigation li {
-    border-bottom: 1px solid #90bade;
-    margin: 0;
-}
-
-#navigation li a {
+div#navigation ul{
     display: block;
-    padding: 5px 5px 5px 0.5em;
-    border-left: 10px solid #1958b7;
-    border-right: 10px solid #508fc4;
-    background-color: #2175bc;
-    color: #fff;
-    text-decoration: none;
-    width: 100%;
+    height: 34px;
+    list-style-type: none;    
+    margin-top: 5px;
 }
 
-html>body #navigation li a {
-    width: auto;
+div#navigation ul li {
+    display: inline;
 }
 
-#navigation li a:hover {
-    border-left: 10px solid #1c64d1;
-    border-right: 10px solid #5ba3e0;
-    background-color: #2586d7;
-    color: #fff;
-}
-
-/*  http://realworldstyle.com/2col.html */
-#navigation {
-    width: 120px;
+div#navigation ul li a{
     float: left;
-    margin-left: -1px;
+    width: 341.5px;
+    height:24px;
+    text-decoration: none;
+    text-align: center;
+    color:white;    
+    padding-top: 10px;
+    transition: background .25s ease-in-out;
+   -moz-transition: background .25s ease-in-out;
+   -webkit-transition: background .25s ease-in-out;
 }
 
-#content {
-    padding: 10px;
-    margin-left: 130px;
+div#navigation ul li a:hover{
+    background-color: #4f4f4f;
+    text-shadow: 0 0 10px #fff;
+    background: url("resources/a_href_L.jpg") left repeat-y,
+        url("resources/a_href_R.jpg") right repeat-y,#4f4f4f;
 }
+/*
+div#navigation ul li a:active{    
+    background-color: #4f4f4f;
+    text-shadow: 0 0 10px #fff;
+    -webkit-box-shadow: inset 0 0 20px #fff;
+    -moz-box-shadow: inset 0 0 20px #fff;
+    box-shadow: inset 0 0 20px #fff;    
+}*/
+
+div#content{
+    text-align: left;
+    width:1345px;
+    min-height: 480px;
+    padding:1.5em 0em 0 1.5em;
+    float:left;
+    background-color: #e1e1e1;
+    color:#000;
+}
+div#footer{
+    clear: both;
+    width: 100%;
+    height:84px;
+    background-image: url("resources/bannerBG.jpg");
+    background-repeat: repeat-x;    
+}
+
+table{
+    border-collapse: collapse;
+    width: 35%;
+}
+th{background-color: #4f4f4f;font-size: 14px;height: 25px;color:#fff; text-align: center;}
+table,th,tr,td {
+    border: 1px solid #000;
+}
+
+td{padding:5px; text-align: right;}
+td.centerize{text-align: center;}
+tr.even{
+    background-color: #f1f1f1;    
+}
+
+div.error{
+    border:1px solid #da3d0d;
+    background-color: #f3b52f;
+    padding:5px;
+    color:#da3d0d;
+    transition: background .25s ease-in-out;
+   -moz-transition: background .25s ease-in-out;
+   -webkit-transition: background .25s ease-in-out;
+}
+
+div.error:hover{
+    background-color: #ffc000;
+}
+
+div.info{
+    border:1px solid #0051a7;
+    background-color: #439dfc;
+    padding:5px;
+    color:#0051a7;
+    transition: background .25s ease-in-out;
+   -moz-transition: background .25s ease-in-out;
+   -webkit-transition: background .25s ease-in-out;
+}
+
+div.info:hover{
+    background-color: #43b4fc;
+}
+
+a{color:#439dfc;}
