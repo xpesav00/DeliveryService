@@ -131,16 +131,12 @@ public class PostmanDaoImplNGTest extends AbstractTestNGSpringContextTests {
      */
     @Test
     public void testUpdatePostman() {
-        em.getTransaction().begin();
         Postman postmanDetached = em.find(Postman.class, postman1Id);
         em.detach(postmanDetached);
-        em.getTransaction().commit();
 
         postmanDetached.setFirstName("Karel");
         postmanDetached.setLastName("Prochazka");
-        em.getTransaction().begin();
         dao.updatePostman(postmanDetached);
-        em.getTransaction().commit();
 
         Postman postman = em.find(Postman.class, postman1Id);
         Assert.assertEquals(postman.getFirstName(), "Karel");
