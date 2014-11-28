@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="${pageContext.request.locale}">
     <head>
-        <title><c:out value="${page.title}"/></title>
+        <title><c:out value="${title}"/></title>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css"/>
         <jsp:invoke fragment="head"/>
     </head>
@@ -20,7 +20,7 @@
                 <div id="navigation">
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/"><f:message key="navigation.index"/></a></li>
-                    <li><a href="${pageContext.request.contextPath}/postman.jsp"><f:message key="navigation.postman"/></a></li>
+                    <li><a href="${pageContext.request.contextPath}/postman/list"><f:message key="navigation.postman"/></a></li>
                     <li><a href="${pageContext.request.contextPath}/customer/list"><f:message key="navigation.customer"/></a></li>
                     <li><a href="${pageContext.request.contextPath}/delivery/list"><f:message key="navigation.delivery"/></a></li>
                 </ul>

@@ -9,7 +9,7 @@
 <my:layout title="${title}">
  <jsp:attribute name="body">
         
-     <h1><img src=""><fmt:message key="customer.allcustomers"/></h1>
+     <h1><fmt:message key="customer.allcustomers"/></h1>
 
         <table>
             <tr>
@@ -30,7 +30,8 @@
                     <td style="text-align: center">${customer.id}</td>
                     <td><c:out value="${customer.firstName}"/></td>
                     <td><c:out value="${customer.lastName}"/></td>
-                    <td><fmt:message key="${customer.address.city}"/>, <fmt:message key="${customer.address.street}"/>, <fmt:message key="${customer.address.postcode}"/></td>
+                    <td><c:out value="${customer.address.city}"/>, <c:out value="${customer.address.street}"/>, 
+                        <c:out value="${customer.address.postcode}"/></td>
                     <td style="text-align: center">
                         <form method="get" action="${pageContext.request.contextPath}/customer/update/${customer.id}">
                             <input type="submit" value="" class="edit">

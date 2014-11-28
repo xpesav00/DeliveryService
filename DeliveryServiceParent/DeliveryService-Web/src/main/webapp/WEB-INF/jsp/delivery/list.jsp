@@ -8,7 +8,7 @@
 <fmt:message var="title" key="delivery.title"/>
 <my:layout title="${title}">
     <jsp:attribute name="body">
-        <p><fmt:message key="delivery.alldeliveries"/></p>
+        <h1><p><fmt:message key="delivery.alldeliveries"/></p></h1>
 
         <table class="basic">
             <tr>

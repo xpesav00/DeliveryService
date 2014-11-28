@@ -2,7 +2,6 @@ package pa165.servicelayer.dto;
 
 import java.util.ArrayList;
 import java.util.List;
-import pa165.deliveryservice.entity.Address;
 
 /**
  * DTO for Customer entity.

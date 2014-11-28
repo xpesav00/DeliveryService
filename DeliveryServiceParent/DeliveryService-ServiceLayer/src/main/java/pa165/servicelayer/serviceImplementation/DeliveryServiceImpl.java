@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pa165.deliveryservice.daoInterface.DeliveryDao;
 import pa165.deliveryservice.entity.*;
+import pa165.servicelayer.dto.AddressDto;
 import pa165.servicelayer.dto.DeliveryDto;
 import pa165.servicelayer.serviceInterface.DeliveryService;
 
@@ -33,7 +34,11 @@ public class DeliveryServiceImpl implements DeliveryService{
         System.out.println("Preload DB");
 
         Customer customer = new Customer();
-        customer.setAddress(new Address());
+        Address a = new Address();
+        a.setCity("Božkov");
+        a.setStreet("Rumová");
+        a.setPostcode(66677);
+        customer.setAddress(a);
         customer.setFirstName("Honza");
         customer.setLastName("Pelda");
         
