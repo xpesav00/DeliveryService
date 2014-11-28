@@ -20,7 +20,7 @@ import pa165.servicelayer.serviceInterface.PostmanService;
  *
  * @author Martin Nekula
  */
-@Service("postmanSerice")
+@Service("postmanService")
 @Transactional
 public class PostmanServiceImpl implements PostmanService {
 
