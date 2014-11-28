@@ -31,7 +31,12 @@
             </tr>
             <tr>
             <th><form:label path="status"><fmt:message key="delivery.status"/></form:label></th>
-            <td><form:input path="status"/></td>
+            <td><form:select path="status">
+                    <c:forEach items="${status}" var="s">
+                        <form:option value="${s}">${s}</form:option>
+                    </c:forEach>
+            </form:select>
+            </td>
             <td><form:errors path="status" cssClass="error"/></td>
         </tr>
         </table>

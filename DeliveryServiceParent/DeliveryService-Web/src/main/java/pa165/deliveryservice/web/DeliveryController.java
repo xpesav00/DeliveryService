@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
+import pa165.deliveryservice.entity.DeliveryStatus;
 import pa165.servicelayer.dto.CustomerDto;
 import pa165.servicelayer.dto.DeliveryDto;
 import pa165.servicelayer.dto.GoodsDto;
@@ -61,6 +62,12 @@ public class DeliveryController {
         return customerService.getAllCustomers();
     }
 
+    @ModelAttribute("status")
+    public DeliveryStatus[] status() {
+        log.debug("status()");
+        return DeliveryStatus.values();
+    }
+    
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
         log.debug("list()");
@@ -92,18 +99,10 @@ public class DeliveryController {
     public String update(@Valid @ModelAttribute DeliveryDto delivery, BindingResult bindingResult, 
             RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         log.debug("update(locale={}, delivery={})", locale, delivery);
-        if(delivery.getId() == -1){
+        if(delivery.getId() == 0){
             deliveryService.createDelivery(delivery);
-//            redirectAttributes.addFlashAttribute(
-//                    "message",
-//                    messageSource.getMessage("book.add.message", new Object[]{book.getTitle(), book.getAuthor(), book.getId()}, locale)
-//            );
         } else {
             deliveryService.updateDelivery(delivery);
-//            redirectAttributes.addFlashAttribute(
-//                    "message",
-//                    messageSource.getMessage("book.updated.message", new Object[]{book.getTitle(), book.getAuthor(), book.getId()}, locale)
-//            );
         }
         
         return "redirect:" + uriBuilder.path("delivery/list").build();

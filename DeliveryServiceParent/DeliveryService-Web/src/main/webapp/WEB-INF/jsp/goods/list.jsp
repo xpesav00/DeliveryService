@@ -20,24 +20,33 @@
                 <th></th>
                 <th></th>
             </tr>
-            <c:forEach items="${goods}" var="goods">
+            <c:forEach items="${delgoods}" var="goods">
                 <tr>
-                    <td>${good.id}</td>
+                    <td>${goods.id}</td>
                     <td><c:out value="${goods.seller}"/></td>
                     <td><c:out value="${goods.price}"/></td>
-                    <td><fmt:message key="${goods.delivery.name}"/></td>
+                    <td><c:out value="${goods.delivery.name}"/></td>
                     <td style="text-align: center">
                         <form method="get" action="${pageContext.request.contextPath}/goods/update/${goods.id}">
                             <input type="submit" value="" class="edit">
                         </form>
                     </td>
                     <td style="text-align: center">
-                        <form method="post" action="${pageContext.request.contextPath}/goods/delete/$goods.id}">
+                        <form method="post" action="${pageContext.request.contextPath}/goods/delete/${goods.id}">
                             <input type="submit" value="" class="delete">
                         </form>
                     </td>
 
                 </tr>
             </c:forEach>
-</jsp:attribute>
+        </table>
+                <br>
+                <br>
+        <form:form method="post" action="${pageContext.request.contextPath}/goods/update" modelAttribute="goods">
+            <fieldset><legend><fmt:message key="goods.list.newgoods"/></legend>
+                <%@include file="form.jsp"%>
+                <input type="submit" value="<fmt:message key='goods.list.creategoods'/>">
+            </fieldset>
+        </form:form>    
+    </jsp:attribute>
 </my:layout>

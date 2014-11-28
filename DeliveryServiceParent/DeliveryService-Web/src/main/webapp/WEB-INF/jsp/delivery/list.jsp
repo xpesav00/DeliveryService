@@ -36,12 +36,12 @@
                     <td><c:out value="${delivery.status}"/></td>
                     <td>
                         <form method="get" action="${pageContext.request.contextPath}/delivery/update/${delivery.id}">
-                            <input type="submit" value="<fmt:message key='delivery.list.edit'/>">
+                            <input type="submit" value="" class="edit">
                         </form>
                     </td>
                     <td>
                         <form method="post" action="${pageContext.request.contextPath}/delivery/delete/${delivery.id}">
-                            <input type="submit" value="<fmt:message key='delivery.list.delete'/>">
+                            <input type="submit" value="" class="delete">
                         </form>
                     </td>
 

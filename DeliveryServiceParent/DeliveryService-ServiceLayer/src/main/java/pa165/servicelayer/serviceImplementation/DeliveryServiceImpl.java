@@ -1,6 +1,7 @@
 package pa165.servicelayer.serviceImplementation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -39,7 +40,11 @@ public class DeliveryServiceImpl implements DeliveryService{
         Postman postman = new Postman();
         postman.setFirstName("Karel");
         postman.setLastName("Pepik");
-        createDelivery("CZC.cz", postman, Collections.EMPTY_LIST, customer, DeliveryStatus.INIT);
+        
+        Goods goods = new Goods();
+        goods.setPrice(100);
+        goods.setSeller("Sony");
+        createDelivery("CZC.cz", postman, Arrays.asList(goods), customer, DeliveryStatus.INIT);
     }
     
     @Override
