@@ -8,6 +8,6 @@
 <fmt:message var="title" key="index.title"/>
 <my:layout title="${title}">
 <jsp:attribute name="body">
-    <my:a href="/delivery/list"><fmt:message key="delivery.list.link"/></my:a>
+    <my:a href="/delivery/list"><fmt:message key="delivery.alldeliveries"/></my:a>
 </jsp:attribute>
 </my:layout>

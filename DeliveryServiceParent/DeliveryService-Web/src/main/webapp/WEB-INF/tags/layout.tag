@@ -21,8 +21,8 @@
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/"><f:message key="navigation.index"/></a></li>
                     <li><a href="${pageContext.request.contextPath}/postman.jsp"><f:message key="navigation.postman"/></a></li>
-                    <li><a href="${pageContext.request.contextPath}/customer.jsp"><f:message key="navigation.customer"/></a></li>
-                    <li><a href="${pageContext.request.contextPath}/delivery.jsp"><f:message key="navigation.delivery"/></a></li>
+                    <li><a href="${pageContext.request.contextPath}/customer/list"><f:message key="navigation.customer"/></a></li>
+                    <li><a href="${pageContext.request.contextPath}/delivery/list"><f:message key="navigation.delivery"/></a></li>
                 </ul>
                 </div>
             </div>
@@ -30,9 +30,10 @@
             <div id="content">
                 <h1><c:out value="${page.heading.main}"/></h1>
                 <c:if test="${not empty message}">
-                    <div class="message"><c:out value="${message}"/></div>
+                    <div class="info"><p><c:out value="${message}"/></p></div>
                 </c:if>
-                    <table>
+                <%--
+                <table>
                         <tr>
                             <th><f:message key="common.id"/></th>
                             <th><f:message key="common.name"/></th>
@@ -61,6 +62,7 @@
             
             <div class="error"><c:out value="${message.confirm.delete.delivery}"/></div>
             <div class="info"><c:out value="Info"/></div>
+            --%>
                 <jsp:invoke fragment="body"/>
             </div>
             <div id ="footer"></div>
