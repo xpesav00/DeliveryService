@@ -12,7 +12,11 @@
     <br>
     <br>
     <h4>
-        This is our project to PA165 using spring mvc and tomcat        
-    </h4>
+        This is our project to PA165 using spring mvc and tomcat.<br></h4>
+        <h4>Upper buttons serve like navigation menu:<br></h4>
+            <h4>Customer for customers<br></h4>
+            <h4>Postman for postmen<br></h4>
+            <h4>Delivery for deliveries</h4>
+    
 </jsp:attribute>
 </my:layout>

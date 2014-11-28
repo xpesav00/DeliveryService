@@ -83,7 +83,7 @@ public class DeliveryController {
         return "/delivery/list";
     }
     
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable long id, RedirectAttributes redirectAttributes, Locale locale, UriComponentsBuilder uriBuilder){
         log.debug("delete({})", id);
         DeliveryDto delivery = deliveryService.findDelivery(id);
