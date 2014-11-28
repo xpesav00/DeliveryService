@@ -16,10 +16,9 @@
             <th><form:label path="delivery"><fmt:message key="goods.delivery"/></form:label></th>
             <td><form:select path="goods">
                     <c:forEach items="${deliveries}" var="d">
-                        <form:option value="${d}"><fmt:message key="${d}"/></form:option>
+                        <form:option value="${d.name}"><${d.name}"/></form:option>
                     </c:forEach>
                 </form:select>
             </td>
-            <%--<td><form:errors path="goods" cssClass="error"/></td>--%>
         </tr>
     </table>

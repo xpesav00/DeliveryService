@@ -25,15 +25,15 @@
                     <td>${good.id}</td>
                     <td><c:out value="${goods.seller}"/></td>
                     <td><c:out value="${goods.price}"/></td>
-                    <td><fmt:message key="${goodss.delivery}"/></td>
-                    <td>
+                    <td><fmt:message key="${goods.delivery.name}"/></td>
+                    <td style="text-align: center">
                         <form method="get" action="${pageContext.request.contextPath}/goods/update/${goods.id}">
-                            <input type="submit" value="<fmt:message key='goods.list.edit'/>">
+                            <input type="submit" value="" class="edit">
                         </form>
                     </td>
-                    <td>
-                        <form method="post" action="${pageContext.request.contextPath}/goods/delete/${book.id}">
-                            <input type="submit" value="<fmt:message key='goods.list.delete'/>">
+                    <td style="text-align: center">
+                        <form method="post" action="${pageContext.request.contextPath}/goods/delete/$goods.id}">
+                            <input type="submit" value="" class="delete">
                         </form>
                     </td>
 

@@ -9,7 +9,7 @@
 <my:layout title="${title}">
     <jsp:attribute name="body">
         <p><fmt:message key="delivery.alldeliveries"/></p>
-        
+
         <table class="basic">
             <tr>
                 <th>id</th>
@@ -21,15 +21,15 @@
                 <th></th>
                 <th></th>
             </tr>
-           <c:forEach items="${deliveries}" var="delivery">
+            <c:forEach items="${deliveries}" var="delivery">
                 <tr>
                     <td>${delivery.id}</td>
                     <td><c:out value="${delivery.name}"/></td>
-                    <td><c:out value="${delivery.postman}"/></td>
-                    <td><c:out value="${delivery.customer}"/></td>
-                <%--Goods a tlacitka update a delete --%>
+                    <td><c:out value="${delivery.postman.firstName} ${delivery.postman.lastName}"/></td>
+                    <td><c:out value="${delivery.customer.firstName} ${delivery.customer.lastName}"/></td>
+
                     <td>
-                        <form method="get" action="${pageContext.request.contextPath}/delivery/list/${delivery.id}">
+                        <form method="get" action="${pageContext.request.contextPath}/goods/list/${delivery.id}">
                             <input type="submit" value="<fmt:message key='delivery.list.goods'/>">
                         </form>
                     </td>
@@ -48,6 +48,12 @@
                 </tr>
             </c:forEach>
         </table>
+        <form:form method="post" action="${pageContext.request.contextPath}/delivery/update" modelAttribute="delivery">
+            <fieldset><legend><fmt:message key="delivery.list.newdelivery"/></legend>
+                <%@include file="form.jsp"%>
+                <input type="submit" value="<fmt:message key='delivery.list.createdelivery'/>">
+            </fieldset>
+        </form:form>
     </jsp:attribute>
 </my:layout>
-                        
+

@@ -13,7 +13,7 @@ import pa165.servicelayer.validation.DeliveryConstraint;
  */
 @DeliveryConstraint
 public class DeliveryDto implements Cloneable{
-    private long id;
+    private long id = -1;
     @NotNull
     @Pattern(regexp = "\\p{javaUpperCase}.*")
     @Size(min =3, max = 30)

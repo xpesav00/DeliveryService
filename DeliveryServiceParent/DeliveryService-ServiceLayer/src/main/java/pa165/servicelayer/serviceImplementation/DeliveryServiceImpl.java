@@ -66,6 +66,17 @@ public class DeliveryServiceImpl implements DeliveryService{
             throw new DataAccessException("Error in persistence layer.", e){};
         }
     }
+    
+    @Override
+    public void createDelivery(DeliveryDto deliveryDto){
+        Delivery delivery = mapper.map(deliveryDto, Delivery.class);
+        
+        try{
+            deliveryDao.addDelivery(delivery);
+        }catch(Exception e){
+            throw new DataAccessException("Error in persistence layer.", e){};
+        }
+    }
 
     @Override
     public DeliveryDto findDelivery(long id) {
@@ -78,10 +89,11 @@ public class DeliveryServiceImpl implements DeliveryService{
     }
 
     @Override
-    public void updateDelivery(Delivery delivery) {
-        if(delivery == null){
+    public void updateDelivery(DeliveryDto deliveryDto) {
+        if(deliveryDto == null){
             throw new NullPointerException("Updated delivery can not be null.");
         }
+        Delivery delivery = mapper.map(deliveryDto, Delivery.class);
         try{
             deliveryDao.updateDelivery(delivery);
         }catch(Exception e){
@@ -90,9 +102,9 @@ public class DeliveryServiceImpl implements DeliveryService{
     }
 
     @Override
-    public void deleteDelivery(Delivery delivery) {
-        if(delivery == null) throw new IllegalArgumentException("Can not delete null.");
-        
+    public void deleteDelivery(DeliveryDto deliveryDto) {
+        if(deliveryDto == null) throw new IllegalArgumentException("Can not delete null.");
+        Delivery delivery = mapper.map(deliveryDto, Delivery.class);
         try{
             deliveryDao.deleteDelivery(delivery);
         }catch(Exception e){

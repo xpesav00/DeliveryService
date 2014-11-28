@@ -30,6 +30,7 @@ public interface DeliveryService {
      */
     void createDelivery(String name, Postman postman, List<Goods> goods, Customer customer, DeliveryStatus status);
     
+    void createDelivery(DeliveryDto delivery);
     /**
      * Find delivery by given id.
      * @param id id of deliverz
@@ -42,13 +43,13 @@ public interface DeliveryService {
      * Updates delivery
      * @param delivery 
      */
-    void updateDelivery(Delivery delivery);
+    void updateDelivery(DeliveryDto delivery);
     
     /**
      * Delete given delivery if exists in DB.
      * @param delivery 
      */
-    void deleteDelivery(Delivery delivery);
+    void deleteDelivery(DeliveryDto delivery);
     
     /**
      * Returns list of all deliveries in DB.

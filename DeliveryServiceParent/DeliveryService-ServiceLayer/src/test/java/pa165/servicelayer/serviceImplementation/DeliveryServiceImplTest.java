@@ -103,7 +103,7 @@ public class DeliveryServiceImplTest extends TestCase {
      */
     @Test
     public void testUpdateDelivery() {
-        deliveryService.updateDelivery(delivery);
+        deliveryService.updateDelivery(deliveryDto);
         verify(dao).updateDelivery(delivery);
     }
 
@@ -112,7 +112,7 @@ public class DeliveryServiceImplTest extends TestCase {
      */
     @Test
     public void testDeleteDelivery() {
-        deliveryService.deleteDelivery(delivery);
+        deliveryService.deleteDelivery(deliveryDto);
         verify(dao).deleteDelivery(delivery);
     }
 
