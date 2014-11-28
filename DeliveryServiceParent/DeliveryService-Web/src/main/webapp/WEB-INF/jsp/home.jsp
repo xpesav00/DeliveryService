@@ -8,6 +8,11 @@
 <fmt:message var="title" key="index.title"/>
 <my:layout title="${title}">
 <jsp:attribute name="body">
-    <%--<my:a href="/delivery/list"><fmt:message key="delivery.list.link"/></my:a>--%>
+    <h1>Welcome</h1>
+    <br>
+    <br>
+    <h4>
+        This is our project to PA165 using spring mvc and tomcat        
+    </h4>
 </jsp:attribute>
 </my:layout>

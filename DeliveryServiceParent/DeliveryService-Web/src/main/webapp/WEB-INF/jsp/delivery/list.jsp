@@ -28,18 +28,18 @@
                     <td><c:out value="${delivery.postman.firstName} ${delivery.postman.lastName}"/></td>
                     <td><c:out value="${delivery.customer.firstName} ${delivery.customer.lastName}"/></td>
 
-                    <td>
+                    <td style="text-align: center">
                         <form method="get" action="${pageContext.request.contextPath}/goods/list/${delivery.id}">
                             <input type="submit" value="<fmt:message key='delivery.list.goods'/>">
                         </form>
                     </td>
                     <td><c:out value="${delivery.status}"/></td>
-                    <td>
+                    <td style="text-align: center">
                         <form method="get" action="${pageContext.request.contextPath}/delivery/update/${delivery.id}">
                             <input type="submit" value="" class="edit">
                         </form>
                     </td>
-                    <td>
+                    <td style="text-align: center">
                         <form method="post" action="${pageContext.request.contextPath}/delivery/delete/${delivery.id}">
                             <input type="submit" value="" class="delete">
                         </form>
@@ -48,7 +48,7 @@
                 </tr>
             </c:forEach>
         </table>
-        <form:form method="post" action="${pageContext.request.contextPath}/delivery/update" modelAttribute="delivery">
+        <form:form method="post" action="${pageContext.request.contextPath}/delivery/update" modelAttribute="delivery" >
             <fieldset><legend><fmt:message key="delivery.list.newdelivery"/></legend>
                 <%@include file="form.jsp"%>
                 <input type="submit" value="<fmt:message key='delivery.list.createdelivery'/>">

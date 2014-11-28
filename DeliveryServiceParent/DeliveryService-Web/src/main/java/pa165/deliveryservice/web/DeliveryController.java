@@ -106,7 +106,8 @@ public class DeliveryController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@Valid @ModelAttribute DeliveryDto delivery, BindingResult bindingResult, 
             RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
-        log.debug("update(locale={}, delivery={})", locale, delivery);
+        log.debug("update(locale={}, delivery={}, postman={})", locale, delivery, delivery.getPostman());
+        
         if(delivery.getId() == 0){
             deliveryService.createDelivery(delivery);
         } else {

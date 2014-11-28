@@ -11,9 +11,9 @@
             </tr>
             <tr>
                 <th><form:label path="postman"><fmt:message key="delivery.postman"/></form:label></th>
-                <td><form:select path="postman">
+                <td><form:select id="postman" path="postman">
                     <c:forEach items="${postmen}" var="p">
-                        <form:option value="${p}">${p.firstName} ${p.lastName}</form:option>
+                        <form:option value="${p}">${p.firstName}${p.lastName}</form:option>
                     </c:forEach>
                 </form:select>
                 </td>
@@ -21,9 +21,9 @@
             </tr>
             <tr>
                 <th><form:label path="customer"><fmt:message key="delivery.customer"/></form:label></th>
-                <td><form:select path="customer">
+                <td><form:select id="customer" path="customer">
                     <c:forEach items="${customers}" var="c">
-                        <form:option value="${c}">${c.firstName} ${c.lastName}</form:option>
+                        <form:option value="${c}">${c.firstName}${c.lastName}</form:option>
                     </c:forEach>
                 </form:select>
                 </td>
@@ -31,7 +31,7 @@
             </tr>
             <tr>
             <th><form:label path="status"><fmt:message key="delivery.status"/></form:label></th>
-            <td><form:select path="status">
+            <td><form:select id="status" path="status">
                     <c:forEach items="${status}" var="s">
                         <form:option value="${s}">${s}</form:option>
                     </c:forEach>

@@ -12,7 +12,7 @@
     <form:hidden path="id"/>
     <fieldset><legend><fmt:message key="delivery.edit.edit"/></legend>
         <%@include file="form.jsp"%>
-        <input type="submit" value="<fmt:message key='delivery.edit.save'/>">
+        <input type="submit" value="<fmt:message key="delivery.edit.save"/>">
     </fieldset>
 </form:form>
 </jsp:attribute>
