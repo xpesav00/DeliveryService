@@ -35,9 +35,7 @@ public class PostmanController {
     
     @Autowired
     private PostmanService postmanService;
-    
-    @Autowired
-    private DeliveryService deliveryService;
+
     
     @ModelAttribute("postmen")
     public List<PostmanDto> allDeliveries() {

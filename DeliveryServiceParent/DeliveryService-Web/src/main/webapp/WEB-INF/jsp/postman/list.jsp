@@ -48,5 +48,12 @@
                 </tr>
             </c:forEach>
         </table>
+
+        <form:form method="post" action="${pageContext.request.contextPath}/postman/update" modelAttribute="postman">
+            <fieldset><legend><fmt:message key="postman.list.newpostman"/></legend>
+                <%@include file="form.jsp"%>
+                <input type="submit" value="<fmt:message key='postman.list.createpostman'/>">
+            </fieldset>
+        </form:form>
     </jsp:attribute>
 </my:layout>

@@ -11,8 +11,8 @@
             <td><form:input path="lastName"/></td>
         </tr>
         <tr>
-            <th><form:label path="delivery"><fmt:message key="postman.deliveries"/></form:label></th>
-            <td><form:select path="delivery">
+            <th><form:label path="deliveries"><fmt:message key="postman.deliveries"/></form:label></th>
+            <td><form:select path="deliveries">
                     <c:forEach items="${deliveries}" var="d">
                         <form:option value="${d.name}">${d.name}</form:option>
                     </c:forEach>
