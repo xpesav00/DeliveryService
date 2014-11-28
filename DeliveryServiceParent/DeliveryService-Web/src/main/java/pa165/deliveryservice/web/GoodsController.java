@@ -52,46 +52,24 @@ public class GoodsController {
         DeliveryDto findDelivery = deliveryService.findDelivery(id);
         selectedDelivery = findDelivery;
         model.addAttribute("delgoods", findDelivery.getGoods());
-        return "goods/list";
+        return "/goods/list";
     }
     
-//    @RequestMapping(value = "/list", method = RequestMethod.GET)
-//    public String list(Model model){
-//        log.debug("list page");
-//        model.addAttribute("goods", new GoodsDto());
-//        return "goods/list";
-//    }
-//    
-//    @RequestMapping(value="/{id}", method=RequestMethod.GET)
-//    public List<GoodsDto> allDeliveryGoods(@PathVariable long id, Model model){
-//        log.debug("all goods from delivery{}", id);
-//        DeliveryDto findDelivery = deliveryService.findDelivery(id);
-//        return findDelivery.getGoods();
-//    }
-//    
-//    @RequestMapping(value="/list", method=RequestMethod.GET)
-//    public String list(Model model){
-//        model.addAttribute("goods", new GoodsDto());
-//        return "goods/list";
-//    } 
-    
-    //@RequestMapping(value = "update/{id}", method = RequestMethod.GET)
-    @RequestMapping(value = "/update/${id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String update_form(@PathVariable long id, Model model) {
         GoodsDto goods = goodsService.findGood(id);
         model.addAttribute("goods", goods);
         model.addAttribute("deliveries", deliveryService.getAllDeliveries());
-//        model.addAttribute("deliveryId", dId);
         log.debug("update_form(model={})", model);
         return "goods/edit";
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable long id, Model model) {
         GoodsDto goods = goodsService.findGood(id);
         model.addAttribute("goods", goods);
         goodsService.deleteGoods(goods);
-        return "goods/edit";
+        return "/goods/edit";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)

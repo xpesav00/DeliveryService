@@ -72,10 +72,18 @@ public class DeliveryController {
     public String list(Model model) {
         log.debug("list()");
         model.addAttribute("delivery", new DeliveryDto());
-        return "delivery/list";
+        return "/delivery/list";
     }
     
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    @RequestMapping(value = "/list/{id}", method = RequestMethod.GET)
+    public String postmanDeliveries(@PathVariable long id, Model model) {
+        log.debug("postmanDeliveries");
+        model.addAttribute("delivery", new DeliveryDto());
+        model.addAttribute("deliveries", postmanService.findPostman(id).getDeliveries());
+        return "/delivery/list";
+    }
+    
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String delete(@PathVariable long id, RedirectAttributes redirectAttributes, Locale locale, UriComponentsBuilder uriBuilder){
         log.debug("delete({})", id);
         DeliveryDto delivery = deliveryService.findDelivery(id);
@@ -92,7 +100,7 @@ public class DeliveryController {
         DeliveryDto delivery = deliveryService.findDelivery(id);
         model.addAttribute("delivery", delivery);
         log.debug("update_form(model={})", model);
-        return "delivery/edit";
+        return "/delivery/edit";
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -105,6 +113,6 @@ public class DeliveryController {
             deliveryService.updateDelivery(delivery);
         }
         
-        return "redirect:" + uriBuilder.path("delivery/list").build();
+        return "redirect:" + uriBuilder.path("/delivery/list").build();
     }
 }

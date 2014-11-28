@@ -5,12 +5,10 @@
         <tr>
             <th><form:label path="firstName"><fmt:message key="postman.firstName"/></form:label></th>
             <td><form:input path="firstName"/></td>
-            <%--<td><form:errors path="author" cssClass="error"/></td>--%>
         </tr>
         <tr>
             <th><form:label path="lastName"><fmt:message key="postman.lastName"/></form:label></th>
             <td><form:input path="lastName"/></td>
-            <%--<td><form:errors path="price" cssClass="error"/></td>--%>
         </tr>
         <tr>
             <th><form:label path="delivery"><fmt:message key="postman.deliveries"/></form:label></th>

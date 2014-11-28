@@ -9,7 +9,7 @@
 <fmt:message var="title" key="page.heading.postmen"/>
 <my:layout title="${title}">
     <jsp:attribute name="body">
-        <h1><p><fmt:message key="postman.allpostmen"/></p></h1>
+        <p><fmt:message key="postman.allpostmen"/></p>
 
         <table class="basic">
             <tr>
@@ -27,7 +27,6 @@
                     <td><c:out value="${postman.firstName}"/></td>
                     <td><c:out value="${postman.lastName}"/></td>
                     <td><c:out value="${fn:length(postman.deliveries)}"/></td>
-                    <%--Deliveries a tlacitka update a delete --%>
                     <td>
                         <form method="get" action="${pageContext.request.contextPath}/delivery/list/${postman.id}">
                             <input type="submit" value="<fmt:message key='page.heading.deliveries'/>">
