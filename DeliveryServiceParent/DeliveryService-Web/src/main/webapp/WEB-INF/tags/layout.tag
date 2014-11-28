@@ -20,7 +20,7 @@
                 <div id="navigation">
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/"><f:message key="navigation.index"/></a></li>
-                    <li><a href="${pageContext.request.contextPath}/postman.jsp"><f:message key="navigation.postman"/></a></li>
+                    <li><a href="${pageContext.request.contextPath}/postman/list"><f:message key="navigation.postman"/></a></li>
                     <li><a href="${pageContext.request.contextPath}/customer/list"><f:message key="navigation.customer"/></a></li>
                     <li><a href="${pageContext.request.contextPath}/delivery/list"><f:message key="navigation.delivery"/></a></li>
                 </ul>
