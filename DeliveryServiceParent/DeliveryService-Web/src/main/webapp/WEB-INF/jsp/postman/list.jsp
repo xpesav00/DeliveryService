@@ -9,7 +9,7 @@
 <fmt:message var="title" key="page.heading.postmen"/>
 <my:layout title="${title}">
     <jsp:attribute name="body">
-        <p><fmt:message key="postman.allpostmen"/></p>
+        <h1><p><fmt:message key="postman.allpostmen"/></p></h1>
 
         <table class="basic">
             <tr>

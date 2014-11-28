@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="${pageContext.request.locale}">
     <head>
-        <title><c:out value="${page.title}"/></title>
+        <title><c:out value="${title}"/></title>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css"/>
         <jsp:invoke fragment="head"/>
     </head>

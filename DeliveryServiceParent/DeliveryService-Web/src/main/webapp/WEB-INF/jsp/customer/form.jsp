@@ -32,21 +32,21 @@
                     <label for="city"><fmt:message key="customer.city" /></label>
                     </dt>
                     <dd><input type="text" id="city" name="city" /></dd>
-                    <dd><form:errors path="city" cssClass="error" element="div" /></dd>
+                    <dd><form:errors path="*" cssClass="error" element="div" /></dd>
                 </dl>
                 <dl>
                     <dt>
                     <label for="street"><fmt:message key="customer.street" /></label>
                     </dt>
                     <dd><input type="text" id="street" name="street" /></dd>
-                    <dd><form:errors path="street" cssClass="error" element="div" /></dd>
+                    <dd><form:errors path="*" cssClass="error" element="div" /></dd>
                 </dl>
                 <dl>
                     <dt>
                     <label for="postcode"><fmt:message key="customer.postcode" /></label>
                     </dt>
                     <dd><input type="text" id="postcode" name="postcode" /></dd>
-                    <dd><form:errors path="postcode" cssClass="error" element="div" /></dd>
+                    <dd><form:errors path="*" cssClass="error" element="div" /></dd>
                 </dl>
             </fieldset>
             <dl>
