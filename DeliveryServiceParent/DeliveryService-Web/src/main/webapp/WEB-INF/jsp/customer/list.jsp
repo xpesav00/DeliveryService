@@ -7,9 +7,12 @@
 <!DOCTYPE html>
 <fmt:message var="title" key="page.heading.customers"/>
 <my:layout title="${title}">
- <jsp:attribute name="body">
-        
-     <h1><fmt:message key="customer.allcustomers"/></h1>
+    <jsp:attribute name="body">
+
+        <h1>
+            <img src="${pageContext.request.contextPath}/resources/customers_icon.jpg" />
+            <fmt:message key="customer.allcustomers"/>
+        </h1>
 
         <table>
             <tr>
@@ -23,32 +26,43 @@
             <c:set var="line" value="0" scope="page" />
             <c:forEach items="${customers}" var="customer">
                 <c:choose>
-                    <c:when test="${line/2 == 0}"><tr class="even"></c:when>
+                    <c:when test="${line%2 == 0}"><tr class="even"></c:when>
                     <c:otherwise><tr></c:otherwise>
-                </c:choose>
-                <c:set var="line" value="${line + 1}" scope="page"/>
-                    <td style="text-align: center">${customer.id}</td>
+                    </c:choose>
+                    <c:set var="line" value="${line + 1}" scope="page"/>
+                    <td class="centering">${customer.id}</td>
                     <td><c:out value="${customer.firstName}"/></td>
                     <td><c:out value="${customer.lastName}"/></td>
                     <td><c:out value="${customer.address.city}"/>, <c:out value="${customer.address.street}"/>, 
                         <c:out value="${customer.address.postcode}"/></td>
-                    <td style="text-align: center">
+                    <td class="centering">
                         <form method="get" action="${pageContext.request.contextPath}/customer/update/${customer.id}">
-                            <input type="submit" value="" class="edit">
+                            <input type="submit" value="" class="edit" title="<fmt:message key="common.edit"/>" />
                         </form>
                     </td>
-                    <td style="text-align: center">
+                    <td class="centering">
                         <form method="post" action="${pageContext.request.contextPath}/customer/delete/${customer.id}">
-                            <input type="submit" value=""  class="delete">
+                            <input type="submit" value=""  class="delete" title="<fmt:message key="common.delete"/>" />
                         </form>
                     </td>
                 </tr>
             </c:forEach>
         </table>
-<br/>
-    <c:set var="isEdited" value="true" scope="page" />
-    <%@include file="form.jsp"%>
+        <br/>
+        <div class="reformed-form">
+            <form:form method="post" action="${pageContext.request.contextPath}/customer/update" modelAttribute="customer">
+                <fieldset>
+                    <legend>
+                        <fmt:message key="customer.new.heading" />
+                    </legend>
+                    <%@include file="form.jsp"%>
+                    <div id="submit_buttons">
+                        <input type="reset" value="<fmt:message key='common.form.reset'/>" />
+                        <input type="submit" value="<fmt:message key='common.form.create'/>" />
+                    </div>
+                </fieldset>
+            </form:form>
+        </div>
 
-
-</jsp:attribute>
+    </jsp:attribute>
 </my:layout>

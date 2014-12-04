@@ -7,13 +7,22 @@
 
 <fmt:message var="title" key="customer.edit.title"/>
 <my:layout title="${title}">
- <jsp:attribute name="body">
-<form:form method="post" action="${pageContext.request.contextPath}/customer/update" modelAttribute="customer">
-    <form:hidden path="id"/>
-    <fieldset><legend><fmt:message key="common.edit.edit"/></legend>
-        <%@include file="form.jsp"%>
-        <input type="submit" value="<fmt:message key='common.confirmChanges'/>">
-    </fieldset>
-</form:form>
-</jsp:attribute>
+    <jsp:attribute name="body">
+        <my:a href="/customer/list">&lt;&lt;<fmt:message key="delviery.backToPage"/></my:a>
+            <br /><br />
+            <div class="reformed-form">
+            <form:form method="post" action="${pageContext.request.contextPath}/customer/update" modelAttribute="customer">
+                <form:hidden path="id"/>
+                <fieldset>
+                    <legend>
+                        <fmt:message key="common.edit.edit"/>
+                    </legend>
+                    <%@include file="form.jsp"%>
+                    <div id="submit_buttons">
+                        <input type="submit" value="<fmt:message key='common.confirmChanges'/>">
+                    </div>
+                </fieldset>
+            </form:form>
+        </div>
+    </jsp:attribute>
 </my:layout>

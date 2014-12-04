@@ -28,41 +28,9 @@
             </div>
             
             <div id="content">
-                <h1><c:out value="${page.heading.main}"/></h1>
                 <c:if test="${not empty message}">
                     <div class="info"><p><c:out value="${message}"/></p></div>
                 </c:if>
-                <%--
-                <table>
-                        <tr>
-                            <th><f:message key="common.id"/></th>
-                            <th><f:message key="common.name"/></th>
-                            <th><f:message key="common.surname"/></th>
-                            <th><f:message key="common.countOfDeliveries"/></th></th>
-                            <th><f:message key="common.edit"/></th>
-                            <th><f:message key="common.delete"/></th>
-                        </tr>
-            <tr>
-                <td>1</td>
-                <td>Petr</td>
-                <td>Novak</td>
-                <td>10000</td>
-                <td class="centerize"><img src="${pageContext.request.contextPath}/resources/edit_btn.jpg" alt="Edit" /></td>
-                <td class="centerize"><img src="${pageContext.request.contextPath}/resources/delete_btn.jpg" alt="Delete" /></td>
-            </tr>
-            <tr class="even">
-                <td>2</td>
-                <td>Petr</td>
-                <td>Novak</td>
-                <td>10000</td>
-                <td class="centerize"><img src="${pageContext.request.contextPath}/resources/edit_btn.jpg" alt="Edit" /></td>
-                <td class="centerize"><img src="${pageContext.request.contextPath}/resources/delete_btn.jpg" alt="Delete" /></td>
-            </tr>
-                    </table>
-            
-            <div class="error"><c:out value="${message.confirm.delete.delivery}"/></div>
-            <div class="info"><c:out value="Info"/></div>
-            --%>
                 <jsp:invoke fragment="body"/>
             </div>
             <div id ="footer"></div>

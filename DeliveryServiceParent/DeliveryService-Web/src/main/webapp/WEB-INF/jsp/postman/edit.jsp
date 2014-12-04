@@ -7,13 +7,19 @@
 
 <fmt:message var="title" key="postman.edit.title"/>
 <my:layout title="${title}">
- <jsp:attribute name="body">
+ <jsp:attribute name="body">  
+     <my:a href="/postman/list">&lt;&lt;<fmt:message key="delviery.backToPage"/></my:a>
+<br /><br />
+<div class="reformed-form">
 <form:form method="post" action="${pageContext.request.contextPath}/postman/update" modelAttribute="postman">
     <form:hidden path="id"/>
     <fieldset><legend><fmt:message key="postman.edit.edit"/></legend>
         <%@include file="form.jsp"%>
-        <input type="submit" value="<fmt:message key='postman.edit.save'/>">
+        <div id="submit_buttons">
+            <input type="submit" value="<fmt:message key='postman.edit.save'/>">
+        </div>
     </fieldset>
 </form:form>
+</div>
 </jsp:attribute>
 </my:layout>

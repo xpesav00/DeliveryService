@@ -3,40 +3,49 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
-        <table>
-            <tr>
-                <th><form:label path="name"><fmt:message key="delivery.name"/></form:label></th>
-                <td><form:input path="name"/></td>
-                <td><form:errors path="name" cssClass="error"/></td>                
-            </tr>
-            <tr>
-                <th><form:label path="postman"><fmt:message key="delivery.postman"/></form:label></th>
-                <td><form:select id="postman" path="postman">
+    <dl>
+        <dt>
+        <label for="name"><fmt:message key="delivery.name" /></label>
+        </dt>
+        <dd><form:input path="name" /></dd>
+        <dd><form:errors path="name" cssClass="error" element="div" /></dd>
+    </dl>
+    <dl>
+        <dt>
+           <form:label path="postman"><fmt:message key="delivery.postman"/></form:label> 
+        </dt>
+        <dd>
+           <form:select id="postman" path="postman">
                     <c:forEach items="${postmen}" var="p">
-                        <form:option value="${p}">${p.firstName}${p.lastName}</form:option>
+                        <form:option value="${p}">${p.firstName}&nbsp;${p.lastName}</form:option>
                     </c:forEach>
-                </form:select>
-                </td>
-                <td><form:errors path="postman" cssClass="error"/></td>
-            </tr>
-            <tr>
-                <th><form:label path="customer"><fmt:message key="delivery.customer"/></form:label></th>
-                <td><form:select id="customer" path="customer">
+                </form:select> 
+        </dd>
+        <dd><form:errors path="postman" cssClass="error"/></dd>
+    </dl>
+    <dl>
+        <dt>
+           <form:label path="customer"><fmt:message key="delivery.customer"/></form:label> 
+        </dt>
+        <dd>
+           <form:select id="customer" path="customer">
                     <c:forEach items="${customers}" var="c">
-                        <form:option value="${c}">${c.firstName}${c.lastName}</form:option>
+                        <form:option value="${c}">${c.firstName}&nbsp;${c.lastName}</form:option>
                     </c:forEach>
-                </form:select>
-                </td>
-                <td><form:errors path="customer" cssClass="error"/></td>
-            </tr>
-            <tr>
-            <th><form:label path="status"><fmt:message key="delivery.status"/></form:label></th>
-            <td><form:select id="status" path="status">
+                </form:select> 
+        </dd>
+        <dd><form:errors path="customer" cssClass="error"/></dd>
+    </dl>
+    <dl>
+        <dt>
+           <form:label path="status"><fmt:message key="delivery.status"/></form:label> 
+        </dt>
+        <dd>
+           <form:select id="status" path="status">
                     <c:forEach items="${status}" var="s">
                         <form:option value="${s}">${s}</form:option>
                     </c:forEach>
-            </form:select>
-            </td>
-            <td><form:errors path="status" cssClass="error"/></td>
-        </tr>
-        </table>
+                </form:select> 
+        </dd>
+        <dd><form:errors path="status" cssClass="error"/></dd>
+    </dl>
