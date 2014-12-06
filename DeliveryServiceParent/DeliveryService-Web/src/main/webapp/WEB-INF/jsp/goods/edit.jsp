@@ -7,13 +7,17 @@
 
 <fmt:message var="title" key="goods.edit.title"/>
 <my:layout title="${title}">
- <jsp:attribute name="body">
-<form:form method="post" action="${pageContext.request.contextPath}/goods/update" modelAttribute="goods">
-    <form:hidden path="id"/>
-    <fieldset><legend><fmt:message key="goods.edit.edit"/></legend>
-        <%@include file="form.jsp"%>
-        <input type="submit" value="<fmt:message key='goods.edit.save'/>">
-    </fieldset>
-</form:form>
-</jsp:attribute>
+    <jsp:attribute name="body">
+        <my:a href="/goods/list/${id}">&lt;&lt;<fmt:message key="goods.backToPage"/></my:a>
+        <br /><br />
+        <div class="reformed-form">
+        <form:form method="post" action="${pageContext.request.contextPath}/goods/update" modelAttribute="goods">
+            <form:hidden path="id"/>
+            <fieldset>
+                <legend><fmt:message key="common.edit"/></legend>
+                <%@include file="form.jsp"%>
+                <input type="submit" value="<fmt:message key="common.save"/>">
+            </fieldset>
+        </form:form>
+    </jsp:attribute>
 </my:layout>

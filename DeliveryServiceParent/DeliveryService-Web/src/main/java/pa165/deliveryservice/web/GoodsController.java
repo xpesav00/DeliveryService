@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package pa165.deliveryservice.web;
 
-import java.util.List;
 import java.util.Locale;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -65,11 +58,16 @@ public class GoodsController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    public String delete(@PathVariable long id, Model model) {
+    public String delete(@PathVariable long id, Model model, UriComponentsBuilder uriBuilder) {
         GoodsDto goods = goodsService.findGood(id);
         model.addAttribute("goods", goods);
         goodsService.deleteGoods(goods);
-        return "/goods/edit";
+
+        DeliveryDto findDelivery = deliveryService.findDelivery(selectedDelivery.getId());
+        selectedDelivery = findDelivery;
+        model.addAttribute("delgoods", findDelivery.getGoods());
+        //return "/goods/list/";
+        return "redirect:" + uriBuilder.path("/goods/list/"+ selectedDelivery.getId()).build();
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)

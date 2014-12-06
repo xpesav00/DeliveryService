@@ -8,20 +8,27 @@
 <fmt:message var="title" key="goods.list.title"/>
 <my:layout title="${title}">
  <jsp:attribute name="body">
+     <h1>
+         <img src="${pageContext.request.contextPath}/resources/goods_btn.jpg" />
+        <fmt:message key="goods.list.deliverygoods"/>
+     </h1>
 
-        <p><fmt:message key="goods.list.deliverygoods"/></p>
-
-        <table class="basic">
+    <table>
             <tr>
-                <th>id</th>
+                <th><fmt:message key="common.id"/></th>
                 <th><fmt:message key="goods.seller"/></th>
                 <th><fmt:message key="goods.price"/></th>
                 <th><fmt:message key="goods.delivery"/></th>
-                <th></th>
-                <th></th>
+                <th><fmt:message key="common.edit"/></th>
+                <th><fmt:message key="common.delete"/></th>
             </tr>
+            <c:set var="line" value="0" scope="page" />
             <c:forEach items="${delgoods}" var="goods">
-                <tr>
+                <c:choose>
+                    <c:when test="${line%2 == 0}"><tr class="even"></c:when>
+                    <c:otherwise><tr></c:otherwise>
+                </c:choose>
+                <c:set var="line" value="${line + 1}" scope="page"/>
                     <td>${goods.id}</td>
                     <td><c:out value="${goods.seller}"/></td>
                     <td><c:out value="${goods.price}"/></td>
@@ -40,13 +47,14 @@
                 </tr>
             </c:forEach>
         </table>
-                <br>
-                <br>
+        <br>
+        <div class="reformed-form">  
         <form:form method="post" action="${pageContext.request.contextPath}/goods/update" modelAttribute="goods">
             <fieldset><legend><fmt:message key="goods.list.newgoods"/></legend>
                 <%@include file="form.jsp"%>
                 <input type="submit" value="<fmt:message key='goods.list.creategoods'/>">
             </fieldset>
-        </form:form>    
+        </form:form> 
+        </div>
     </jsp:attribute>
 </my:layout>
