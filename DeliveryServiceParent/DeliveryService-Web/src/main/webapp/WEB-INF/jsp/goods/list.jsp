@@ -8,6 +8,8 @@
 <fmt:message var="title" key="goods.list.title"/>
 <my:layout title="${title}">
  <jsp:attribute name="body">
+     <my:a href="/delivery/list">&lt;&lt;<fmt:message key="delivery.backToPage"/></my:a>
+            <br /><br />
      <h1>
          <img src="${pageContext.request.contextPath}/resources/goods_btn.jpg" />
         <fmt:message key="goods.list.deliverygoods"/>

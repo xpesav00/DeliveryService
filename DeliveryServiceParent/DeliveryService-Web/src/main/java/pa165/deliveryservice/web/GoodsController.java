@@ -52,7 +52,7 @@ public class GoodsController {
     public String update_form(@PathVariable long id, Model model) {
         GoodsDto goods = goodsService.findGood(id);
         model.addAttribute("goods", goods);
-        model.addAttribute("deliveries", deliveryService.getAllDeliveries());
+        model.addAttribute("deliveryId", selectedDelivery.getId());
         log.debug("update_form(model={})", model);
         return "goods/edit";
     }
