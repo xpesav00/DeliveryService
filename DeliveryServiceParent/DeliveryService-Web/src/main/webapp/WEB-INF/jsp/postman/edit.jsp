@@ -8,7 +8,7 @@
 <fmt:message var="title" key="postman.edit.title"/>
 <my:layout title="${title}">
  <jsp:attribute name="body">  
-     <my:a href="/postman/list">&lt;&lt;<fmt:message key="delviery.backToPage"/></my:a>
+     <my:a href="/postman/list">&lt;&lt;<fmt:message key="delivery.backToPage"/></my:a>
 <br /><br />
 <div class="reformed-form">
 <form:form method="post" action="${pageContext.request.contextPath}/postman/update" modelAttribute="postman">
