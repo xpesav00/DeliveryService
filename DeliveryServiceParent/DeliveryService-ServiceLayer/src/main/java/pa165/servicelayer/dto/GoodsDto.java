@@ -2,6 +2,7 @@ package pa165.servicelayer.dto;
 
 import java.util.Objects;
 import javax.validation.constraints.*;
+import org.hibernate.validator.constraints.NotEmpty;
 import pa165.servicelayer.validation.GoodsConstraint;
 
 
@@ -16,13 +17,12 @@ public class GoodsDto  implements Cloneable{
     private long id;
     @NotNull
     @Min(1)
-    private long price; //Cena musi byt vzdy nastavena a navic nesmi byt rovna 0
-    
-    //TODO smazat komentar
-    //Musi zacinat velkym pismenet
+    private long price;
+
     @NotNull
     @Pattern(regexp = "\\p{javaUpperCase}.*")
-    private String seller; //Prodejce musi zacinat velkym pismenem a nemsi byt null
+    @Size(min = 1, max = 30)
+    private String seller;
 
     @NotNull
     private DeliveryDto delivery; //Nevim, jake by mela mit dalsi omezeni

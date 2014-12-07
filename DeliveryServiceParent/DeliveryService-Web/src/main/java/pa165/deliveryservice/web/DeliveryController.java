@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,7 +17,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import pa165.deliveryservice.entity.DeliveryStatus;
 import pa165.servicelayer.dto.CustomerDto;
 import pa165.servicelayer.dto.DeliveryDto;
-import pa165.servicelayer.dto.GoodsDto;
 import pa165.servicelayer.dto.PostmanDto;
 import pa165.servicelayer.serviceInterface.CustomerService;
 import pa165.servicelayer.serviceInterface.DeliveryService;
@@ -41,8 +41,8 @@ public class DeliveryController {
     @Autowired
     private CustomerService customerService;
     
-//    @Autowired
-//    private MessageSource messageSource;
+    @Autowired
+    private MessageSource messageSource;
     
     @ModelAttribute("deliveries")
     public List<DeliveryDto> allDeliveries() {
@@ -88,10 +88,10 @@ public class DeliveryController {
         log.debug("delete({})", id);
         DeliveryDto delivery = deliveryService.findDelivery(id);
         deliveryService.deleteDelivery(delivery);
-//        redirectAttributes.addFlashAttribute(
-//                "message",
-//                messageSource.getMessage("delivery.delete.message", new Object[]{delivery.getName(), delivery.getPostman(), delivery.getCustomer()}, locale)
-//        );
+        redirectAttributes.addFlashAttribute(
+                "message",
+                messageSource.getMessage("delivery.delete.message", new Object[]{delivery.getName(), delivery.getId()}, locale)
+        );
         return "redirect:" + uriBuilder.path("/delivery/list").build();
     }
     
@@ -100,6 +100,8 @@ public class DeliveryController {
         DeliveryDto delivery = deliveryService.findDelivery(id);
         model.addAttribute("delivery", delivery);
         log.debug("update_form(model={})", model);
+        
+        
         return "/delivery/edit";
     }
 
@@ -121,6 +123,11 @@ public class DeliveryController {
         } else {
             log.debug("update(locale={}, delivery={}, postman={})", locale, delivery, delivery.getPostman());
             deliveryService.updateDelivery(delivery);
+            
+            redirectAttributes.addFlashAttribute(
+                "message",
+                messageSource.getMessage("delivery.update.message", new Object[]{delivery.getName(), delivery.getId()}, locale)
+            );
         }
         
         return "redirect:" + uriBuilder.path("/delivery/list").build();

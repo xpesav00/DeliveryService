@@ -36,6 +36,9 @@ public class PostmanController {
     
     @Autowired
     private PostmanService postmanService;
+    
+    @Autowired
+    private MessageSource messageSource;
 
     
     @ModelAttribute("postmen")
@@ -70,9 +73,14 @@ public class PostmanController {
     }
 
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    public String delete(@PathVariable long id, Model model, UriComponentsBuilder uriBuilder) {
+    public String delete(@PathVariable long id, Model model, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         PostmanDto postman = postmanService.findPostman(id);
         postmanService.deletePostman(postman);
+        
+        redirectAttributes.addFlashAttribute(
+                "message",
+                messageSource.getMessage("postman.delete.message", new Object[]{postman.getFirstName(), postman.getLastName(), postman.getDeliveries(), postman.getId()}, locale)
+        );
         return "redirect:" + uriBuilder.path("/postman/list").build();
     }
 
@@ -90,6 +98,11 @@ public class PostmanController {
                 postman.setDeliveries(new ArrayList<DeliveryDto>());
             }
             postmanService.updatePostman(postman);
+            
+            redirectAttributes.addFlashAttribute(
+                "message",
+                messageSource.getMessage("goods.update.message", new Object[]{postman.getFirstName(), postman.getLastName(), postman.getDeliveries(), postman.getId()}, locale)
+            );
         }
         
         return "redirect:" + uriBuilder.path("/postman/list/").build();
