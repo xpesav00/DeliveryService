@@ -87,7 +87,7 @@ public class DeliveryServiceImplTest extends TestCase {
 
     @Test
     public void testCreateDelivery() {
-        deliveryService.createDelivery(delivery.getName(), postman, goods, customer, DeliveryStatus.INIT);
+        deliveryService.createDelivery(deliveryDto);
         verify(dao).addDelivery(delivery);
     }
 

@@ -18,12 +18,12 @@ public class Delivery {
     private long Id;    
     @Column(nullable=false,length=NAME_LENGTH)
     private String name;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
     private Postman postman;
     //when removing delivery, remove also the goods in it
     @OneToMany(mappedBy="delivery", cascade = CascadeType.REMOVE)
     private List<Goods> goods = new ArrayList<>();
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
     private Customer customer;
     @Enumerated(EnumType.STRING)
     private DeliveryStatus status;

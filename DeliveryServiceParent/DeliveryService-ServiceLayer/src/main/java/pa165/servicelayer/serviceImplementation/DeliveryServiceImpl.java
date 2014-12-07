@@ -12,9 +12,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pa165.deliveryservice.daoInterface.DeliveryDao;
+import pa165.deliveryservice.daoInterface.PostmanDao;
 import pa165.deliveryservice.entity.*;
 import pa165.servicelayer.dto.AddressDto;
+import pa165.servicelayer.dto.CustomerDto;
 import pa165.servicelayer.dto.DeliveryDto;
+import pa165.servicelayer.dto.GoodsDto;
+import pa165.servicelayer.dto.PostmanDto;
 import pa165.servicelayer.serviceInterface.DeliveryService;
 
 /**
@@ -33,8 +37,8 @@ public class DeliveryServiceImpl implements DeliveryService{
     public void preloadDB(){
         System.out.println("Preload DB");
 
-        Customer customer = new Customer();
-        Address a = new Address();
+        CustomerDto customer = new CustomerDto();
+        AddressDto a = new AddressDto();
         a.setCity("Božkov");
         a.setStreet("Rumová");
         a.setPostcode(66677);
@@ -42,18 +46,18 @@ public class DeliveryServiceImpl implements DeliveryService{
         customer.setFirstName("Honza");
         customer.setLastName("Pelda");
         
-        Postman postman = new Postman();
+        PostmanDto postman = new PostmanDto();
         postman.setFirstName("Karel");
         postman.setLastName("Pepik");
         
-        Goods goods = new Goods();
+        GoodsDto goods = new GoodsDto();
         goods.setPrice(100);
         goods.setSeller("Sony");
         createDelivery("CZC.cz", postman, Arrays.asList(goods), customer, DeliveryStatus.INIT);
     }
     
     @Override
-    public void createDelivery(String name, Postman postman, List<Goods> goods, Customer customer, DeliveryStatus status) {
+    public void createDelivery(String name, PostmanDto postman, List<GoodsDto> goods, CustomerDto customer, DeliveryStatus status) {
         if(name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Name of delivery can not be empty.");
         }else if(customer == null) {
@@ -63,12 +67,13 @@ public class DeliveryServiceImpl implements DeliveryService{
             throw new IllegalArgumentException("Invalid status("+status+"), delivery status should be INIT.");
         }
         
-        Delivery delivery = new Delivery();
-        delivery.setName(name);
-        delivery.setPostman(postman);
-        delivery.setGoods(goods);
-        delivery.setCustomer(customer);
-        delivery.setStatus(status);
+        DeliveryDto deliveryDto = new DeliveryDto();
+        deliveryDto.setName(name);
+        deliveryDto.setPostman(postman);
+        deliveryDto.setGoods(goods);
+        deliveryDto.setCustomer(customer);
+        deliveryDto.setStatus(status);
+        Delivery delivery = mapper.map(deliveryDto, Delivery.class);
         
         try{
             deliveryDao.addDelivery(delivery);

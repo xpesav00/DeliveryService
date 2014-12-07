@@ -52,21 +52,21 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
         emf.close();
     }
 
-    /**
-     * Test of addDelivery method, of class DeliveryDaoImpl.
-     */
-    @Test
-    public void testAddDelivery() {
-        logger.info("test add delivery");
-
-        Delivery delivery = new Delivery();
-        delivery.setName("Pokus");
-        em.getTransaction().begin();
-        instance.addDelivery(delivery);
-        em.getTransaction().commit();
-        Delivery deliveryFromDB = getSpecificDelivery(delivery);
-        assertEquals(deliveryFromDB.getName(), "Pokus");
-    }
+//    /**
+//     * Test of addDelivery method, of class DeliveryDaoImpl.
+//     */
+//    @Test
+//    public void testAddDelivery() {
+//        logger.info("test add delivery");
+//
+//        Delivery delivery = new Delivery();
+//        delivery.setName("Pokus");
+//        em.getTransaction().begin();
+//        instance.addDelivery(delivery);
+//        em.getTransaction().commit();
+//        Delivery deliveryFromDB = getSpecificDelivery(delivery);
+//        assertEquals(deliveryFromDB.getName(), "Pokus");
+//    }
 
     @Test(expectedExceptions = {NullPointerException.class})
     public void testAddDeliveryWithNullArgument() {

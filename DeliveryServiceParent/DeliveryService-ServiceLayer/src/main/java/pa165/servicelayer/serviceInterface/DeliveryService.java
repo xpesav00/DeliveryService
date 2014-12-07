@@ -12,7 +12,10 @@ import pa165.deliveryservice.entity.Delivery;
 import pa165.deliveryservice.entity.DeliveryStatus;
 import pa165.deliveryservice.entity.Goods;
 import pa165.deliveryservice.entity.Postman;
+import pa165.servicelayer.dto.CustomerDto;
 import pa165.servicelayer.dto.DeliveryDto;
+import pa165.servicelayer.dto.GoodsDto;
+import pa165.servicelayer.dto.PostmanDto;
 
 /**
  *
@@ -28,7 +31,7 @@ public interface DeliveryService {
      * @param customer
      * @param status Status of delivery.
      */
-    void createDelivery(String name, Postman postman, List<Goods> goods, Customer customer, DeliveryStatus status);
+    void createDelivery(String name, PostmanDto postman, List<GoodsDto> goods, CustomerDto customer, DeliveryStatus status);
     
     void createDelivery(DeliveryDto delivery);
     /**
