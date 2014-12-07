@@ -49,12 +49,12 @@ public class PostmanServiceImpl implements PostmanService {
         postman.setFirstName(postmanDto.getFirstName());
         postman.setLastName(postmanDto.getLastName());
 
-        List<Delivery> deliveries = new ArrayList<>();
+        //List<Delivery> deliveries = new ArrayList<>();
         for (DeliveryDto deliveryDto : postmanDto.getDeliveries()) {
-            deliveries.add(mapper.map(deliveryDto, Delivery.class));
+            postman.addDelivery(mapper.map(deliveryDto, Delivery.class));
         }
 
-        postman.setDeliveries(deliveries);
+        //postman.setDeliveries(deliveries);
         postmanDao.updatePostman(postman);
     }
 
@@ -73,7 +73,9 @@ public class PostmanServiceImpl implements PostmanService {
         if (postmanDto == null) {
             throw new NullPointerException("Postman is null.");
         }
-        
+        if(postmanDto.areDeliveriesNull()){
+            postmanDto.setDeliveries(new ArrayList<DeliveryDto>());
+        }
         Postman postman = mapper.map(postmanDto, Postman.class);
         postmanDao.addPostman(postman);
     }

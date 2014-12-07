@@ -1,6 +1,7 @@
 package pa165.deliveryservice.web;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import javax.validation.Valid;
@@ -63,17 +64,16 @@ public class PostmanController {
     public String update_form(@PathVariable long id, Model model) {
         PostmanDto postman = postmanService.findPostman(id);
         model.addAttribute("postman", postman);
-        //model.addAttribute("deliveries", deliveryService.getAllDeliveries());
+        model.addAttribute("deliveries", postman.getDeliveries());
         log.debug("update_form(model={})", model);
         return "postman/edit";
     }
 
-    @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
-    public String delete(@PathVariable long id, Model model) {
+    @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
+    public String delete(@PathVariable long id, Model model, UriComponentsBuilder uriBuilder) {
         PostmanDto postman = postmanService.findPostman(id);
-        model.addAttribute("postman", postman);
         postmanService.deletePostman(postman);
-        return "postman/edit";
+        return "redirect:" + uriBuilder.path("/postman/list").build();
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
@@ -81,8 +81,14 @@ public class PostmanController {
             RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         log.debug("update(locale={}, postman={})", locale, postman);
         if(postman.getId() == 0){
+            if(postman.areDeliveriesNull()){
+                postman.setDeliveries(new ArrayList<DeliveryDto>());
+            }
             postmanService.addPostman(postman);
         } else {
+            if(postman.areDeliveriesNull()){
+                postman.setDeliveries(new ArrayList<DeliveryDto>());
+            }
             postmanService.updatePostman(postman);
         }
         

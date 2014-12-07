@@ -23,9 +23,10 @@ public class Postman {
     private String firstName;
     private String lastName;
     @OneToMany(mappedBy = "postman")
-    private List<Delivery> deliveries = new ArrayList<>();
+    private List<Delivery> deliveries;
 
     public Postman() {
+        deliveries = new ArrayList<>();
     }
 
     public long getId() {

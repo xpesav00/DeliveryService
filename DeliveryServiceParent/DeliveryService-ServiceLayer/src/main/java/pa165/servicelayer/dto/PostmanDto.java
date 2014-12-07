@@ -14,10 +14,11 @@ public class PostmanDto implements Cloneable{
     private long Id;
     private String firstName;
     private String lastName;
-    private List<DeliveryDto> deliveries = new ArrayList<>();
+    private List<DeliveryDto> deliveries;
 
     
     public PostmanDto() {
+        deliveries = new ArrayList<>();
     }
     
     public long getId() {
@@ -56,6 +57,11 @@ public class PostmanDto implements Cloneable{
         this.deliveries = deliveries;
     }
 
+    public boolean areDeliveriesNull(){
+        if(deliveries == null) return true;
+        
+        return false;
+    }
     @Override
     public int hashCode() {
         int hash = 5;
