@@ -42,7 +42,8 @@ public class DeliveryDaoImpl implements DeliveryDao{
     public void addDelivery(Delivery delivery) {
         log.info("Adding new delivery("+delivery+") into DB.");
         evaluateDelivery(delivery);
-        em.persist(delivery);
+        //em.persist(delivery);
+        em.merge(delivery);
     }
     
     @Override

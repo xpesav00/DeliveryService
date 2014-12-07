@@ -8,7 +8,7 @@ import java.util.List;
  *
  * @author Martin Nekula
  */
-public class CustomerDto {
+public class CustomerDto implements Cloneable{
 
     private long Id;
     private String firstName;
@@ -58,6 +58,10 @@ public class CustomerDto {
 
     public void setDeliveries(List<DeliveryDto> deliveries) {
         this.deliveries = deliveries;
+    }
+    
+    public void addDelivery(DeliveryDto delivery){
+        this.deliveries.add(delivery);
     }
 
     @Override

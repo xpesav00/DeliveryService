@@ -8,7 +8,7 @@
 <fmt:message var="title" key="delivery.edit.title"/>
 <my:layout title="${title}">
     <jsp:attribute name="body">
-        <my:a href="/delivery/list">&lt;&lt;<fmt:message key="delviery.backToPage"/></my:a>
+        <my:a href="/delivery/list">&lt;&lt;<fmt:message key="delivery.backToPage"/></my:a>
         <br /><br />
         <div class="reformed-form">
             <form:form method="post" action="${pageContext.request.contextPath}/delivery/update" modelAttribute="delivery">

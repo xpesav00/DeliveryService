@@ -2,13 +2,14 @@ package pa165.servicelayer.dto;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *  DTO for Postman entity.
  * 
  * @author Martin Nekula
  */
-public class PostmanDto {
+public class PostmanDto implements Cloneable{
 
     private long Id;
     private String firstName;
@@ -46,6 +47,10 @@ public class PostmanDto {
     public List<DeliveryDto> getDeliveries() {
         return deliveries;
     }
+    
+    public void addDelivery(DeliveryDto delivery){
+        this.deliveries.add(delivery);
+    }
 
     public void setDeliveries(List<DeliveryDto> deliveries) {
         this.deliveries = deliveries;
@@ -54,7 +59,10 @@ public class PostmanDto {
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 11 * hash + (int) (this.Id ^ (this.Id >>> 32));
+        hash = 67 * hash + (int) (this.Id ^ (this.Id >>> 32));
+        hash = 67 * hash + Objects.hashCode(this.firstName);
+        hash = 67 * hash + Objects.hashCode(this.lastName);
+        hash = 67 * hash + Objects.hashCode(this.deliveries);
         return hash;
     }
 
@@ -67,8 +75,22 @@ public class PostmanDto {
             return false;
         }
         final PostmanDto other = (PostmanDto) obj;
-        return this.Id == other.Id;
+        if (this.Id != other.Id) {
+            return false;
+        }
+        if (!Objects.equals(this.firstName, other.firstName)) {
+            return false;
+        }
+        if (!Objects.equals(this.lastName, other.lastName)) {
+            return false;
+        }
+        if (!Objects.equals(this.deliveries, other.deliveries)) {
+            return false;
+        }
+        return true;
     }
+
+
 
     @Override
     public String toString() {

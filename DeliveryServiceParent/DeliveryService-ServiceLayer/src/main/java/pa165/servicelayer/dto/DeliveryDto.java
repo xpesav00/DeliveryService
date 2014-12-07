@@ -28,6 +28,8 @@ public class DeliveryDto implements Cloneable{
     private DeliveryStatus status;
 
     public DeliveryDto() {
+        customer = new CustomerDto();
+        postman = new PostmanDto();
     }
 
     public DeliveryDto(long id, String name, PostmanDto postman, List<GoodsDto> goods, CustomerDto customer, DeliveryStatus status) {

@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <fmt:message var="title" key="delivery.title"/>
 <my:layout title="${title}">
@@ -19,6 +20,7 @@
                 <th><fmt:message key="delivery.name"/></th>
                 <th><fmt:message key="delivery.postman"/></th>
                 <th><fmt:message key="delivery.customer"/></th>
+                <th><fmt:message key="common.countOfDeliveries"/></th>
                 <th><fmt:message key="delivery.goods"/></th>
                 <th><fmt:message key="delivery.status"/></th>
                 <th><fmt:message key="common.edit"/></th>
@@ -35,7 +37,7 @@
                     <td><c:out value="${delivery.name}"/></td>
                     <td><c:out value="${delivery.postman.firstName} ${delivery.postman.lastName}"/></td>
                     <td><c:out value="${delivery.customer.firstName} ${delivery.customer.lastName}"/></td>
-
+                    <td><c:out value="${fn:length(delivery.goods)}"/></td>
                     <td class="centering">
                         <form method="get" action="${pageContext.request.contextPath}/goods/list/${delivery.id}">
                             <input type="submit" value="" class="goodsList" title="<fmt:message key='delivery.list.goods'/>" />
@@ -58,7 +60,7 @@
         </table>
         <br/>
         <div class="reformed-form">    
-        <form:form method="post" action="${pageContext.request.contextPath}/delivery/update" modelAttribute="delivery" >
+        <form:form method="post" action="${pageContext.request.contextPath}/delivery/update/" modelAttribute="delivery" >
             <fieldset><legend><fmt:message key="delivery.list.newdelivery"/></legend>
                 <%@include file="form.jsp"%>
                 <div id="submit_buttons">

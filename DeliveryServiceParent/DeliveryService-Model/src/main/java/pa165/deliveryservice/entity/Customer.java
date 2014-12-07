@@ -107,6 +107,6 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "Customer{" + "Id=" + Id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", deliveries=" + deliveries + '}';
+        return "Customer{" + "Id=" + Id + ", firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", deliveries=" + deliveries.size() + '}';
     }
 }

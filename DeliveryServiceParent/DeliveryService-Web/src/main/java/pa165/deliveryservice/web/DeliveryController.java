@@ -106,11 +106,20 @@ public class DeliveryController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@Valid @ModelAttribute DeliveryDto delivery, BindingResult bindingResult, 
             RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
-        log.debug("update(locale={}, delivery={}, postman={})", locale, delivery, delivery.getPostman());
+        //TODO delete comment
+        //log.debug("update(locale={}, delivery={}, postman={})", locale, delivery, delivery.getPostman());
         
+        PostmanDto postman = postmanService.findPostman(delivery.getPostman().getId());
+        CustomerDto customer = customerService.findCustomer(delivery.getCustomer().getId());
+        delivery.setPostman(postman);
+        delivery.setCustomer(customer);
+        postman.addDelivery(delivery);
+        customer.addDelivery(delivery);
         if(delivery.getId() == 0){
+            log.debug("create(locale={}, delivery={}, postman={})", locale, delivery, delivery.getPostman());
             deliveryService.createDelivery(delivery);
         } else {
+            log.debug("update(locale={}, delivery={}, postman={})", locale, delivery, delivery.getPostman());
             deliveryService.updateDelivery(delivery);
         }
         

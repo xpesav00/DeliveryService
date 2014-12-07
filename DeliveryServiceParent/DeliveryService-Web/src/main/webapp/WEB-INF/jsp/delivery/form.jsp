@@ -15,11 +15,12 @@
            <form:label path="postman"><fmt:message key="delivery.postman"/></form:label> 
         </dt>
         <dd>
-           <form:select id="postman" path="postman">
-                    <c:forEach items="${postmen}" var="p">
-                        <form:option value="${p}">${p.firstName}&nbsp;${p.lastName}</form:option>
-                    </c:forEach>
-                </form:select> 
+           <form:select path="postman.id">
+                <form:option value="-1" label="-- Select --" selected="selected"></form:option>
+                <c:forEach items="${postmen}" var="p">
+                    <form:option value="${p.id}">${p.firstName}&nbsp;${p.lastName}</form:option>
+                </c:forEach>
+            </form:select> 
         </dd>
         <dd><form:errors path="postman" cssClass="error"/></dd>
     </dl>
@@ -28,11 +29,12 @@
            <form:label path="customer"><fmt:message key="delivery.customer"/></form:label> 
         </dt>
         <dd>
-           <form:select id="customer" path="customer">
-                    <c:forEach items="${customers}" var="c">
-                        <form:option value="${c}">${c.firstName}&nbsp;${c.lastName}</form:option>
-                    </c:forEach>
-                </form:select> 
+           <form:select path="customer.id">
+                <form:option value="-1" label="-- Select --"></form:option>
+                <c:forEach items="${customers}" var="c">
+                        <form:option value="${c.id}">${c.firstName}&nbsp;${c.lastName}</form:option>
+                </c:forEach>
+            </form:select> 
         </dd>
         <dd><form:errors path="customer" cssClass="error"/></dd>
     </dl>
@@ -42,6 +44,7 @@
         </dt>
         <dd>
            <form:select id="status" path="status">
+               <form:option value="-1" label="-- Select --" selected="selected"></form:option>
                     <c:forEach items="${status}" var="s">
                         <form:option value="${s}">${s}</form:option>
                     </c:forEach>
