@@ -3,6 +3,7 @@ package pa165.servicelayer.dto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.validation.constraints.*;
 
 /**
  *  DTO for Postman entity.
@@ -12,7 +13,13 @@ import java.util.Objects;
 public class PostmanDto implements Cloneable{
 
     private long Id;
+    @NotNull
+    @Pattern(regexp = "\\p{javaUpperCase}.*")
+    @Size(min = 2, max = 30)
     private String firstName;
+    @NotNull
+    @Pattern(regexp = "\\p{javaUpperCase}.*")
+    @Size(min = 2, max = 30)
     private String lastName;
     private List<DeliveryDto> deliveries;
 

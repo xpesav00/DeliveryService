@@ -88,6 +88,16 @@ public class PostmanController {
     public String update(@Valid @ModelAttribute PostmanDto postman, BindingResult bindingResult, 
             RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         log.debug("update(locale={}, postman={})", locale, postman);
+        if (bindingResult.hasErrors()) {
+            log.debug("binding errors");
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                log.debug("ObjectError: {}", ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                log.debug("FieldError: {}", fe);
+            }
+            return postman.getId()==0?"redirect:" + uriBuilder.path("/postman/list").build():"redirect:" + uriBuilder.path("/postman/update/"+postman.getId()).build();
+        }
         if(postman.getId() == 0){
             if(postman.areDeliveriesNull()){
                 postman.setDeliveries(new ArrayList<DeliveryDto>());

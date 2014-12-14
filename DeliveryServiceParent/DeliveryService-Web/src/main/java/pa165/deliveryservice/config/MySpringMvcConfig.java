@@ -1,7 +1,5 @@
 package pa165.deliveryservice.config;
 
-import pa165.servicelayer.serviceInterface.*;
-import pa165.servicelayer.serviceImplementation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -87,6 +85,4 @@ public class MySpringMvcConfig extends WebMvcConfigurerAdapter {
         log.debug("validator()");
         return new LocalValidatorFactoryBean();
     }
-
-
 }

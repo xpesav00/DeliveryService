@@ -11,6 +11,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -108,8 +110,17 @@ public class DeliveryController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@Valid @ModelAttribute DeliveryDto delivery, BindingResult bindingResult, 
             RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
-        //TODO delete comment
-        //log.debug("update(locale={}, delivery={}, postman={})", locale, delivery, delivery.getPostman());
+        
+        if (bindingResult.hasErrors()) {
+            log.debug("binding errors");
+            for (ObjectError ge : bindingResult.getGlobalErrors()) {
+                log.debug("ObjectError: {}", ge);
+            }
+            for (FieldError fe : bindingResult.getFieldErrors()) {
+                log.debug("FieldError: {}", fe);
+            }
+            return delivery.getId()==0?"/delivery/list":"/delivery/edit";
+        }
         
         PostmanDto postman = postmanService.findPostman(delivery.getPostman().getId());
         CustomerDto customer = customerService.findCustomer(delivery.getCustomer().getId());

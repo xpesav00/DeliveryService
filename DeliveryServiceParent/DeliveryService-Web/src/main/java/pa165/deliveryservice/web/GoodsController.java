@@ -11,15 +11,12 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
-import pa165.deliveryservice.validation.GoodsValidator;
 import pa165.servicelayer.dto.*;
 import pa165.servicelayer.serviceInterface.DeliveryService;
 import pa165.servicelayer.serviceInterface.GoodsService;
@@ -83,15 +80,6 @@ public class GoodsController {
         return "redirect:" + uriBuilder.path("/goods/list/"+ selectedDelivery.getId()).build();
     }
 
-    /**
-     * Spring Validator added to JSR-303 Validator for this @Controller only
-     * http://docs.spring.io/spring/docs/current/spring-framework-reference/html/validation.html#validation-mvc-configuring
-     */
-    @InitBinder
-    protected void initBinder(WebDataBinder binder) {
-        binder.addValidators(new GoodsValidator());
-    }
-
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@Valid @ModelAttribute GoodsDto goods, BindingResult bindingResult, 
             RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
@@ -104,7 +92,7 @@ public class GoodsController {
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 log.debug("FieldError: {}", fe);
             }
-            return "redirect:" + uriBuilder.path("/goods/list/"+ selectedDelivery.getId()).build();
+            return goods.getId()==0?"redirect:" + uriBuilder.path("/goods/list/"+ selectedDelivery.getId()).build():"redirect:" + uriBuilder.path("/goods/update/"+goods.getId()).build();
         }
         if(goods.getId() == 0){
             log.debug("null delivery : {}", selectedDelivery == null);
