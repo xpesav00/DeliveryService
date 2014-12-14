@@ -2,7 +2,7 @@ package pa165.servicelayer.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import pa165.servicelayer.dto.GoodsDto;
+import pa165.deliveryservice.api.dto.GoodsDto;
 
 
 /**

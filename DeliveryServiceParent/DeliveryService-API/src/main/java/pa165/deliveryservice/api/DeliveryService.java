@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package pa165.servicelayer.serviceInterface;
+package pa165.deliveryservice.api;
 
 import java.util.List;
 import pa165.deliveryservice.entity.Customer;
@@ -12,10 +12,10 @@ import pa165.deliveryservice.entity.Delivery;
 import pa165.deliveryservice.entity.DeliveryStatus;
 import pa165.deliveryservice.entity.Goods;
 import pa165.deliveryservice.entity.Postman;
-import pa165.servicelayer.dto.CustomerDto;
-import pa165.servicelayer.dto.DeliveryDto;
-import pa165.servicelayer.dto.GoodsDto;
-import pa165.servicelayer.dto.PostmanDto;
+import pa165.deliveryservice.api.dto.CustomerDto;
+import pa165.deliveryservice.api.dto.DeliveryDto;
+import pa165.deliveryservice.api.dto.GoodsDto;
+import pa165.deliveryservice.api.dto.PostmanDto;
 
 /**
  *

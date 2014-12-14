@@ -11,9 +11,9 @@ import org.springframework.transaction.annotation.Transactional;
 import pa165.deliveryservice.daoInterface.PostmanDao;
 import pa165.deliveryservice.entity.Delivery;
 import pa165.deliveryservice.entity.Postman;
-import pa165.servicelayer.dto.DeliveryDto;
-import pa165.servicelayer.dto.PostmanDto;
-import pa165.servicelayer.serviceInterface.PostmanService;
+import pa165.deliveryservice.api.dto.DeliveryDto;
+import pa165.deliveryservice.api.dto.PostmanDto;
+import pa165.deliveryservice.api.PostmanService;
 
 /**
  * Service layer for Postman entity.

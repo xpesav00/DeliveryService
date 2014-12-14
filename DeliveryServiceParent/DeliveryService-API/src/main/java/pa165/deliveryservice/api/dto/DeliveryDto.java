@@ -1,17 +1,15 @@
-package pa165.servicelayer.dto;
+package pa165.deliveryservice.api.dto;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.validation.constraints.*;
 import pa165.deliveryservice.entity.DeliveryStatus;
-import pa165.servicelayer.validation.DeliveryConstraint;
 
 /**
  * 
  * @author Drimal
  */
-@DeliveryConstraint
 public class DeliveryDto implements Cloneable{
     private long id = 0;
     @NotNull

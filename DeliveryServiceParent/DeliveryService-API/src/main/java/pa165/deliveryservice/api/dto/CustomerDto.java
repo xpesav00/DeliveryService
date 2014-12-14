@@ -1,4 +1,4 @@
-package pa165.servicelayer.dto;
+package pa165.deliveryservice.api.dto;
 
 import java.util.ArrayList;
 import java.util.List;

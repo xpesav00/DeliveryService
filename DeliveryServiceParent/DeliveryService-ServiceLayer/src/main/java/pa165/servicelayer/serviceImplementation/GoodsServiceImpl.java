@@ -10,9 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 import pa165.deliveryservice.daoInterface.GoodsDao;
 import pa165.deliveryservice.entity.Delivery;
 import pa165.deliveryservice.entity.Goods;
-import pa165.servicelayer.dto.DeliveryDto;
-import pa165.servicelayer.dto.GoodsDto;
-import pa165.servicelayer.serviceInterface.GoodsService;
+import pa165.deliveryservice.api.dto.DeliveryDto;
+import pa165.deliveryservice.api.dto.GoodsDto;
+import pa165.deliveryservice.api.GoodsService;
 
 /**
  *

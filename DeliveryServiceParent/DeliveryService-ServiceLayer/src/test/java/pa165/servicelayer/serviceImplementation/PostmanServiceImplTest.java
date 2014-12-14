@@ -15,8 +15,8 @@ import org.springframework.test.util.ReflectionTestUtils;
 import pa165.deliveryservice.daoInterface.PostmanDao;
 import pa165.deliveryservice.entity.Delivery;
 import pa165.deliveryservice.entity.Postman;
-import pa165.servicelayer.dto.PostmanDto;
-import pa165.servicelayer.serviceInterface.PostmanService;
+import pa165.deliveryservice.api.dto.PostmanDto;
+import pa165.deliveryservice.api.PostmanService;
 
 /**
  * Tests of Postman Service layer, using mock DAO layer.

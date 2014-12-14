@@ -21,8 +21,8 @@ import pa165.deliveryservice.entity.Delivery;
 import pa165.deliveryservice.entity.DeliveryStatus;
 import pa165.deliveryservice.entity.Goods;
 import pa165.deliveryservice.entity.Postman;
-import pa165.servicelayer.dto.DeliveryDto;
-import pa165.servicelayer.serviceInterface.DeliveryService;
+import pa165.deliveryservice.api.dto.DeliveryDto;
+import pa165.deliveryservice.api.DeliveryService;
 
 /**
  *

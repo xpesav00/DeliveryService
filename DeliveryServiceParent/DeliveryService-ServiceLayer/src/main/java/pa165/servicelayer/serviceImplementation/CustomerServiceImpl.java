@@ -11,10 +11,10 @@ import pa165.deliveryservice.daoInterface.CustomerDao;
 import pa165.deliveryservice.entity.Address;
 import pa165.deliveryservice.entity.Customer;
 import pa165.deliveryservice.entity.Delivery;
-import pa165.servicelayer.dto.AddressDto;
-import pa165.servicelayer.dto.CustomerDto;
-import pa165.servicelayer.dto.DeliveryDto;
-import pa165.servicelayer.serviceInterface.CustomerService;
+import pa165.deliveryservice.api.dto.AddressDto;
+import pa165.deliveryservice.api.dto.CustomerDto;
+import pa165.deliveryservice.api.dto.DeliveryDto;
+import pa165.deliveryservice.api.CustomerService;
 
 /**
  * Service layer for Customer entity.

@@ -12,7 +12,8 @@
         <module>DeliveryService-Model</module>
         <module>DeliveryService-ServiceLayer</module>
     <module>DeliveryService-Web</module>
-  </modules>
+        <module>DeliveryService-API</module>
+    </modules>
     
     <build>
         <pluginManagement>

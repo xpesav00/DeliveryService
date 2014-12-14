@@ -1,8 +1,8 @@
-package pa165.servicelayer.serviceInterface;
+package pa165.deliveryservice.api;
 
 import java.util.List;
-import pa165.servicelayer.dto.DeliveryDto;
-import pa165.servicelayer.dto.GoodsDto;
+import pa165.deliveryservice.api.dto.DeliveryDto;
+import pa165.deliveryservice.api.dto.GoodsDto;
 
 /**
  *

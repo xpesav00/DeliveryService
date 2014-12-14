@@ -27,8 +27,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 import pa165.deliveryservice.validation.AddressValidator;
 import pa165.deliveryservice.validation.CustomerValidator;
-import pa165.servicelayer.dto.CustomerDto;
-import pa165.servicelayer.serviceInterface.CustomerService;
+import pa165.deliveryservice.api.dto.CustomerDto;
+import pa165.deliveryservice.api.CustomerService;
 
 /**
  *

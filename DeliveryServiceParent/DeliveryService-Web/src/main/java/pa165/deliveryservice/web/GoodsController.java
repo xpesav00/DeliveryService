@@ -1,5 +1,7 @@
 package pa165.deliveryservice.web;
 
+import pa165.deliveryservice.api.dto.DeliveryDto;
+import pa165.deliveryservice.api.dto.GoodsDto;
 import java.util.Locale;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -17,9 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
-import pa165.servicelayer.dto.*;
-import pa165.servicelayer.serviceInterface.DeliveryService;
-import pa165.servicelayer.serviceInterface.GoodsService;
+import pa165.deliveryservice.api.DeliveryService;
+import pa165.deliveryservice.api.GoodsService;
 
 /**
  * SpringMVC Controller for handling goods.

@@ -1,18 +1,14 @@
-package pa165.servicelayer.dto;
+package pa165.deliveryservice.api.dto;
 
 import java.util.Objects;
 import javax.validation.constraints.*;
 import org.hibernate.validator.constraints.NotEmpty;
-import pa165.servicelayer.validation.GoodsConstraint;
-
-
 
 /**
  * DTO for goods entity
  *
  * @author Drimal
  */
-@GoodsConstraint
 public class GoodsDto  implements Cloneable{
     private long id;
     @NotNull

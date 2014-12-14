@@ -14,12 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 import pa165.deliveryservice.daoInterface.DeliveryDao;
 import pa165.deliveryservice.daoInterface.PostmanDao;
 import pa165.deliveryservice.entity.*;
-import pa165.servicelayer.dto.AddressDto;
-import pa165.servicelayer.dto.CustomerDto;
-import pa165.servicelayer.dto.DeliveryDto;
-import pa165.servicelayer.dto.GoodsDto;
-import pa165.servicelayer.dto.PostmanDto;
-import pa165.servicelayer.serviceInterface.DeliveryService;
+import pa165.deliveryservice.api.dto.AddressDto;
+import pa165.deliveryservice.api.dto.CustomerDto;
+import pa165.deliveryservice.api.dto.DeliveryDto;
+import pa165.deliveryservice.api.dto.GoodsDto;
+import pa165.deliveryservice.api.dto.PostmanDto;
+import pa165.deliveryservice.api.DeliveryService;
 
 /**
  *

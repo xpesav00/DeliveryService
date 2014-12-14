@@ -18,11 +18,11 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
-import pa165.servicelayer.dto.DeliveryDto;
-import pa165.servicelayer.dto.GoodsDto;
-import pa165.servicelayer.dto.PostmanDto;
-import pa165.servicelayer.serviceInterface.DeliveryService;
-import pa165.servicelayer.serviceInterface.PostmanService;
+import pa165.deliveryservice.api.dto.DeliveryDto;
+import pa165.deliveryservice.api.dto.GoodsDto;
+import pa165.deliveryservice.api.dto.PostmanDto;
+import pa165.deliveryservice.api.DeliveryService;
+import pa165.deliveryservice.api.PostmanService;
 
 /**
  * SpringMVC Controller for handling postmen.

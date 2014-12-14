@@ -19,6 +19,11 @@
             <version>1.0-SNAPSHOT</version>
             <type>jar</type>
         </dependency>
+        <dependency>
+            <groupId>PA165</groupId>
+            <artifactId>DeliveryService-API</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         
         <dependency>
             <groupId>junit</groupId>

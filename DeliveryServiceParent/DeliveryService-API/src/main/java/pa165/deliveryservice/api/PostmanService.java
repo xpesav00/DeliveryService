@@ -1,7 +1,7 @@
-package pa165.servicelayer.serviceInterface;
+package pa165.deliveryservice.api;
 
 import java.util.List;
-import pa165.servicelayer.dto.PostmanDto;
+import pa165.deliveryservice.api.dto.PostmanDto;
 
 /**
  * Service layer Postman interface.
