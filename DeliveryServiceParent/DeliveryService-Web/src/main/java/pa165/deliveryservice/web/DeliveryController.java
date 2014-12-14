@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -23,6 +24,7 @@ import pa165.deliveryservice.api.dto.PostmanDto;
 import pa165.deliveryservice.api.CustomerService;
 import pa165.deliveryservice.api.DeliveryService;
 import pa165.deliveryservice.api.PostmanService;
+import pa165.deliveryservice.validation.DeliveryValidator;
 
 /**
  * SpringMVC Controller for handling deliveries.
@@ -142,5 +144,10 @@ public class DeliveryController {
         }
         
         return "redirect:" + uriBuilder.path("/delivery/list").build();
+    }
+    
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.addValidators(new DeliveryValidator());
     }
 }

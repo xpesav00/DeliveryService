@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 import pa165.deliveryservice.api.DeliveryService;
 import pa165.deliveryservice.api.GoodsService;
+import pa165.deliveryservice.validation.GoodsValidator;
 
 /**
  * SpringMVC Controller for handling goods.
@@ -108,5 +111,10 @@ public class GoodsController {
         }
         
         return "redirect:" + uriBuilder.path("/goods/list/"+ selectedDelivery.getId()).build();
+    }
+
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.addValidators(new GoodsValidator());
     }
 }
