@@ -1,7 +1,5 @@
 package pa165.deliveryservice.web;
 
-import pa165.deliveryservice.api.dto.DeliveryDto;
-import pa165.deliveryservice.api.dto.GoodsDto;
 import java.util.Locale;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -13,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,6 +22,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
 import pa165.deliveryservice.api.DeliveryService;
 import pa165.deliveryservice.api.GoodsService;
+import pa165.deliveryservice.api.dto.DeliveryDto;
+import pa165.deliveryservice.api.dto.GoodsDto;
 import pa165.deliveryservice.validation.GoodsValidator;
 
 /**
@@ -84,8 +85,14 @@ public class GoodsController {
         return "redirect:" + uriBuilder.path("/goods/list/"+ selectedDelivery.getId()).build();
     }
 
+    
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.addValidators(new GoodsValidator());
+    }
+
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute GoodsDto goods, BindingResult bindingResult, 
+    public String update(@Validated @ModelAttribute GoodsDto goods, BindingResult bindingResult, 
             RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         log.debug("update(locale={}, goods={})", locale, goods);
         if (bindingResult.hasErrors()) {
@@ -111,10 +118,5 @@ public class GoodsController {
         }
         
         return "redirect:" + uriBuilder.path("/goods/list/"+ selectedDelivery.getId()).build();
-    }
-
-    @InitBinder
-    protected void initBinder(WebDataBinder binder) {
-        binder.addValidators(new GoodsValidator());
     }
 }

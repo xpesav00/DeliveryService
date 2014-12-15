@@ -16,7 +16,9 @@
             <fieldset>
                 <legend><fmt:message key="common.edit"/></legend>
                 <%@include file="form.jsp"%>
-                <input type="submit" value="<fmt:message key="common.save"/>">
+                <div id="submit_buttons">
+                    <input type="submit" value="<fmt:message key="common.save"/>">
+                </div>
             </fieldset>
         </form:form>
     </jsp:attribute>

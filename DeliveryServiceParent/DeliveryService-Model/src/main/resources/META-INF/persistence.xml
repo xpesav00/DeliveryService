@@ -11,6 +11,8 @@
 			<property name="hibernate.hbm2ddl.auto" value="create" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
+                        <property name="javax.persistence.jdbc.user" value="pa165"/>
+                        <property name="javax.persistence.jdbc.password" value="pa165"/>
 		</properties>
 	</persistence-unit>
 </persistence>

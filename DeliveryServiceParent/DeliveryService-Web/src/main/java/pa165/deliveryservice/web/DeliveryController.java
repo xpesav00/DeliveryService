@@ -108,6 +108,11 @@ public class DeliveryController {
         
         return "/delivery/edit";
     }
+    
+    @InitBinder
+    protected void initBinder(WebDataBinder binder) {
+        binder.addValidators(new DeliveryValidator());
+    }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@Valid @ModelAttribute DeliveryDto delivery, BindingResult bindingResult, 
@@ -144,10 +149,5 @@ public class DeliveryController {
         }
         
         return "redirect:" + uriBuilder.path("/delivery/list").build();
-    }
-    
-    @InitBinder
-    protected void initBinder(WebDataBinder binder) {
-        binder.addValidators(new DeliveryValidator());
     }
 }

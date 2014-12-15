@@ -12,16 +12,9 @@ import pa165.deliveryservice.entity.DeliveryStatus;
  */
 public class DeliveryDto implements Cloneable{
     private long id = 0;
-    @NotNull
-    @Pattern(regexp = "\\p{javaUpperCase}.*")
-    @Size(min =3, max = 30)
     private String name;
-    @NotNull
     private PostmanDto postman;
-    @NotNull
-    @Size(min =1)
     private List<GoodsDto> goods = new ArrayList<>();
-    @NotNull
     private CustomerDto customer;
     private DeliveryStatus status;
 

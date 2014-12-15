@@ -1,8 +1,6 @@
 package pa165.deliveryservice.api.dto;
 
 import java.util.Objects;
-import javax.validation.constraints.*;
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * DTO for goods entity
@@ -11,16 +9,8 @@ import org.hibernate.validator.constraints.NotEmpty;
  */
 public class GoodsDto  implements Cloneable{
     private long id;
-    @NotNull
-    @Min(1)
     private long price;
-
-    @NotNull
-    @Pattern(regexp = "\\p{javaUpperCase}.*")
-    @Size(min = 1, max = 30)
     private String seller;
-
-    @NotNull
     private DeliveryDto delivery; //Nevim, jake by mela mit dalsi omezeni
 
     public GoodsDto(){}

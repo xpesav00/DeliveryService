@@ -13,16 +13,9 @@ import javax.validation.constraints.*;
 public class PostmanDto implements Cloneable{
 
     private long Id;
-    @NotNull
-    @Pattern(regexp = "\\p{javaUpperCase}.*")
-    @Size(min = 2, max = 30)
     private String firstName;
-    @NotNull
-    @Pattern(regexp = "\\p{javaUpperCase}.*")
-    @Size(min = 2, max = 30)
     private String lastName;
     private List<DeliveryDto> deliveries;
-
     
     public PostmanDto() {
         deliveries = new ArrayList<>();

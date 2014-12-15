@@ -29,7 +29,7 @@ public class GoodsValidator implements Validator{
         if(goods.getPrice() <= 0){
             errors.rejectValue("price", "error.goods.price.negativevalue");
         }
-        if(goods.getSeller().length() > 30){
+        if(goods.getSeller().length() < 2 || goods.getSeller().length() > 30){
             errors.rejectValue("seller", "error.goods.seller.length");
         }
     }
