@@ -13,6 +13,7 @@
         <module>DeliveryService-ServiceLayer</module>
     <module>DeliveryService-Web</module>
         <module>DeliveryService-API</module>
+        <module>DeliveryService-REST-Client</module>
     </modules>
     
     <build>
