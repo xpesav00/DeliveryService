@@ -24,9 +24,9 @@ public interface PostmanRestI {
      * Method for retrieve all postmen
      * @return list of postmen
      */
-    @GET
-    @Path("/findAll")
-    @Produces(MediaType.APPLICATION_JSON)
+    @GET //Process HTTP GET request
+    @Path("/findAll")//relative uri path
+    @Produces(MediaType.APPLICATION_JSON)//type of content
     public List<Postman> findAll();
     
     /**
@@ -43,7 +43,7 @@ public interface PostmanRestI {
      * @param id 
      */
     @POST
-    @Path("/create")
+    @Path("/findByID/{id}")
     @Consumes(MediaType.APPLICATION_JSON)
     public void findByID(@PathParam("id") String id);
     
