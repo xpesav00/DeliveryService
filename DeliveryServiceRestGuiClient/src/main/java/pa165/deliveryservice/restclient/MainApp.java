@@ -88,8 +88,8 @@ public class MainApp {
             } else {
                 System.out.println("Server is running");
                
-                String restUrl = "http://localhost:4080/pa165/index.jsp/Rest/";
-                doGet(new URL(restUrl + "Courier/?findall"));
+                String restUrl = "http://localhost:8080/pa165/rest/";
+                doGet(new URL(restUrl + "postman/findAll"));
 
             }
         } catch (IOException e) {

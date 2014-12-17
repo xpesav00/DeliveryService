@@ -1,10 +1,12 @@
 package pa165.deliveryservice.restclient.api;
 
+import java.util.List;
 import org.codehaus.jackson.JsonNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpEntity;
-import pa165.deliveryservice.rest.dto.Postman;
+import pa165.deliveryservice.api.dto.PostmanDto;
+import pa165.deliveryservice.restclient.interfaces.PostmanRestClient;
 
 /**
  *
@@ -18,9 +20,9 @@ public class PostmanRestClientImpl extends RestClientAPI implements PostmanRestC
     }
 
     @Override
-    public void create(Postman postman) {
+    public void create(PostmanDto postman) {
         logger.info("Creating entity Postman {}", postman);
-        HttpEntity<Postman> entity = new HttpEntity<Postman>(postman,headers);
+        HttpEntity<PostmanDto> entity = new HttpEntity<PostmanDto>(postman,headers);
         uri =  rt.postForLocation(
         url.concat("create="),entity);
         logger.info("Entity created");
@@ -34,7 +36,7 @@ public class PostmanRestClientImpl extends RestClientAPI implements PostmanRestC
     }
 
     @Override
-    public void update(Postman postman) {
+    public void update(PostmanDto postman) {
         logger.info("Updating entity Postman {}", postman);
         rt.put(url.concat("update="),postman);
         logger.info("Entity updated");
@@ -43,7 +45,7 @@ public class PostmanRestClientImpl extends RestClientAPI implements PostmanRestC
     @Override
     public JsonNode findAll() {
         logger.info("Retrieving all entity Postman");
-        JsonNode jsonNode = rt.getForObject(url.concat("/findall"), JsonNode.class);
+        JsonNode jsonNode = rt.getForObject(url.concat("findall"), JsonNode.class);
         for (JsonNode e : jsonNode) {//TOTO what to do with them
             System.out.println("Entity: "+e);
         }
@@ -53,8 +55,6 @@ public class PostmanRestClientImpl extends RestClientAPI implements PostmanRestC
 
     @Override
     public JsonNode findByID(String id) {
-        logger.info("Finding entity Postman {}", id);
-        return rt.getForObject(url.concat("findByID=").concat(id), JsonNode.class);
+        return rt.getForObject(url.concat("/findByID/").concat(id), JsonNode.class);
     }
-    
 }

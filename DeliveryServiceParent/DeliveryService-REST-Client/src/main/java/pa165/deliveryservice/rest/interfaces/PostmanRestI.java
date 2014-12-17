@@ -10,14 +10,15 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import pa165.deliveryservice.rest.dto.Postman;
+import pa165.deliveryservice.api.dto.PostmanDto;
+
 
 /**
  * REST API for server
  *
  * @author Drimal
  */
-@Path("/postman")
+@Path("/rest/postman")
 public interface PostmanRestI {
     
     /**
@@ -27,7 +28,7 @@ public interface PostmanRestI {
     @GET //Process HTTP GET request
     @Path("/findAll")//relative uri path
     @Produces(MediaType.APPLICATION_JSON)//type of content
-    public List<Postman> findAll();
+    public List<PostmanDto> findAll();
     
     /**
      * Method for create specific postman
@@ -36,7 +37,7 @@ public interface PostmanRestI {
     @POST
     @Path("/create")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void create(Postman postman);
+    public void create(PostmanDto postman);
     
     /**
      * Method for find specific postman by ID
@@ -54,7 +55,7 @@ public interface PostmanRestI {
     @PUT
     @Path("/update")
     @Consumes(MediaType.APPLICATION_JSON)
-    public void update(Postman postman);
+    public void update(PostmanDto postman);
     
     /**
      * Method for delete specific postman
