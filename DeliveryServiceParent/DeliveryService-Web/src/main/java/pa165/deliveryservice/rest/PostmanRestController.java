@@ -1,4 +1,4 @@
-package pa165.deliveryservice.web;
+package pa165.deliveryservice.rest;
 
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,9 +26,4 @@ public class PostmanRestController {
         return postmanService.getAllPostmen();
     }
     
-//    @RequestMapping(value = "/create", method = RequestMethod.POST)
-//    @ResponseBody
-//    public void create(){
-//        
-//    }
 }
