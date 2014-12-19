@@ -2,6 +2,7 @@ package pa165.servicelayer.serviceImplementation;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,21 @@ public class PostmanServiceImpl implements PostmanService {
 
     @Autowired
     private Mapper mapper;
-
+    
+    @PostConstruct
+    public void preloadDB(){
+        PostmanDto postman1 = new PostmanDto();
+        postman1.setFirstName("Karel");
+        postman1.setLastName("Pepik");
+        
+        PostmanDto postman2 = new PostmanDto();
+        postman2.setFirstName("Honza");
+        postman2.setLastName("Pospisil");
+        
+        addPostman(postman1);
+        addPostman(postman2);
+    }
+    
     @Override
     public List<PostmanDto> getAllPostmen() {
         List<PostmanDto> postmenList = new ArrayList<>();
