@@ -53,17 +53,35 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane1" pref="649" max="32767" attributes="0"/>
                   <Component id="customerForm" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnShowCustomer" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnCreateCustomer" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnDeleteCustomer" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnUpdateCustomer" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="jScrollPane1" alignment="1" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane1" pref="202" max="32767" attributes="0"/>
+                      <Component id="jScrollPane1" min="-2" pref="242" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnShowCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnDeleteCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCreateCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnUpdateCustomer" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="customerForm" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -79,15 +97,11 @@
                 <Component class="javax.swing.JTable" name="customerTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="6" rowCount="1">
+                      <Table columnCount="4" rowCount="0">
                         <Column editable="false" title="Id" type="java.lang.Long"/>
                         <Column editable="false" title="Name" type="java.lang.String"/>
                         <Column editable="false" title="Surname" type="java.lang.String"/>
                         <Column editable="false" title="Address" type="java.lang.String"/>
-                        <Column editable="false" title="Edit" type="java.lang.Object">
-                          <Data value=""/>
-                        </Column>
-                        <Column editable="false" title="Delete" type="java.lang.Object"/>
                       </Table>
                     </Property>
                   </Properties>
@@ -116,27 +130,22 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txtCity" min="-2" pref="172" max="-2" attributes="0"/>
-                              <Component id="txtPostcode" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
-                              <Component id="txtStreet" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
+                              <Component id="txtCustomerCity" min="-2" pref="172" max="-2" attributes="0"/>
+                              <Component id="txtCustomerPostcode" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
+                              <Component id="txtCustomerStreet" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabel2" max="32767" attributes="0"/>
+                              <Component id="jLabel1" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabel2" max="32767" attributes="0"/>
-                                      <Component id="jLabel1" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtName" min="-2" pref="172" max="-2" attributes="0"/>
-                                      <Component id="txtSurrname" min="-2" pref="172" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Component id="btnCreate" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCustomerName" min="-2" pref="172" max="-2" attributes="0"/>
+                              <Component id="txtCustomerSurrname" min="-2" pref="172" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="401" max="32767" attributes="0"/>
                       </Group>
@@ -145,36 +154,32 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtName" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCustomerName" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtSurrname" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCustomerSurrname" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="lblCity" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="txtCity" min="-2" max="-2" attributes="0"/>
+                                  <Component id="txtCustomerCity" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtStreet" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txtCustomerStreet" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel3" min="-2" pref="21" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="txtPostcode" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtCustomerPostcode" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                          <Component id="btnCreate" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -191,16 +196,11 @@
                     <Property name="text" type="java.lang.String" value="Surrname:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtName">
+                <Component class="javax.swing.JTextField" name="txtCustomerName">
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtSurrname">
+                <Component class="javax.swing.JTextField" name="txtCustomerSurrname">
                 </Component>
-                <Component class="javax.swing.JButton" name="btnCreate">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Create"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JTextField" name="txtCity">
+                <Component class="javax.swing.JTextField" name="txtCustomerCity">
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblCity">
                   <Properties>
@@ -214,9 +214,9 @@
                     <Property name="text" type="java.lang.String" value="Street:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtStreet">
+                <Component class="javax.swing.JTextField" name="txtCustomerStreet">
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtPostcode">
+                <Component class="javax.swing.JTextField" name="txtCustomerPostcode">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel4">
                   <Properties>
@@ -226,12 +226,29 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="btnShowCustomer">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Show customers"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnCreateCustomer">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Create"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnDeleteCustomer">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Delete selected"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnUpdateCustomer">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Update selected"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="postmanPanel">
-          <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="postmanPanelMouseClicked"/>
-          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Postman">
@@ -244,9 +261,21 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jScrollPane2" alignment="0" pref="649" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="postmanForm" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="postmanForm" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btnShowPostmans" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnCreatePostman" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnDeletePostman" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="btnUpdatePostman" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -256,8 +285,15 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane2" min="-2" pref="213" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="btnShowPostmans" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnDeletePostman" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnCreatePostman" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnUpdatePostman" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="postmanForm" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="96" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -273,20 +309,17 @@
                 <Component class="javax.swing.JTable" name="postmanTable">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="3" rowCount="1">
-                        <Column editable="false" title="Id" type="java.lang.Long">
-                          <Data value="1"/>
-                        </Column>
-                        <Column editable="false" title="Name" type="java.lang.String">
-                          <Data value="kokot"/>
-                        </Column>
-                        <Column editable="false" title="Surname" type="java.lang.String">
-                          <Data value="b"/>
-                        </Column>
+                      <Table columnCount="3" rowCount="0">
+                        <Column editable="false" title="Id" type="java.lang.Long"/>
+                        <Column editable="false" title="Name" type="java.lang.String"/>
+                        <Column editable="false" title="Surname" type="java.lang.String"/>
                       </Table>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="postmanTableMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -306,19 +339,14 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jLabel6" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel5" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="txtName1" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
-                                      <Component id="txtSurrname1" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Component id="btnCreate1" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtPostmanName" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
+                              <Component id="txtPostmanSurname" alignment="0" min="-2" pref="172" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="381" max="32767" attributes="0"/>
                       </Group>
@@ -330,15 +358,14 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtName1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtPostmanName" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="txtSurrname1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="txtPostmanSurname" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="btnCreate1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -355,17 +382,32 @@
                     <Property name="text" type="java.lang.String" value="Surrname:"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtName1">
+                <Component class="javax.swing.JTextField" name="txtPostmanName">
                 </Component>
-                <Component class="javax.swing.JTextField" name="txtSurrname1">
-                </Component>
-                <Component class="javax.swing.JButton" name="btnCreate1">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Create"/>
-                  </Properties>
+                <Component class="javax.swing.JTextField" name="txtPostmanSurname">
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="btnShowPostmans">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Show postmans"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnDeletePostman">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Delete selected"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnCreatePostman">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Create"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="btnUpdatePostman">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Update selected"/>
+              </Properties>
+            </Component>
           </SubComponents>
         </Container>
       </SubComponents>

@@ -5,12 +5,17 @@
  */
 package pa165.deliveryservice.restclient;
 
+import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import pa165.deliveryservice.restclient.api.PostmanClient;
 import pa165.deliveryservice.restclient.entity.Postman;
+import pa165.deliveryservice.restclient.listeners.CreatePostmanListener;
+import pa165.deliveryservice.restclient.listeners.DeletePostmanListener;
+import pa165.deliveryservice.restclient.listeners.GetAllPostmansListener;
+import pa165.deliveryservice.restclient.listeners.UpdatePostmanListener;
 
 /**
  *
@@ -18,6 +23,7 @@ import pa165.deliveryservice.restclient.entity.Postman;
  */
 public class RestClient extends javax.swing.JFrame {
     private final PostmanClient postmanClient;
+    
     /**
      * Creates new form RestClient
      */
@@ -27,7 +33,10 @@ public class RestClient extends javax.swing.JFrame {
         //CustomerClient customerClient = new CustomerClient(hostURL);
         initComponents();
         
-        
+        btnShowPostmans.addActionListener(new GetAllPostmansListener(postmanClient, postmanTable));
+        btnDeletePostman.addActionListener(new DeletePostmanListener(postmanClient, postmanTable));
+        btnCreatePostman.addActionListener(new CreatePostmanListener(postmanClient, txtPostmanName, txtPostmanSurname));
+        btnUpdatePostman.addActionListener(new UpdatePostmanListener(postmanClient, postmanTable, txtPostmanName, txtPostmanSurname));
     }
 
     /**
@@ -46,41 +55,47 @@ public class RestClient extends javax.swing.JFrame {
         customerForm = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
-        txtSurrname = new javax.swing.JTextField();
-        btnCreate = new javax.swing.JButton();
-        txtCity = new javax.swing.JTextField();
+        txtCustomerName = new javax.swing.JTextField();
+        txtCustomerSurrname = new javax.swing.JTextField();
+        txtCustomerCity = new javax.swing.JTextField();
         lblCity = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtStreet = new javax.swing.JTextField();
-        txtPostcode = new javax.swing.JTextField();
+        txtCustomerStreet = new javax.swing.JTextField();
+        txtCustomerPostcode = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
+        btnShowCustomer = new javax.swing.JButton();
+        btnCreateCustomer = new javax.swing.JButton();
+        btnDeleteCustomer = new javax.swing.JButton();
+        btnUpdateCustomer = new javax.swing.JButton();
         postmanPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         postmanTable = new javax.swing.JTable();
         postmanForm = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtName1 = new javax.swing.JTextField();
-        txtSurrname1 = new javax.swing.JTextField();
-        btnCreate1 = new javax.swing.JButton();
+        txtPostmanName = new javax.swing.JTextField();
+        txtPostmanSurname = new javax.swing.JTextField();
+        btnShowPostmans = new javax.swing.JButton();
+        btnDeletePostman = new javax.swing.JButton();
+        btnCreatePostman = new javax.swing.JButton();
+        btnUpdatePostman = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Delivery Sevice REST Client");
 
         customerTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, "", null}
+
             },
             new String [] {
-                "Id", "Name", "Surname", "Address", "Edit", "Delete"
+                "Id", "Name", "Surname", "Address"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Long.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -99,8 +114,6 @@ public class RestClient extends javax.swing.JFrame {
         jLabel1.setText("Name:");
 
         jLabel2.setText("Surrname:");
-
-        btnCreate.setText("Create");
 
         lblCity.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCity.setText("City:");
@@ -122,80 +135,91 @@ public class RestClient extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(customerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtPostcode, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCustomerCity, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCustomerPostcode, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCustomerStreet, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(customerFormLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(customerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(customerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(customerFormLayout.createSequentialGroup()
-                        .addGroup(customerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(customerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSurrname, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnCreate))
+                    .addComponent(txtCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCustomerSurrname, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(401, Short.MAX_VALUE))
         );
         customerFormLayout.setVerticalGroup(
             customerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(customerFormLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(customerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCustomerName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(customerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtSurrname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCustomerSurrname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(customerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblCity)
                     .addGroup(customerFormLayout.createSequentialGroup()
-                        .addComponent(txtCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtCustomerCity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(customerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtStreet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCustomerStreet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(customerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPostcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addGap(17, 17, 17)
-                .addComponent(btnCreate)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtCustomerPostcode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)))
         );
+
+        btnShowCustomer.setText("Show customers");
+
+        btnCreateCustomer.setText("Create");
+
+        btnDeleteCustomer.setText("Delete selected");
+
+        btnUpdateCustomer.setText("Update selected");
 
         javax.swing.GroupLayout customerPanelLayout = new javax.swing.GroupLayout(customerPanel);
         customerPanel.setLayout(customerPanelLayout);
         customerPanelLayout.setHorizontalGroup(
             customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
             .addComponent(customerForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(customerPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(btnShowCustomer)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnCreateCustomer)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDeleteCustomer)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnUpdateCustomer)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         customerPanelLayout.setVerticalGroup(
             customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(customerPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnShowCustomer)
+                    .addComponent(btnDeleteCustomer)
+                    .addComponent(btnCreateCustomer)
+                    .addComponent(btnUpdateCustomer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(customerForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Customer", customerPanel);
 
-        postmanPanel.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                postmanPanelMouseClicked(evt);
-            }
-        });
-
         postmanTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                { new Long(1), "kokot", "b"}
+
             },
             new String [] {
                 "Id", "Name", "Surname"
@@ -217,6 +241,11 @@ public class RestClient extends javax.swing.JFrame {
             }
         });
         postmanTable.setToolTipText("");
+        postmanTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                postmanTableMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(postmanTable);
 
         postmanForm.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Postman", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
@@ -226,24 +255,19 @@ public class RestClient extends javax.swing.JFrame {
 
         jLabel6.setText("Surrname:");
 
-        btnCreate1.setText("Create");
-
         javax.swing.GroupLayout postmanFormLayout = new javax.swing.GroupLayout(postmanForm);
         postmanForm.setLayout(postmanFormLayout);
         postmanFormLayout.setHorizontalGroup(
             postmanFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(postmanFormLayout.createSequentialGroup()
                 .addContainerGap()
+                .addGroup(postmanFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(postmanFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(postmanFormLayout.createSequentialGroup()
-                        .addGroup(postmanFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(postmanFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtName1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtSurrname1, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnCreate1))
+                    .addComponent(txtPostmanName, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPostmanSurname, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(381, Short.MAX_VALUE))
         );
         postmanFormLayout.setVerticalGroup(
@@ -252,14 +276,21 @@ public class RestClient extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(postmanFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPostmanName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(postmanFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtSurrname1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCreate1))
+                    .addComponent(txtPostmanSurname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34))
         );
+
+        btnShowPostmans.setText("Show postmans");
+
+        btnDeletePostman.setText("Delete selected");
+
+        btnCreatePostman.setText("Create");
+
+        btnUpdatePostman.setText("Update selected");
 
         javax.swing.GroupLayout postmanPanelLayout = new javax.swing.GroupLayout(postmanPanel);
         postmanPanel.setLayout(postmanPanelLayout);
@@ -268,7 +299,17 @@ public class RestClient extends javax.swing.JFrame {
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
             .addGroup(postmanPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(postmanForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(postmanForm, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(postmanPanelLayout.createSequentialGroup()
+                        .addComponent(btnShowPostmans)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCreatePostman)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDeletePostman)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnUpdatePostman)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         postmanPanelLayout.setVerticalGroup(
@@ -276,8 +317,14 @@ public class RestClient extends javax.swing.JFrame {
             .addGroup(postmanPanelLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(postmanPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnShowPostmans)
+                    .addComponent(btnDeletePostman)
+                    .addComponent(btnCreatePostman)
+                    .addComponent(btnUpdatePostman))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(postmanForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 96, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Postman", postmanPanel);
@@ -298,26 +345,11 @@ public class RestClient extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void postmanPanelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postmanPanelMouseClicked
-        try{
-        Vector columnNames = new Vector();
-        Vector rows = new Vector();
-        columnNames.add("Id");
-        columnNames.add("Name");
-        columnNames.add("Surname");
-        for (Postman postman : postmanClient.getAllPostmen()) {
-            Vector row = new Vector();
-            row.add(Long.valueOf(postman.getId()));
-            row.add(postman.getFirstName());
-            row.add(postman.getLastName());
-            rows.add(row);
-        }
-        TableModel model = new DefaultTableModel(columnNames, rows);        
-        postmanTable.setModel(model);
-        }catch(Exception ex) {
-            JOptionPane.showMessageDialog(null, "Unexpected error occurred. \n\n"+ex.getMessage(),"Unexpected Error",JOptionPane.ERROR_MESSAGE);
-        }
-    }//GEN-LAST:event_postmanPanelMouseClicked
+    private void postmanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postmanTableMouseClicked
+        DefaultTableModel model = (DefaultTableModel)postmanTable.getModel();
+        txtPostmanName.setText(model.getValueAt(postmanTable.getSelectedRow(), 1).toString());
+        txtPostmanSurname.setText(model.getValueAt(postmanTable.getSelectedRow(), 2).toString());
+    }//GEN-LAST:event_postmanTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -355,8 +387,14 @@ public class RestClient extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCreate;
-    private javax.swing.JButton btnCreate1;
+    private javax.swing.JButton btnCreateCustomer;
+    private javax.swing.JButton btnCreatePostman;
+    private javax.swing.JButton btnDeleteCustomer;
+    private javax.swing.JButton btnDeletePostman;
+    private javax.swing.JButton btnShowCustomer;
+    private javax.swing.JButton btnShowPostmans;
+    private javax.swing.JButton btnUpdateCustomer;
+    private javax.swing.JButton btnUpdatePostman;
     private javax.swing.JPanel customerForm;
     private javax.swing.JPanel customerPanel;
     private javax.swing.JTable customerTable;
@@ -373,12 +411,12 @@ public class RestClient extends javax.swing.JFrame {
     private javax.swing.JPanel postmanForm;
     private javax.swing.JPanel postmanPanel;
     private javax.swing.JTable postmanTable;
-    private javax.swing.JTextField txtCity;
-    private javax.swing.JTextField txtName;
-    private javax.swing.JTextField txtName1;
-    private javax.swing.JTextField txtPostcode;
-    private javax.swing.JTextField txtStreet;
-    private javax.swing.JTextField txtSurrname;
-    private javax.swing.JTextField txtSurrname1;
+    private javax.swing.JTextField txtCustomerCity;
+    private javax.swing.JTextField txtCustomerName;
+    private javax.swing.JTextField txtCustomerPostcode;
+    private javax.swing.JTextField txtCustomerStreet;
+    private javax.swing.JTextField txtCustomerSurrname;
+    private javax.swing.JTextField txtPostmanName;
+    private javax.swing.JTextField txtPostmanSurname;
     // End of variables declaration//GEN-END:variables
 }
