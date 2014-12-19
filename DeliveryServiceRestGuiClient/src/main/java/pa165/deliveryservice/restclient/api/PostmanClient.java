@@ -7,6 +7,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import pa165.deliveryservice.rest.interfaces.PostmanRestI;
 import pa165.deliveryservice.restclient.BaseClient;
 import pa165.deliveryservice.restclient.entity.Postman;
 
@@ -14,25 +15,28 @@ import pa165.deliveryservice.restclient.entity.Postman;
  *
  * @author Drimal
  */
-public class PostmanClient extends BaseClient{
+public class PostmanClient extends BaseClient implements PostmanRestI{
 
     public PostmanClient(String baseUrl) {
         super(baseUrl);
         this.setBaseUrl(baseUrl + "/postman");
     }
  
+    @Override
     public List<Postman> getAllPostmen(){
         WebTarget postmanResource = this.getResource().path("/findAll");
         Invocation.Builder builder = postmanResource.request(MediaType.APPLICATION_JSON);
         return builder.get( new GenericType<List<Postman>>() {});
     }
     
+    @Override
     public Postman getPostman(long id){
-        WebTarget postmanResource = this.getResource().path("/get/"+id);
+        WebTarget postmanResource = this.getResource().path(""+id);
         Invocation.Builder builder = postmanResource.request(MediaType.APPLICATION_JSON);
         return builder.get(Postman.class);
     }
     
+    @Override
     public Response createPostman(Postman postman)
     {
         WebTarget userResource = this.getResource().path("/create");
@@ -41,6 +45,7 @@ public class PostmanClient extends BaseClient{
         return builder.post(entity);
     }
     
+    @Override
     public Response deletePostman(long id)
     {
         WebTarget userResource = this.getResource().path("/delete/"+id);
@@ -48,7 +53,8 @@ public class PostmanClient extends BaseClient{
         return builder.delete();
     }
 
-    public Response updateUser(Postman postman)
+    @Override
+    public Response updatePostman(Postman postman)
     {
         WebTarget userResource = this.getResource().path("/update/"+postman.getId());
         Invocation.Builder builder = userResource.request();
