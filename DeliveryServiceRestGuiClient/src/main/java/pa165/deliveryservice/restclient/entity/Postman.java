@@ -38,6 +38,9 @@ public class Postman {
         this.lastName = lastName;
     }
     
-    
+    @Override
+    public String toString(){
+        return "ID: "+getId()+", first name: "+getFirstName()+", last name: "+getLastName();
+    }
     
 }

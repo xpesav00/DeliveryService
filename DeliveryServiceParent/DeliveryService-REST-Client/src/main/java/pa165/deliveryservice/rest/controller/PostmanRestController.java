@@ -51,9 +51,9 @@ public class PostmanRestController {
         return p;
     }
     
-    @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{postmanId}", method = RequestMethod.GET)
     @ResponseBody
-    public PostmanDto get(@PathVariable(value = "id") long id) {
+    public PostmanDto getPostman(@PathVariable(value = "postmanId") long id) {
         return postmanService.findPostman(id);
     }
     

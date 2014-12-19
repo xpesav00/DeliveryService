@@ -28,7 +28,7 @@ public class PostmanClient extends BaseClient{
     }
     
     public Postman getPostman(long id){
-        WebTarget postmanResource = this.getResource().path("/get/"+id);
+        WebTarget postmanResource = this.getResource().path(""+id);
         Invocation.Builder builder = postmanResource.request(MediaType.APPLICATION_JSON);
         return builder.get(Postman.class);
     }
@@ -48,7 +48,7 @@ public class PostmanClient extends BaseClient{
         return builder.delete();
     }
 
-    public Response updateUser(Postman postman)
+    public Response updatePostman(Postman postman)
     {
         WebTarget userResource = this.getResource().path("/update/"+postman.getId());
         Invocation.Builder builder = userResource.request();
