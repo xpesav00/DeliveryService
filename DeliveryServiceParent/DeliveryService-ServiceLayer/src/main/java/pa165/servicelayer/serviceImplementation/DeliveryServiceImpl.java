@@ -53,7 +53,7 @@ public class DeliveryServiceImpl implements DeliveryService{
         GoodsDto goods = new GoodsDto();
         goods.setPrice(100);
         goods.setSeller("Sony");
-        createDelivery("CZC.cz", postman, Arrays.asList(goods), customer, DeliveryStatus.INIT);
+        createDelivery("CZC.cz", null, Arrays.asList(goods), customer, DeliveryStatus.INIT);
     }
     
     @Override
