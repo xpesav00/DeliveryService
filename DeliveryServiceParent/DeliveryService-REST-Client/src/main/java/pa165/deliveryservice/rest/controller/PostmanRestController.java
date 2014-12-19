@@ -1,5 +1,7 @@
 package pa165.deliveryservice.rest.controller;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +31,24 @@ public class PostmanRestController {
     @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     @ResponseBody
     public List<PostmanDto> findAll(){
-        return postmanService.getAllPostmen();
+        System.out.println("Number of postmen: "+ postmanService.getAllPostmen().size());
+        //return postmanService.getAllPostmen();
+        List<PostmanDto> resultList = new ArrayList<PostmanDto>();
+        List<PostmanDto> postmen = postmanService.getAllPostmen();
+        for (PostmanDto postmanDto : postmen) {
+            resultList.add(retrievePostmanDtoForJson(postmanDto));
+        }
+        
+        return resultList;
+    }
+    
+    private PostmanDto retrievePostmanDtoForJson(PostmanDto postman){
+        PostmanDto p = new PostmanDto();
+        p.setId(postman.getId());
+        p.setFirstName(postman.getFirstName());
+        p.setLastName(postman.getLastName());
+        
+        return p;
     }
     
     @RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
