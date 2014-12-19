@@ -5,6 +5,7 @@
  */
 package pa165.deliveryservice.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import javax.validation.Valid;
@@ -25,10 +26,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
+import pa165.deliveryservice.api.CustomerService;
+import pa165.deliveryservice.api.DeliveryService;
+import pa165.deliveryservice.api.dto.CustomerDto;
+import pa165.deliveryservice.api.dto.DeliveryDto;
 import pa165.deliveryservice.validation.AddressValidator;
 import pa165.deliveryservice.validation.CustomerValidator;
-import pa165.deliveryservice.api.dto.CustomerDto;
-import pa165.deliveryservice.api.CustomerService;
+
 
 /**
  *
@@ -41,6 +45,8 @@ public class CustomerController {
     
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private DeliveryService deliveryService;
     @Autowired
     private MessageSource messageSource;
     
@@ -77,6 +83,22 @@ public class CustomerController {
         return "customer/edit";
     }
     
+    @RequestMapping(value = "/deliveries/{id}", method = RequestMethod.GET)
+    public String showDeliveries(@PathVariable long id, Model model){
+        log.debug("showDeliveries()");
+        CustomerDto customer = customerService.findCustomer(id);
+        
+        List<DeliveryDto> allDeliveries = deliveryService.getAllDeliveries();
+        List<DeliveryDto> freeDeliveries = new ArrayList<>();
+        for(DeliveryDto currentDelivery:allDeliveries){
+            if(currentDelivery.getCustomer() == null) {
+                freeDeliveries.add(currentDelivery);
+            }
+        }
+        model.addAttribute("customerDeliveries", customer.getDeliveries());
+        model.addAttribute("allDeliveries",freeDeliveries);
+        return "customer/deliveries";
+    }
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.addValidators(new CustomerValidator(new AddressValidator()));
@@ -110,4 +132,6 @@ public class CustomerController {
         }
         return "redirect:" + uriBuilder.path("/customer/list").build();
     }
+    
+    
 }

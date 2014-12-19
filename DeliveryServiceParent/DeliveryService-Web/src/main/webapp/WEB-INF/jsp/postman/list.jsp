@@ -36,7 +36,7 @@
                     <td><c:out value="${postman.lastName}"/></td>
                     <td><c:out value="${fn:length(postman.deliveries)}"/></td>
                     <td class="centering">
-                        <form method="get" action="${pageContext.request.contextPath}/delivery/list/${postman.id}">
+                        <form method="get" action="${pageContext.request.contextPath}/postman/deliveries/${postman.id}">
                             <input type="submit" value="" class="delList" title="<fmt:message key='page.heading.deliveries'/>" />
                         </form>
                     </td>
@@ -47,7 +47,7 @@
                     </td>
                     <td style="text-align: center">
                         <form method="post" action="${pageContext.request.contextPath}/postman/delete/${postman.id}">
-                            <input type="submit" value=""  class="delete" title="<fmt:message key="common.delete"/>" />
+                            <input type="submit" value=""  class="delete" title="<fmt:message key="common.delete"/>" onclick="return confirm('<fmt:message key="message.confirm.delete.postman" />')" />
                         </form>
                     </td>
 

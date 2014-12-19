@@ -76,10 +76,6 @@ public class CustomerDaoImpl implements CustomerDao {
             throw new NullPointerException("Internal Error: Param customer is null.");
         }
 
-        if (customer.getId() == 0) {
-            log.error("Internal Error: Param customer id is null.");
-            throw new NullPointerException("Internal Error: Param customer id is null.");
-        }
         em.merge(customer);
     }
 

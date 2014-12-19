@@ -33,10 +33,12 @@ import pa165.deliveryservice.validation.PostmanValidator;
 @Controller
 @RequestMapping("/postman")
 public class PostmanController {
-    private final static Logger log = LoggerFactory.getLogger(DeliveryController.class);
+    private final static Logger log = LoggerFactory.getLogger(PostmanController.class);
     
     @Autowired
     private PostmanService postmanService;
+    @Autowired
+    private DeliveryService deliveryService;
     
     @Autowired
     private MessageSource messageSource;
@@ -117,6 +119,14 @@ public class PostmanController {
         }
         
         return "redirect:" + uriBuilder.path("/postman/list/").build();
+    }
+    
+    @RequestMapping(value = "/deliveries/{id}", method = RequestMethod.GET)
+    public String showDeliveries(@PathVariable long id, Model model){
+        log.debug("showDeliveries()");
+        PostmanDto postman = postmanService.findPostman(id);
+        model.addAttribute("postmansDeliveries",postman.getDeliveries());
+        return "postman/deliveries";
     }
 
     @InitBinder
