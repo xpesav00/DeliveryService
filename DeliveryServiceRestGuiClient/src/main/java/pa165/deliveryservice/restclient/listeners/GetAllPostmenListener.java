@@ -22,12 +22,12 @@ import pa165.deliveryservice.restclient.entity.Postman;
  *
  * @author John
  */
-public class GetAllPostmansListener implements ActionListener {
+public class GetAllPostmenListener implements ActionListener {
     private final PostmanClient postmanClient;
     private final javax.swing.JTable table;
-    private static final Logger log = Logger.getLogger(GetAllPostmansListener.class.getName());
+    private static final Logger log = Logger.getLogger(GetAllPostmenListener.class.getName());
     
-    public GetAllPostmansListener(PostmanClient postmanClient, JTable table) {
+    public GetAllPostmenListener(PostmanClient postmanClient, JTable table) {
         this.postmanClient = postmanClient;
         this.table = table;
     }

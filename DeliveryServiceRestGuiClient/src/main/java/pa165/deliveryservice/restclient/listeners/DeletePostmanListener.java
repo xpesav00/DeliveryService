@@ -42,7 +42,7 @@ public class DeletePostmanListener implements ActionListener {
             DefaultTableModel dtm = (DefaultTableModel) table.getModel();
             int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this postman??");
             if (dialogResult == JOptionPane.YES_OPTION) {
-                long id = Long.parseLong((String) dtm.getValueAt(table.getSelectedRow(), 0));
+                long id = Long.parseLong(dtm.getValueAt(table.getSelectedRow(), 0).toString());
                 try {
                     postmanClient.deletePostman(id);
                 } catch (Exception ex) {

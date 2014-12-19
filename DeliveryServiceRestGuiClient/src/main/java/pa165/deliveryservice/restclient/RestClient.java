@@ -14,7 +14,7 @@ import pa165.deliveryservice.restclient.api.PostmanClient;
 import pa165.deliveryservice.restclient.entity.Postman;
 import pa165.deliveryservice.restclient.listeners.CreatePostmanListener;
 import pa165.deliveryservice.restclient.listeners.DeletePostmanListener;
-import pa165.deliveryservice.restclient.listeners.GetAllPostmansListener;
+import pa165.deliveryservice.restclient.listeners.GetAllPostmenListener;
 import pa165.deliveryservice.restclient.listeners.UpdatePostmanListener;
 
 /**
@@ -33,7 +33,7 @@ public class RestClient extends javax.swing.JFrame {
         //CustomerClient customerClient = new CustomerClient(hostURL);
         initComponents();
         
-        btnShowPostmans.addActionListener(new GetAllPostmansListener(postmanClient, postmanTable));
+        btnShowPostmans.addActionListener(new GetAllPostmenListener(postmanClient, postmanTable));
         btnDeletePostman.addActionListener(new DeletePostmanListener(postmanClient, postmanTable));
         btnCreatePostman.addActionListener(new CreatePostmanListener(postmanClient, txtPostmanName, txtPostmanSurname));
         btnUpdatePostman.addActionListener(new UpdatePostmanListener(postmanClient, postmanTable, txtPostmanName, txtPostmanSurname));
@@ -284,7 +284,7 @@ public class RestClient extends javax.swing.JFrame {
                 .addGap(34, 34, 34))
         );
 
-        btnShowPostmans.setText("Show postmans");
+        btnShowPostmans.setText("Show postmen");
 
         btnDeletePostman.setText("Delete selected");
 

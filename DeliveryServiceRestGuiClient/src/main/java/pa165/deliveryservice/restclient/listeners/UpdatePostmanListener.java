@@ -25,7 +25,7 @@ import pa165.deliveryservice.restclient.entity.Postman;
 public class UpdatePostmanListener implements ActionListener {
 
     private final PostmanClient postmanClient;
-    private static final Logger log = Logger.getLogger(GetAllPostmansListener.class.getName());
+    private static final Logger log = Logger.getLogger(GetAllPostmenListener.class.getName());
     private JTextField txtPostmanName;
     private JTextField txtPostmanSurname;
     private JTable table;
@@ -65,12 +65,12 @@ public class UpdatePostmanListener implements ActionListener {
 
             try {
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
-                Object valueAt = model.getValueAt(table.getSelectedRow(), 0);
-                long id = (Long) valueAt;
+                String valueAt = model.getValueAt(table.getSelectedRow(), 0).toString();
+                long id = Long.parseLong(valueAt);
                 Postman postman = postmanClient.getPostman(id);
                 postman.setFirstName(txtPostmanName.getText());
                 postman.setLastName(txtPostmanSurname.getText());
-                Response response = postmanClient.updateUser(postman);
+                Response response = postmanClient.updatePostman(postman);
             } catch (Exception ex) {
                 log.log(Level.SEVERE, ex.getStackTrace().toString());
                 JOptionPane.showMessageDialog(null, "Unexpected error occurred while updating postman! \n\n" + ex.getMessage(), "Unexpected Error", JOptionPane.ERROR_MESSAGE);
