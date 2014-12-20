@@ -2,6 +2,7 @@ package pa165.servicelayer.serviceImplementation;
 
 import java.util.ArrayList;
 import java.util.List;
+import javax.annotation.PostConstruct;
 import org.dozer.Mapper;
 import org.dozer.MappingException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,21 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private Mapper mapper;
 
+    @PostConstruct
+    public void preloadDB(){
+        Address address = new Address();
+        address.setCity("Brno");
+        address.setStreet("Ulehla");
+        address.setPostcode(14689);
+        
+        Customer cust = new Customer();
+        cust.setFirstName("Bedrich");
+        cust.setLastName("Navratil");
+        cust.setAddress(address);
+        
+        customerDao.addCustomer(cust);
+    }
+    
     @Override
     public void createCustomer(String firstName, String lastName, AddressDto address, List<DeliveryDto> deliveries) {
         if (firstName.isEmpty()) {

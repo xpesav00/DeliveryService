@@ -1,9 +1,10 @@
-package pa165.deliveryservice.restclient.entity;
+package pa165.deliveryservice.rest.entity;
 
 import java.util.List;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 /**
+ * DTO object for REST client
  *
  * @author Drimal
  */

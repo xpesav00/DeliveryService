@@ -16,7 +16,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.ws.rs.core.Response;
 import pa165.deliveryservice.restclient.api.PostmanClient;
-import pa165.deliveryservice.restclient.entity.Postman;
+import pa165.deliveryservice.rest.entity.Postman;
 
 /**
  *

@@ -1,15 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package pa165.deliveryservice.rest.interfaces;
-//TODO Implement
+
+import java.util.List;
+import javax.ws.rs.core.Response;
+import pa165.deliveryservice.rest.entity.Customer;
+
 /**
+ * REST API for customer client
  *
  * @author Drimal
  */
 public interface CustomerRestI {
     
+    List<Customer> getAllCustomers();
+    
+    Customer getCustomer(long id);
+    
+    Response createCustomer(Customer customer);
+    
+    Response deleteCustomer(long id);
+    
+    Response updateCustomer(Customer customer);
 }

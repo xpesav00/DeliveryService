@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import pa165.deliveryservice.restclient.api.PostmanClient;
-import pa165.deliveryservice.restclient.entity.Postman;
+import pa165.deliveryservice.rest.entity.Postman;
 import pa165.deliveryservice.restclient.listeners.CreatePostmanListener;
 import pa165.deliveryservice.restclient.listeners.DeletePostmanListener;
 import pa165.deliveryservice.restclient.listeners.GetAllPostmenListener;
