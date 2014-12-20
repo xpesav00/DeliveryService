@@ -82,7 +82,7 @@ public class PostmanController {
         
         redirectAttributes.addFlashAttribute(
                 "message",
-                messageSource.getMessage("postman.delete.message", new Object[]{postman.getFirstName(), postman.getLastName(), postman.getDeliveries(), postman.getId()}, locale)
+                messageSource.getMessage("message.delete.postman", new Object[]{postman.getFirstName(), postman.getLastName(), postman.getId()}, locale)
         );
         return "redirect:" + uriBuilder.path("/postman/list").build();
     }
@@ -114,7 +114,7 @@ public class PostmanController {
             
             redirectAttributes.addFlashAttribute(
                 "message",
-                messageSource.getMessage("goods.update.message", new Object[]{postman.getFirstName(), postman.getLastName(), postman.getDeliveries(), postman.getId()}, locale)
+                messageSource.getMessage("message.update.postman", new Object[]{postman.getFirstName(), postman.getLastName()}, locale)
             );
         }
         
