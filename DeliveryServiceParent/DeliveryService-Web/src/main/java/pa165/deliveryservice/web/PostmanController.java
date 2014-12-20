@@ -28,7 +28,7 @@ import pa165.deliveryservice.validation.PostmanValidator;
 /**
  * SpringMVC Controller for handling postmen.
  *
- * @author Martin Nekula
+ * @author Martin Nekula, John
  */
 @Controller
 @RequestMapping("/postman")
@@ -128,7 +128,7 @@ public class PostmanController {
         model.addAttribute("postmansDeliveries",postman.getDeliveries());
         return "postman/deliveries";
     }
-
+    
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.addValidators(new PostmanValidator());

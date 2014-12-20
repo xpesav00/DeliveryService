@@ -7,28 +7,26 @@ package pa165.deliveryservice.restclient.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import pa165.deliveryservice.restclient.api.CustomerClient;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import pa165.deliveryservice.restclient.api.PostmanClient;
-
 /**
  *
  * @author John
  */
-public class DeletePostmanListener implements ActionListener {
-    private final PostmanClient postmanClient;
+public class DeleteCustomerListener implements ActionListener {
+    private final CustomerClient customerClient;
     private final JTable table;
-    private static final Logger log = Logger.getLogger(DeletePostmanListener.class.getName());
+    private static final Logger log = Logger.getLogger(DeleteCustomerListener.class.getName());
 
-    public DeletePostmanListener(PostmanClient postmanClient, JTable table) {
-        this.postmanClient = postmanClient;
+    public DeleteCustomerListener(CustomerClient customerClient, JTable table) {
+        this.customerClient = customerClient;
         this.table = table;
     }
-    
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (table.getSelectedRow() == -1) {
@@ -39,19 +37,18 @@ public class DeletePostmanListener implements ActionListener {
                 JOptionPane.showMessageDialog(null, "First you must select some row!");
                 return;
             }
-        } else {
-            DefaultTableModel dtm = (DefaultTableModel) table.getModel();
+    }else{
+       DefaultTableModel dtm = (DefaultTableModel) table.getModel();
             int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete this postman??");
             if (dialogResult == JOptionPane.YES_OPTION) {
                 long id = Long.parseLong(dtm.getValueAt(table.getSelectedRow(), 0).toString());
                 try {
-                    postmanClient.deletePostman(id);
-                    dtm.removeRow(table.getSelectedRow());
+                    customerClient.deletePostman(id);
                 } catch (Exception ex) {
-                    log.log(Level.SEVERE, Arrays.toString(ex.getStackTrace()));
+                    log.log(Level.SEVERE, ex.getStackTrace().toString());
                     JOptionPane.showMessageDialog(null, "Unexpected error occurred while deleting! \n\n" + ex.getMessage(), "Unexpected Error", JOptionPane.ERROR_MESSAGE);
                 }
-            }
-        }         
-    }    
+            }           
+    }
+    }  
 }

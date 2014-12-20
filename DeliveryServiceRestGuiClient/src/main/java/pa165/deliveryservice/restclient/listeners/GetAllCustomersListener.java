@@ -7,6 +7,7 @@ package pa165.deliveryservice.restclient.listeners;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -15,22 +16,23 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-import pa165.deliveryservice.restclient.api.PostmanClient;
-import pa165.deliveryservice.restclient.entity.Postman;
+import pa165.deliveryservice.restclient.api.CustomerClient;
+import pa165.deliveryservice.restclient.entity.Customer;
 
 /**
  *
  * @author John
  */
-public class GetAllPostmenListener implements ActionListener {
-    private final PostmanClient postmanClient;
+public class GetAllCustomersListener implements ActionListener {
+    private final CustomerClient customerClient;
     private final JTable table;
-    private static final Logger log = Logger.getLogger(GetAllPostmenListener.class.getName());
-    
-    public GetAllPostmenListener(PostmanClient postmanClient, JTable table) {
-        this.postmanClient = postmanClient;
+    private static final Logger log = Logger.getLogger(GetAllCustomersListener.class.getName());
+
+    public GetAllCustomersListener(CustomerClient customerClient, JTable table) {
+        this.customerClient = customerClient;
         this.table = table;
     }
+    
     
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -40,12 +42,14 @@ public class GetAllPostmenListener implements ActionListener {
             columnNames.add("Id");
             columnNames.add("Name");
             columnNames.add("Surname");
-            List<Postman> allPostmen = postmanClient.getAllPostmen();
-            for (Postman postman : allPostmen) {
+            columnNames.add("Address");
+            List<Customer> allCustomers = customerClient.getAllCustomers();
+            for (Customer customer : allCustomers) {
                 Vector<Object> row = new Vector<Object>();
-                row.add(postman.getId());
-                row.add(postman.getFirstName());
-                row.add(postman.getLastName());
+                row.add(customer.getId());
+                row.add(customer.getFirstName());
+                row.add(customer.getLastName());
+                row.add(customer.getAddress());
                 rows.add(row);                
             }
             TableModel model = new DefaultTableModel(rows, columnNames){
@@ -56,8 +60,9 @@ public class GetAllPostmenListener implements ActionListener {
             };
             table.setModel(model);
         } catch (Exception ex) {
-            log.log(Level.SEVERE, ex.getStackTrace().toString());
+            log.log(Level.SEVERE, Arrays.toString(ex.getStackTrace()));
             JOptionPane.showMessageDialog(null, "Unexpected error occurred! \n\n" + ex.getMessage(), "Unexpected Error", JOptionPane.ERROR_MESSAGE);
         }
-    }  
+    }
+    
 }
