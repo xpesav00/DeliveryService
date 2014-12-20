@@ -61,9 +61,7 @@ public class CustomerServiceImpl implements CustomerService {
         if (deliveries == null) {
             throw new NullPointerException("Deliveries can't be null.");
         }
-        if (deliveries.isEmpty()) {
-            throw new IllegalArgumentException("Deliveries can't be empty.");
-        }
+
         Customer customer = new Customer();
         customer.setFirstName(firstName);
         customer.setLastName(lastName);
