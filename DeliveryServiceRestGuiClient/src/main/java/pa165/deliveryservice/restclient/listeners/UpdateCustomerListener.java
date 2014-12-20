@@ -5,7 +5,6 @@
  */
 package pa165.deliveryservice.restclient.listeners;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -16,6 +15,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.ws.rs.core.Response;
+import pa165.deliveryservice.rest.entity.Address;
+import pa165.deliveryservice.rest.entity.Customer;
+import pa165.deliveryservice.restclient.api.CustomerClient;
 
 /**
  *
@@ -26,6 +28,7 @@ public class UpdateCustomerListener implements ActionListener {
     private static final Logger log = Logger.getLogger(UpdateCustomerListener.class.getName());
     private final JTable table;
     private final JTextField nameTF, surnameTF, cityTF, streetTF, postcodeTF;
+    private final GetAllRecords getAllRecords;
 
     public UpdateCustomerListener(CustomerClient customerClient, JTable table, JTextField name, JTextField surname, JTextField city, JTextField street, JTextField postcode) {
         this.customerClient = customerClient;
@@ -35,6 +38,7 @@ public class UpdateCustomerListener implements ActionListener {
         this.cityTF = city;
         this.streetTF = street;
         this.postcodeTF = postcode;
+        getAllRecords = new GetAllRecords(null, customerClient, table);
     }
 
     @Override
@@ -96,13 +100,16 @@ public class UpdateCustomerListener implements ActionListener {
                 DefaultTableModel model = (DefaultTableModel) table.getModel();
                 String valueAt = model.getValueAt(table.getSelectedRow(), 0).toString();
                 long id = Long.parseLong(valueAt);
-                Customer customer = customerClient.getCustomer(id);
+                Customer customer = customerClient.getCustomer(id);                
                 customer.setFirstName(name);
                 customer.setLastName(surname);
-                customer.setCity(city);
-                customer.setStreet(street);
-                customer.setPostcode(Integer.parseInt(postcode));
-                Response response = customerClient.updateCustomer(customer);
+                Address address = new Address();
+                address.setCity(city);
+                address.setStreet(street);
+                address.setPostcode(Integer.parseInt(postcode));
+                customer.setAddress(address);
+                Response response = customerClient.createCustomer(customer);
+                getAllRecords.getAll();
             } catch (Exception ex) {
                 log.log(Level.SEVERE, Arrays.toString(ex.getStackTrace()));
                 JOptionPane.showMessageDialog(null, "Unexpected error occurred while updating postman! \n\n" + ex.getMessage(), "Unexpected Error", JOptionPane.ERROR_MESSAGE);

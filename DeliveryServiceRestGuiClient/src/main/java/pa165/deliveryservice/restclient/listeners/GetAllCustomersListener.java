@@ -17,7 +17,7 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import pa165.deliveryservice.restclient.api.CustomerClient;
-import pa165.deliveryservice.restclient.entity.Customer;
+import pa165.deliveryservice.rest.entity.Customer;
 
 /**
  *

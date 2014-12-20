@@ -16,6 +16,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.ws.rs.core.Response;
+import pa165.deliveryservice.rest.entity.Address;
+import pa165.deliveryservice.rest.entity.Customer;
+import pa165.deliveryservice.restclient.api.CustomerClient;
 
 /**
  *
@@ -25,12 +28,12 @@ public class CreateCustomerListener implements ActionListener {
 
     private final CustomerClient customerClient;
     private static final Logger log = Logger.getLogger(CreateCustomerListener.class.getName());
-    private final JTable table;
     private final JTextField nameTF, surnameTF, cityTF, streetTF, postcodeTF;
-
+    private final GetAllRecords getAllRecords;
+    
     public CreateCustomerListener(CustomerClient customerClient, JTable table, JTextField name, JTextField surname, JTextField city, JTextField street, JTextField postcode) {
         this.customerClient = customerClient;
-        this.table = table;
+        getAllRecords = new GetAllRecords(null, customerClient, table);
         this.nameTF = name;
         this.surnameTF = surname;
         this.cityTF = city;
@@ -86,21 +89,19 @@ public class CreateCustomerListener implements ActionListener {
         }
 
         try {
-            DefaultTableModel model = (DefaultTableModel) table.getModel();
-            String valueAt = model.getValueAt(table.getSelectedRow(), 0).toString();
-            long id = Long.parseLong(valueAt);
             Customer customer = new Customer();
             customer.setFirstName(name);
             customer.setLastName(surname);
-            customer.setCity(city);
-            customer.setStreet(street);
-            customer.setPostcode(Integer.parseInt(postcode));
+            Address address = new Address();
+            address.setCity(city);
+            address.setStreet(street);
+            address.setPostcode(Integer.parseInt(postcode));
+            customer.setAddress(address);
             Response response = customerClient.createCustomer(customer);
+            getAllRecords.getAll();
         } catch (Exception ex) {
             log.log(Level.SEVERE, Arrays.toString(ex.getStackTrace()));
             JOptionPane.showMessageDialog(null, "Unexpected error occurred while updating postman! \n\n" + ex.getMessage(), "Unexpected Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-}
-
 }

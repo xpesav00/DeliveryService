@@ -7,58 +7,57 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import pa165.deliveryservice.rest.interfaces.PostmanRestI;
+import pa165.deliveryservice.rest.entity.Customer;
+import pa165.deliveryservice.rest.interfaces.CustomerRestI;
 import pa165.deliveryservice.restclient.BaseClient;
-import pa165.deliveryservice.rest.entity.Postman;
 
 /**
- * REST Postman client
+ * REST Customer client
+ *
  * @author Drimal
  */
-public class PostmanClient extends BaseClient implements PostmanRestI{
+public class CustomerClient extends BaseClient implements CustomerRestI{
 
-    public PostmanClient(String baseUrl) {
+    public CustomerClient(String baseUrl) {
         super(baseUrl);
-        this.setBaseUrl(baseUrl + "/postman");
+        this.setBaseUrl(baseUrl + "/customer");
     }
- 
+
     @Override
-    public List<Postman> getAllPostmen(){
+    public List<Customer> getAllCustomers() {
         WebTarget postmanResource = this.getResource().path("/findAll");
         Invocation.Builder builder = postmanResource.request(MediaType.APPLICATION_JSON);
-        return builder.get( new GenericType<List<Postman>>() {});
+        return builder.get( new GenericType<List<Customer>>() {});
     }
-    
+
     @Override
-    public Postman getPostman(long id){
+    public Customer getCustomer(long id) {
         WebTarget postmanResource = this.getResource().path(""+id);
         Invocation.Builder builder = postmanResource.request(MediaType.APPLICATION_JSON);
-        return builder.get(Postman.class);
+        return builder.get(Customer.class);
     }
-    
+
     @Override
-    public Response createPostman(Postman postman)
-    {
+    public Response createCustomer(Customer customer) {
         WebTarget userResource = this.getResource().path("/create");
         Invocation.Builder builder = userResource.request(MediaType.APPLICATION_JSON);
-        Entity<Postman> entity = Entity.entity(postman, MediaType.APPLICATION_JSON);
+        Entity<Customer> entity = Entity.entity(customer, MediaType.APPLICATION_JSON);
         return builder.post(entity);
     }
-    
+
     @Override
-    public Response deletePostman(long id)
-    {
+    public Response deleteCustomer(long id) {
         WebTarget userResource = this.getResource().path("/delete/"+id);
         Invocation.Builder builder = userResource.request(MediaType.APPLICATION_JSON);
         return builder.delete();
     }
 
     @Override
-    public Response updatePostman(Postman postman)
-    {
-        WebTarget userResource = this.getResource().path("/update/"+postman.getId());
+    public Response updateCustomer(Customer customer) {
+        WebTarget userResource = this.getResource().path("/update/"+customer.getId());
         Invocation.Builder builder = userResource.request();
-        Entity<Postman> entity = Entity.entity(postman, MediaType.APPLICATION_JSON);
+        Entity<Customer> entity = Entity.entity(customer, MediaType.APPLICATION_JSON);
         return builder.put(entity);
     }
+    
 }

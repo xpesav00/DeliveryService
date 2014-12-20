@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.validation.constraints.*;
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  *  DTO for Postman entity.
@@ -15,6 +16,7 @@ public class PostmanDto implements Cloneable{
     private long Id;
     private String firstName;
     private String lastName;
+    @JsonIgnore
     private List<DeliveryDto> deliveries;
     
     public PostmanDto() {
@@ -45,6 +47,7 @@ public class PostmanDto implements Cloneable{
         this.lastName = lastName;
     }
 
+    @JsonIgnore
     public List<DeliveryDto> getDeliveries() {
         return deliveries;
     }

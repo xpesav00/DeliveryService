@@ -43,7 +43,8 @@ public class DeleteCustomerListener implements ActionListener {
             if (dialogResult == JOptionPane.YES_OPTION) {
                 long id = Long.parseLong(dtm.getValueAt(table.getSelectedRow(), 0).toString());
                 try {
-                    customerClient.deletePostman(id);
+                    customerClient.deleteCustomer(id);
+                    dtm.removeRow(table.getSelectedRow());
                 } catch (Exception ex) {
                     log.log(Level.SEVERE, ex.getStackTrace().toString());
                     JOptionPane.showMessageDialog(null, "Unexpected error occurred while deleting! \n\n" + ex.getMessage(), "Unexpected Error", JOptionPane.ERROR_MESSAGE);

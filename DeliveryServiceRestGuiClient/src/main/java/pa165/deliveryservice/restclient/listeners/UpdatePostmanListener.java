@@ -16,7 +16,7 @@ import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.ws.rs.core.Response;
 import pa165.deliveryservice.restclient.api.PostmanClient;
-import pa165.deliveryservice.restclient.entity.Postman;
+import pa165.deliveryservice.rest.entity.Postman;
 
 /**
  *
@@ -28,12 +28,14 @@ public class UpdatePostmanListener implements ActionListener {
     private static final Logger log = Logger.getLogger(CreatePostmanListener.class.getName());
     private final JTextField nameTF, surnameTF;
     private final JTable table;
+    private final GetAllRecords getAllRecords;
 
     public UpdatePostmanListener(PostmanClient client, JTable table, JTextField txtPostmanName, JTextField txtPostmanSurname) {
         this.postmanClient = client;
         this.table = table;
         this.nameTF = txtPostmanName;
         this.surnameTF = txtPostmanSurname;
+        getAllRecords = new GetAllRecords(postmanClient, null, table);
     }
 
     @Override
@@ -72,6 +74,7 @@ public class UpdatePostmanListener implements ActionListener {
                 postman.setFirstName(name);
                 postman.setLastName(surname);
                 Response response = postmanClient.updatePostman(postman);
+                getAllRecords.getAll();
             } catch (Exception ex) {
                 log.log(Level.SEVERE, Arrays.toString(ex.getStackTrace()));
                 JOptionPane.showMessageDialog(null, "Unexpected error occurred while updating postman! \n\n" + ex.getMessage(), "Unexpected Error", JOptionPane.ERROR_MESSAGE);
