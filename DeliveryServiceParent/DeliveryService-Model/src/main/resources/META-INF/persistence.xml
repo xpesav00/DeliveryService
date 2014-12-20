@@ -1,18 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
-	version="1.0">
-	<persistence-unit name="myUnit" transaction-type="RESOURCE_LOCAL">
-		<properties>
-			<property name="hibernate.connection.url" value="jdbc:derby:memory:testdb"/>
-			<property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.EmbeddedDriver"/>
-			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-			<property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect" />
-			<property name="hibernate.hbm2ddl.auto" value="create" />
-			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.format_sql" value="true" />
-                        <property name="javax.persistence.jdbc.user" value="pa165"/>
-                        <property name="javax.persistence.jdbc.password" value="pa165"/>
-		</properties>
-	</persistence-unit>
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence">
+    <persistence-unit name="myUnit" transaction-type="RESOURCE_LOCAL">
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:derby:memory:testdb"/>
+            <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.EmbeddedDriver"/>
+            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.DerbyTenSevenDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="create"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="javax.persistence.jdbc.user" value="pa165"/>
+            <property name="javax.persistence.jdbc.password" value="pa165"/>
+        </properties>
+    </persistence-unit> 
+        
+    <persistence-unit name="DeliveryServiceDB" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>pa165.deliveryservice.entity.Customer</class>
+        <class>pa165.deliveryservice.entity.Delivery</class>
+        <class>pa165.deliveryservice.entity.Goods</class>
+        <class>pa165.deliveryservice.entity.Postman</class>
+        <properties>
+            <property name="hibernate.connection.username" value="pa165"/>
+            <property name="hibernate.connection.driver_class" value="org.apache.derby.jdbc.ClientDriver"/>
+            <property name="hibernate.connection.password" value="pa165"/>
+            <property name="hibernate.connection.url" value="jdbc:derby://localhost:1527/pa165;create=true"/>
+            <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/>
+            <property name="hibernate.show_sql" value="false"/>
+        </properties>
+    </persistence-unit>
+    --&gt;
+        
+    -
+        
 </persistence>
