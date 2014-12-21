@@ -108,7 +108,7 @@ public class UpdateCustomerListener implements ActionListener {
                 getAllRecords.getAll();
             } catch (Exception ex) {
                 log.log(Level.SEVERE, Arrays.toString(ex.getStackTrace()));
-                JOptionPane.showMessageDialog(null, "Unexpected error occurred while updating postman! \n\n" + ex.getMessage(), "Unexpected Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, "Unexpected error occurred while updating customer! \n\n" + ex.getMessage(), "Unexpected Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
