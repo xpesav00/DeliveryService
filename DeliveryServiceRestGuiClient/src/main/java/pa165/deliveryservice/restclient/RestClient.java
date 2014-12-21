@@ -388,9 +388,9 @@ public class RestClient extends javax.swing.JFrame {
        txtCustomerSurname.setText(model.getValueAt(customerTable.getSelectedRow(), 2).toString());
        String address = model.getValueAt(customerTable.getSelectedRow(), 3).toString();
        String parsedAddress[] = address.split(",",3);
-       txtCustomerCity.setText(parsedAddress[0]);
-       txtCustomerStreet.setText(parsedAddress[1]);
-       txtCustomerPostcode.setText(parsedAddress[2]);
+       txtCustomerCity.setText(parsedAddress[0].trim());
+       txtCustomerStreet.setText(parsedAddress[1].trim());
+       txtCustomerPostcode.setText(parsedAddress[2].trim());
     }//GEN-LAST:event_customerTableMouseClicked
 
     private void postmanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_postmanTableMouseClicked
