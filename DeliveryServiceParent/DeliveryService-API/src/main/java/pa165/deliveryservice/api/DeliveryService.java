@@ -1,30 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package pa165.deliveryservice.api;
 
 import java.util.List;
-import pa165.deliveryservice.entity.Customer;
-import pa165.deliveryservice.entity.Delivery;
 import pa165.deliveryservice.entity.DeliveryStatus;
-import pa165.deliveryservice.entity.Goods;
-import pa165.deliveryservice.entity.Postman;
 import pa165.deliveryservice.api.dto.CustomerDto;
 import pa165.deliveryservice.api.dto.DeliveryDto;
 import pa165.deliveryservice.api.dto.GoodsDto;
 import pa165.deliveryservice.api.dto.PostmanDto;
 
 /**
+ * Service layer Delivery interface.
  *
  * @author Jan Stastny
  */
 public interface DeliveryService {
     
     /**
-     * Create delivery and store it into dtb.
+     * Create delivery and store it into db
      * @param name Name of delivery
      * @param postman 
      * @param goods Goods inside
@@ -36,14 +27,14 @@ public interface DeliveryService {
     void createDelivery(DeliveryDto delivery);
     /**
      * Find delivery by given id.
-     * @param id id of deliverz
-     * @return DeliveryDto with given id or null if there doesnt exists.
+     * @param id id of delivery
+     * @return DeliveryDto with given id or null if there doesn't exist
      * @throws IllegalArgumentException
      */
     DeliveryDto findDelivery(long id);
     
     /**
-     * Updates delivery
+     * Update delivery
      * @param delivery 
      */
     void updateDelivery(DeliveryDto delivery);
@@ -55,7 +46,7 @@ public interface DeliveryService {
     void deleteDelivery(DeliveryDto delivery);
     
     /**
-     * Returns list of all deliveries in DB.
+     * Return list of all deliveries in DB.
      * @return List of deliveries
      */
     List<DeliveryDto> getAllDeliveries();

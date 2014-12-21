@@ -41,7 +41,6 @@ public class PostmanServiceImplTest extends AbstractIntegrationTest {
     public void setUp() {
         postmanService = new PostmanServiceImpl();
         mapper = new DozerBeanMapper();
-        //sets Mock PostmanDao to postmanService field
         ReflectionTestUtils.setField(postmanService, "postmanDao", dao);
         ReflectionTestUtils.setField(postmanService, "mapper", mapper);
 

@@ -17,15 +17,4 @@
         <dd><form:errors path="lastName" cssClass="error" element="div" /></dd>
     </dl>
 
-    <dl>
-        <dt>
-        <label for="deliveries"><fmt:message key="postman.deliveries" /></label>
-        </dt>
-        <dd>
-            <form:select path="deliveries">
-                <c:forEach items="${deliveries}" var="d">
-                        <form:option value="${d.name}">${d.name}</form:option>
-                </c:forEach>
-            </form:select>
-        </dd>
-    </dl>    
+  

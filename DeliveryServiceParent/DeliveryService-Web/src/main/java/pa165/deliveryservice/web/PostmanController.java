@@ -1,6 +1,5 @@
 package pa165.deliveryservice.web;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -21,22 +20,23 @@ import org.springframework.web.util.UriComponentsBuilder;
 import pa165.deliveryservice.api.DeliveryService;
 import pa165.deliveryservice.api.PostmanService;
 import pa165.deliveryservice.api.dto.DeliveryDto;
-import pa165.deliveryservice.api.dto.GoodsDto;
 import pa165.deliveryservice.api.dto.PostmanDto;
 import pa165.deliveryservice.validation.PostmanValidator;
 
 /**
  * SpringMVC Controller for handling postmen.
  *
- * @author Martin Nekula
+ * @author Martin Nekula, John
  */
 @Controller
 @RequestMapping("/postman")
 public class PostmanController {
-    private final static Logger log = LoggerFactory.getLogger(DeliveryController.class);
+    private final static Logger log = LoggerFactory.getLogger(PostmanController.class);
     
     @Autowired
     private PostmanService postmanService;
+    @Autowired
+    private DeliveryService deliveryService;
     
     @Autowired
     private MessageSource messageSource;
@@ -80,13 +80,13 @@ public class PostmanController {
         
         redirectAttributes.addFlashAttribute(
                 "message",
-                messageSource.getMessage("postman.delete.message", new Object[]{postman.getFirstName(), postman.getLastName(), postman.getDeliveries(), postman.getId()}, locale)
+                messageSource.getMessage("message.delete.postman", new Object[]{postman.getFirstName(), postman.getLastName(), postman.getId()}, locale)
         );
         return "redirect:" + uriBuilder.path("/postman/list").build();
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute PostmanDto postman, BindingResult bindingResult, 
+    public String update(@Valid @ModelAttribute("postman") PostmanDto postman, BindingResult bindingResult, 
             RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         log.debug("update(locale={}, postman={})", locale, postman);
         if (bindingResult.hasErrors()) {
@@ -96,29 +96,41 @@ public class PostmanController {
             }
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 log.debug("FieldError: {}", fe);
+
             }
-            return postman.getId()==0?"redirect:" + uriBuilder.path("/postman/list").build():"redirect:" + uriBuilder.path("/postman/update/"+postman.getId()).build();
+            return (Long.valueOf(postman.getId()) == 0)?"postman/list":"postman/edit";
         }
         if(postman.getId() == 0){
             if(postman.areDeliveriesNull()){
                 postman.setDeliveries(new ArrayList<DeliveryDto>());
             }
             postmanService.addPostman(postman);
+            redirectAttributes.addFlashAttribute(
+                "message",
+                messageSource.getMessage("message.new.postman", new Object[]{postman.getFirstName(), postman.getLastName()}, locale)
+            );
         } else {
             if(postman.areDeliveriesNull()){
                 postman.setDeliveries(new ArrayList<DeliveryDto>());
             }
-            postmanService.updatePostman(postman);
-            
+            postmanService.updatePostman(postman);            
             redirectAttributes.addFlashAttribute(
                 "message",
-                messageSource.getMessage("goods.update.message", new Object[]{postman.getFirstName(), postman.getLastName(), postman.getDeliveries(), postman.getId()}, locale)
+                messageSource.getMessage("message.update.postman", new Object[]{postman.getFirstName(), postman.getLastName()}, locale)
             );
         }
         
         return "redirect:" + uriBuilder.path("/postman/list/").build();
     }
-
+    
+    @RequestMapping(value = "/deliveries/{id}", method = RequestMethod.GET)
+    public String showDeliveries(@PathVariable long id, Model model){
+        log.debug("showDeliveries()");
+        PostmanDto postman = postmanService.findPostman(id);
+        model.addAttribute("postmansDeliveries",postman.getDeliveries());
+        return "postman/deliveries";
+    }
+    
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.addValidators(new PostmanValidator());

@@ -3,7 +3,6 @@ package pa165.deliveryservice.api.dto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import javax.validation.constraints.*;
 
 /**
  *  DTO for Postman entity.
@@ -95,8 +94,6 @@ public class PostmanDto implements Cloneable{
         }
         return true;
     }
-
-
 
     @Override
     public String toString() {

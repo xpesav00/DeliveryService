@@ -20,7 +20,6 @@ public class Delivery {
     private String name;
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})
     private Postman postman;
-    //when removing delivery, remove also the goods in it
     @OneToMany(mappedBy="delivery", cascade = CascadeType.REMOVE)
     private List<Goods> goods = new ArrayList<>();
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH})

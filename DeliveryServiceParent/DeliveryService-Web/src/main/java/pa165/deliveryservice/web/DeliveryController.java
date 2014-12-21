@@ -94,7 +94,7 @@ public class DeliveryController {
         deliveryService.deleteDelivery(delivery);
         redirectAttributes.addFlashAttribute(
                 "message",
-                messageSource.getMessage("delivery.delete.message", new Object[]{delivery.getName(), delivery.getId()}, locale)
+                messageSource.getMessage("message.delete.delivery", new Object[]{delivery.getName(), delivery.getId()}, locale)
         );
         return "redirect:" + uriBuilder.path("/delivery/list").build();
     }
@@ -115,7 +115,7 @@ public class DeliveryController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute DeliveryDto delivery, BindingResult bindingResult, 
+    public String update(@Valid @ModelAttribute("delivery") DeliveryDto delivery, BindingResult bindingResult, 
             RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         
         if (bindingResult.hasErrors()) {
@@ -126,9 +126,9 @@ public class DeliveryController {
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 log.debug("FieldError: {}", fe);
             }
-            return delivery.getId()==0?"/delivery/list":"/delivery/edit";
+            return (Long.valueOf(delivery.getId())== 0)?"delivery/list":"delivery/edit";
         }
-        
+
         PostmanDto postman = postmanService.findPostman(delivery.getPostman().getId());
         CustomerDto customer = customerService.findCustomer(delivery.getCustomer().getId());
         delivery.setPostman(postman);
@@ -138,13 +138,16 @@ public class DeliveryController {
         if(delivery.getId() == 0){
             log.debug("create(locale={}, delivery={}, postman={})", locale, delivery, delivery.getPostman());
             deliveryService.createDelivery(delivery);
-        } else {
-            log.debug("update(locale={}, delivery={}, postman={})", locale, delivery, delivery.getPostman());
-            deliveryService.updateDelivery(delivery);
-            
             redirectAttributes.addFlashAttribute(
                 "message",
-                messageSource.getMessage("delivery.update.message", new Object[]{delivery.getName(), delivery.getId()}, locale)
+                messageSource.getMessage("message.new.delivery", new Object[]{delivery.getName(), delivery.getId(), delivery.getCustomer().getFirstName()+" "+delivery.getCustomer().getLastName()}, locale)
+            );
+        } else {
+            log.debug("update(locale={}, delivery={}, postman={})", locale, delivery, delivery.getPostman());
+            deliveryService.updateDelivery(delivery);            
+            redirectAttributes.addFlashAttribute(
+                "message",
+                messageSource.getMessage("message.update.delivery", new Object[]{delivery.getName(), delivery.getId()}, locale)
             );
         }
         

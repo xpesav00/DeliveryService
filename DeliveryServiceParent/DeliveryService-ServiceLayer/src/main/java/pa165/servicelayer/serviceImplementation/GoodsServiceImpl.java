@@ -46,7 +46,6 @@ public class GoodsServiceImpl implements GoodsService {
 
         goodsDao.addGoods(goods);
 
-        //TODO fix mapping (delivery mapping)
         return mapper.map(goods, GoodsDto.class);
     }
 

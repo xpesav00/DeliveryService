@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -46,8 +45,7 @@ public class GoodsController {
     private MessageSource messageSource;
     
     private DeliveryDto selectedDelivery = null;
-    
-    //volani list.jsp s hodnotou id
+
     @RequestMapping(value = "/list/{id}", method = RequestMethod.GET)
     public String listId(@PathVariable long id, Model model) {
         log.debug("goods list()");
@@ -80,7 +78,7 @@ public class GoodsController {
         
         redirectAttributes.addFlashAttribute(
                 "message",
-                messageSource.getMessage("goods.delete.message", new Object[]{goods.getSeller(), goods.getPrice()}, locale)
+                messageSource.getMessage("message.delete.goods", new Object[]{goods.getSeller()}, locale)
         );
         return "redirect:" + uriBuilder.path("/goods/list/"+ selectedDelivery.getId()).build();
     }
@@ -92,7 +90,7 @@ public class GoodsController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@Validated @ModelAttribute GoodsDto goods, BindingResult bindingResult, 
+    public String update(@Valid @ModelAttribute("goods") GoodsDto goods, BindingResult bindingResult, Model model,
             RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         log.debug("update(locale={}, goods={})", locale, goods);
         if (bindingResult.hasErrors()) {
@@ -103,17 +101,24 @@ public class GoodsController {
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 log.debug("FieldError: {}", fe);
             }
-            return goods.getId()==0?"redirect:" + uriBuilder.path("/goods/list/"+ selectedDelivery.getId()).build():"redirect:" + uriBuilder.path("/goods/update/"+goods.getId()).build();
+            model.addAttribute("goods", goods);
+            model.addAttribute("deliveryId", selectedDelivery.getId());
+            model.addAttribute("delgoods", selectedDelivery.getGoods());
+            return (goods.getId() == 0)?"goods/list":"goods/edit";
         }
         if(goods.getId() == 0){
             log.debug("null delivery : {}", selectedDelivery == null);
             goodsService.createGoods(goods.getPrice(), goods.getSeller(), selectedDelivery);
+            redirectAttributes.addFlashAttribute(
+                    "message",
+                    messageSource.getMessage("message.new.goods", new Object[]{goods.getSeller(), goods.getPrice(),selectedDelivery.getName()}, locale)
+            );
         } else {
             goods.setDelivery(selectedDelivery);
             goodsService.updateGoods(goods);
             redirectAttributes.addFlashAttribute(
                     "message",
-                    messageSource.getMessage("goods.update.message", new Object[]{goods.getSeller(), goods.getPrice()}, locale)
+                    messageSource.getMessage("message.update.goods", new Object[]{goods.getSeller(), goods.getPrice()}, locale)
             );
         }
         

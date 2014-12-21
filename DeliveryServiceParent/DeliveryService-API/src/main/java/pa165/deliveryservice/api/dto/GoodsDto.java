@@ -11,7 +11,7 @@ public class GoodsDto  implements Cloneable{
     private long id;
     private long price;
     private String seller;
-    private DeliveryDto delivery; //Nevim, jake by mela mit dalsi omezeni
+    private DeliveryDto delivery;
 
     public GoodsDto(){}
     

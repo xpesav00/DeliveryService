@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package pa165.deliveryservice.validation;
 
 import org.springframework.validation.Errors;
@@ -12,14 +6,14 @@ import org.springframework.validation.Validator;
 import pa165.deliveryservice.api.dto.GoodsDto;
 
 /**
- *
+ * Validator for Goods object
  * @author Drimal
  */
 public class GoodsValidator implements Validator{
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return GoodsDto.class.equals(clazz);
+        return GoodsDto.class.isAssignableFrom(clazz);
     }
 
     @Override

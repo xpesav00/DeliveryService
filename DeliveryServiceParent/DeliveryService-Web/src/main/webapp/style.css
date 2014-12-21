@@ -62,14 +62,6 @@ div#navigation ul li a:hover{
     background: url("resources/a_href_L.jpg") left repeat-y,
         url("resources/a_href_R.jpg") right repeat-y,#4f4f4f;
 }
-/*
-div#navigation ul li a:active{    
-    background-color: #4f4f4f;
-    text-shadow: 0 0 10px #fff;
-    -webkit-box-shadow: inset 0 0 20px #fff;
-    -moz-box-shadow: inset 0 0 20px #fff;
-    box-shadow: inset 0 0 20px #fff;    
-}*/
 
 div#content{
     text-align: left;
@@ -107,6 +99,7 @@ div.error{
     border:1px solid #da3d0d;
     background-color: #f3b52f;
     padding:5px;
+    margin-bottom: 5px;
     color:#da3d0d;
     transition: background .25s ease-in-out;
    -moz-transition: background .25s ease-in-out;
@@ -121,6 +114,7 @@ div.info{
     border:1px solid #0051a7;
     background-color: #439dfc;
     padding:5px;
+    margin-bottom: 5px;
     color:#0051a7;
     transition: background .25s ease-in-out;
    -moz-transition: background .25s ease-in-out;

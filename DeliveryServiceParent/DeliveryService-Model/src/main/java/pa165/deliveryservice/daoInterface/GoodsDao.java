@@ -1,6 +1,5 @@
 package pa165.deliveryservice.daoInterface;
 
-
 import java.util.List;
 import pa165.deliveryservice.entity.Goods;
 
@@ -36,7 +35,7 @@ public interface GoodsDao {
     
     /**
      * Get specific goods to Delivery Service database
-     * @param goods goods to add into database
+     * @param id identifier goods to add into database
      */
     Goods getGoods(long id);
 

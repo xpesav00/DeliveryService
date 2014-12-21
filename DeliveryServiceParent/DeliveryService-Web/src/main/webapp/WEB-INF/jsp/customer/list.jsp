@@ -7,8 +7,8 @@
 <!DOCTYPE html>
 <fmt:message var="title" key="page.heading.customers"/>
 <my:layout title="${title}">
+    
     <jsp:attribute name="body">
-
         <h1>
             <img src="${pageContext.request.contextPath}/resources/customers_icon.jpg" />
             <fmt:message key="customer.allcustomers"/>
@@ -20,6 +20,7 @@
                 <th><fmt:message key="common.name"/></th>
                 <th><fmt:message key="common.surname"/></th>
                 <th><fmt:message key="customer.address"/></th>
+                <th><fmt:message key="postman.deliveries" /></th>
                 <th><fmt:message key="common.edit"/></th>
                 <th><fmt:message key="common.delete"/></th>
             </tr>
@@ -36,13 +37,18 @@
                     <td><c:out value="${customer.address.city}"/>, <c:out value="${customer.address.street}"/>, 
                         <c:out value="${customer.address.postcode}"/></td>
                     <td class="centering">
+                        <form method="get" action="${pageContext.request.contextPath}/customer/deliveries/${customer.id}">
+                            <input type="submit" value="" class="delList" title="<fmt:message key="customer.showDeliveries"/>" />
+                        </form>
+                    </td>
+                    <td class="centering">
                         <form method="get" action="${pageContext.request.contextPath}/customer/update/${customer.id}">
                             <input type="submit" value="" class="edit" title="<fmt:message key="common.edit"/>" />
                         </form>
                     </td>
                     <td class="centering">
                         <form method="post" action="${pageContext.request.contextPath}/customer/delete/${customer.id}">
-                            <input type="submit" value=""  class="delete" title="<fmt:message key="common.delete"/>" />
+                            <input type="submit" value=""  class="delete" title="<fmt:message key="common.delete"/>" onclick="return confirm('<fmt:message key="message.confirm.delete.customer" />')" />
                         </form>
                     </td>
                 </tr>

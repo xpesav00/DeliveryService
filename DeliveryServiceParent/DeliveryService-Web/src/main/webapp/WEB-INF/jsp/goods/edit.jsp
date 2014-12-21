@@ -9,17 +9,18 @@
 <my:layout title="${title}">
     <jsp:attribute name="body">
         <my:a href="/goods/list/${deliveryId}">&lt;&lt;<fmt:message key="goods.backToPage"/></my:a>
-        <br /><br />
-        <div class="reformed-form">
-        <form:form method="post" action="${pageContext.request.contextPath}/goods/update" modelAttribute="goods">
-            <form:hidden path="id"/>
-            <fieldset>
-                <legend><fmt:message key="common.edit"/></legend>
-                <%@include file="form.jsp"%>
-                <div id="submit_buttons">
-                    <input type="submit" value="<fmt:message key="common.save"/>">
-                </div>
-            </fieldset>
-        </form:form>
+            <br /><br />
+            <div class="reformed-form">
+            <form:form method="post" action="${pageContext.request.contextPath}/goods/update" modelAttribute="goods">
+                <form:hidden path="id"/>
+                <fieldset>
+                    <legend><fmt:message key="common.edit"/></legend>
+                    <%@include file="form.jsp"%>
+                    <div id="submit_buttons">
+                        <input type="submit" value="<fmt:message key="common.save"/>">
+                    </div>
+                </fieldset>
+            </form:form>
+        </div>
     </jsp:attribute>
 </my:layout>

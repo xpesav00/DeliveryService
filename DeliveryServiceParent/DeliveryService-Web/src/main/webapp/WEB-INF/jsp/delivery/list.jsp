@@ -20,7 +20,7 @@
                 <th><fmt:message key="delivery.name"/></th>
                 <th><fmt:message key="delivery.postman"/></th>
                 <th><fmt:message key="delivery.customer"/></th>
-                <th><fmt:message key="common.countOfDeliveries"/></th>
+                <th><fmt:message key="common.countOfGoods"/></th>
                 <th><fmt:message key="delivery.goods"/></th>
                 <th><fmt:message key="delivery.status"/></th>
                 <th><fmt:message key="common.edit"/></th>
@@ -51,7 +51,7 @@
                     </td>
                     <td class="centering">
                         <form method="post" action="${pageContext.request.contextPath}/delivery/delete/${delivery.id}">
-                            <input type="submit" value="" class="delete" title="<fmt:message key="common.delete"/>">
+                            <input type="submit" value="" class="delete" title="<fmt:message key="common.delete"/>" onclick="return confirm('<fmt:message key="message.confirm.delete.delivery" />')"/>
                         </form>
                     </td>
 

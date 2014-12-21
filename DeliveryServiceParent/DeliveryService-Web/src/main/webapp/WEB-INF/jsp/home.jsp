@@ -8,15 +8,10 @@
 <fmt:message var="title" key="index.title"/>
 <my:layout title="${title}">
 <jsp:attribute name="body">
-    <h1>Welcome</h1>
+    <h1><fmt:message key="page.heading.main" /></h1>
     <br>
     <br>
-    <h4>
-        This is our project to PA165 using spring mvc and tomcat.<br></h4>
-        <h4>Upper buttons serve like navigation menu:<br></h4>
-            <h4>Customer for customers<br></h4>
-            <h4>Postman for postmen<br></h4>
-            <h4>Delivery for deliveries</h4>
+    <p><strong><fmt:message key="mainpage.info" /></strong></p>
     
 </jsp:attribute>
 </my:layout>

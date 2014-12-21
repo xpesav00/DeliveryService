@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pa165.deliveryservice.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import javax.validation.Valid;
@@ -25,12 +21,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.UriComponentsBuilder;
+import pa165.deliveryservice.api.CustomerService;
+import pa165.deliveryservice.api.DeliveryService;
+import pa165.deliveryservice.api.dto.CustomerDto;
+import pa165.deliveryservice.api.dto.DeliveryDto;
 import pa165.deliveryservice.validation.AddressValidator;
 import pa165.deliveryservice.validation.CustomerValidator;
-import pa165.deliveryservice.api.dto.CustomerDto;
-import pa165.deliveryservice.api.CustomerService;
+
 
 /**
+ * SpringMVC Controller for handling customers
  *
  * @author John
  */
@@ -41,6 +41,8 @@ public class CustomerController {
     
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private DeliveryService deliveryService;
     @Autowired
     private MessageSource messageSource;
     
@@ -77,13 +79,29 @@ public class CustomerController {
         return "customer/edit";
     }
     
+    @RequestMapping(value = "/deliveries/{id}", method = RequestMethod.GET)
+    public String showDeliveries(@PathVariable long id, Model model){
+        log.debug("showDeliveries()");
+        CustomerDto customer = customerService.findCustomer(id);
+        
+        List<DeliveryDto> allDeliveries = deliveryService.getAllDeliveries();
+        List<DeliveryDto> freeDeliveries = new ArrayList<>();
+        for(DeliveryDto currentDelivery:allDeliveries){
+            if(currentDelivery.getCustomer() == null) {
+                freeDeliveries.add(currentDelivery);
+            }
+        }
+        model.addAttribute("customerDeliveries", customer.getDeliveries());
+        model.addAttribute("allDeliveries",freeDeliveries);
+        return "customer/deliveries";
+    }
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.addValidators(new CustomerValidator(new AddressValidator()));
     }
     
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute CustomerDto customer, BindingResult bindingResult, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
+    public String update(@Valid @ModelAttribute("customer") CustomerDto customer, BindingResult bindingResult, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         log.debug("update(locale={}, customer={})", locale, customer);
         if (bindingResult.hasErrors()) {
             log.debug("binding errors");
@@ -93,7 +111,7 @@ public class CustomerController {
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 log.debug("FieldError: {}", fe);
             }
-            return (Long.valueOf(customer.getId()) == null)?"customer/list":"customer/edit";
+            return (Long.valueOf(customer.getId()) == 0)?"customer/list":"customer/edit";
         }
         if (Long.valueOf(customer.getId()) == null) {
             customerService.createCustomer(customer.getFirstName(), customer.getLastName(), customer.getAddress(), customer.getDeliveries());
@@ -110,4 +128,6 @@ public class CustomerController {
         }
         return "redirect:" + uriBuilder.path("/customer/list").build();
     }
+    
+    
 }

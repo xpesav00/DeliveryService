@@ -2,17 +2,14 @@ package pa165.servicelayer.serviceImplementation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pa165.deliveryservice.daoInterface.DeliveryDao;
-import pa165.deliveryservice.daoInterface.PostmanDao;
 import pa165.deliveryservice.entity.*;
 import pa165.deliveryservice.api.dto.AddressDto;
 import pa165.deliveryservice.api.dto.CustomerDto;
@@ -45,7 +42,7 @@ public class DeliveryServiceImpl implements DeliveryService{
         customer.setAddress(a);
         customer.setFirstName("Honza");
         customer.setLastName("Pelda");
-        
+
         PostmanDto postman = new PostmanDto();
         postman.setFirstName("Karel");
         postman.setLastName("Pepik");
