@@ -88,7 +88,7 @@ public class PostmanController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute PostmanDto postman, BindingResult bindingResult, 
+    public String update(@Valid @ModelAttribute("postman") PostmanDto postman, BindingResult bindingResult, 
             RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         log.debug("update(locale={}, postman={})", locale, postman);
         if (bindingResult.hasErrors()) {
@@ -98,8 +98,8 @@ public class PostmanController {
             }
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 log.debug("FieldError: {}", fe);
-            }
-            return postman.getId()==0?"redirect:" + uriBuilder.path("/postman/list").build():"redirect:" + uriBuilder.path("/postman/update/"+postman.getId()).build();
+            }//TODO fix return (wrong redirect in web)
+            return (Long.valueOf(postman.getId()) ==null)?"postman/list":"postman/edit";
         }
         if(postman.getId() == 0){
             if(postman.areDeliveriesNull()){

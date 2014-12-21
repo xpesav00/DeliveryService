@@ -102,8 +102,8 @@ public class GoodsController {
             }
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 log.debug("FieldError: {}", fe);
-            }
-            return goods.getId()==0?"redirect:" + uriBuilder.path("/goods/list/"+ selectedDelivery.getId()).build():"redirect:" + uriBuilder.path("/goods/update/"+goods.getId()).build();
+            }//TODO fix return (wrong redirect in web)
+            return (Long.valueOf(goods.getId())==null)?"goods/edit":"goods/list";
         }
         if(goods.getId() == 0){
             log.debug("null delivery : {}", selectedDelivery == null);

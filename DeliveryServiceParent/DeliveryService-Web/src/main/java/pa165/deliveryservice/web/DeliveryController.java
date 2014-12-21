@@ -115,7 +115,7 @@ public class DeliveryController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute DeliveryDto delivery, BindingResult bindingResult, 
+    public String update(@Valid @ModelAttribute("delivery") DeliveryDto delivery, BindingResult bindingResult, 
             RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         
         if (bindingResult.hasErrors()) {
@@ -125,8 +125,8 @@ public class DeliveryController {
             }
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 log.debug("FieldError: {}", fe);
-            }
-            return delivery.getId()==0?"/delivery/list":"/delivery/edit";
+            }//TODO fix return (wrong redirect in web)
+            return (Long.valueOf(delivery.getId())==null)?"delivery/list":"delivery/edit";
         }
         
         PostmanDto postman = postmanService.findPostman(delivery.getPostman().getId());
