@@ -22,10 +22,10 @@ public class PostmanValidator implements Validator{
         ValidationUtils.rejectIfEmpty(errors, "lastName", "error.postman.lastname.empty");
         PostmanDto postman = (PostmanDto) target;
         if(postman.getFirstName().length() < 2 || postman.getFirstName().length() > 30){
-            errors.reject("firstName", "error.postman.firstname.length");
+            errors.rejectValue("firstName", "error.postman.firstname.length");
         }
         if(postman.getLastName().length() < 2 || postman.getLastName().length() > 30){
-            errors.reject("firstName", "error.postman.lastname.length");
+            errors.rejectValue("lastName", "error.postman.lastname.length");
         }
     }
     
