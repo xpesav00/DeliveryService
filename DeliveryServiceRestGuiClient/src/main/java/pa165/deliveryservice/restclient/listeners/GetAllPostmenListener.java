@@ -23,41 +23,14 @@ import pa165.deliveryservice.rest.entity.Postman;
  * @author John
  */
 public class GetAllPostmenListener implements ActionListener {
-    private final PostmanClient postmanClient;
-    private final JTable table;
-    private static final Logger log = Logger.getLogger(GetAllPostmenListener.class.getName());
+    private final GetAllRecords getAllRecords;
     
     public GetAllPostmenListener(PostmanClient postmanClient, JTable table) {
-        this.postmanClient = postmanClient;
-        this.table = table;
+        getAllRecords = new GetAllRecords(postmanClient, null, table);
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        try {
-            Vector<String> columnNames = new Vector<String>();
-            Vector<Vector> rows = new Vector<Vector>();
-            columnNames.add("Id");
-            columnNames.add("Name");
-            columnNames.add("Surname");
-            List<Postman> allPostmen = postmanClient.getAllPostmen();
-            for (Postman postman : allPostmen) {
-                Vector<Object> row = new Vector<Object>();
-                row.add(postman.getId());
-                row.add(postman.getFirstName());
-                row.add(postman.getLastName());
-                rows.add(row);                
-            }
-            TableModel model = new DefaultTableModel(rows, columnNames){
-                @Override
-                public boolean isCellEditable(int rowIndex, int columnIndex) {
-                    return false;
-                }
-            };
-            table.setModel(model);
-        } catch (Exception ex) {
-            log.log(Level.SEVERE, ex.getStackTrace().toString());
-            JOptionPane.showMessageDialog(null, "Unexpected error occurred! \n\n" + ex.getMessage(), "Unexpected Error", JOptionPane.ERROR_MESSAGE);
-        }
+        getAllRecords.getAll();
     }  
 }

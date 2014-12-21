@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 import pa165.deliveryservice.rest.entity.Customer;
 import pa165.deliveryservice.rest.entity.Postman;
@@ -72,7 +73,12 @@ public class GetAllRecords {
                     return false;
                 }
             };
+            TableColumnModel columnModel = table.getColumnModel();
+            columnModel.getColumn(0).setMinWidth(50);
+            columnModel.getColumn(0).setMaxWidth(50);
+            columnModel.getColumn(0).setPreferredWidth(50);
             table.setModel(model);
+            table.setColumnModel(columnModel);
             table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         } catch (Exception ex) {
             log.log(Level.SEVERE, Arrays.toString(ex.getStackTrace()));
