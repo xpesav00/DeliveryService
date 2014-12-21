@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pa165.deliveryservice.restclient.listeners;
 
-import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
@@ -14,14 +8,14 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.DefaultTableModel;
 import javax.ws.rs.core.Response;
 import pa165.deliveryservice.rest.entity.Address;
 import pa165.deliveryservice.rest.entity.Customer;
 import pa165.deliveryservice.restclient.api.CustomerClient;
 
 /**
- *
+ * Listener for create customer operation
+ * 
  * @author John
  */
 public class CreateCustomerListener implements ActionListener {
@@ -48,35 +42,35 @@ public class CreateCustomerListener implements ActionListener {
         String city = cityTF.getText();
         String street = streetTF.getText();
         String postcode = postcodeTF.getText();
-        if (name.isEmpty() || name == null) {
+        if (name == null || name.isEmpty()) {
             Helper.markTextField(false, nameTF);
             Helper.showMessage("Name can't be empty.");
             return;
         } else {
             Helper.markTextField(true, nameTF);
         }
-        if (surname.isEmpty() || surname == null) {
+        if (surname == null || surname.isEmpty()) {
             Helper.markTextField(false, surnameTF);
             Helper.showMessage("Surname can't be empty.");
             return;
         } else {
             Helper.markTextField(true, surnameTF);
         }
-        if (city.length() < 2 || city == null) {
+        if (city == null || city.length() < 2) {
             Helper.markTextField(false, cityTF);
             Helper.showMessage("City must be filled in (at least 2 characters).");
             return;
         } else {
             Helper.markTextField(true, cityTF);
         }
-        if (street.length() < 2 || street == null) {
+        if (street == null || street.length() < 2) {
             Helper.markTextField(false, streetTF);
             Helper.showMessage("Street must be filled in (at least 2 characters).");
             return;
         } else {
             Helper.markTextField(true, streetTF);
         }
-        if (postcode.isEmpty() || postcode == null) {
+        if (postcode == null || postcode.isEmpty()) {
             Helper.markTextField(false, postcodeTF);
             Helper.showMessage("Surname can't be empty.");
             return;

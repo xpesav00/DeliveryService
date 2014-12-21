@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pa165.deliveryservice.web;
 
 import java.util.ArrayList;
@@ -35,6 +30,7 @@ import pa165.deliveryservice.validation.CustomerValidator;
 
 
 /**
+ * SpringMVC Controller for handling customers
  *
  * @author John
  */

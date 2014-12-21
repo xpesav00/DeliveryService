@@ -5,6 +5,7 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 
 /**
+ * Parent rest client implementation 
  *
  * @author Drimal
  */
