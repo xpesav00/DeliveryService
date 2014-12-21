@@ -32,7 +32,6 @@ public class PostmanRestController {
     @ResponseBody
     public List<PostmanDto> findAll(){
         System.out.println("Number of postmen: "+ postmanService.getAllPostmen().size());
-        //return postmanService.getAllPostmen();
         List<PostmanDto> resultList = new ArrayList<PostmanDto>();
         List<PostmanDto> postmen = postmanService.getAllPostmen();
         for (PostmanDto postmanDto : postmen) {

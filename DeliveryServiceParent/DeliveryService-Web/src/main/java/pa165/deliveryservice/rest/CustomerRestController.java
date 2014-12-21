@@ -1,5 +1,6 @@
 package pa165.deliveryservice.rest;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +19,6 @@ import pa165.deliveryservice.api.dto.CustomerDto;
 import pa165.deliveryservice.rest.entity.Address;
 import pa165.deliveryservice.rest.entity.Customer;
 
-
 /**
  * Rest controller for Customer
  * @author Drimal
@@ -32,7 +32,12 @@ public class CustomerRestController{
     @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     @ResponseBody
     public List<CustomerDto> findAll(){
-        return customerService.getAllCustomers();
+        List<CustomerDto> resultList = new ArrayList<>();
+        List<CustomerDto> allCustomers = customerService.getAllCustomers();
+        for(CustomerDto customerDto : allCustomers){
+            resultList.add(retrieveCustomerDtoForJson(customerDto));
+        }
+        return resultList;
     }
 
     @RequestMapping(value = "/{customerId}", method = RequestMethod.GET)
@@ -60,6 +65,17 @@ public class CustomerRestController{
     public void delete(@PathVariable("id") long id){
         CustomerDto customerDto = customerService.findCustomer(id);
         customerService.deleteCustomer(customerDto);
+    }
+    
+    private CustomerDto retrieveCustomerDtoForJson(CustomerDto customer){
+        CustomerDto cust = new CustomerDto();
+        cust.setId(customer.getId());
+        cust.setFirstName(customer.getFirstName());
+        cust.setLastName(customer.getLastName());
+        cust.setAddress(customer.getAddress());
+        cust.setDeliveries(Collections.EMPTY_LIST);
+        
+        return cust;
     }
     
     private CustomerDto convertCustomerToCustomerDto(Customer customer){

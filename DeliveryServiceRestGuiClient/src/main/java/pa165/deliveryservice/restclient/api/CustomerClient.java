@@ -25,37 +25,37 @@ public class CustomerClient extends BaseClient implements CustomerRestI{
 
     @Override
     public List<Customer> getAllCustomers() {
-        WebTarget postmanResource = this.getResource().path("/findAll");
-        Invocation.Builder builder = postmanResource.request(MediaType.APPLICATION_JSON);
+        WebTarget customerResource = this.getResource().path("/findAll");
+        Invocation.Builder builder = customerResource.request(MediaType.APPLICATION_JSON);
         return builder.get( new GenericType<List<Customer>>() {});
     }
 
     @Override
     public Customer getCustomer(long id) {
-        WebTarget postmanResource = this.getResource().path(""+id);
-        Invocation.Builder builder = postmanResource.request(MediaType.APPLICATION_JSON);
+        WebTarget customerResource = this.getResource().path(""+id);
+        Invocation.Builder builder = customerResource.request(MediaType.APPLICATION_JSON);
         return builder.get(Customer.class);
     }
 
     @Override
     public Response createCustomer(Customer customer) {
-        WebTarget userResource = this.getResource().path("/create");
-        Invocation.Builder builder = userResource.request(MediaType.APPLICATION_JSON);
+        WebTarget customerResource = this.getResource().path("/create");
+        Invocation.Builder builder = customerResource.request(MediaType.APPLICATION_JSON);
         Entity<Customer> entity = Entity.entity(customer, MediaType.APPLICATION_JSON);
         return builder.post(entity);
     }
 
     @Override
     public Response deleteCustomer(long id) {
-        WebTarget userResource = this.getResource().path("/delete/"+id);
-        Invocation.Builder builder = userResource.request(MediaType.APPLICATION_JSON);
+        WebTarget customerResource = this.getResource().path("/delete/"+id);
+        Invocation.Builder builder = customerResource.request(MediaType.APPLICATION_JSON);
         return builder.delete();
     }
 
     @Override
     public Response updateCustomer(Customer customer) {
-        WebTarget userResource = this.getResource().path("/update/"+customer.getId());
-        Invocation.Builder builder = userResource.request();
+        WebTarget customerResource = this.getResource().path("/update/"+customer.getId());
+        Invocation.Builder builder = customerResource.request();
         Entity<Customer> entity = Entity.entity(customer, MediaType.APPLICATION_JSON);
         return builder.put(entity);
     }

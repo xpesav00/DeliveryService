@@ -2,7 +2,6 @@ package pa165.deliveryservice.api.dto;
 
 import java.util.ArrayList;
 import java.util.List;
-import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * DTO for Customer entity.
@@ -15,7 +14,6 @@ public class CustomerDto implements Cloneable{
     private String firstName;
     private String lastName;
     private AddressDto address;
-    @JsonIgnore
     private List<DeliveryDto> deliveries = new ArrayList<>();
 
     
@@ -54,7 +52,6 @@ public class CustomerDto implements Cloneable{
         this.address = address;
     }
 
-    @JsonIgnore
     public List<DeliveryDto> getDeliveries() {
         return deliveries;
     }

@@ -2,7 +2,6 @@ package pa165.deliveryservice.rest.interfaces;
 
 import java.util.List;
 import javax.ws.rs.core.Response;
-import pa165.deliveryservice.restclient.api.PostmanClient;
 import pa165.deliveryservice.rest.entity.Postman;
 
 
