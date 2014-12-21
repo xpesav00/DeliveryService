@@ -1,6 +1,5 @@
 package pa165.deliveryservice.web;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -21,7 +20,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import pa165.deliveryservice.api.DeliveryService;
 import pa165.deliveryservice.api.PostmanService;
 import pa165.deliveryservice.api.dto.DeliveryDto;
-import pa165.deliveryservice.api.dto.GoodsDto;
 import pa165.deliveryservice.api.dto.PostmanDto;
 import pa165.deliveryservice.validation.PostmanValidator;
 

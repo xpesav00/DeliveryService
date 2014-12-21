@@ -51,9 +51,10 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>bm-rest</finalName>
+        <finalName>DeliveryService-rest</finalName>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <source>1.6</source>

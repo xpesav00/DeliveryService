@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pa165.deliveryservice.restclient.listeners;
 
 import java.awt.event.ActionEvent;
@@ -11,6 +6,7 @@ import javax.swing.JTable;
 import pa165.deliveryservice.restclient.api.CustomerClient;
 
 /**
+ * Listener for get all customer operation
  *
  * @author John
  */
