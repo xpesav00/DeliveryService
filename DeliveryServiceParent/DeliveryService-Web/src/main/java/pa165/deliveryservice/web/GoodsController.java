@@ -45,8 +45,7 @@ public class GoodsController {
     private MessageSource messageSource;
     
     private DeliveryDto selectedDelivery = null;
-    
-    //volani list.jsp s hodnotou id
+
     @RequestMapping(value = "/list/{id}", method = RequestMethod.GET)
     public String listId(@PathVariable long id, Model model) {
         log.debug("goods list()");
@@ -91,7 +90,7 @@ public class GoodsController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute GoodsDto goods, BindingResult bindingResult, 
+    public String update(@Valid @ModelAttribute GoodsDto goods, BindingResult bindingResult, Model model,
             RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         log.debug("update(locale={}, goods={})", locale, goods);
         if (bindingResult.hasErrors()) {
@@ -102,7 +101,10 @@ public class GoodsController {
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 log.debug("FieldError: {}", fe);
             }
-            return (Long.valueOf(goods.getId())==null)?"goods/edit":"goods/list";
+            model.addAttribute("goods", goods);
+            model.addAttribute("deliveryId", selectedDelivery.getId());
+            model.addAttribute("delgoods", selectedDelivery.getGoods());
+            return (goods.getId() == 0)?"goods/list":"goods/edit";
         }
         if(goods.getId() == 0){
             log.debug("null delivery : {}", selectedDelivery == null);
