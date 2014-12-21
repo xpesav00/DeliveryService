@@ -107,12 +107,15 @@ public class PostmanController {
                 postman.setDeliveries(new ArrayList<DeliveryDto>());
             }
             postmanService.addPostman(postman);
+            redirectAttributes.addFlashAttribute(
+                "message",
+                messageSource.getMessage("message.new.postman", new Object[]{postman.getFirstName(), postman.getLastName()}, locale)
+            );
         } else {
             if(postman.areDeliveriesNull()){
                 postman.setDeliveries(new ArrayList<DeliveryDto>());
             }
-            postmanService.updatePostman(postman);
-            
+            postmanService.updatePostman(postman);            
             redirectAttributes.addFlashAttribute(
                 "message",
                 messageSource.getMessage("message.update.postman", new Object[]{postman.getFirstName(), postman.getLastName()}, locale)

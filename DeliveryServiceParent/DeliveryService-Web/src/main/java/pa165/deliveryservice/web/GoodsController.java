@@ -78,7 +78,7 @@ public class GoodsController {
         
         redirectAttributes.addFlashAttribute(
                 "message",
-                messageSource.getMessage("goods.delete.message", new Object[]{goods.getSeller(), goods.getPrice()}, locale)
+                messageSource.getMessage("message.delete.goods", new Object[]{goods.getSeller()}, locale)
         );
         return "redirect:" + uriBuilder.path("/goods/list/"+ selectedDelivery.getId()).build();
     }
@@ -109,12 +109,16 @@ public class GoodsController {
         if(goods.getId() == 0){
             log.debug("null delivery : {}", selectedDelivery == null);
             goodsService.createGoods(goods.getPrice(), goods.getSeller(), selectedDelivery);
+            redirectAttributes.addFlashAttribute(
+                    "message",
+                    messageSource.getMessage("message.new.goods", new Object[]{goods.getSeller(), goods.getPrice(),selectedDelivery.getName()}, locale)
+            );
         } else {
             goods.setDelivery(selectedDelivery);
             goodsService.updateGoods(goods);
             redirectAttributes.addFlashAttribute(
                     "message",
-                    messageSource.getMessage("goods.update.message", new Object[]{goods.getSeller(), goods.getPrice()}, locale)
+                    messageSource.getMessage("message.update.goods", new Object[]{goods.getSeller(), goods.getPrice()}, locale)
             );
         }
         

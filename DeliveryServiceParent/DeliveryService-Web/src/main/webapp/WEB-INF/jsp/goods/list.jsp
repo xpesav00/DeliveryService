@@ -11,7 +11,7 @@
      <my:a href="/delivery/list">&lt;&lt;<fmt:message key="delivery.backToPage"/></my:a>
             <br /><br />
      <h1>
-         <img src="${pageContext.request.contextPath}/resources/goods_btn.jpg" />
+        <img src="${pageContext.request.contextPath}/resources/goods_btn.jpg" />
         <fmt:message key="goods.list.deliverygoods"/>
      </h1>
 
@@ -37,12 +37,12 @@
                     <td><c:out value="${goods.delivery.name}"/></td>
                     <td style="text-align: center">
                         <form method="get" action="${pageContext.request.contextPath}/goods/update/${goods.id}">
-                            <input type="submit" value="" class="edit">
+                            <input type="submit" value="" class="edit" title="<fmt:message key="goods.list.edit" />" />
                         </form>
                     </td>
                     <td style="text-align: center">
                         <form method="post" action="${pageContext.request.contextPath}/goods/delete/${goods.id}">
-                            <input type="submit" value="" class="delete">
+                            <input type="submit" value="" class="delete" title="<fmt:message key="goods.list.delete" />" onclick="return confirm('<fmt:message key="message.confirm.delete.goods" />')" />
                         </form>
                     </td>
 
@@ -54,7 +54,9 @@
         <form:form method="post" action="${pageContext.request.contextPath}/goods/update" modelAttribute="goods">
             <fieldset><legend><fmt:message key="goods.list.newgoods"/></legend>
                 <%@include file="form.jsp"%>
-                <input type="submit" value="<fmt:message key='goods.list.creategoods'/>">
+                <div id="submit_buttons">
+                    <input type="submit" value="<fmt:message key='goods.list.creategoods'/>">
+                </div>
             </fieldset>
         </form:form> 
         </div>

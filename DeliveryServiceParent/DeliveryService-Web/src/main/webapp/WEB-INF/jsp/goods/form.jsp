@@ -5,13 +5,13 @@
 <dl>
 
     <dt>
-    <label for="seller"><fmt:message key="goods.seller"/></label>
+    <form:label path="seller"><fmt:message key="goods.seller" /></form:label>
     </dt>
     <dd><form:input path="seller"/></dd>
     <dd><form:errors path="seller" cssClass="error" element="div"/></dd>
 
     <dt>
-        <label for="price"><fmt:message key="goods.price"/></label>
+        <form:label path="price"><fmt:message key="goods.price" /></form:label>
     </dt>
     <dd><form:input path="price"/></dd>
     <dd><form:errors path="price" cssClass="error" element="div"/></dd>

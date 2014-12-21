@@ -19,7 +19,7 @@ public class GoodsValidator implements Validator{
 
     @Override
     public boolean supports(Class<?> clazz) {
-        return GoodsDto.class.equals(clazz);
+        return GoodsDto.class.isAssignableFrom(clazz);
     }
 
     @Override

@@ -24,9 +24,9 @@ public class AddressValidator implements Validator {
 
     @Override
     public void validate(Object o, Errors errors) {
-        ValidationUtils.rejectIfEmpty(errors, "city", "error.customer.address.city");
-        ValidationUtils.rejectIfEmpty(errors, "street", "error.customer.address.street");
-        ValidationUtils.rejectIfEmpty(errors, "postcode", "error.customer.address.postcode");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "city", "error.customer.address.city");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "street", "error.customer.address.street");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "postcode", "error.customer.address.postcode");
         AddressDto address = (AddressDto) o;
         String trimmed = StringUtils.deleteWhitespace(String.valueOf(address.getPostcode()));
         if(trimmed.length() != 5) {
