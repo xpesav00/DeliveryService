@@ -11,7 +11,7 @@ import pa165.deliveryservice.entity.DeliveryStatus;
  * @author Drimal
  */
 public class DeliveryDto implements Cloneable{
-    private long id = 0;
+    private long id;
     private String name;
     private PostmanDto postman;
     private List<GoodsDto> goods = new ArrayList<>();

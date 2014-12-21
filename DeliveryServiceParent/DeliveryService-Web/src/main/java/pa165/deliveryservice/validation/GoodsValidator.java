@@ -12,7 +12,7 @@ import org.springframework.validation.Validator;
 import pa165.deliveryservice.api.dto.GoodsDto;
 
 /**
- *
+ * Validator for Goods object
  * @author Drimal
  */
 public class GoodsValidator implements Validator{

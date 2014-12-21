@@ -14,6 +14,7 @@ import pa165.deliveryservice.api.dto.AddressDto;
 import pa165.deliveryservice.api.dto.CustomerDto;
 
 /**
+ * Validator for Customer object
  *
  * @author John
  */

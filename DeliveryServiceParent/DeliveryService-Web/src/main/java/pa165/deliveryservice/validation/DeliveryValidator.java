@@ -4,8 +4,10 @@ import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import pa165.deliveryservice.api.dto.DeliveryDto;
+import pa165.deliveryservice.entity.DeliveryStatus;
 
 /**
+ * Validator for Delivery object
  *
  * @author Drimal
  */
@@ -20,12 +22,17 @@ public class DeliveryValidator implements Validator{
     public void validate(Object target, Errors errors) {
         ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "error.delivery.name");
         DeliveryDto delivery = (DeliveryDto) target;
-        if(delivery.getPostman() == null){
-            errors.reject("postman", "error.delivery.postman");
+        if(delivery.getPostman().getId() == -1){
+            errors.rejectValue("postman", "error.delivery.postman");
         }
-        if(delivery.getCustomer() == null){
-            errors.reject("customer", "error.delivery.customer");
+        if(delivery.getCustomer().getId() == -1){
+            errors.rejectValue("customer", "error.delivery.customer");
+        }
+        if (delivery.getStatus() == DeliveryStatus.NONE) {
+            errors.rejectValue("status", "error.delivery.status.empty");
+        }
+        if(delivery.getId() == 0 && delivery.getStatus() != DeliveryStatus.INIT){
+            errors.rejectValue("status", "error.delivery.status");
         }
     }
-    
 }

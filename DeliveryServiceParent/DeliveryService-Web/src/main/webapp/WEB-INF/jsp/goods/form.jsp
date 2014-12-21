@@ -8,11 +8,11 @@
     <label for="seller"><fmt:message key="goods.seller"/></label>
     </dt>
     <dd><form:input path="seller"/></dd>
-    <dd><form:errors path="seller" cssClass="error"/></dd>
+    <dd><form:errors path="seller" cssClass="error" element="div"/></dd>
 
     <dt>
         <label for="price"><fmt:message key="goods.price"/></label>
     </dt>
     <dd><form:input path="price"/></dd>
-    <dd><form:errors path="price" cssClass="error"/></dd>
+    <dd><form:errors path="price" cssClass="error" element="div"/></dd>
 </dl>

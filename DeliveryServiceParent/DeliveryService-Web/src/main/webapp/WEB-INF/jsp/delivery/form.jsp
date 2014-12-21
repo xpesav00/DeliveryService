@@ -22,7 +22,7 @@
                 </c:forEach>
             </form:select> 
         </dd>
-        <dd><form:errors path="postman" cssClass="error"/></dd>
+        <dd><form:errors path="postman" cssClass="error" element="div"/></dd>
     </dl>
     <dl>
         <dt>
@@ -36,7 +36,7 @@
                 </c:forEach>
             </form:select> 
         </dd>
-        <dd><form:errors path="customer" cssClass="error"/></dd>
+        <dd><form:errors path="customer" cssClass="error" element="div"/></dd>
     </dl>
     <dl>
         <dt>
@@ -44,11 +44,11 @@
         </dt>
         <dd>
            <form:select id="status" path="status">
-               <form:option value="-1" label="-- Select --" selected="selected"></form:option>
+               <form:option value="NONE" label="-- Select --" selected="selected"></form:option>
                     <c:forEach items="${status}" var="s">
                         <form:option value="${s}">${s}</form:option>
                     </c:forEach>
                 </form:select> 
         </dd>
-        <dd><form:errors path="status" cssClass="error"/></dd>
+        <dd><form:errors path="status" cssClass="error" element="div"/></dd>
     </dl>
