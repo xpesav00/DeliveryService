@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -92,7 +91,7 @@ public class GoodsController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@Validated @ModelAttribute GoodsDto goods, BindingResult bindingResult, 
+    public String update(@Valid @ModelAttribute GoodsDto goods, BindingResult bindingResult, 
             RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         log.debug("update(locale={}, goods={})", locale, goods);
         if (bindingResult.hasErrors()) {
@@ -102,7 +101,7 @@ public class GoodsController {
             }
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 log.debug("FieldError: {}", fe);
-            }//TODO fix return (wrong redirect in web)
+            }
             return (Long.valueOf(goods.getId())==null)?"goods/edit":"goods/list";
         }
         if(goods.getId() == 0){

@@ -12,7 +12,7 @@ import org.springframework.validation.Validator;
 import pa165.deliveryservice.api.dto.AddressDto;
 
 /**
- *
+ * Validator for Address object
  * @author John
  */
 public class AddressValidator implements Validator {

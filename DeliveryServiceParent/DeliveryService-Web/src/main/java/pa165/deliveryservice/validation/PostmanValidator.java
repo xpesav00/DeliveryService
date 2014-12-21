@@ -6,6 +6,7 @@ import org.springframework.validation.Validator;
 import pa165.deliveryservice.api.dto.PostmanDto;
 
 /**
+ * Validator for Postman object
  *
  * @author Drimal
  */
