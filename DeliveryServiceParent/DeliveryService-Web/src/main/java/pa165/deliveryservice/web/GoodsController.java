@@ -90,7 +90,7 @@ public class GoodsController {
     }
 
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute GoodsDto goods, BindingResult bindingResult, Model model,
+    public String update(@Valid @ModelAttribute("goods") GoodsDto goods, BindingResult bindingResult, Model model,
             RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         log.debug("update(locale={}, goods={})", locale, goods);
         if (bindingResult.hasErrors()) {
