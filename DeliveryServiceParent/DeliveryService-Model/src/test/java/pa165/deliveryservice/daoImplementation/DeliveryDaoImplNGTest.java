@@ -1,14 +1,10 @@
 package pa165.deliveryservice.daoImplementation;
 
-import static com.oracle.nio.BufferSecrets.instance;
-import static java.lang.StrictMath.exp;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-import org.junit.Rule;
-import org.junit.rules.ExpectedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.test.annotation.DirtiesContext;
@@ -18,7 +14,6 @@ import static org.testng.Assert.*;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pa165.deliveryservice.DaoContext;
 import pa165.deliveryservice.entity.Address;
 import pa165.deliveryservice.entity.Customer;
 import pa165.deliveryservice.entity.Delivery;
@@ -52,21 +47,23 @@ public class DeliveryDaoImplNGTest extends AbstractTestNGSpringContextTests {
         emf.close();
     }
 
-//    /**
-//     * Test of addDelivery method, of class DeliveryDaoImpl.
-//     */
-//    @Test
-//    public void testAddDelivery() {
-//        logger.info("test add delivery");
-//
-//        Delivery delivery = new Delivery();
-//        delivery.setName("Pokus");
-//        em.getTransaction().begin();
-//        instance.addDelivery(delivery);
-//        em.getTransaction().commit();
-//        Delivery deliveryFromDB = getSpecificDelivery(delivery);
-//        assertEquals(deliveryFromDB.getName(), "Pokus");
-//    }
+    /**
+     * Test of addDelivery method, of class DeliveryDaoImpl.
+     */
+    @Test
+    public void testAddDelivery() {
+        logger.info("test add delivery");
+
+        Delivery delivery = new Delivery();
+        delivery.setName("Pokus");
+        em.getTransaction().begin();
+        instance.addDelivery(delivery);
+        em.flush();
+        em.getTransaction().commit();
+        delivery.setId(1);
+        Delivery deliveryFromDB = getSpecificDelivery(delivery);
+        assertEquals(deliveryFromDB.getName(), "Pokus");
+    }
 
     @Test(expectedExceptions = {NullPointerException.class})
     public void testAddDeliveryWithNullArgument() {

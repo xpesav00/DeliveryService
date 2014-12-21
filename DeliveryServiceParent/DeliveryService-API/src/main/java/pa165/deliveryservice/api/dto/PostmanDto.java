@@ -95,8 +95,6 @@ public class PostmanDto implements Cloneable{
         return true;
     }
 
-
-
     @Override
     public String toString() {
         return "PostmanDto{" + "Id=" + Id + ", firstName=" + firstName + ", lastName=" + lastName + '}';

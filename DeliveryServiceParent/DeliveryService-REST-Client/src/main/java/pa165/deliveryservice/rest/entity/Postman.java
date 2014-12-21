@@ -1,6 +1,5 @@
 package pa165.deliveryservice.rest.entity;
 
-import java.util.List;
 import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 
 /**

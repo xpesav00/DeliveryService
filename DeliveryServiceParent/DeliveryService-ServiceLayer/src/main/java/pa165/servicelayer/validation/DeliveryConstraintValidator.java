@@ -7,7 +7,7 @@ import pa165.deliveryservice.api.dto.DeliveryDto;
 
 
 /**
- *
+ * Validator for @DeliveryConstraint annotation
  * @author Drimal
  */
 public class DeliveryConstraintValidator implements ConstraintValidator<DeliveryConstraint, DeliveryDto>{

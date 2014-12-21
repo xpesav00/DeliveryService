@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import static org.mockito.Mockito.*;
+import org.mockito.exceptions.verification.junit.ArgumentsAreDifferent;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.util.ReflectionTestUtils;
 import pa165.deliveryservice.daoInterface.CustomerDao;
@@ -43,7 +44,7 @@ public class CustomerServiceImplTest extends AbstractIntegrationTest {
     public void setUp() {
         customerService = new CustomerServiceImpl();
         mapper = new DozerBeanMapper();
-        //sets Mock CustomerDao to customerService field
+
         ReflectionTestUtils.setField(customerService, "customerDao", dao);
         ReflectionTestUtils.setField(customerService, "mapper", mapper);
 
@@ -62,8 +63,13 @@ public class CustomerServiceImplTest extends AbstractIntegrationTest {
         mapper = null;
     }
 
-    @Test(expected = IllegalArgumentException.class)
     public void testAddCustomer() {
+        customerService.createCustomer(customerDto.getFirstName(), customerDto.getLastName(), customerDto.getAddress(), customerDto.getDeliveries());
+        verify(dao).addCustomer(customer);
+    }
+    
+    @Test(expected = ArgumentsAreDifferent.class)
+    public void testAddDifferentCustomer() {
         customerService.createCustomer("Jan", "Jeliman", new AddressDto(), new ArrayList<DeliveryDto>());
         verify(dao).addCustomer(customer);
     }

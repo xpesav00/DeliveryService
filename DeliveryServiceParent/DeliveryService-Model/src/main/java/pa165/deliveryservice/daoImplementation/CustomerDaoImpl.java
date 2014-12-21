@@ -39,12 +39,6 @@ public class CustomerDaoImpl implements CustomerDao {
         this.em = em;
     }
 
-    /**
-     * Finds a single customer in the DB.
-     *
-     * @param id Customers's ID.
-     * @return Found customer.
-     */
     @Override
     public Customer getCustomer(long id) {
         log.info("Get specific customer from database.");
@@ -96,7 +90,6 @@ public class CustomerDaoImpl implements CustomerDao {
         } catch (NullPointerException ex) {
             throw new IllegalArgumentException("Unknown object to delete.");
         }
-        //set 'no customer' to deleted customer's deliveries
         for (Delivery del : customerDb.getDeliveries()) {
             del.setCustomer(null);
         }

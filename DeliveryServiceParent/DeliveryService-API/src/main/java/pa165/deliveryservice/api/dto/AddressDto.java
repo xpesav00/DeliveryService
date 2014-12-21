@@ -3,7 +3,8 @@ package pa165.deliveryservice.api.dto;
 import java.util.Objects;
 
 /**
- * 
+ * DTO for Address entity.
+ *
  * @author Drimal
  */
 public class AddressDto {

@@ -16,7 +16,6 @@ public class GoodsConstraintValidator implements ConstraintValidator<GoodsConstr
 
     @Override
     public boolean isValid(GoodsDto goods, ConstraintValidatorContext cvc) {
-        //Pokud je cena validni, tak musi byt nastaven i nejaky prodejce
         boolean isValid = !(goods.getPrice() >= 1 && goods.getSeller().isEmpty());
                 
         if ( !isValid ) {

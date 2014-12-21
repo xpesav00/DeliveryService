@@ -64,12 +64,10 @@ public class PostmanServiceImpl implements PostmanService {
         postman.setFirstName(postmanDto.getFirstName());
         postman.setLastName(postmanDto.getLastName());
 
-        //List<Delivery> deliveries = new ArrayList<>();
         for (DeliveryDto deliveryDto : postmanDto.getDeliveries()) {
             postman.addDelivery(mapper.map(deliveryDto, Delivery.class));
         }
 
-        //postman.setDeliveries(deliveries);
         postmanDao.updatePostman(postman);
     }
 

@@ -82,7 +82,6 @@ public class PostmanDaoImpl implements PostmanDao {
         } catch (NullPointerException ex) {
             throw new IllegalArgumentException("Unknown postman object.");
         }
-        //set 'no postman' to deleted postman's deliveries
         for (Delivery del : postmanDb.getDeliveries()) {
             del.setPostman(null);
         }

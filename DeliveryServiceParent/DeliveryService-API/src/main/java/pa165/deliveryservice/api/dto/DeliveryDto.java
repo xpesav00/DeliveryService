@@ -3,11 +3,11 @@ package pa165.deliveryservice.api.dto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import javax.validation.constraints.*;
 import pa165.deliveryservice.entity.DeliveryStatus;
 
 /**
- * 
+ * DTO for Delivery entity.
+ *
  * @author Drimal
  */
 public class DeliveryDto implements Cloneable{

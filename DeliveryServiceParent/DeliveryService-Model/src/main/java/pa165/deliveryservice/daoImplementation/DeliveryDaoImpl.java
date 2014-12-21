@@ -1,16 +1,9 @@
 package pa165.deliveryservice.daoImplementation;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import pa165.deliveryservice.daoInterface.DeliveryDao;
 import pa165.deliveryservice.entity.Delivery;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -42,7 +35,6 @@ public class DeliveryDaoImpl implements DeliveryDao{
     public void addDelivery(Delivery delivery) {
         log.info("Adding new delivery("+delivery+") into DB.");
         evaluateDelivery(delivery);
-        //em.persist(delivery);
         em.merge(delivery);
     }
     

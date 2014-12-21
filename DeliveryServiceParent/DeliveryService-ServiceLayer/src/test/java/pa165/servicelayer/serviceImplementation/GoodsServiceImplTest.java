@@ -19,6 +19,7 @@ import pa165.deliveryservice.api.GoodsService;
  
  
 /**
+* Tests of Goods Service layer, using mock DAO layer.
 *
 * @author Jan Stastny
 */

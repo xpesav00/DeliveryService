@@ -1,8 +1,7 @@
-package pa165.deliveryservice;
+package pa165.deliveryservice.daoImplementation;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
-
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

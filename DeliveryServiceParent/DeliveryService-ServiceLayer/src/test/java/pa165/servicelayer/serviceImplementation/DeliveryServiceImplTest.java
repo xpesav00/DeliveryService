@@ -25,6 +25,7 @@ import pa165.deliveryservice.api.dto.DeliveryDto;
 import pa165.deliveryservice.api.DeliveryService;
 
 /**
+ * Tests of Delivery Service layer, using mock DAO layer.
  *
  * @author Drimal
  */

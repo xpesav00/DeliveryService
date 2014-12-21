@@ -24,7 +24,6 @@
     <bean id="goodsDao" class="pa165.deliveryservice.daoImplementation.GoodsDaoImpl" />
     <bean id="goodsService" class="pa165.servicelayer.serviceImplementation.GoodsServiceImpl"/>
     
-    <!--Jan Stastny-->
     <bean id="deliveryDao" class="pa165.deliveryservice.daoImplementation.DeliveryDaoImpl" />
     <bean id="deliveryService" class="pa165.servicelayer.serviceImplementation.DeliveryServiceImpl"/>
     

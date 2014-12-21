@@ -12,7 +12,6 @@ import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pa165.deliveryservice.DaoContext;
 import pa165.deliveryservice.daoInterface.PostmanDao;
 import pa165.deliveryservice.entity.Address;
 import pa165.deliveryservice.entity.Customer;
@@ -36,7 +35,6 @@ public class PostmanDaoImplNGTest extends AbstractTestNGSpringContextTests {
     PostmanDao dao;
     private long postman1Id;
 
-    //before each test
     @BeforeMethod
     public void setUpMethod() throws Exception {
         emf = Persistence.createEntityManagerFactory("myUnit");
@@ -81,12 +79,12 @@ public class PostmanDaoImplNGTest extends AbstractTestNGSpringContextTests {
         Delivery del2 = new Delivery();
         del1.setName("DELx055");
         del1.setPostman(pman1);
-        //TODO add deliveries
+        
         del1.setCustomer(cus1);
         del1.setStatus(DeliveryStatus.INIT);
         del2.setName("DELx257");
         del2.setPostman(pman1);
-        //TODO add goods to del2
+
         del2.setCustomer(cus2);
         del2.setStatus(DeliveryStatus.SENT);
 
@@ -109,7 +107,6 @@ public class PostmanDaoImplNGTest extends AbstractTestNGSpringContextTests {
         em.getTransaction().commit();
     }
 
-    //after each test
     @AfterMethod
     public void tearDownMethod() throws Exception {
         emf.close();
