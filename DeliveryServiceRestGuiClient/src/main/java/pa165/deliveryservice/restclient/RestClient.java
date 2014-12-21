@@ -10,7 +10,8 @@ import pa165.deliveryservice.restclient.api.*;
 import pa165.deliveryservice.restclient.listeners.*;
 
 /**
- *
+ * REST Client GUI
+ * 
  * @author John
  */
 public class RestClient extends javax.swing.JFrame {
@@ -24,7 +25,7 @@ public class RestClient extends javax.swing.JFrame {
         String hostURL = "http://localhost:8080/pa165/rest";
          postmanClient = new PostmanClient(hostURL);
          customerClient = new CustomerClient(hostURL);
-        //CustomerClient customerClient = new CustomerClient(hostURL);
+
         initComponents();
         
         btnShowPostmen.addActionListener(new GetAllPostmenListener(postmanClient, postmanTable));

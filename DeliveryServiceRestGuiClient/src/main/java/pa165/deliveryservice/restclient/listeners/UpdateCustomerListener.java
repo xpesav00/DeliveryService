@@ -108,7 +108,7 @@ public class UpdateCustomerListener implements ActionListener {
                 address.setStreet(street);
                 address.setPostcode(Integer.parseInt(postcode));
                 customer.setAddress(address);
-                Response response = customerClient.createCustomer(customer);
+                Response response = customerClient.updateCustomer(customer);
                 getAllRecords.getAll();
             } catch (Exception ex) {
                 log.log(Level.SEVERE, Arrays.toString(ex.getStackTrace()));
