@@ -105,7 +105,7 @@ public class CustomerController {
     }
     
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String update(@Valid @ModelAttribute CustomerDto customer, BindingResult bindingResult, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
+    public String update(@Valid @ModelAttribute("customer") CustomerDto customer, BindingResult bindingResult, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         log.debug("update(locale={}, customer={})", locale, customer);
         if (bindingResult.hasErrors()) {
             log.debug("binding errors");
