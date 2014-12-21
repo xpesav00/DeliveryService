@@ -7,7 +7,7 @@ This is a team project for advanced Java course at Masaryk University.
 * __Server__ - Apache Tomcat
 * __Framework__ - Spring
 * __Database__ - JavaDB, port 1527
-* __Database name__ - testdb
+* __Database name__ - DeliveryServiceDB
 * __Database user__ - pa165
 * __Database user password__ - pa165
 * __Web application context__ - http://localhost:8080/pa165
@@ -34,12 +34,12 @@ Project uses maven, to build it use:
 mvn install
 ```
 
-Run DeliveryServiceRestGuiClient module:
+Run DeliveryServiceRestGuiClient module from its directory:
 ```
 mvn exec:java -Dmaven.test.skip=true
 ```
 
-Run DeliveryService-Web module:
+Run DeliveryService-Web module from its directory:
 ```
 mvn tomcat:run -Dmaven.test.skip=true
 ```
