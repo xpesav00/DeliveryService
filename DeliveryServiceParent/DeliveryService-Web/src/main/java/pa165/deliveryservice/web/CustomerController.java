@@ -115,7 +115,7 @@ public class CustomerController {
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 log.debug("FieldError: {}", fe);
             }
-            return (Long.valueOf(customer.getId()) == null)?"customer/list":"customer/edit";
+            return (Long.valueOf(customer.getId()) == 0)?"customer/list":"customer/edit";
         }
         if (Long.valueOf(customer.getId()) == null) {
             customerService.createCustomer(customer.getFirstName(), customer.getLastName(), customer.getAddress(), customer.getDeliveries());

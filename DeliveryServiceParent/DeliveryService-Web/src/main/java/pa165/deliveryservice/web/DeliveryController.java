@@ -126,8 +126,7 @@ public class DeliveryController {
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 log.debug("FieldError: {}", fe);
             }
-            if(delivery.getId() == 0) return "delivery/list";
-            return (Long.valueOf(delivery.getId())==null)?"delivery/list":"delivery/edit";
+            return (Long.valueOf(delivery.getId())== 0)?"delivery/list":"delivery/edit";
         }
 
         PostmanDto postman = postmanService.findPostman(delivery.getPostman().getId());

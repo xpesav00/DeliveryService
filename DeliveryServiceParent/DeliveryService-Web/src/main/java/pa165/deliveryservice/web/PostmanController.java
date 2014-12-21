@@ -99,7 +99,7 @@ public class PostmanController {
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 log.debug("FieldError: {}", fe);
             }//TODO fix return (wrong redirect in web)
-            return (Long.valueOf(postman.getId()) ==null)?"postman/list":"postman/edit";
+            return (Long.valueOf(postman.getId()) == 0)?"postman/list":"postman/edit";
         }
         if(postman.getId() == 0){
             if(postman.areDeliveriesNull()){
