@@ -82,4 +82,5 @@
             </plugin>
         </plugins>
     </build>
+    <name>DeliveryService-Rest-GuiClient</name>
 </project>
