@@ -9,7 +9,7 @@ import pa165.deliveryservice.rest.entity.Customer;
  *
  * @author Drimal
  */
-public interface CustomerRestI {
+public interface CustomerRestApi {
     
     List<Customer> getAllCustomers();
     

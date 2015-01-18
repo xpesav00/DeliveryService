@@ -10,7 +10,7 @@ import pa165.deliveryservice.rest.entity.Postman;
  *
  * @author Drimal
  */
-public interface PostmanRestI {
+public interface PostmanRestApi {
             
     List<Postman> getAllPostmen();
     

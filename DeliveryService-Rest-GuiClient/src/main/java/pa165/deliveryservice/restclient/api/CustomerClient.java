@@ -1,5 +1,6 @@
 package pa165.deliveryservice.restclient.api;
 
+import java.util.Collections;
 import java.util.List;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
@@ -8,7 +9,8 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import pa165.deliveryservice.rest.entity.Customer;
-import pa165.deliveryservice.rest.interfaces.CustomerRestI;
+import pa165.deliveryservice.rest.entity.Postman;
+import pa165.deliveryservice.rest.interfaces.CustomerRestApi;
 import pa165.deliveryservice.restclient.BaseClient;
 
 /**
@@ -16,7 +18,7 @@ import pa165.deliveryservice.restclient.BaseClient;
  *
  * @author Drimal
  */
-public class CustomerClient extends BaseClient implements CustomerRestI{
+public class CustomerClient extends BaseClient implements CustomerRestApi{
 
     public CustomerClient(String baseUrl) {
         super(baseUrl);
@@ -24,32 +26,56 @@ public class CustomerClient extends BaseClient implements CustomerRestI{
     }
 
     @Override
-    public List<Customer> getAllCustomers() {
+    public List<Customer> getAllCustomers() throws RuntimeException {
         WebTarget customerResource = this.getResource().path("/findAll");
         Invocation.Builder builder = customerResource.request(MediaType.APPLICATION_JSON);
-        return builder.get( new GenericType<List<Customer>>() {});
+        List<Customer> result = Collections.EMPTY_LIST;
+        try{
+                result = builder.get( new GenericType<List<Customer>>() {});
+        }catch(Exception ex){
+            throw new RuntimeException("Can't retrieve all customers!", ex);
+        }
+        return result;
     }
 
     @Override
-    public Customer getCustomer(long id) {
+    public Customer getCustomer(long id) throws RuntimeException {
         WebTarget customerResource = this.getResource().path(""+id);
         Invocation.Builder builder = customerResource.request(MediaType.APPLICATION_JSON);
-        return builder.get(Customer.class);
+        Customer result = null;
+        try{
+            result = builder.get(Customer.class);
+        }catch(Exception ex){
+            throw new RuntimeException("Can't retrieve customer!", ex);
+        }
+        return result;
     }
 
     @Override
-    public Response createCustomer(Customer customer) {
+    public Response createCustomer(Customer customer) throws RuntimeException{
         WebTarget customerResource = this.getResource().path("/create");
         Invocation.Builder builder = customerResource.request(MediaType.APPLICATION_JSON);
         Entity<Customer> entity = Entity.entity(customer, MediaType.APPLICATION_JSON);
-        return builder.post(entity);
+        Response response = null;
+        try{    
+            response = builder.post(entity);
+        }catch(Exception ex){
+            throw new RuntimeException("Can't create customer!", ex);
+        }
+        return response;
     }
 
     @Override
-    public Response deleteCustomer(long id) {
+    public Response deleteCustomer(long id) throws RuntimeException{
         WebTarget customerResource = this.getResource().path("/delete/"+id);
         Invocation.Builder builder = customerResource.request(MediaType.APPLICATION_JSON);
-        return builder.delete();
+        Response response = null;
+        try{    
+            response = builder.delete();
+        }catch(Exception ex){
+            throw new RuntimeException("Can't delete customer!", ex);
+        }
+        return response;        
     }
 
     @Override
@@ -57,7 +83,13 @@ public class CustomerClient extends BaseClient implements CustomerRestI{
         WebTarget customerResource = this.getResource().path("/update/"+customer.getId());
         Invocation.Builder builder = customerResource.request();
         Entity<Customer> entity = Entity.entity(customer, MediaType.APPLICATION_JSON);
-        return builder.put(entity);
+        Response response = null;
+        try{    
+            response = builder.put(entity);
+        }catch(Exception ex){
+            throw new RuntimeException("Can't update customer!", ex);
+        }
+        return response;  
     }
     
 }
