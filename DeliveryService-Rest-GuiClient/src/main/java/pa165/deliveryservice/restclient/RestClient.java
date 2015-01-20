@@ -5,34 +5,44 @@
  */
 package pa165.deliveryservice.restclient;
 
+import java.awt.im.InputContext;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import javax.swing.table.DefaultTableModel;
 import pa165.deliveryservice.restclient.api.*;
 import pa165.deliveryservice.restclient.listeners.*;
 
 /**
  * REST Client GUI
- * 
+ *
  * @author John
  */
 public class RestClient extends javax.swing.JFrame {
     private final PostmanClient postmanClient;
     private final CustomerClient customerClient;
-    
+    private Locale currentLocale;
+    private ResourceBundle bundle;
+
     /**
      * Creates new form RestClient
      */
     public RestClient() {
         String hostURL = "http://localhost:8080/pa165/rest";
-         postmanClient = new PostmanClient(hostURL);
-         customerClient = new CustomerClient(hostURL);
+        postmanClient = new PostmanClient(hostURL);
+        customerClient = new CustomerClient(hostURL);
+
+        InputContext context = InputContext.getInstance();
+
+        currentLocale = new Locale(context.getLocale().getLanguage());
+        bundle = ResourceBundle.getBundle("MessagesBundle", currentLocale);
 
         initComponents();
-        
+
         btnShowPostmen.addActionListener(new GetAllPostmenListener(postmanClient, postmanTable));
         btnDeletePostman.addActionListener(new DeletePostmanListener(postmanClient, postmanTable));
         btnCreatePostman.addActionListener(new CreatePostmanListener(postmanClient,postmanTable, txtPostmanName, txtPostmanSurname));
         btnUpdatePostman.addActionListener(new UpdatePostmanListener(postmanClient, postmanTable, txtPostmanName, txtPostmanSurname));
-    
+
         btnShowCustomer.addActionListener(new GetAllCustomersListener(customerClient, customerTable));
         btnDeleteCustomer.addActionListener(new DeleteCustomerListener(customerClient, customerTable));
         btnCreateCustomer.addActionListener(new CreateCustomerListener(customerClient, customerTable, txtCustomerName, txtCustomerSurname, txtCustomerCity, txtCustomerStreet, txtCustomerPostcode));
@@ -97,7 +107,10 @@ public class RestClient extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Name", "Surname", "Address"
+                bundle.getString("table.id"),
+                bundle.getString("table.name"),
+                bundle.getString("table.surname"),
+                bundle.getString("table.address")
             }
         ) {
             Class[] types = new Class [] {
@@ -123,11 +136,11 @@ public class RestClient extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(customerTable);
 
-        customerForm.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Customer", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
+        customerForm.setBorder(javax.swing.BorderFactory.createTitledBorder(null, bundle.getString("customer.head"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
         customerForm.setLayout(new java.awt.GridBagLayout());
 
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblName.setText("Name:");
+        lblName.setText(bundle.getString("name"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -142,7 +155,7 @@ public class RestClient extends javax.swing.JFrame {
         customerForm.add(txtCustomerName, gridBagConstraints);
 
         lblSurname.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblSurname.setText("Surname:");
+        lblSurname.setText(bundle.getString("surname"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -157,7 +170,7 @@ public class RestClient extends javax.swing.JFrame {
         customerForm.add(txtCustomerSurname, gridBagConstraints);
 
         lblCity.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblCity.setText("City:");
+        lblCity.setText(bundle.getString("city"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -172,7 +185,7 @@ public class RestClient extends javax.swing.JFrame {
         customerForm.add(txtCustomerCity, gridBagConstraints);
 
         lblStreet.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblStreet.setText("Street:");
+        lblStreet.setText(bundle.getString("street"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -187,7 +200,7 @@ public class RestClient extends javax.swing.JFrame {
         customerForm.add(txtCustomerStreet, gridBagConstraints);
 
         lblPostcode.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblPostcode.setText("Postcode:");
+        lblPostcode.setText(bundle.getString("postcode"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -201,7 +214,7 @@ public class RestClient extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 4, 7, 202);
         customerForm.add(txtCustomerPostcode, gridBagConstraints);
 
-        btnClearCustomer.setText("Clear form");
+        btnClearCustomer.setText(bundle.getString("clear"));
         btnClearCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearCustomerActionPerformed(evt);
@@ -217,16 +230,16 @@ public class RestClient extends javax.swing.JFrame {
         customerButtonPanel.setMinimumSize(new java.awt.Dimension(452, 23));
         customerButtonPanel.setLayout(new java.awt.GridLayout(1, 0));
 
-        btnShowCustomer.setText("Show customers");
+        btnShowCustomer.setText(bundle.getString("customer.show"));
         customerButtonPanel.add(btnShowCustomer);
 
-        btnCreateCustomer.setText("Create");
+        btnCreateCustomer.setText(bundle.getString("customer.create"));
         customerButtonPanel.add(btnCreateCustomer);
 
-        btnUpdateCustomer.setText("Update selected");
+        btnUpdateCustomer.setText(bundle.getString("update"));
         customerButtonPanel.add(btnUpdateCustomer);
 
-        btnDeleteCustomer.setText("Delete selected");
+        btnDeleteCustomer.setText(bundle.getString("delete"));
         customerButtonPanel.add(btnDeleteCustomer);
 
         javax.swing.GroupLayout customerPanelLayout = new javax.swing.GroupLayout(customerPanel);
@@ -254,7 +267,9 @@ public class RestClient extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Id", "Name", "Surname"
+                bundle.getString("table.id"),
+                bundle.getString("table.name"),
+                bundle.getString("table.surname")
             }
         ) {
             Class[] types = new Class [] {
@@ -280,18 +295,18 @@ public class RestClient extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(postmanTable);
 
-        postmanForm.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Postman", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
+        postmanForm.setBorder(javax.swing.BorderFactory.createTitledBorder(null, bundle.getString("postman.head"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
         postmanForm.setLayout(new java.awt.GridBagLayout());
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel5.setText("Name:");
+        jLabel5.setText(bundle.getString("name"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.LINE_END;
         postmanForm.add(jLabel5, gridBagConstraints);
 
-        jLabel6.setText("Surname:");
+        jLabel6.setText(bundle.getString("surname"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -312,7 +327,7 @@ public class RestClient extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(6, 4, 0, 202);
         postmanForm.add(txtPostmanSurname, gridBagConstraints);
 
-        btnClearPostman.setText("Clear form");
+        btnClearPostman.setText(bundle.getString("clear"));
         btnClearPostman.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnClearPostmanActionPerformed(evt);
@@ -328,19 +343,19 @@ public class RestClient extends javax.swing.JFrame {
         postmanButtonPanel.setPreferredSize(new java.awt.Dimension(452, 23));
         postmanButtonPanel.setLayout(new java.awt.GridLayout(1, 0));
 
-        btnShowPostmen.setText("Show postmen");
+        btnShowPostmen.setText(bundle.getString("postman.show"));
         btnShowPostmen.setMaximumSize(new java.awt.Dimension(65, 23));
         btnShowPostmen.setMinimumSize(new java.awt.Dimension(65, 23));
         btnShowPostmen.setPreferredSize(new java.awt.Dimension(65, 23));
         postmanButtonPanel.add(btnShowPostmen);
 
-        btnCreatePostman.setText("Create");
+        btnCreatePostman.setText(bundle.getString("postman.create"));
         postmanButtonPanel.add(btnCreatePostman);
 
-        btnUpdatePostman.setText("Update selected");
+        btnUpdatePostman.setText(bundle.getString("update"));
         postmanButtonPanel.add(btnUpdatePostman);
 
-        btnDeletePostman.setText("Delete selected");
+        btnDeletePostman.setText(bundle.getString("delete"));
         postmanButtonPanel.add(btnDeletePostman);
 
         javax.swing.GroupLayout postmanPanelLayout = new javax.swing.GroupLayout(postmanPanel);
@@ -361,7 +376,7 @@ public class RestClient extends javax.swing.JFrame {
                 .addComponent(postmanButtonPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(postmanForm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Postman", postmanPanel);
