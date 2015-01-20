@@ -20,6 +20,9 @@ public class User {
     @Column
     private byte[] password; //password is saved as hash of user password
 
+    @Column
+    private UserRole userRole;
+
     public long getId() {
         return id;
     }
@@ -42,6 +45,14 @@ public class User {
 
     public void setPassword(byte[] password) {
         this.password = password;
+    }
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 
     @Override

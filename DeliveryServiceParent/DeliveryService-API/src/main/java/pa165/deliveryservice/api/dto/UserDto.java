@@ -2,6 +2,7 @@ package pa165.deliveryservice.api.dto;
 
 import java.util.Arrays;
 import java.util.Objects;
+import pa165.deliveryservice.entity.UserRole;
 
 /**
  *
@@ -10,6 +11,7 @@ import java.util.Objects;
 public class UserDto {
     private String username;
     private byte[] password;
+    private UserRole role;
 
     public String getUsername() {
         return username;
@@ -25,6 +27,14 @@ public class UserDto {
 
     public void setPassword(byte[] password) {
         this.password = password;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 
     @Override
