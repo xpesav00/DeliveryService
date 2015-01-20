@@ -12,6 +12,5 @@
     <br>
     <br>
     <p><strong><fmt:message key="mainpage.info" /></strong></p>
-    
 </jsp:attribute>
 </my:layout>
