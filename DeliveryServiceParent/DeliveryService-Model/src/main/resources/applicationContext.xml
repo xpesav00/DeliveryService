@@ -32,4 +32,8 @@
     
     <bean id="customerDao" class="pa165.deliveryservice.daoImplementation.CustomerDaoImpl" />
     <bean id="customerService" class="pa165.servicelayer.serviceImplementation.CustomerServiceImpl" />
+    
+    <bean id="userDao" class="pa165.deliveryservice.daoImplementation.UserDaoImpl" />
+    <bean id="userService" class="pa165.servicelayer.serviceImplementation.UserServiceImpl" />
+    
 </beans>
