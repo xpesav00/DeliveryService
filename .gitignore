@@ -6,5 +6,7 @@
 /DeliveryServiceParent/DeliveryService-Web/target/
 /DeliveryServiceParent/FileDownloader/nbproject/private/
 /DeliveryServiceParent/DeliveryService-API/target/
-/DeliveryServiceParent/DeliveryService-REST-Client/target/
-/DeliveryServiceRestGuiClient/target/
+/DeliveryServiceParent/DeliveryService-REST/target/
+/DeliveryServiceParent/DeliveryService-Rest-GuiClient/target/
+/DeliveryService-Rest-GuiClient/target/
+
