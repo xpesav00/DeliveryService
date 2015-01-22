@@ -19,7 +19,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <spring.version>4.1.1.RELEASE</spring.version>
     </properties>
-    
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -31,7 +31,7 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
- 
+
     <dependencies>
         <dependency>
             <groupId>PA165</groupId>
@@ -50,7 +50,7 @@
         </dependency>
         <dependency>
             <groupId>PA165</groupId>
-            <artifactId>DeliveryService-REST-API</artifactId>
+            <artifactId>DeliveryService-REST</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <!-- servlet, JSP, JSTL -->
@@ -106,6 +106,23 @@
             <artifactId>spring-web</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>3.2.5.RELEASE</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>3.2.5.RELEASE</version>
+            <type>jar</type>
+            <scope>compile</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -126,7 +143,7 @@
             <artifactId>jackson-databind</artifactId>
             <version>2.4.3</version>
         </dependency>
-        
+
          <dependency>
              <groupId>javax.servlet</groupId>
              <artifactId>javax.servlet-api</artifactId>

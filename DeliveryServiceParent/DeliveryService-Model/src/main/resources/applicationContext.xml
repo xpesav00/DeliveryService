@@ -11,10 +11,10 @@
             http://www.springframework.org/schema/tx
             http://www.springframework.org/schema/tx/spring-tx.xsd">
     <import resource="springConfig.xml"/>
-    
+
     <!-- Exception translation bean post processor -->
     <bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
-    
+
     <!-- propojuje @Autowired atributy -->
     <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
 
@@ -23,17 +23,16 @@
 
     <bean id="goodsDao" class="pa165.deliveryservice.daoImplementation.GoodsDaoImpl" />
     <bean id="goodsService" class="pa165.servicelayer.serviceImplementation.GoodsServiceImpl"/>
-    
+
     <bean id="deliveryDao" class="pa165.deliveryservice.daoImplementation.DeliveryDaoImpl" />
     <bean id="deliveryService" class="pa165.servicelayer.serviceImplementation.DeliveryServiceImpl"/>
-    
+
     <bean id="postmanDao" class="pa165.deliveryservice.daoImplementation.PostmanDaoImpl" />
     <bean id="postmanService" class="pa165.servicelayer.serviceImplementation.PostmanServiceImpl" />
-    
+
     <bean id="customerDao" class="pa165.deliveryservice.daoImplementation.CustomerDaoImpl" />
     <bean id="customerService" class="pa165.servicelayer.serviceImplementation.CustomerServiceImpl" />
-    
+
     <bean id="userDao" class="pa165.deliveryservice.daoImplementation.UserDaoImpl" />
     <bean id="userService" class="pa165.servicelayer.serviceImplementation.UserServiceImpl" />
-    
 </beans>

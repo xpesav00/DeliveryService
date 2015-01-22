@@ -2,6 +2,7 @@ package pa165.servicelayer.serviceImplementation;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
@@ -9,6 +10,7 @@ import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pa165.deliveryservice.api.UserService;
@@ -55,6 +57,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Secured("ROLE_ADMIN")
     public void createUser(UserDto user) {
         if(user == null){
             throw new NullPointerException("User can't be null.");
@@ -63,6 +66,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Secured("ROLE_ADMIN")
     public boolean deleteUser(UserDto user) {
         if(user == null){
             throw new NullPointerException("User can't be null.");
@@ -72,6 +76,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    @Secured("ROLE_ADMIN")
     public void updateUser(UserDto user) {
         if(user == null){
             throw new NullPointerException("User can't be null.");
@@ -90,7 +95,17 @@ public class UserServiceImpl implements UserService{
         return null;
     }
 
+    public List<UserDto> retrieveAllUsers(){
+        List<UserDto> result = new ArrayList<>();
+        List<UserEntity> listUserEntity = userDao.retrieveAllUsers();
+        for (UserEntity user : listUserEntity) {
+            result.add(mapper.map(user, UserDto.class));
+        }
+        return result;
+    }
+
     @Override
+    @Secured("ROLE_ADMIN")
     public boolean userMatcher(String name, byte[] password) {
         UserDto userDb = getUserByName(name);
         if(userDb != null){

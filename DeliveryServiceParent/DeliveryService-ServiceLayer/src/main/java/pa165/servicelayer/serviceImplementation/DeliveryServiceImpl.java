@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pa165.deliveryservice.daoInterface.DeliveryDao;
@@ -29,7 +30,7 @@ public class DeliveryServiceImpl implements DeliveryService{
     private DeliveryDao deliveryDao;
     @Autowired
     private Mapper mapper;
-    
+
     @PostConstruct
     public void preloadDB(){
         System.out.println("Preload DB");
@@ -46,14 +47,15 @@ public class DeliveryServiceImpl implements DeliveryService{
         PostmanDto postman = new PostmanDto();
         postman.setFirstName("Karel");
         postman.setLastName("Pepik");
-        
+
         GoodsDto goods = new GoodsDto();
         goods.setPrice(100);
         goods.setSeller("Sony");
         createDelivery("CZC.cz", postman, Arrays.asList(goods), customer, DeliveryStatus.INIT);
     }
-    
+
     @Override
+    @Secured("ROLE_ADMIN")
     public void createDelivery(String name, PostmanDto postman, List<GoodsDto> goods, CustomerDto customer, DeliveryStatus status) {
         if(name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Name of delivery can not be empty.");
@@ -63,7 +65,7 @@ public class DeliveryServiceImpl implements DeliveryService{
         if(status != DeliveryStatus.INIT) {
             throw new IllegalArgumentException("Invalid status("+status+"), delivery status should be INIT.");
         }
-        
+
         DeliveryDto deliveryDto = new DeliveryDto();
         deliveryDto.setName(name);
         deliveryDto.setPostman(postman);
@@ -71,18 +73,7 @@ public class DeliveryServiceImpl implements DeliveryService{
         deliveryDto.setCustomer(customer);
         deliveryDto.setStatus(status);
         Delivery delivery = mapper.map(deliveryDto, Delivery.class);
-        
-        try{
-            deliveryDao.addDelivery(delivery);
-        }catch(Exception e){
-            throw new DataAccessException("Error in persistence layer.", e){};
-        }
-    }
-    
-    @Override
-    public void createDelivery(DeliveryDto deliveryDto){
-        Delivery delivery = mapper.map(deliveryDto, Delivery.class);
-        
+
         try{
             deliveryDao.addDelivery(delivery);
         }catch(Exception e){
@@ -91,6 +82,19 @@ public class DeliveryServiceImpl implements DeliveryService{
     }
 
     @Override
+    @Secured("ROLE_ADMIN")
+    public void createDelivery(DeliveryDto deliveryDto){
+        Delivery delivery = mapper.map(deliveryDto, Delivery.class);
+
+        try{
+            deliveryDao.addDelivery(delivery);
+        }catch(Exception e){
+            throw new DataAccessException("Error in persistence layer.", e){};
+        }
+    }
+
+    @Override
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public DeliveryDto findDelivery(long id) {
         if(id < 0) {
             throw new IllegalArgumentException("Id can not be less than 0.");
@@ -101,6 +105,7 @@ public class DeliveryServiceImpl implements DeliveryService{
     }
 
     @Override
+    @Secured("ROLE_ADMIN")
     public void updateDelivery(DeliveryDto deliveryDto) {
         if(deliveryDto == null){
             throw new NullPointerException("Updated delivery can not be null.");
@@ -114,6 +119,7 @@ public class DeliveryServiceImpl implements DeliveryService{
     }
 
     @Override
+    @Secured("ROLE_ADMIN")
     public void deleteDelivery(DeliveryDto deliveryDto) {
         if(deliveryDto == null) throw new IllegalArgumentException("Can not delete null.");
         Delivery delivery = mapper.map(deliveryDto, Delivery.class);
@@ -125,6 +131,7 @@ public class DeliveryServiceImpl implements DeliveryService{
     }
 
     @Override
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public List<DeliveryDto> getAllDeliveries() {
         List<DeliveryDto> allDeliveries = new ArrayList<>();
         List<Delivery> allDeliveryDaos = deliveryDao.getAllDeliveries();
@@ -133,5 +140,4 @@ public class DeliveryServiceImpl implements DeliveryService{
         }
         return allDeliveries;
     }
-    
 }

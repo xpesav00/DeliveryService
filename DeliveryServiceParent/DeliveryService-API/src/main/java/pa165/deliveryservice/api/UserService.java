@@ -1,5 +1,6 @@
 package pa165.deliveryservice.api;
 
+import java.util.List;
 import pa165.deliveryservice.api.dto.UserDto;
 
 /**
@@ -41,4 +42,6 @@ public interface UserService {
      * @return true if specific user exist
      */
     boolean userMatcher(String name, byte[] password);
+
+    List<UserDto> retrieveAllUsers();
 }

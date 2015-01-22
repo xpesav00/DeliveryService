@@ -6,6 +6,7 @@ import javax.annotation.PostConstruct;
 
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,22 +31,23 @@ public class PostmanServiceImpl implements PostmanService {
 
     @Autowired
     private Mapper mapper;
-    
+
     @PostConstruct
     public void preloadDB(){
         PostmanDto postman1 = new PostmanDto();
         postman1.setFirstName("Karel");
         postman1.setLastName("Pepik");
-        
+
         PostmanDto postman2 = new PostmanDto();
         postman2.setFirstName("Honza");
         postman2.setLastName("Pospisil");
-        
+
         addPostman(postman1);
         addPostman(postman2);
     }
-    
+
     @Override
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public List<PostmanDto> getAllPostmen() {
         List<PostmanDto> postmenList = new ArrayList<>();
         for (Postman postman : postmanDao.getAllPostmen()) {
@@ -55,6 +57,7 @@ public class PostmanServiceImpl implements PostmanService {
     }
 
     @Override
+    @Secured("ROLE_ADMIN")
     public void updatePostman(PostmanDto postmanDto) {
         if (postmanDto == null) {
             throw new NullPointerException("Postman is null.");
@@ -72,16 +75,18 @@ public class PostmanServiceImpl implements PostmanService {
     }
 
     @Override
+    @Secured("ROLE_ADMIN")
     public void deletePostman(PostmanDto postmanDto) {
         if (postmanDto == null) {
             throw new NullPointerException("Postman is null.");
         }
-        
+
         Postman postman = postmanDao.getPostman(postmanDto.getId());
         postmanDao.deletePostman(postman);
     }
 
     @Override
+    @Secured("ROLE_ADMIN")
     public void addPostman(PostmanDto postmanDto) {
         if (postmanDto == null) {
             throw new NullPointerException("Postman is null.");
@@ -94,6 +99,7 @@ public class PostmanServiceImpl implements PostmanService {
     }
 
     @Override
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public PostmanDto findPostman(long id) {
         Postman postman = postmanDao.getPostman(id);
         if (postman == null) {

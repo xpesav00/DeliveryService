@@ -5,6 +5,7 @@ import java.util.List;
 import org.dozer.Mapper;
 import org.dozer.MappingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pa165.deliveryservice.daoInterface.GoodsDao;
@@ -29,6 +30,7 @@ public class GoodsServiceImpl implements GoodsService {
     private Mapper mapper;
 
     @Override
+    @Secured("ROLE_ADMIN")
     public GoodsDto createGoods(long price, String seller, DeliveryDto delivery) {
         if (price < 0) {
             throw new IllegalArgumentException("Price can't be negative.");
@@ -50,6 +52,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    @Secured("ROLE_ADMIN")
     public boolean deleteGoods(GoodsDto goodsDto) {
         if (goodsDto == null) {
             throw new NullPointerException("Goods can't be null.");
@@ -61,6 +64,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    @Secured("ROLE_ADMIN")
     public void updateGoods(GoodsDto goodsDto) {
         if (goodsDto == null) {
             throw new NullPointerException("Goods can't be null.");
@@ -71,6 +75,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public List<GoodsDto> getAllGoods() {
         List<GoodsDto> resultList = new ArrayList<>();
         for (Goods goods : goodsDao.getAllGoods()) {
@@ -80,6 +85,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    @Secured({"ROLE_USER", "ROLE_ADMIN"})
     public GoodsDto findGood(long id) {
         if (id < 0) {
             throw new IllegalArgumentException("Id can't be negative.");
