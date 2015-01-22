@@ -1,7 +1,7 @@
 package pa165.deliveryservice.daoInterface;
 
 import java.util.List;
-import pa165.deliveryservice.entity.User;
+import pa165.deliveryservice.entity.UserEntity;
 
 /**
  * Performs necessary operations with user entities
@@ -14,30 +14,30 @@ public interface UserDao {
      * Update information about a single user
      * @param user user to update
      */
-    void updateUser(User user);
+    void updateUser(UserEntity user);
 
     /**
      * Add specific user into DB
      * @param user user to add
      */
-    void addUser(User user);
+    void addUser(UserEntity user);
 
     /**
      * Retrieve specific user by name
      * @param id user's id
      * @return return user
      */
-    User getUser(long id);
+    UserEntity getUser(long id);
 
     /**
      * Delete specific user
      * @param user user to deleteUser
      */
-    void deleteUser(User user);
+    void deleteUser(UserEntity user);
 
     /**
      * Retrieve all users in db
      * @return
      */
-    List<User> retrieveAllUsers();
+    List<UserEntity> retrieveAllUsers();
 }

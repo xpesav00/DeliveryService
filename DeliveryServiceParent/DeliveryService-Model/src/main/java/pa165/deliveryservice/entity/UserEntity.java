@@ -9,7 +9,7 @@ import javax.persistence.*;
  * @author Drimal
  */
 @Entity
-public class User {
+public class UserEntity {
     @Id
     @GeneratedValue
     private long id;

@@ -1,7 +1,12 @@
 package pa165.servicelayer.serviceImplementation;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.annotation.PostConstruct;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pa165.deliveryservice.api.UserService;
 import pa165.deliveryservice.api.dto.UserDto;
 import pa165.deliveryservice.daoInterface.UserDao;
-import pa165.deliveryservice.entity.User;
+import pa165.deliveryservice.entity.UserEntity;
 
 /**
  *
@@ -25,12 +30,36 @@ public class UserServiceImpl implements UserService{
     @Autowired
     private Mapper mapper;
 
+    @PostConstruct
+    public void preloadDB(){
+        UserEntity admin = new UserEntity();
+        admin.setUsername("admin");
+
+        UserEntity restUser = new UserEntity();
+        restUser.setUsername("rest");
+
+        MessageDigest digest = null;
+        try {
+            digest = java.security.MessageDigest.getInstance("MD5");
+            digest.update("admin".getBytes());
+            admin.setPassword(digest.digest());
+
+            digest.update("rest".getBytes());
+            restUser.setPassword(digest.digest());
+        } catch (NoSuchAlgorithmException ex) {
+            Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        userDao.addUser(admin);
+        userDao.addUser(restUser);
+    }
+
     @Override
     public void createUser(UserDto user) {
         if(user == null){
             throw new NullPointerException("User can't be null.");
         }
-        userDao.addUser(mapper.map(user, User.class));
+        userDao.addUser(mapper.map(user, UserEntity.class));
     }
 
     @Override
@@ -38,7 +67,7 @@ public class UserServiceImpl implements UserService{
         if(user == null){
             throw new NullPointerException("User can't be null.");
         }
-        userDao.deleteUser(mapper.map(user, User.class));
+        userDao.deleteUser(mapper.map(user, UserEntity.class));
         return true;
     }
 
@@ -47,13 +76,13 @@ public class UserServiceImpl implements UserService{
         if(user == null){
             throw new NullPointerException("User can't be null.");
         }
-        userDao.updateUser(mapper.map(user, User.class));
+        userDao.updateUser(mapper.map(user, UserEntity.class));
     }
 
     @Override
     public UserDto getUserByName(String name) {
-        List<User> retrieveAllUsers = userDao.retrieveAllUsers();
-        for (User user : retrieveAllUsers) {
+        List<UserEntity> retrieveAllUsers = userDao.retrieveAllUsers();
+        for (UserEntity user : retrieveAllUsers) {
             if(user.getUsername().equals(name)){
                 return mapper.map(user, UserDto.class);
             }

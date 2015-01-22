@@ -12,7 +12,7 @@ import org.springframework.test.util.ReflectionTestUtils;
 import pa165.deliveryservice.api.UserService;
 import pa165.deliveryservice.api.dto.UserDto;
 import pa165.deliveryservice.daoInterface.UserDao;
-import pa165.deliveryservice.entity.User;
+import pa165.deliveryservice.entity.UserEntity;
 
 /**
  *
@@ -21,7 +21,7 @@ import pa165.deliveryservice.entity.User;
 public class UserServiceImplTest extends AbstractIntegrationTest{
     private UserService userService;
     private UserDto userDto;
-    private User user;
+    private UserEntity user;
     private DozerBeanMapper mapper;
 
     @Mock
@@ -34,7 +34,7 @@ public class UserServiceImplTest extends AbstractIntegrationTest{
         ReflectionTestUtils.setField(userService, "userDao", dao);
         ReflectionTestUtils.setField(userService, "mapper", mapper);
 
-        user = new User();
+        user = new UserEntity();
         user.setUsername("anton");
         user.setPassword(new byte[]{1,2,3});
         user.setId(1);
