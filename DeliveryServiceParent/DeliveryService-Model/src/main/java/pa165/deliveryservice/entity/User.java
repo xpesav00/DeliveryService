@@ -20,7 +20,7 @@ public class User {
     @Column
     private byte[] password; //password is saved as hash of user password
 
-    @Column
+    @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
     public long getId() {
