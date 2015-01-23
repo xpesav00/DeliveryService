@@ -9,25 +9,29 @@
 <my:layout title="${title}">
     <jsp:attribute name="body">
         <h1>Login Page</h1>
-        <form:form method="get" action="${pageContext.request.contextPath}/login/doLogin" modelAttribute="user">
-            <fieldset>
-            <dl>
-                <dt>
-                <form:label path="username"><fmt:message key="username" /></form:label>
-                </dt>
-                <dd><form:input path="username"/></dd>
-                <dd><form:errors path="username" cssClass="error" element="div"/></dd>
-                <dt>
-                <form:label path="password"><fmt:message key="password" /></form:label>
-                    </dt>
-                    <dd><form:password path="password"/></dd>
-                <dd><form:errors path="password" cssClass="error" element="div"/></dd>
-            </dl>
-            <div id="submit_button" style="text-align: left">
-                    <input type="submit" value="<fmt:message key='login'/>">
-            </div>
-            </fieldset>
+        <form name='loginForm' action="<c:url value='j_spring_security_check' />"
+              method='POST'>
 
-        </form:form>
+            <table>
+                <tr>
+                    <td>User:</td>
+                    <td><input type='text' name='j_username' value=''>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Password:</td>
+                    <td><input type='password' name='j_password' />
+                    </td>
+                </tr>
+                <tr>
+                    <td><input name="submit" type="submit"
+                               value="submit" />
+                    </td>
+                    <td><input name="reset" type="reset" />
+                    </td>
+                </tr>
+            </table>
+
+        </form>
     </jsp:attribute>
 </my:layout>

@@ -36,11 +36,4 @@ http://www.springframework.org/schema/jdbc http://www.springframework.org/schema
         <property name="dataSource" ref="dataSource"/>
     </bean>
     
-    <!-- web security: pro redirect na login-->
-    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter"/>
-    <bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
-        <property name="interceptors">
-            <ref bean="authenticationInterceptor"/>
-        </property>
-    </bean>
 </beans>

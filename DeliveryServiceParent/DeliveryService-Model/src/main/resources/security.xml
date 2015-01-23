@@ -1,7 +1,7 @@
 <beans:beans xmlns="http://www.springframework.org/schema/security"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
                     http://www.springframework.org/schema/beans/spring-beans.xsd
                    http://www.springframework.org/schema/security
                     http://www.springframework.org/schema/security/spring-security.xsd">
@@ -9,16 +9,25 @@
 
     <global-method-security secured-annotations="enabled" />
 
+    <!-- block all except login page for users not logged in -->
+    <http auto-config="true">
+        <intercept-url pattern="/login*" access="ROLE_ANONYMOUS" />
+        <intercept-url pattern="/**" access="ROLE_ADMIN, ROLE_USER" />
+        <form-login login-page="/login" default-target-url="/"
+                    authentication-failure-url="/login"/>
+        <anonymous /> 
+    </http>
+    
     <authentication-manager>
         <authentication-provider>
-          <user-service>
-            <!-- define admin user with role admin -->
-            <user name="admin" password="admin" authorities="ROLE_ADMIN" />
-            <!-- define rest user with role admin -->
-            <user name="rest" password="rest" authorities="ROLE_ADMIN" />
-            <!-- define common user -->
-            <user name="user" password="user" authorities="ROLE_USER" />
-          </user-service>
+            <user-service>
+                <!-- define admin user with role admin -->
+                <user name="admin" password="admin" authorities="ROLE_ADMIN" />
+                <!-- define rest user with role admin -->
+                <user name="rest" password="rest" authorities="ROLE_ADMIN" />
+                <!-- define common user -->
+                <user name="user" password="user" authorities="ROLE_USER" />
+            </user-service>
         </authentication-provider>
     </authentication-manager>
 
