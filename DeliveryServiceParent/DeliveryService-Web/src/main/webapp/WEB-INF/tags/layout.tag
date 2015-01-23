@@ -23,6 +23,7 @@
                     <li><a href="${pageContext.request.contextPath}/postman/list"><f:message key="navigation.postman"/></a></li>
                     <li><a href="${pageContext.request.contextPath}/customer/list"><f:message key="navigation.customer"/></a></li>
                     <li><a href="${pageContext.request.contextPath}/delivery/list"><f:message key="navigation.delivery"/></a></li>
+                    <li><a href="${pageContext.request.contextPath}/user/list"><f:message key="navigation.user"/></a></li>
                 </ul>
                 </div>
             </div>

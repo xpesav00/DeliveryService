@@ -8,30 +8,28 @@
 <fmt:message var="title" key="index.title"/>
 <my:layout title="${title}">
     <jsp:attribute name="body">
-        <h1>Login Page</h1>
-        <form name='loginForm' action="<c:url value='j_spring_security_check' />"
-              method='POST'>
+        <h1><fmt:message key="page.heading.login" /></h1>
 
-            <table>
-                <tr>
-                    <td>User:</td>
-                    <td><input type='text' name='j_username' value=''>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Password:</td>
-                    <td><input type='password' name='j_password' />
-                    </td>
-                </tr>
-                <tr>
-                    <td><input name="submit" type="submit"
-                               value="submit" />
-                    </td>
-                    <td><input name="reset" type="reset" />
-                    </td>
-                </tr>
-            </table>
+        <div class="reformed-form">
+            <form:form method="POST" action="j_spring_security_check">
+                <fieldset>
+                    <legend><fmt:message key="user.login" /></legend>
+                    <dl>
+                        <dt><label for="j_username"><fmt:message key="user.username" /></label></dt>
+                        <dd><input id="j_username" name="j_username" type="text" value=""/></dd>
+                        <dd><form:errors path="j_username" cssClass="error" element="div" /></dd>
+                    </dl>
 
-        </form>
+                    <dl>
+                        <dt><label for="j_password"><fmt:message key="user.password" /></label></dt>
+                        <dd><input id="j_password" name="j_password" type="password" /></dd>
+                        <dd><form:errors path="j_password" cssClass="error" element="div" /></dd>
+                    </dl>
+                    <div id="submit_buttons">
+                        <input type="submit" value="<fmt:message key='user.button.login'/>" />
+                    </div>
+                </fieldset>
+            </form:form>
+        </div>
     </jsp:attribute>
 </my:layout>

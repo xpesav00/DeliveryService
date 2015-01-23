@@ -5,7 +5,7 @@ import pa165.deliveryservice.api.dto.UserDto;
 
 /**
  *
- * @author Drimal
+ * @author Drimal, JStastny (modification)
  */
 public interface UserService {
 
@@ -44,4 +44,11 @@ public interface UserService {
     boolean userMatcher(String name, byte[] password);
 
     List<UserDto> retrieveAllUsers();
+    
+    /**
+     * Returns user with given id
+     * @param id
+     * @return user with given id
+     */
+    UserDto findUserById(long id);
 }

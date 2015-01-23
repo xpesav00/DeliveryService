@@ -95,6 +95,7 @@ public class UserServiceImpl implements UserService{
         return null;
     }
 
+    @Override
     public List<UserDto> retrieveAllUsers(){
         List<UserDto> result = new ArrayList<>();
         List<UserEntity> listUserEntity = userDao.retrieveAllUsers();
@@ -112,5 +113,15 @@ public class UserServiceImpl implements UserService{
             return Arrays.equals(password, userDb.getPassword());
         }
         return false;
+    }
+
+    @Override
+    @Secured({"ROLE_ADMIN"})
+    public UserDto findUserById(long id) {
+        if (id < 0) {
+            throw new IllegalArgumentException("Id can't be negative.");
+        }
+        UserEntity user = userDao.getUser(id);
+        return mapper.map(user, UserDto.class);
     }
 }

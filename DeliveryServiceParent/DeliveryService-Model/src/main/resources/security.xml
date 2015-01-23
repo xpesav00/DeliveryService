@@ -11,6 +11,8 @@
 
     <!-- block all except login page for users not logged in -->
     <http auto-config="true">
+        <!--<intercept-url pattern="/resources/**" access="ROLE_ANONYMOUS" />-->
+        <intercept-url pattern="/style.css" access="ROLE_ANONYMOUS" />
         <intercept-url pattern="/login*" access="ROLE_ANONYMOUS" />
         <intercept-url pattern="/**" access="ROLE_ADMIN, ROLE_USER" />
         <form-login login-page="/login" default-target-url="/"

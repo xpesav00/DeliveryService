@@ -37,6 +37,11 @@ public class LoginController {
 
         return "/login";
     }
+    
+    @ModelAttribute("user")
+        public void putUser(Model model){
+        model.addAttribute("user", new UserDto());
+    }
 
 //    @RequestMapping(value = "/loginError", method = RequestMethod.GET)
 //    public String loginError(ModelMap model) {
