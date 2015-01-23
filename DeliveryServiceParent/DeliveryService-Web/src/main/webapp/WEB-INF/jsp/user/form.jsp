@@ -18,15 +18,15 @@
     </dl>
     <dl>
         <dt>
-           <form:label path="role"><fmt:message key="user.permission"/></form:label> 
+           <form:label path="userRole"><fmt:message key="user.permission"/></form:label> 
         </dt>
         <dd>
-           <form:select id="role" path="role">
-               <c:forEach items="${role}" var="r">
+           <form:select id="userRole" path="userRole">
+               <c:forEach items="${userRole}" var="r">
                 <form:option value="${r}">${r}</form:option>
                </c:forEach>
            </form:select> 
         </dd>
-        <dd><form:errors path="role" cssClass="error" element="div"/></dd>
+        <dd><form:errors path="userRole" cssClass="error" element="div"/></dd>
     </dl>
   

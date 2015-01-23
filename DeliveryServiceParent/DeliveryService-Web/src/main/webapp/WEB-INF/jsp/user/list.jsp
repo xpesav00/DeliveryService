@@ -34,10 +34,10 @@
                     
                     <td>
                         <c:choose>
-                            <c:when test="${user.role == 'ROLE_USER'}">
+                            <c:when test="${user.userRole == 'ROLE_USER'}">
                                 <fmt:message key="user.permission.user" />
                             </c:when>
-                            <c:when test="${user.role == 'ROLE_REST'}">
+                            <c:when test="${user.userRole == 'ROLE_REST'}">
                                 <fmt:message key="user.permission.rest" />
                             </c:when>
                             <c:otherwise>

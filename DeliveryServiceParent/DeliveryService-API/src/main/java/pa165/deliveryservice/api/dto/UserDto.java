@@ -12,7 +12,7 @@ public class UserDto {
     private long id;
     private String username;
     private byte[] password;
-    private UserRole role;
+    private UserRole userRole;
 
     public String getUsername() {
         return username;
@@ -38,12 +38,12 @@ public class UserDto {
         this.password = password;
     }
 
-    public UserRole getRole() {
-        return role;
+    public UserRole getUserRole() {
+        return userRole;
     }
 
-    public void setRole(UserRole role) {
-        this.role = role;
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 
     @Override

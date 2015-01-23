@@ -8,27 +8,28 @@
 
 
     <global-method-security secured-annotations="enabled" />
-    
+    <http pattern="/resources/**" security='none' />
+    <http pattern="/style.css" security='none' />
     <!-- block all except login page for users not logged in -->
     <http auto-config="true" use-expressions="true">
-        <!--<intercept-url pattern="/resources/**" access="isAnonymous()" />-->
-        <intercept-url pattern="/style.css" access = "isAnonymous()" />
+        <!--      <intercept-url pattern="/resources/**" filters="none" />
+        <intercept-url pattern="/style.css" filters="none" /> -->
         <intercept-url pattern="/login*" access = "isAnonymous()" />
         <intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER','ROLE_REST')" />
-        <form-login login-page="/login" default-target-url="/home" authentication-failure-url="/login"/>
+        <form-login login-page="/login" default-target-url="/" authentication-failure-url="/login"/>
         <logout logout-success-url="/login"/>
     </http>
 
     <authentication-manager>
         <authentication-provider>
-          <user-service>
-            <!-- define admin user with role admin -->
-            <user name="admin" password="admin" authorities="ROLE_ADMIN" />
-            <!-- define rest user with role admin -->
-            <user name="rest" password="rest" authorities="ROLE_REST" />
-            <!-- define common user -->
-            <user name="user" password="user" authorities="ROLE_USER" />
-          </user-service>
+            <user-service>
+                <!-- define admin user with role admin -->
+                <user name="admin" password="admin" authorities="ROLE_ADMIN" />
+                <!-- define rest user with role admin -->
+                <user name="rest" password="rest" authorities="ROLE_REST" />
+                <!-- define common user -->
+                <user name="user" password="user" authorities="ROLE_USER" />
+            </user-service>
         </authentication-provider>
     </authentication-manager>
 

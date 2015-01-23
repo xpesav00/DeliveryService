@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pa165.deliveryservice.web;
 
 import java.util.List;
@@ -50,7 +45,7 @@ public class UserController {
         return userService.retrieveAllUsers();
     }
     
-    @ModelAttribute("role")
+    @ModelAttribute("userRole")
     public UserRole[] role() {
         log.debug("user role()");
         return UserRole.values();
@@ -94,13 +89,13 @@ public class UserController {
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 log.debug("FieldError: {}", fe);
             }
-            return (Long.valueOf(user.getId()) == 0)?"user/list":"user/edit";
+            return (user.getId() == 0)?"user/list":"user/edit";
         }
         if (user.getId() == 0) {            
             userService.createUser(user);
             redirectAttributes.addFlashAttribute(
                     "message",
-                    messageSource.getMessage("message.new.user", new Object[]{user.getUsername(), user.getRole()}, locale)
+                    messageSource.getMessage("message.new.user", new Object[]{user.getUsername(), user.getUserRole()}, locale)
             );
         } else {
             userService.updateUser(user);
