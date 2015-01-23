@@ -3,6 +3,7 @@ package pa165.deliveryservice.restclient.listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -10,8 +11,8 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import javax.ws.rs.core.Response;
-import pa165.deliveryservice.restclient.api.PostmanClient;
 import pa165.deliveryservice.rest.entity.Postman;
+import pa165.deliveryservice.restclient.api.PostmanClient;
 
 /**
  * Listener for update postman operation
@@ -24,24 +25,26 @@ public class UpdatePostmanListener implements ActionListener {
     private static final Logger log = Logger.getLogger(CreatePostmanListener.class.getName());
     private final JTextField nameTF, surnameTF;
     private final JTable table;
+    private ResourceBundle bundle;
     private final GetAllRecords getAllRecords;
 
-    public UpdatePostmanListener(PostmanClient client, JTable table, JTextField txtPostmanName, JTextField txtPostmanSurname) {
+    public UpdatePostmanListener(PostmanClient client, JTable table, JTextField txtPostmanName, JTextField txtPostmanSurname, ResourceBundle bundle) {
         this.postmanClient = client;
         this.table = table;
         this.nameTF = txtPostmanName;
         this.surnameTF = txtPostmanSurname;
-        getAllRecords = new GetAllRecords(postmanClient, null, table);
+        this.bundle = bundle;
+        getAllRecords = new GetAllRecords(postmanClient, null, table, bundle);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if (table.getSelectedRow() == -1) {
             if (table.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(null, "Table is empty!");
+                JOptionPane.showMessageDialog(null, bundle.getString("table.empty"));
                 return;
             } else {
-                JOptionPane.showMessageDialog(null, "First you must select some row!");
+                JOptionPane.showMessageDialog(null, bundle.getString("table.selection"));
                 return;
             }
         } else {
@@ -49,14 +52,14 @@ public class UpdatePostmanListener implements ActionListener {
             String surname = surnameTF.getText();
             if (name.isEmpty() || name == null) {
                 Helper.markTextField(false, nameTF);
-                Helper.showMessage("Name can't be empty.");
+                Helper.showMessage(bundle.getString("create.name"));
                 return;
             } else {
                 Helper.markTextField(true, nameTF);
             }
             if (surname.isEmpty() || surname == null) {
                 Helper.markTextField(false, surnameTF);
-                Helper.showMessage("Surname can't be empty.");
+                Helper.showMessage(bundle.getString("create.surname"));
                 return;
             } else {
                 Helper.markTextField(true, surnameTF);
@@ -73,7 +76,7 @@ public class UpdatePostmanListener implements ActionListener {
                 getAllRecords.getAll();
             } catch (Exception ex) {
                 log.log(Level.SEVERE, Arrays.toString(ex.getStackTrace()));
-                JOptionPane.showMessageDialog(null, "Unexpected error occurred while updating postman! \n\n" + ex.getMessage(), "Unexpected Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, bundle.getString("postman.update.error")+" \n\n" + ex.getMessage(), bundle.getString("error.header"), JOptionPane.ERROR_MESSAGE);
             }
         }
     }

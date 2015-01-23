@@ -1,19 +1,32 @@
 package pa165.deliveryservice.rest;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.ws.rs.client.ClientRequestContext;
+import javax.ws.rs.core.Context;
+import javax.xml.bind.DatatypeConverter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import pa165.deliveryservice.api.CustomerService;
+import pa165.deliveryservice.api.UserService;
 import pa165.deliveryservice.api.dto.AddressDto;
 import pa165.deliveryservice.api.dto.CustomerDto;
 import pa165.deliveryservice.rest.entity.Address;
@@ -28,10 +41,19 @@ import pa165.deliveryservice.rest.entity.Customer;
 public class CustomerRestController{
     @Autowired
     private CustomerService customerService;
-    
+
+    @Autowired
+    private UserService userService;
+
+    @ModelAttribute
+    public void authenticateUser(@RequestHeader HttpHeaders headers){
+        RestAuthenticater authenticater = new RestAuthenticater();
+        authenticater.authenticateAndAuthorizeRemoteRestUser(SecurityContextHolder.getContext(), headers, userService);
+    }
+
     @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     @ResponseBody
-    public List<CustomerDto> findAll(){
+    public List<CustomerDto> findAll(@RequestHeader HttpHeaders headers){
         List<CustomerDto> resultList = new ArrayList<>();
         List<CustomerDto> allCustomers = customerService.getAllCustomers();
         for(CustomerDto customerDto : allCustomers){
@@ -42,8 +64,10 @@ public class CustomerRestController{
 
     @RequestMapping(value = "/{customerId}", method = RequestMethod.GET)
     @ResponseBody
-    public CustomerDto getPostman(@PathVariable(value = "customerId") long id) {
-        return customerService.findCustomer(id);
+    public CustomerDto getCustomer(@PathVariable(value = "customerId") long id) {
+        CustomerDto findCustomer = customerService.findCustomer(id);
+        findCustomer.setDeliveries(Collections.EMPTY_LIST);
+        return findCustomer;
     }
 
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -57,6 +81,8 @@ public class CustomerRestController{
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void update(@PathVariable("customerId") long id, @RequestBody Customer customer) {
         CustomerDto customerDto = convertCustomerToCustomerDto(customer);
+        CustomerDto customerDB = customerService.findCustomer(customerDto.getId());
+        customerDto.setDeliveries(customerDB.getDeliveries());
         customerService.updateCustomer(customerDto);
     }
     

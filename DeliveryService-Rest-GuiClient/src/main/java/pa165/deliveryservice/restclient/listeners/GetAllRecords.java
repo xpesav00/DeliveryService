@@ -2,6 +2,7 @@ package pa165.deliveryservice.restclient.listeners;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.ResourceBundle;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -26,12 +27,14 @@ public class GetAllRecords {
     private final PostmanClient postmanClient;
     private final CustomerClient customerClient;
     private final JTable table;
+    private ResourceBundle bundle;
     private static final Logger log = Logger.getLogger(GetAllRecords.class.getName());
 
-    public GetAllRecords(PostmanClient postmanClient, CustomerClient customerClient, JTable table) {
+    public GetAllRecords(PostmanClient postmanClient, CustomerClient customerClient, JTable table, ResourceBundle bundle) {
         this.postmanClient = postmanClient;
         this.customerClient = customerClient;
         this.table = table;
+        this.bundle = bundle;
     }
 
     public void getAll() {
@@ -78,7 +81,7 @@ public class GetAllRecords {
             table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         } catch (Exception ex) {
             log.log(Level.SEVERE, Arrays.toString(ex.getStackTrace()));
-            JOptionPane.showMessageDialog(null, "Unexpected error occurred! \n\n" + ex.getMessage(), "Unexpected Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, bundle.getString("error.all")+" \n\n" + ex.getMessage(), bundle.getString("error.header"), JOptionPane.ERROR_MESSAGE);
         }
     }
 }

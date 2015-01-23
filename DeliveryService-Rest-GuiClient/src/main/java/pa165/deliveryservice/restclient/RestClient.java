@@ -38,15 +38,15 @@ public class RestClient extends javax.swing.JFrame {
 
         initComponents();
 
-        btnShowPostmen.addActionListener(new GetAllPostmenListener(postmanClient, postmanTable));
-        btnDeletePostman.addActionListener(new DeletePostmanListener(postmanClient, postmanTable));
-        btnCreatePostman.addActionListener(new CreatePostmanListener(postmanClient,postmanTable, txtPostmanName, txtPostmanSurname));
-        btnUpdatePostman.addActionListener(new UpdatePostmanListener(postmanClient, postmanTable, txtPostmanName, txtPostmanSurname));
+        btnShowPostmen.addActionListener(new GetAllPostmenListener(postmanClient, postmanTable, bundle));
+        btnDeletePostman.addActionListener(new DeletePostmanListener(postmanClient, postmanTable, bundle));
+        btnCreatePostman.addActionListener(new CreatePostmanListener(postmanClient,postmanTable, txtPostmanName, txtPostmanSurname, bundle));
+        btnUpdatePostman.addActionListener(new UpdatePostmanListener(postmanClient, postmanTable, txtPostmanName, txtPostmanSurname, bundle));
 
-        btnShowCustomer.addActionListener(new GetAllCustomersListener(customerClient, customerTable));
-        btnDeleteCustomer.addActionListener(new DeleteCustomerListener(customerClient, customerTable));
-        btnCreateCustomer.addActionListener(new CreateCustomerListener(customerClient, customerTable, txtCustomerName, txtCustomerSurname, txtCustomerCity, txtCustomerStreet, txtCustomerPostcode));
-        btnUpdateCustomer.addActionListener(new UpdateCustomerListener(customerClient, customerTable, txtCustomerName, txtCustomerSurname, txtCustomerCity, txtCustomerStreet, txtCustomerPostcode));
+        btnShowCustomer.addActionListener(new GetAllCustomersListener(customerClient, customerTable, bundle));
+        btnDeleteCustomer.addActionListener(new DeleteCustomerListener(customerClient, customerTable, bundle));
+        btnCreateCustomer.addActionListener(new CreateCustomerListener(customerClient, customerTable, txtCustomerName, txtCustomerSurname, txtCustomerCity, txtCustomerStreet, txtCustomerPostcode, bundle));
+        btnUpdateCustomer.addActionListener(new UpdateCustomerListener(customerClient, customerTable, txtCustomerName, txtCustomerSurname, txtCustomerCity, txtCustomerStreet, txtCustomerPostcode, bundle));
     }
 
     /**
@@ -419,7 +419,7 @@ public class RestClient extends javax.swing.JFrame {
         txtCustomerSurname.setText(null);
         txtCustomerCity.setText(null);
         txtCustomerStreet.setText(null);
-        txtCustomerPostcode.setText(null);        
+        txtCustomerPostcode.setText(null);
     }//GEN-LAST:event_btnClearCustomerActionPerformed
 
     private void btnClearPostmanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearPostmanActionPerformed

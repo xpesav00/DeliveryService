@@ -4,16 +4,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import pa165.deliveryservice.api.PostmanService;
+import pa165.deliveryservice.api.UserService;
 import pa165.deliveryservice.api.dto.PostmanDto;
 import pa165.deliveryservice.rest.entity.Postman;
 
@@ -27,7 +32,16 @@ import pa165.deliveryservice.rest.entity.Postman;
 public class PostmanRestController {
     @Autowired
     private PostmanService postmanService;
-    
+
+    @Autowired
+    private UserService userService;
+
+    @ModelAttribute
+    public void authenticateUser(@RequestHeader HttpHeaders headers){
+        RestAuthenticater authenticater = new RestAuthenticater();
+        authenticater.authenticateAndAuthorizeRemoteRestUser(SecurityContextHolder.getContext(), headers, userService);
+    }
+
     @RequestMapping(value = "/findAll", method = RequestMethod.GET)
     @ResponseBody
     public List<PostmanDto> findAll(){
