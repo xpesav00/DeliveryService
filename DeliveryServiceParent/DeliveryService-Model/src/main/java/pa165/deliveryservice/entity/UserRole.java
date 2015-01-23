@@ -5,5 +5,5 @@ package pa165.deliveryservice.entity;
  * @author Drimal
  */
 public enum UserRole {
-    ADMIN, USER;
+    ROLE_ADMIN, ROLE_REST, ROLE_USER;
 }

@@ -17,19 +17,19 @@
         <intercept-url pattern="/**" access="ROLE_ADMIN, ROLE_USER" />
         <form-login login-page="/login" default-target-url="/"
                     authentication-failure-url="/login"/>
-        <anonymous /> 
+        <anonymous />
     </http>
-    
+
     <authentication-manager>
         <authentication-provider>
-            <user-service>
-                <!-- define admin user with role admin -->
-                <user name="admin" password="admin" authorities="ROLE_ADMIN" />
-                <!-- define rest user with role admin -->
-                <user name="rest" password="rest" authorities="ROLE_ADMIN" />
-                <!-- define common user -->
-                <user name="user" password="user" authorities="ROLE_USER" />
-            </user-service>
+          <user-service>
+            <!-- define admin user with role admin -->
+            <user name="admin" password="admin" authorities="ROLE_ADMIN" />
+            <!-- define rest user with role admin -->
+            <user name="rest" password="rest" authorities="ROLE_REST" />
+            <!-- define common user -->
+            <user name="user" password="user" authorities="ROLE_USER" />
+          </user-service>
         </authentication-provider>
     </authentication-manager>
 

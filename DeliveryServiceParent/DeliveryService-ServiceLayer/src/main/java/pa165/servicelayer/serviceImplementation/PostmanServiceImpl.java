@@ -47,7 +47,7 @@ public class PostmanServiceImpl implements PostmanService {
     }
 
     @Override
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_REST"})
     public List<PostmanDto> getAllPostmen() {
         List<PostmanDto> postmenList = new ArrayList<>();
         for (Postman postman : postmanDao.getAllPostmen()) {
@@ -57,7 +57,7 @@ public class PostmanServiceImpl implements PostmanService {
     }
 
     @Override
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "ROLE_REST"})
     public void updatePostman(PostmanDto postmanDto) {
         if (postmanDto == null) {
             throw new NullPointerException("Postman is null.");
@@ -75,7 +75,7 @@ public class PostmanServiceImpl implements PostmanService {
     }
 
     @Override
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "ROLE_REST"})
     public void deletePostman(PostmanDto postmanDto) {
         if (postmanDto == null) {
             throw new NullPointerException("Postman is null.");
@@ -86,7 +86,7 @@ public class PostmanServiceImpl implements PostmanService {
     }
 
     @Override
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "ROLE_REST"})
     public void addPostman(PostmanDto postmanDto) {
         if (postmanDto == null) {
             throw new NullPointerException("Postman is null.");
@@ -99,7 +99,7 @@ public class PostmanServiceImpl implements PostmanService {
     }
 
     @Override
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_REST"})
     public PostmanDto findPostman(long id) {
         Postman postman = postmanDao.getPostman(id);
         if (postman == null) {

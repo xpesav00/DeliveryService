@@ -49,7 +49,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "ROLE_REST"})
     public void createCustomer(String firstName, String lastName, AddressDto address, List<DeliveryDto> deliveries) {
         if (firstName.isEmpty()) {
             throw new IllegalArgumentException("First name can't be nempty.");
@@ -78,8 +78,8 @@ public class CustomerServiceImpl implements CustomerService {
         customerDao.addCustomer(customer);
     }
 
-    @Override//TOTO uncomment
-    //@Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Override
+    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_REST"})
     public List<CustomerDto> getAllCustomers() {
         List<CustomerDto> resultList = new ArrayList<>();
         for (Customer customer : customerDao.getAllCustomers()) {
@@ -89,10 +89,10 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "ROLE_REST"})
     public void updateCustomer(CustomerDto customer) {
         if (customer == null) {
-            throw new NullPointerException("Goods can't be null.");
+            throw new NullPointerException("Customer can't be null.");
         }
         Customer customerA = convertCustomerDtoToCustomer(customer);
 
@@ -100,7 +100,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN", "ROLE_REST"})
     public void deleteCustomer(CustomerDto customerDto) {
         if (customerDto == null) {
             throw new NullPointerException("Customer can't be null.");
@@ -111,7 +111,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_REST"})
     public CustomerDto findCustomer(long id) {
         if (id < 0) {
             throw new IllegalArgumentException("Id can't be negative.");
@@ -121,7 +121,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_REST"})
     public AddressDto getCustomerAddress(long id) {
         if (id <= 0) {
             throw new IllegalArgumentException("Id is zero or negative.");
@@ -132,6 +132,7 @@ public class CustomerServiceImpl implements CustomerService {
         return mapper.map(address, AddressDto.class);
     }
 
+    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_REST"})
     private Customer convertCustomerDtoToCustomer(CustomerDto customer) throws MappingException {
         Customer customerA = new Customer();
         customerA.setId(customer.getId());

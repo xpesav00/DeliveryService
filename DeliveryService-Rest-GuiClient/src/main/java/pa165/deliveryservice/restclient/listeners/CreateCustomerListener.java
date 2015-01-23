@@ -3,6 +3,7 @@ package pa165.deliveryservice.restclient.listeners;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
+import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -24,15 +25,17 @@ public class CreateCustomerListener implements ActionListener {
     private static final Logger log = Logger.getLogger(CreateCustomerListener.class.getName());
     private final JTextField nameTF, surnameTF, cityTF, streetTF, postcodeTF;
     private final GetAllRecords getAllRecords;
+    private ResourceBundle bundle;
     
-    public CreateCustomerListener(CustomerClient customerClient, JTable table, JTextField name, JTextField surname, JTextField city, JTextField street, JTextField postcode) {
+    public CreateCustomerListener(CustomerClient customerClient, JTable table, JTextField name, JTextField surname, JTextField city, JTextField street, JTextField postcode, ResourceBundle bundle) {
         this.customerClient = customerClient;
-        getAllRecords = new GetAllRecords(null, customerClient, table);
+        getAllRecords = new GetAllRecords(null, customerClient, table, bundle);
         this.nameTF = name;
         this.surnameTF = surname;
         this.cityTF = city;
         this.streetTF = street;
         this.postcodeTF = postcode;
+        this.bundle = bundle;
     }
 
     @Override
@@ -44,39 +47,39 @@ public class CreateCustomerListener implements ActionListener {
         String postcode = postcodeTF.getText();
         if (name == null || name.isEmpty()) {
             Helper.markTextField(false, nameTF);
-            Helper.showMessage("Name can't be empty.");
+            Helper.showMessage(bundle.getString("create.name"));
             return;
         } else {
             Helper.markTextField(true, nameTF);
         }
         if (surname == null || surname.isEmpty()) {
             Helper.markTextField(false, surnameTF);
-            Helper.showMessage("Surname can't be empty.");
+            Helper.showMessage(bundle.getString("create.name"));
             return;
         } else {
             Helper.markTextField(true, surnameTF);
         }
         if (city == null || city.length() < 2) {
             Helper.markTextField(false, cityTF);
-            Helper.showMessage("City must be filled in (at least 2 characters).");
+            Helper.showMessage(bundle.getString("create.city"));
             return;
         } else {
             Helper.markTextField(true, cityTF);
         }
         if (street == null || street.length() < 2) {
             Helper.markTextField(false, streetTF);
-            Helper.showMessage("Street must be filled in (at least 2 characters).");
+            Helper.showMessage(bundle.getString("create.street"));
             return;
         } else {
             Helper.markTextField(true, streetTF);
         }
         if (postcode == null || postcode.isEmpty()) {
             Helper.markTextField(false, postcodeTF);
-            Helper.showMessage("Surname can't be empty.");
+            Helper.showMessage(bundle.getString("create.postcode"));
             return;
         } else if (postcode.length() != 5 || !Helper.isNumeric(postcode)) {
             Helper.markTextField(false, postcodeTF);
-            Helper.showMessage("Postcode must be numeric value (exact 5 numbers).");
+            Helper.showMessage(bundle.getString("create.postcode.numeric"));
             return;
         } else {
             Helper.markTextField(true, postcodeTF);
@@ -95,7 +98,7 @@ public class CreateCustomerListener implements ActionListener {
             getAllRecords.getAll();
         } catch (Exception ex) {
             log.log(Level.SEVERE, Arrays.toString(ex.getStackTrace()));
-            JOptionPane.showMessageDialog(null, "Unexpected error occurred while updating postman! \n\n" + ex.getMessage(), "Unexpected Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, bundle.getString("customer.create.error")+" \n\n" + ex.getMessage(), bundle.getString("error.header"), JOptionPane.ERROR_MESSAGE);
         }
     }
 }
