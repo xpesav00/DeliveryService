@@ -5,8 +5,8 @@
 <%@ attribute name="body" fragment="true" required="true" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<!DOCTYPE html>
 <html lang="${pageContext.request.locale}">
     <head>
         <title><c:out value="${title}"/></title>
@@ -17,15 +17,20 @@
         <div id ="container">
             <div id="banner">
                 <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/resources/banner.jpg" alt="Delivery Service" /></a>
+                <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER','ROLE_REST')">
                 <div id="navigation">
                 <ul>
                     <li><a href="${pageContext.request.contextPath}/"><f:message key="navigation.index"/></a></li>
                     <li><a href="${pageContext.request.contextPath}/postman/list"><f:message key="navigation.postman"/></a></li>
                     <li><a href="${pageContext.request.contextPath}/customer/list"><f:message key="navigation.customer"/></a></li>
                     <li><a href="${pageContext.request.contextPath}/delivery/list"><f:message key="navigation.delivery"/></a></li>
+                    <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <li><a href="${pageContext.request.contextPath}/user/list"><f:message key="navigation.user"/></a></li>
+                    </sec:authorize>
+
                 </ul>
                 </div>
+                </sec:authorize>
             </div>
             
             <div id="content">

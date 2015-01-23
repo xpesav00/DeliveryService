@@ -8,16 +8,15 @@
 
 
     <global-method-security secured-annotations="enabled" />
-
+    
     <!-- block all except login page for users not logged in -->
-    <http auto-config="true">
-        <!--<intercept-url pattern="/resources/**" access="ROLE_ANONYMOUS" />-->
-        <intercept-url pattern="/style.css" access="ROLE_ANONYMOUS" />
-        <intercept-url pattern="/login*" access="ROLE_ANONYMOUS" />
-        <intercept-url pattern="/**" access="ROLE_ADMIN, ROLE_USER" />
-        <form-login login-page="/login" default-target-url="/"
-                    authentication-failure-url="/login"/>
-        <anonymous />
+    <http auto-config="true" use-expressions="true">
+        <!--<intercept-url pattern="/resources/**" access="isAnonymous()" />-->
+        <intercept-url pattern="/style.css" access = "isAnonymous()" />
+        <intercept-url pattern="/login*" access = "isAnonymous()" />
+        <intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER','ROLE_REST')" />
+        <form-login login-page="/login" default-target-url="/home" authentication-failure-url="/login"/>
+        <logout logout-success-url="/login"/>
     </http>
 
     <authentication-manager>

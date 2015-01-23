@@ -96,7 +96,7 @@ public class UserController {
             }
             return (Long.valueOf(user.getId()) == 0)?"user/list":"user/edit";
         }
-        if (Long.valueOf(user.getId()) == null) {            
+        if (user.getId() == 0) {            
             userService.createUser(user);
             redirectAttributes.addFlashAttribute(
                     "message",

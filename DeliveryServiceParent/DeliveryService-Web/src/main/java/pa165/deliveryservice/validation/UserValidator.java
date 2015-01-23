@@ -5,16 +5,13 @@
  */
 package pa165.deliveryservice.validation;
 
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import pa165.deliveryservice.api.UserService;
 import pa165.deliveryservice.api.dto.UserDto;
-import pa165.servicelayer.serviceImplementation.UserServiceImpl;
 
 /**
  *
@@ -56,7 +53,6 @@ public class UserValidator implements Validator {
         if(user.getPassword().length < 6) {
             errors.rejectValue("password", "error.login.password.length");
         } //toto projde v pohode, kdyz je helo kratsi jak 6 tak to vyhodi chybu
-        String toString = userService.toString();
         UserDto userByName = userService.getUserByName(user.getUsername());
         if(userByName != null) {
             errors.rejectValue("username", "error.login.user.exists");

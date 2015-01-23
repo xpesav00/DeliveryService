@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <fmt:message var="title" key="page.heading.customers"/>
 <my:layout title="${title}">
@@ -21,8 +22,10 @@
                 <th><fmt:message key="common.surname"/></th>
                 <th><fmt:message key="customer.address"/></th>
                 <th><fmt:message key="postman.deliveries" /></th>
-                <th><fmt:message key="common.edit"/></th>
-                <th><fmt:message key="common.delete"/></th>
+                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                    <th><fmt:message key="common.edit"/></th>
+                    <th><fmt:message key="common.delete"/></th>
+                </sec:authorize>
             </tr>
             <c:set var="line" value="0" scope="page" />
             <c:forEach items="${customers}" var="customer">
@@ -41,6 +44,7 @@
                             <input type="submit" value="" class="delList" title="<fmt:message key="customer.showDeliveries"/>" />
                         </form>
                     </td>
+                    <sec:authorize access="hasRole('ROLE_ADMIN')">
                     <td class="centering">
                         <form method="get" action="${pageContext.request.contextPath}/customer/update/${customer.id}">
                             <input type="submit" value="" class="edit" title="<fmt:message key="common.edit"/>" />
@@ -51,10 +55,12 @@
                             <input type="submit" value=""  class="delete" title="<fmt:message key="common.delete"/>" onclick="return confirm('<fmt:message key="message.confirm.delete.customer" />')" />
                         </form>
                     </td>
+                    </sec:authorize>
                 </tr>
             </c:forEach>
         </table>
         <br/>
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
         <div class="reformed-form">
             <form:form method="post" action="${pageContext.request.contextPath}/customer/update" modelAttribute="customer">
                 <fieldset>
@@ -69,6 +75,7 @@
                 </fieldset>
             </form:form>
         </div>
+        </sec:authorize>
 
     </jsp:attribute>
 </my:layout>
