@@ -9,7 +9,9 @@
 <my:layout title="${title}">
     <jsp:attribute name="body">
         <h1><fmt:message key="page.heading.login" /></h1>
-
+        <div class="error">
+            <p><fmt:message key="error.login.wrongData" /></p>
+        </div>
         <div class="reformed-form">
             <form:form method="POST" action="j_spring_security_check">
                 <fieldset>
