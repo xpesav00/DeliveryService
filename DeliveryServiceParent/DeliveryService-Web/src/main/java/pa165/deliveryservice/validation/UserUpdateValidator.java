@@ -12,6 +12,7 @@ import pa165.deliveryservice.api.UserService;
 import pa165.deliveryservice.api.dto.UserDto;
 
 /**
+ * Validator for user update form
  *
  * @author JStastny
  */

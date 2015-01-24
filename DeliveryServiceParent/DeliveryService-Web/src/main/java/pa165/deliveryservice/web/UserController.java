@@ -4,7 +4,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Locale;
-import javax.inject.Inject;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,8 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +27,7 @@ import pa165.deliveryservice.validation.UserCreateValidator;
 import pa165.deliveryservice.validation.UserUpdateValidator;
 
 /**
+ * SpringMVC Controller for handling users.
  *
  * @author JStastny
  */
@@ -128,9 +126,9 @@ public class UserController {
         redirectAttributes.addFlashAttribute("message", messageSource.getMessage("message.update.user", new Object[]{user.getUsername(), user.getUserRole()}, locale));
         return "redirect:" + uriBuilder.path("/user/list").build();
     }
-    
+
     private void hashPasswd(UserDto user) {
-        byte[] pw = user.getPassword();       
+        byte[] pw = user.getPassword();
         MessageDigest digest;
         byte[] hashPw = null;
         try {

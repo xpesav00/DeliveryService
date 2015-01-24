@@ -77,12 +77,12 @@ public class CustomerDaoImplNGTest extends AbstractTestNGSpringContextTests {
         Delivery del2 = new Delivery();
         del1.setName("DELx055");
         del1.setPostman(pman1);
-        //TODO add goods to del1
+
         del1.setCustomer(cus1);
         del1.setStatus(DeliveryStatus.INIT);
         del2.setName("DELx257");
         del2.setPostman(pman1);
-        //TODO add goods to del2
+
         del2.setCustomer(cus2);
         del2.setStatus(DeliveryStatus.SENT);
 

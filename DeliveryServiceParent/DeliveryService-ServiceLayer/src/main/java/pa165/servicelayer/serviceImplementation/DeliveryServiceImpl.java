@@ -45,13 +45,22 @@ public class DeliveryServiceImpl implements DeliveryService{
         customer.setLastName("Pelda");
 
         PostmanDto postman = new PostmanDto();
-        postman.setFirstName("Karel");
-        postman.setLastName("Pepik");
+        postman.setFirstName("Adam");
+        postman.setLastName("Nesvadba");
 
         GoodsDto goods = new GoodsDto();
         goods.setPrice(100);
         goods.setSeller("Sony");
-        createDelivery("CZC.cz", postman, Arrays.asList(goods), customer, DeliveryStatus.INIT);
+
+        GoodsDto goods2 = new GoodsDto();
+        goods2.setPrice(635);
+        goods2.setSeller("Acer");
+
+        GoodsDto goods3 = new GoodsDto();
+        goods3.setPrice(7895);
+        goods3.setSeller("Acer Liqued");
+
+        createDelivery("CZC.cz", postman, Arrays.asList(goods, goods2), customer, DeliveryStatus.INIT);
     }
 
     @Override

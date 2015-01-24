@@ -20,6 +20,7 @@ import pa165.deliveryservice.entity.UserEntity;
 import pa165.deliveryservice.entity.UserRole;
 
 /**
+ * Service layer for User entity
  *
  * @author Drimal
  */
@@ -43,6 +44,10 @@ public class UserServiceImpl implements UserService{
         restUser.setUsername("rest");
         restUser.setUserRole(UserRole.ROLE_REST);
 
+        UserEntity user = new UserEntity();
+        user.setUsername("user");
+        user.setUserRole(UserRole.ROLE_USER);
+
         MessageDigest digest = null;
         try {
             digest = java.security.MessageDigest.getInstance("MD5");
@@ -51,12 +56,16 @@ public class UserServiceImpl implements UserService{
 
             digest.update("rest".getBytes());
             restUser.setPassword(digest.digest());
+
+            digest.update("user".getBytes());
+            user.setPassword(digest.digest());
         } catch (NoSuchAlgorithmException ex) {
             Logger.getLogger(UserServiceImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         userDao.addUser(admin);
         userDao.addUser(restUser);
+        userDao.addUser(user);
     }
 
     @Override

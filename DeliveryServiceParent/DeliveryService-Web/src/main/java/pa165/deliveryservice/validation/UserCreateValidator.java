@@ -2,16 +2,14 @@ package pa165.deliveryservice.validation;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import pa165.deliveryservice.api.UserService;
 import pa165.deliveryservice.api.dto.UserDto;
-import pa165.servicelayer.serviceImplementation.UserServiceImpl;
 
 /**
- *
+ * Validator for user create form
  * @author JStastny
  */
 public class UserCreateValidator implements Validator {

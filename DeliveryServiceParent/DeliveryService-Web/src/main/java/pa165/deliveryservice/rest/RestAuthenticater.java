@@ -14,6 +14,7 @@ import pa165.deliveryservice.api.UserService;
 import pa165.deliveryservice.api.dto.UserDto;
 
 /**
+ * Authenticator for rest client
  *
  * @author Drimal
  */
