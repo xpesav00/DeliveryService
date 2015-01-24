@@ -2,6 +2,7 @@ package pa165.deliveryservice.web;
 
 import java.util.List;
 import java.util.Locale;
+import javax.inject.Inject;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import pa165.deliveryservice.api.UserService;
 import pa165.deliveryservice.api.dto.UserDto;
 import pa165.deliveryservice.entity.UserRole;
-import pa165.deliveryservice.validation.UserValidator;
+import pa165.deliveryservice.validation.UserCreateValidator;
+import pa165.deliveryservice.validation.UserUpdateValidator;
 
 /**
  *
@@ -38,6 +40,11 @@ public class UserController {
     private UserService userService;
     @Autowired
     private MessageSource messageSource;
+    @Autowired
+    private UserCreateValidator userCreateValidator;
+    @Autowired
+    private UserUpdateValidator userUpdateValidator;
+    
     
     @ModelAttribute("users")
     public List<UserDto> allUsers() {
@@ -81,6 +88,7 @@ public class UserController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@Valid @ModelAttribute("user") UserDto user, BindingResult bindingResult, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         log.debug("update(locale={}, user={})", locale, user);
+        
         if (bindingResult.hasErrors()) {
             log.debug("binding errors");
             for (ObjectError ge : bindingResult.getGlobalErrors()) {
@@ -92,12 +100,14 @@ public class UserController {
             return (user.getId() == 0)?"user/list":"user/edit";
         }
         if (user.getId() == 0) {            
+            userCreateValidator.validate(user, bindingResult);
             userService.createUser(user);
             redirectAttributes.addFlashAttribute(
                     "message",
                     messageSource.getMessage("message.new.user", new Object[]{user.getUsername(), user.getUserRole()}, locale)
             );
         } else {
+            userUpdateValidator.validate(user, bindingResult);
             userService.updateUser(user);
             redirectAttributes.addFlashAttribute(
                     "message",
@@ -107,8 +117,8 @@ public class UserController {
         return "redirect:" + uriBuilder.path("/user/list").build();
     }
     
-    @InitBinder
-    protected void initBinder(WebDataBinder binder) {
-        binder.addValidators(new UserValidator(userService));
-    }
+//    @InitBinder
+//    protected void initBinder(WebDataBinder binder) {
+//        binder.addValidators(new UserCreateValidator(userService));
+//    }
 }
