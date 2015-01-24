@@ -8,6 +8,7 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <html lang="${pageContext.request.locale}">
+    <sec:authentication var="user" property="principal" />
     <head>
         <title><c:out value="${title}"/></title>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css"/>
@@ -21,7 +22,7 @@
                 </div>
                 <div id="login">
                     <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER','ROLE_REST')">
-                        <span>TODO</span>&nbsp;<a href="${pageContext.request.contextPath}/j_spring_security_logout"><f:message key="user.button.logout" /></a>
+                        <span>Hi, ${user}</span>&nbsp;<a href="${pageContext.request.contextPath}/j_spring_security_logout"><f:message key="user.button.logout" /></a>
                     </sec:authorize>
                 </div>
                 <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER','ROLE_REST')">
