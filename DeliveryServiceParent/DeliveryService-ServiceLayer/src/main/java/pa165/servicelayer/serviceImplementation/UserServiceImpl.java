@@ -17,6 +17,7 @@ import pa165.deliveryservice.api.UserService;
 import pa165.deliveryservice.api.dto.UserDto;
 import pa165.deliveryservice.daoInterface.UserDao;
 import pa165.deliveryservice.entity.UserEntity;
+import pa165.deliveryservice.entity.UserRole;
 
 /**
  *
@@ -36,9 +37,11 @@ public class UserServiceImpl implements UserService{
     public void preloadDB(){
         UserEntity admin = new UserEntity();
         admin.setUsername("admin");
+        admin.setUserRole(UserRole.ROLE_ADMIN);
 
         UserEntity restUser = new UserEntity();
         restUser.setUsername("rest");
+        restUser.setUserRole(UserRole.ROLE_REST);
 
         MessageDigest digest = null;
         try {
@@ -106,7 +109,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    @Secured("ROLE_ADMIN")
+//    @Secured("ROLE_ADMIN")
     public boolean userMatcher(String name, byte[] password) {
         UserDto userDb = getUserByName(name);
         if(userDb != null){
