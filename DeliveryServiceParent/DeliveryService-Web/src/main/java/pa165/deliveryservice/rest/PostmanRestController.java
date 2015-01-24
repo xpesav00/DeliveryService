@@ -58,7 +58,9 @@ public class PostmanRestController {
     @RequestMapping(value = "/{postmanId}", method = RequestMethod.GET)
     @ResponseBody
     public PostmanDto getPostman(@PathVariable(value = "postmanId") long id) {
-        return postmanService.findPostman(id);
+        PostmanDto findPostman = postmanService.findPostman(id);
+        findPostman.setDeliveries(Collections.EMPTY_LIST);
+        return findPostman;
     }
     
     @RequestMapping(value = "/create", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -72,6 +74,8 @@ public class PostmanRestController {
     @ResponseStatus(value = HttpStatus.ACCEPTED)
     public void update(@PathVariable("postmanId") long id, @RequestBody Postman postman) {
         PostmanDto postmanDto = convertPostmanToPostmanDto(postman);
+        PostmanDto postmanDB = postmanService.findPostman(postman.getId());
+        postmanDto.setDeliveries(postmanDB.getDeliveries());
         postmanService.updatePostman(postmanDto);
     }
 

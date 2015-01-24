@@ -65,9 +65,6 @@ public class Postman {
         if (delivery == null) {
             throw new NullPointerException("Delivery to add cannot be null!");
         }
-        if (delivery.getId() != 0) {
-            throw new IllegalArgumentException("Cannot add: delivery ID already set!");
-        }
         deliveries.add(delivery);
     }
 

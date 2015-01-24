@@ -1,6 +1,7 @@
 package pa165.servicelayer.serviceImplementation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import javax.annotation.PostConstruct;
 
@@ -66,7 +67,7 @@ public class PostmanServiceImpl implements PostmanService {
         Postman postman = postmanDao.getPostman(postmanDto.getId());
         postman.setFirstName(postmanDto.getFirstName());
         postman.setLastName(postmanDto.getLastName());
-
+        postman.setDeliveries(new ArrayList<Delivery>());
         for (DeliveryDto deliveryDto : postmanDto.getDeliveries()) {
             postman.addDelivery(mapper.map(deliveryDto, Delivery.class));
         }

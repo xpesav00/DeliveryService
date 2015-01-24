@@ -12,6 +12,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContext;
 import pa165.deliveryservice.api.UserService;
 import pa165.deliveryservice.api.dto.UserDto;
+import pa165.deliveryservice.entity.UserRole;
 
 /**
  * Authenticator for rest client
@@ -27,7 +28,7 @@ public class RestAuthenticater {
 
         if(isUserSupported(service, username)){
             UserDto userDB = service.getUserByName(username);
-            if(arePasswordsEquals(pswd, userDB)){
+            if(arePasswordsEquals(pswd, userDB) && userDB.getUserRole().equals(UserRole.ROLE_REST)){
                 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(username, pswd);
                 context.setAuthentication(token);
             }
