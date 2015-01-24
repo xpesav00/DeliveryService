@@ -15,65 +15,68 @@
             <fmt:message key="user.allUsers"/>
         </h1>
         <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
-        <table>
-            <tr>
-                <th><fmt:message key="common.id"/></th>
-                <th><fmt:message key="user.username"/></th>
-                <th><fmt:message key="user.permission"/></th>
-                <th><fmt:message key="common.edit"/></th>
-                <th><fmt:message key="common.delete"/></th>
-            </tr>
-            <c:set var="line" value="0" scope="page" />
-            <c:forEach items="${users}" var="user">
-                <c:choose>
-                    <c:when test="${line%2 == 0}"><tr class="even"></c:when>
-                    <c:otherwise><tr></c:otherwise>
-                </c:choose>
-                <c:set var="line" value="${line + 1}" scope="page"/>
-                    <td class="centering">${user.id}</td>
-                    <td><c:out value="${user.username}"/></td>
-                    
-                    <td>
-                        <c:choose>
-                            <c:when test="${user.userRole == 'ROLE_USER'}">
-                                <fmt:message key="user.permission.user" />
-                            </c:when>
-                            <c:when test="${user.userRole == 'ROLE_REST'}">
-                                <fmt:message key="user.permission.rest" />
-                            </c:when>
-                            <c:otherwise>
-                                <fmt:message key="user.permission.admin" />
-                            </c:otherwise>
-                        </c:choose>
-                    </td>
-                    <td class="centering">
-                        <form method="get" action="${pageContext.request.contextPath}/user/update/${user.id}">
-                            <input type="submit" value="" class="edit" title="<fmt:message key="common.edit"/>" />
-                        </form>
-                    </td>
-                    <td style="text-align: center">
-                        <form method="post" action="${pageContext.request.contextPath}/user/delete/${user.id}">
-                            <input type="submit" value=""  class="delete" title="<fmt:message key="common.delete"/>" onclick="return confirm('<fmt:message key="message.confirm.delete.user" />')" />
-                        </form>
-                    </td>
-
+            <table>
+                <tr>
+                    <th><fmt:message key="common.id"/></th>
+                    <th><fmt:message key="user.username"/></th>
+                    <th><fmt:message key="user.permission"/></th>
+                    <th><fmt:message key="common.edit"/></th>
+                    <th><fmt:message key="common.delete"/></th>
                 </tr>
-            </c:forEach>
-        </table>
-        
-        <br/>
-        <div class="reformed-form">
-            <form:form method="post" action="${pageContext.request.contextPath}/user/create" modelAttribute="user">
-                <fieldset>
-                    <legend><fmt:message key="user.list.newuser"/></legend>
-                    <%@include file="form.jsp"%>
-                    <div id="submit_buttons">
-                        <input type="reset" value="<fmt:message key='common.form.reset'/>" />
-                        <input type="submit" value="<fmt:message key='common.form.create'/>" />
-                    </div>
-                </fieldset>
-            </form:form>
-        </div>
+                <c:set var="line" value="0" scope="page" />
+                <c:forEach items="${users}" var="user">
+                    <c:choose>
+                        <c:when test="${line%2 == 0}"><tr class="even"></c:when>
+                        <c:otherwise><tr></c:otherwise>
+                        </c:choose>
+                        <c:set var="line" value="${line + 1}" scope="page"/>
+                        <td class="centering">${user.id}</td>
+                        <td><c:out value="${user.username}"/></td>
+
+                        <td>
+                            <c:choose>
+                                <c:when test="${user.userRole == 'ROLE_USER'}">
+                                    <fmt:message key="user.permission.user" />
+                                </c:when>
+                                <c:when test="${user.userRole == 'ROLE_REST'}">
+                                    <fmt:message key="user.permission.rest" />
+                                </c:when>
+                                <c:when test="${user.userRole == 'ROLE_POSTMAN'}">
+                                    <fmt:message key="user.permission.rest" />
+                                </c:when>
+                                <c:otherwise>
+                                    <fmt:message key="user.permission.admin" />
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+                        <td class="centering">
+                            <form method="get" action="${pageContext.request.contextPath}/user/update/${user.id}">
+                                <input type="submit" value="" class="edit" title="<fmt:message key="common.edit"/>" />
+                            </form>
+                        </td>
+                        <td style="text-align: center">
+                            <form method="post" action="${pageContext.request.contextPath}/user/delete/${user.id}">
+                                <input type="submit" value=""  class="delete" title="<fmt:message key="common.delete"/>" onclick="return confirm('<fmt:message key="message.confirm.delete.user" />')" />
+                            </form>
+                        </td>
+
+                    </tr>
+                </c:forEach>
+            </table>
+
+            <br/>
+            <div class="reformed-form">
+                <form:form method="post" action="${pageContext.request.contextPath}/user/create" modelAttribute="user">
+                    <fieldset>
+                        <legend><fmt:message key="user.list.newuser"/></legend>
+                        <%@include file="form.jsp"%>
+                        <div id="submit_buttons">
+                            <input type="reset" value="<fmt:message key='common.form.reset'/>" />
+                            <input type="submit" value="<fmt:message key='common.form.create'/>" />
+                        </div>
+                    </fieldset>
+                </form:form>
+            </div>
         </sec:authorize>
     </jsp:attribute>
 </my:layout>

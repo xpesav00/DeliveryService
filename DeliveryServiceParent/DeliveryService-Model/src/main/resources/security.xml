@@ -10,6 +10,7 @@
     <global-method-security secured-annotations="enabled" />
     <http pattern="/resources/**" security='none' />
     <http pattern="/style.css" security='none' />
+    <http pattern="/rest/**" security='none' />
     <!-- block all except login page for users not logged in -->
     <http auto-config="true" use-expressions="true">
         <intercept-url pattern="/login*" access = "isAnonymous()" />
