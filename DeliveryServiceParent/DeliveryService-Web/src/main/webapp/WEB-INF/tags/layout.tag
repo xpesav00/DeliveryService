@@ -7,8 +7,16 @@
 <%@ taglib prefix="f" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
-<html lang="${pageContext.request.locale}">
+<html lang="${pageContext.request.locale}">    
     <sec:authentication var="user" property="principal" />
+    <script type="text/javascript" src="http://code.jquery.com/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $("input[name$='def']").click(function () {
+            $("dd.hidden").toggle(this.checked);
+        });
+    });
+    </script>
     <head>
         <title><c:out value="${title}"/></title>
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style.css"/>

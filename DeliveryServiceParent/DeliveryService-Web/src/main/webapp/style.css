@@ -200,9 +200,12 @@ div.reformed-form fieldset legend{
 }
 div.reformed-form input{
     margin-bottom: 0.5em;
-    width:250px;
-    
+    width:250px;    
 }
+div.reformed-form input[type=checkbox] {
+    width:auto;
+}
+
 div.reformed-form input[type=submit],div.reformed-form input[type=reset]{
     width:auto;
     height:25px;
@@ -226,4 +229,7 @@ div.reformed-form select {
 div#submit_buttons {
     float:right; 
     
+}
+dd.hidden {
+    display:none;
 }

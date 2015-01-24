@@ -9,11 +9,12 @@
         <dd><form:input path="username" /></dd>
         <dd><form:errors path="username" cssClass="error" element="div" /></dd>
     </dl>
-    <dl>
+    <dl>        
         <dt>
         <label for="password"><fmt:message key="user.password" /></label>
         </dt>
-        <dd><form:password path="password" /></dd>
+        <label><input type="checkbox" name="def" value="default"><fmt:message key="user.change.password" /></label>
+        <dd class="hidden"><form:password path="password" /></dd>
         <dd><form:errors path="password" cssClass="error" element="div" /></dd>
     </dl>
     <dl>
