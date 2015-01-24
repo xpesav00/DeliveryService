@@ -34,12 +34,12 @@ Project uses maven, to build it use:
 mvn install
 ```
 
-Run DeliveryServiceRestGuiClient module from its directory:
-```
-mvn exec:java -Dmaven.test.skip=true
-```
-
 Run DeliveryService-Web module from its directory:
 ```
 mvn tomcat:run -Dmaven.test.skip=true
+```
+
+Run DeliveryServiceRestGuiClient module from its directory:
+```
+mvn exec:java -Dmaven.test.skip=true
 ```
