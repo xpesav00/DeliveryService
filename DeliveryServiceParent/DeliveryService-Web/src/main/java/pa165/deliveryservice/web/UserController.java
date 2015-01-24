@@ -1,5 +1,7 @@
 package pa165.deliveryservice.web;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Locale;
 import javax.validation.Valid;
@@ -32,32 +34,33 @@ import pa165.deliveryservice.validation.UserValidator;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+
     final static Logger log = LoggerFactory.getLogger(UserController.class);
-    
+
     @Autowired
     private UserService userService;
     @Autowired
     private MessageSource messageSource;
-    
+
     @ModelAttribute("users")
     public List<UserDto> allUsers() {
         log.debug("allUsers()");
         return userService.retrieveAllUsers();
     }
-    
+
     @ModelAttribute("userRole")
     public UserRole[] role() {
         log.debug("user role()");
         return UserRole.values();
     }
-    
+
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String list(Model model) {
         log.debug("calling list() method");
         model.addAttribute("user", new UserDto());
         return "user/list";
-    } 
-    
+    }
+
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String delete(@PathVariable long id, RedirectAttributes redirectAttributes, Locale locale, UriComponentsBuilder uriBuilder) {
         log.debug("calling delete({}) method", id);
@@ -69,7 +72,7 @@ public class UserController {
         );
         return "redirect:" + uriBuilder.path("/user/list").build();
     }
-    
+
     @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
     public String update_form(@PathVariable long id, Model model) {
         UserDto user = userService.findUserById(id);
@@ -77,7 +80,7 @@ public class UserController {
         log.debug("update_form(model={})", model);
         return "user/edit";
     }
-    
+
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(@Valid @ModelAttribute("user") UserDto user, BindingResult bindingResult, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale) {
         log.debug("update(locale={}, user={})", locale, user);
@@ -89,15 +92,17 @@ public class UserController {
             for (FieldError fe : bindingResult.getFieldErrors()) {
                 log.debug("FieldError: {}", fe);
             }
-            return (user.getId() == 0)?"user/list":"user/edit";
+            return (user.getId() == 0) ? "user/list" : "user/edit";
         }
-        if (user.getId() == 0) {            
+        if (user.getId() == 0) {
+            hashPasswd(user);
             userService.createUser(user);
             redirectAttributes.addFlashAttribute(
                     "message",
                     messageSource.getMessage("message.new.user", new Object[]{user.getUsername(), user.getUserRole()}, locale)
             );
         } else {
+            hashPasswd(user);
             userService.updateUser(user);
             redirectAttributes.addFlashAttribute(
                     "message",
@@ -106,9 +111,23 @@ public class UserController {
         }
         return "redirect:" + uriBuilder.path("/user/list").build();
     }
-    
+
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.addValidators(new UserValidator(userService));
+    }
+
+    private void hashPasswd(UserDto user) {
+        byte[] pw = user.getPassword();       
+        MessageDigest digest;
+        byte[] hashPw = null;
+        try {
+            digest = java.security.MessageDigest.getInstance("MD5");
+            digest.update(pw);
+            hashPw = digest.digest();
+            user.setPassword(hashPw);
+        } catch (NoSuchAlgorithmException ex) {
+            log.error("Password encoding exc.: No such algorithm.", ex);
+        }
     }
 }
