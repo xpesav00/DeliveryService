@@ -22,7 +22,7 @@
                 </div>
                 <div id="login">
                     <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER','ROLE_REST')">
-                        <span>Hi, ${user}</span>&nbsp;<a href="${pageContext.request.contextPath}/j_spring_security_logout"><f:message key="user.button.logout" /></a>
+                        <span><f:message key="welcome" />, ${user}</span>&nbsp;<a href="${pageContext.request.contextPath}/j_spring_security_logout"><f:message key="user.button.logout" /></a>
                     </sec:authorize>
                 </div>
                 <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER','ROLE_REST')">
