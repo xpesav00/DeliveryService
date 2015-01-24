@@ -5,6 +5,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <fmt:message var="title" key="user.allUsers"/>
 <my:layout title="${title}">
@@ -13,7 +14,7 @@
             <img src="${pageContext.request.contextPath}/resources/user_icon.jpg" />
             <fmt:message key="user.allUsers"/>
         </h1>
-        
+        <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
         <table>
             <tr>
                 <th><fmt:message key="common.id"/></th>
@@ -73,5 +74,6 @@
                 </fieldset>
             </form:form>
         </div>
+        </sec:authorize>
     </jsp:attribute>
 </my:layout>

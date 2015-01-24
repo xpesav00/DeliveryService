@@ -79,7 +79,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_REST"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_REST", "ROLE_POSTMAN"})
     public List<CustomerDto> getAllCustomers() {
         List<CustomerDto> resultList = new ArrayList<>();
         for (Customer customer : customerDao.getAllCustomers()) {
@@ -111,7 +111,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_REST"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_REST","ROLE_POSTMAN"})
     public CustomerDto findCustomer(long id) {
         if (id < 0) {
             throw new IllegalArgumentException("Id can't be negative.");
@@ -121,7 +121,7 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_REST"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_REST","ROLE_POSTMAN"})
     public AddressDto getCustomerAddress(long id) {
         if (id <= 0) {
             throw new IllegalArgumentException("Id is zero or negative.");
@@ -132,7 +132,7 @@ public class CustomerServiceImpl implements CustomerService {
         return mapper.map(address, AddressDto.class);
     }
 
-    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_REST"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_REST","ROLE_POSTMAN"})
     private Customer convertCustomerDtoToCustomer(CustomerDto customer) throws MappingException {
         Customer customerA = new Customer();
         customerA.setId(customer.getId());

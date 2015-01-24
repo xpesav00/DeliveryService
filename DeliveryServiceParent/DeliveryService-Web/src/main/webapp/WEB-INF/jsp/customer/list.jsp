@@ -14,17 +14,19 @@
             <img src="${pageContext.request.contextPath}/resources/customers_icon.jpg" />
             <fmt:message key="customer.allcustomers"/>
         </h1>
-
+        <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_POSTMAN','ROLE_USER','ROLE_REST')">
         <table>
             <tr>
                 <th><fmt:message key="common.id"/></th>
                 <th><fmt:message key="common.name"/></th>
                 <th><fmt:message key="common.surname"/></th>
                 <th><fmt:message key="customer.address"/></th>
-                <th><fmt:message key="postman.deliveries" /></th>
-                <sec:authorize access="hasRole('ROLE_ADMIN')">
-                    <th><fmt:message key="common.edit"/></th>
-                    <th><fmt:message key="common.delete"/></th>
+                <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
+                <th><fmt:message key="postman.deliveries" /></th>  
+                </sec:authorize>
+                <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_REST')">
+                <th><fmt:message key="common.edit"/></th>
+                <th><fmt:message key="common.delete"/></th>
                 </sec:authorize>
             </tr>
             <c:set var="line" value="0" scope="page" />
@@ -39,12 +41,14 @@
                     <td><c:out value="${customer.lastName}"/></td>
                     <td><c:out value="${customer.address.city}"/>, <c:out value="${customer.address.street}"/>, 
                         <c:out value="${customer.address.postcode}"/></td>
+                    <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
                     <td class="centering">
                         <form method="get" action="${pageContext.request.contextPath}/customer/deliveries/${customer.id}">
                             <input type="submit" value="" class="delList" title="<fmt:message key="customer.showDeliveries"/>" />
                         </form>
                     </td>
-                    <sec:authorize access="hasRole('ROLE_ADMIN')">
+                    </sec:authorize>
+                    <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_REST')">
                     <td class="centering">
                         <form method="get" action="${pageContext.request.contextPath}/customer/update/${customer.id}">
                             <input type="submit" value="" class="edit" title="<fmt:message key="common.edit"/>" />
@@ -60,7 +64,7 @@
             </c:forEach>
         </table>
         <br/>
-        <sec:authorize access="hasRole('ROLE_ADMIN')">
+        <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_REST')">
         <div class="reformed-form">
             <form:form method="post" action="${pageContext.request.contextPath}/customer/update" modelAttribute="customer">
                 <fieldset>
@@ -75,6 +79,7 @@
                 </fieldset>
             </form:form>
         </div>
+        </sec:authorize>
         </sec:authorize>
 
     </jsp:attribute>

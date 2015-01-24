@@ -5,6 +5,7 @@
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <fmt:message var="title" key="page.heading.postmen"/>
 <my:layout title="${title}">
@@ -13,16 +14,18 @@
             <img src="${pageContext.request.contextPath}/resources/postmans_icon.jpg" />
             <fmt:message key="postman.allpostmen"/>
         </h1>
-        
+        <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_POSTMAN','ROLE_USER','ROLE_REST')">
         <table>
             <tr>
                 <th><fmt:message key="common.id"/></th>
                 <th><fmt:message key="common.name"/></th>
                 <th><fmt:message key="common.surname"/></th>
                 <th><fmt:message key="common.countOfDeliveries"/></th>
+                <sec:authorize access="!hasAnyRole('ROLE_POSTMAN','ROLE_USER')">
                 <th><fmt:message key="page.heading.deliveries"/></th>
                 <th><fmt:message key="common.edit"/></th>
                 <th><fmt:message key="common.delete"/></th>
+                </sec:authorize>
             </tr>
             <c:set var="line" value="0" scope="page" />
             <c:forEach items="${postmen}" var="postman">
@@ -35,6 +38,7 @@
                     <td><c:out value="${postman.firstName}"/></td>
                     <td><c:out value="${postman.lastName}"/></td>
                     <td><c:out value="${fn:length(postman.deliveries)}"/></td>
+                    <sec:authorize access="!hasAnyRole('ROLE_POSTMAN','ROLE_USER')">
                     <td class="centering">
                         <form method="get" action="${pageContext.request.contextPath}/postman/deliveries/${postman.id}">
                             <input type="submit" value="" class="delList" title="<fmt:message key='page.heading.deliveries'/>" />
@@ -50,11 +54,12 @@
                             <input type="submit" value=""  class="delete" title="<fmt:message key="common.delete"/>" onclick="return confirm('<fmt:message key="message.confirm.delete.postman" />')" />
                         </form>
                     </td>
-
+                    </sec:authorize>
                 </tr>
             </c:forEach>
         </table>
-        
+        </sec:authorize>
+        <sec:authorize access="!hasAnyRole('ROLE_POSTMAN','ROLE_USER')">
         <br/>
         <div class="reformed-form">
             <form:form method="post" action="${pageContext.request.contextPath}/postman/update" modelAttribute="postman">
@@ -68,5 +73,6 @@
                 </fieldset>
             </form:form>
         </div>
+        </sec:authorize>
     </jsp:attribute>
 </my:layout>

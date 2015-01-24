@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <fmt:message var="title" key="goods.list.title"/>
 <my:layout title="${title}">
@@ -11,6 +12,7 @@
      <my:a href="/delivery/list">&lt;&lt;<fmt:message key="delivery.backToPage"/></my:a>
             <br /><br />
      <h1>
+     <sec:authorize access="hasAnyRole('ROLE_ADMIN')">
         <img src="${pageContext.request.contextPath}/resources/goods_btn.jpg" />
         <fmt:message key="goods.list.deliverygoods"/>
      </h1>
@@ -60,5 +62,6 @@
             </fieldset>
         </form:form> 
         </div>
+     </sec:authorize>
     </jsp:attribute>
 </my:layout>

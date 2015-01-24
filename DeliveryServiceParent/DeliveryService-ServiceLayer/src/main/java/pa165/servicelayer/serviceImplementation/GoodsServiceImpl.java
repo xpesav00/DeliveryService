@@ -75,7 +75,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN","ROLE_POSTMAN"})
     public List<GoodsDto> getAllGoods() {
         List<GoodsDto> resultList = new ArrayList<>();
         for (Goods goods : goodsDao.getAllGoods()) {
@@ -85,7 +85,7 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN","ROLE_POSTMAN"})
     public GoodsDto findGood(long id) {
         if (id < 0) {
             throw new IllegalArgumentException("Id can't be negative.");

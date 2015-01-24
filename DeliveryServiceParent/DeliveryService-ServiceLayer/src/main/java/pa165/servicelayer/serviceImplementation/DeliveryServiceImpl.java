@@ -55,7 +55,7 @@ public class DeliveryServiceImpl implements DeliveryService{
     }
 
     @Override
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN"})
     public void createDelivery(String name, PostmanDto postman, List<GoodsDto> goods, CustomerDto customer, DeliveryStatus status) {
         if(name == null || name.isEmpty()) {
             throw new IllegalArgumentException("Name of delivery can not be empty.");
@@ -82,7 +82,7 @@ public class DeliveryServiceImpl implements DeliveryService{
     }
 
     @Override
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN"})
     public void createDelivery(DeliveryDto deliveryDto){
         Delivery delivery = mapper.map(deliveryDto, Delivery.class);
 
@@ -94,7 +94,7 @@ public class DeliveryServiceImpl implements DeliveryService{
     }
 
     @Override
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN","ROLE_POSTMAN"})
     public DeliveryDto findDelivery(long id) {
         if(id < 0) {
             throw new IllegalArgumentException("Id can not be less than 0.");
@@ -105,7 +105,7 @@ public class DeliveryServiceImpl implements DeliveryService{
     }
 
     @Override
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN"})
     public void updateDelivery(DeliveryDto deliveryDto) {
         if(deliveryDto == null){
             throw new NullPointerException("Updated delivery can not be null.");
@@ -119,7 +119,7 @@ public class DeliveryServiceImpl implements DeliveryService{
     }
 
     @Override
-    @Secured("ROLE_ADMIN")
+    @Secured({"ROLE_ADMIN"})
     public void deleteDelivery(DeliveryDto deliveryDto) {
         if(deliveryDto == null) throw new IllegalArgumentException("Can not delete null.");
         Delivery delivery = mapper.map(deliveryDto, Delivery.class);
@@ -131,7 +131,7 @@ public class DeliveryServiceImpl implements DeliveryService{
     }
 
     @Override
-    @Secured({"ROLE_USER", "ROLE_ADMIN"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN","ROLE_POSTMAN"})
     public List<DeliveryDto> getAllDeliveries() {
         List<DeliveryDto> allDeliveries = new ArrayList<>();
         List<Delivery> allDeliveryDaos = deliveryDao.getAllDeliveries();

@@ -47,7 +47,7 @@ public class PostmanServiceImpl implements PostmanService {
     }
 
     @Override
-    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_REST"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_REST","ROLE_POSTMAN"})
     public List<PostmanDto> getAllPostmen() {
         List<PostmanDto> postmenList = new ArrayList<>();
         for (Postman postman : postmanDao.getAllPostmen()) {
@@ -99,7 +99,7 @@ public class PostmanServiceImpl implements PostmanService {
     }
 
     @Override
-    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_REST"})
+    @Secured({"ROLE_USER", "ROLE_ADMIN", "ROLE_REST","ROLE_POSTMAN"})
     public PostmanDto findPostman(long id) {
         Postman postman = postmanDao.getPostman(id);
         if (postman == null) {
