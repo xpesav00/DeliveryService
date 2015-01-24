@@ -14,7 +14,6 @@ import pa165.servicelayer.serviceImplementation.UserServiceImpl;
  *
  * @author JStastny
  */
-@Component
 public class UserCreateValidator implements Validator {
 
     private Pattern pattern;
@@ -22,13 +21,10 @@ public class UserCreateValidator implements Validator {
     private UserService userService;
     private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
 
-    public UserCreateValidator() {
-    }   
-    
-//    public UserCreateValidator() {
-//        pattern = Pattern.compile(PASSWORD_PATTERN);
-//        this.userService = new UserServiceImpl();
-//    }
+    public UserCreateValidator(UserService userService) {
+        pattern = Pattern.compile(PASSWORD_PATTERN);
+        this.userService = userService;
+    }
 
     /**
      * Validate password with regular expression

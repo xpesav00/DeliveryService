@@ -12,12 +12,5 @@
         <br>
         <br>
         <p><strong><fmt:message key="mainpage.info" /></strong></p>
-        <br>
-        <br>
-        <div class="reformed-form">
-            <form action="<c:url value="j_spring_security_logout" />">
-                <input type="submit" value="Logout">
-            </form>
-        </div>
     </jsp:attribute>
 </my:layout>

@@ -62,7 +62,7 @@
         
         <br/>
         <div class="reformed-form">
-            <form:form method="post" action="${pageContext.request.contextPath}/user/update" modelAttribute="user">
+            <form:form method="post" action="${pageContext.request.contextPath}/user/create" modelAttribute="user">
                 <fieldset>
                     <legend><fmt:message key="user.list.newuser"/></legend>
                     <%@include file="form.jsp"%>

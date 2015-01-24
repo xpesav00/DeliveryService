@@ -25,6 +25,7 @@
                         <dd><input id="j_password" name="j_password" type="password" /></dd>
                         <dd><form:errors path="j_password" cssClass="error" element="div" /></dd>
                     </dl>
+                    <form:errors path="formError" cssClass="error" element="div" />
                     <div id="submit_buttons">
                         <input type="submit" value="<fmt:message key='user.button.login'/>" />
                     </div>

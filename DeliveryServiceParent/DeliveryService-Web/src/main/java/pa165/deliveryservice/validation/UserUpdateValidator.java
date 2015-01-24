@@ -49,7 +49,6 @@ public class UserUpdateValidator implements Validator {
         if (user.getPassword().length < 6) {
             errors.rejectValue("password", "error.login.password.length");
         }
-
     }
 
 }

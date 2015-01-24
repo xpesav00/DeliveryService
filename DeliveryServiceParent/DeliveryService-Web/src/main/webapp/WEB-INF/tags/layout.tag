@@ -16,28 +16,35 @@
     <body>
         <div id ="container">
             <div id="banner">
-                <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/resources/banner.jpg" alt="Delivery Service" /></a>
-                <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER','ROLE_REST')">
-                <div id="navigation">
-                <ul>
-                    <li><a href="${pageContext.request.contextPath}/"><f:message key="navigation.index"/></a></li>
-                    <li><a href="${pageContext.request.contextPath}/postman/list"><f:message key="navigation.postman"/></a></li>
-                    <li><a href="${pageContext.request.contextPath}/customer/list"><f:message key="navigation.customer"/></a></li>
-                    <li><a href="${pageContext.request.contextPath}/delivery/list"><f:message key="navigation.delivery"/></a></li>
-                    <sec:authorize access="hasRole('ROLE_ADMIN')">
-                    <li><a href="${pageContext.request.contextPath}/user/list"><f:message key="navigation.user"/></a></li>
-                    </sec:authorize>
-
-                </ul>
+                <div id="bannerImage">
+                    <a href="${pageContext.request.contextPath}/"><img src="${pageContext.request.contextPath}/resources/banner.jpg" alt="Delivery Service" /></a>
                 </div>
+                <div id="login">
+                    <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER','ROLE_REST')">
+                        <span>TODO</span>&nbsp;<a href="${pageContext.request.contextPath}/j_spring_security_logout"><f:message key="user.button.logout" /></a>
+                    </sec:authorize>
+                </div>
+                <sec:authorize access="hasAnyRole('ROLE_ADMIN','ROLE_USER','ROLE_REST')">
+                    <div id="navigation">
+                        <ul>
+                            <li><a href="${pageContext.request.contextPath}/"><f:message key="navigation.index"/></a></li>
+                            <li><a href="${pageContext.request.contextPath}/postman/list"><f:message key="navigation.postman"/></a></li>
+                            <li><a href="${pageContext.request.contextPath}/customer/list"><f:message key="navigation.customer"/></a></li>
+                            <li><a href="${pageContext.request.contextPath}/delivery/list"><f:message key="navigation.delivery"/></a></li>
+                                <sec:authorize access="hasRole('ROLE_ADMIN')">
+                                <li><a href="${pageContext.request.contextPath}/user/list"><f:message key="navigation.user"/></a></li>
+                                </sec:authorize>
+
+                        </ul>
+                    </div>
                 </sec:authorize>
             </div>
-            
+
             <div id="content">
                 <c:if test="${not empty message}">
                     <div class="info"><p><c:out value="${message}"/></p></div>
-                </c:if>
-                <jsp:invoke fragment="body"/>
+                        </c:if>
+                        <jsp:invoke fragment="body"/>
             </div>
             <div id ="footer"></div>
         </div>
