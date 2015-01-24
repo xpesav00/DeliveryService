@@ -110,7 +110,7 @@ public class UserController {
     }
     
     @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public String updateUser(@Valid @ModelAttribute("user") UserDto user, BindingResult bindingResult, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale){
+    public String updateUser(@ModelAttribute("user") UserDto user, BindingResult bindingResult, RedirectAttributes redirectAttributes, UriComponentsBuilder uriBuilder, Locale locale){
         log.debug("UPDATE (locale={}, user={})", locale, user);
         userUpdateValidator.validate(user, bindingResult);        
         hashPasswd(user);

@@ -2,6 +2,8 @@ package pa165.deliveryservice.validation;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -19,10 +21,13 @@ public class UserUpdateValidator implements Validator {
     private Pattern pattern;
     private Matcher matcher;
     private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
-    
+    @Autowired
+    private UserService userService;
+
     public UserUpdateValidator() {
         pattern = Pattern.compile(PASSWORD_PATTERN);
-    } 
+    }
+
     /**
      * Validate password with regular expression
      *
@@ -48,6 +53,11 @@ public class UserUpdateValidator implements Validator {
         UserDto user = (UserDto) o;
         if (user.getPassword().length < 6) {
             errors.rejectValue("password", "error.login.password.length");
+        }
+        UserDto userByName = userService.getUserByName(user.getUsername());
+        //pokud dostanu sam sebe, tak OK. Pokud dostanu existujiciho uzivatele tak NOK
+        if (userByName != null && !(userByName.getUsername().equals(user.getUsername()))) {
+            errors.rejectValue("username", "error.login.user.exists");
         }
     }
 

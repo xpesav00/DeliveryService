@@ -13,8 +13,9 @@
     <!-- block all except login page for users not logged in -->
     <http auto-config="true" use-expressions="true">
         <intercept-url pattern="/login*" access = "isAnonymous()" />
+        <intercept-url pattern="/login_fail*" access = "isAnonymous()" />
         <intercept-url pattern="/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER','ROLE_REST','ROLE_POSTMAN')" />
-        <form-login login-page="/login" default-target-url="/" authentication-failure-url="/login"/>
+        <form-login login-page="/login" default-target-url="/" authentication-failure-url="/login_fail"/>
         <logout logout-success-url="/login"/>
     </http>
 

@@ -31,33 +31,37 @@ import pa165.servicelayer.serviceImplementation.UserServiceImpl;
  * @author Drimal
  */
 @Controller
-@RequestMapping("/login")
+@RequestMapping()
 public class LoginController {
 
     private final static Logger log = LoggerFactory.getLogger(LoginController.class);
 
-    @RequestMapping(method = RequestMethod.GET)
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String login(ModelMap model) {
 
         return "/login";
     }
-    
+
+    @RequestMapping(value = "/login_fail", method = RequestMethod.GET)
+    public String loginFail(ModelMap model) {
+
+        return "/login_fail";
+    }
+
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.addValidators(new UserLoginValidator(new UserServiceImpl()));
     }
-    
+
 //    @ModelAttribute("user")
 //        public void putUser(Model model){
 //        model.addAttribute("user", new UserDto());
 //    }
-
 //    @RequestMapping(value = "/loginError", method = RequestMethod.GET)
 //    public String loginError(ModelMap model) {
 //        model.addAttribute("error", "true");
 //        
 //        return "login_page";
 //    }
-
 //        return "redirect:" + uriBuilder.path("").build();
 }
