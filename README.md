@@ -36,7 +36,7 @@ in respective directory.
 
 Run DeliveryService-Web module from its directory:
 ```
-mvn tomcat:run -Dmaven.test.skip=true
+mvn tomcat7:run -Dmaven.test.skip=true
 ```
 
 Run DeliveryServiceRestGuiClient module from its directory:
