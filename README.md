@@ -28,11 +28,11 @@ Contains a REST client for Delivery Service.
 
 ## Building and Testing
 
-Project uses maven, to build it use:
-
+Project uses maven, to build Web interface or REST Gui use:
 ```
 mvn install
 ```
+in respective directory.
 
 Run DeliveryService-Web module from its directory:
 ```
